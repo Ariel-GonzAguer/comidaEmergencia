@@ -1,0 +1,701 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Dashboard - Alimentos de Emergencia">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <h1 class="text-xl font-semibold text-gray-900">
+              Alimentos de Emergencia
+            </h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span id="user-email" class="text-sm text-gray-500"></span>
+            <button
+              id="logout-btn"
+              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <!-- Estadísticas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+          <div class="p-5">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-2xl">📦</span>
+                </div>
+              </div>
+              <div class="ml-5 w-0 flex-1">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">
+                    Total Alimentos
+                  </dt>
+                  <dd
+                    id="total-foods"
+                    class="text-lg font-medium text-gray-900"
+                  >
+                    0
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+          <div class="p-5">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-2xl">⚠️</span>
+                </div>
+              </div>
+              <div class="ml-5 w-0 flex-1">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">
+                    Próximos a Vencer
+                  </dt>
+                  <dd
+                    id="expiring-foods"
+                    class="text-lg font-medium text-gray-900"
+                  >
+                    0
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+          <div class="p-5">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-2xl">⚡</span>
+                </div>
+              </div>
+              <div class="ml-5 w-0 flex-1">
+                <dl>
+                  <dt class="text-sm font-medium text-gray-500 truncate">
+                    Total Calorías
+                  </dt>
+                  <dd
+                    id="total-calories"
+                    class="text-lg font-medium text-gray-900"
+                  >
+                    0
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Botón agregar alimento -->
+      <div class="mb-6">
+        <button
+          id="add-food-btn"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center"
+        >
+          <span class="mr-2">➕</span>
+          Agregar Alimento
+        </button>
+      </div>
+      <!-- Filtros -->
+      <div class="mb-6">
+        <div class="flex flex-wrap gap-2">
+          <label class="text-sm font-medium text-gray-700 mr-2"
+            >Filtrar por categoría:</label
+          >
+          <button
+            id="filter-all"
+            class="px-3 py-1 text-xs rounded-full bg-blue-600 text-white hover:bg-blue-700 filter-btn"
+          >
+            📋 Todas
+          </button>
+          <button
+            id="filter-latas"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+          >
+            🥫 Latas
+          </button>
+          <button
+            id="filter-paquetes"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+          >
+            📦 Paquetes
+          </button>
+          <button
+            id="filter-frescos"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+          >
+            🥬 Frescos
+          </button>
+          <button
+            id="filter-frascos"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+          >
+            🫙 Frascos
+          </button>
+          <button
+            id="filter-otros"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+          >
+            📋 Otros
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista de alimentos -->
+      <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        <div class="px-4 py-5 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Inventario de Alimentos
+          </h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Lista de todos tus alimentos de emergencia
+          </p>
+        </div>
+        <div id="foods-list" class="border-t border-gray-200">
+          <div id="loading-foods" class="px-4 py-5 text-center text-gray-500">
+            <span class="animate-spin inline-block text-3xl mb-2">⏳</span>
+            <br />Cargando alimentos...
+          </div>
+          <div
+            id="empty-state"
+            class="px-4 py-5 text-center text-gray-500 hidden"
+          >
+            <span class="text-5xl mb-4 block">🍱</span>
+            <h3 class="text-sm font-medium text-gray-900 mb-2">
+              No hay alimentos registrados
+            </h3>
+            <p class="text-sm text-gray-500">
+              Comienza agregando tu primer alimento de emergencia
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal para agregar/editar alimento -->
+    <div
+      id="food-modal"
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden"
+    >
+      <div
+        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+      >
+        <div class="mt-3">
+          <h3 id="modal-title" class="text-lg font-medium text-gray-900 mb-4">
+            Agregar Alimento
+          </h3>
+          <form id="food-form" class="space-y-4">
+            <div>
+              <label
+                for="food-name"
+                class="block text-sm font-medium text-gray-700"
+                >Nombre del Alimento</label
+              >
+              <input
+                type="text"
+                id="food-name"
+                name="name"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                placeholder="Ej: Arroz, Frijoles, Atún"
+              />
+            </div>
+
+            <div>
+              <label
+                for="food-category"
+                class="block text-sm font-medium text-gray-700">Categoría</label
+              >
+              <select
+                id="food-category"
+                name="category"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              >
+                <option value="">Seleccionar categoría</option>
+                <option value="latas">🥫 Latas</option>
+                <option value="paquetes">📦 Paquetes</option>
+                <option value="frescos">🥬 Frescos</option>
+                <option value="frascos">🫙 Frascos</option>
+                <option value="otros">📋 Otros</option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="food-quantity"
+                class="block text-sm font-medium text-gray-700">Cantidad</label
+              >
+              <input
+                type="number"
+                id="food-quantity"
+                name="quantity"
+                min="1"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                placeholder="Ej: 2"
+              />
+            </div>
+
+            <div>
+              <label
+                for="food-unit"
+                class="block text-sm font-medium text-gray-700">Unidad</label
+              >
+              <select
+                id="food-unit"
+                name="unit"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              >
+                <option value="">Seleccionar unidad</option>
+                <option value="kg">Kilogramos</option>
+                <option value="g">Gramos</option>
+                <option value="lb">Libras</option>
+                <option value="unidades">Unidades</option>
+                <option value="latas">Latas</option>
+                <option value="paquetes">Paquetes</option>
+                <option value="botellas">Botellas</option>
+                <option value="litros">Litros</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="food-calories"
+                class="block text-sm font-medium text-gray-700"
+                >Calorías por unidad</label
+              >
+              <input
+                type="number"
+                id="food-calories"
+                name="calories"
+                min="0"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                placeholder="Ej: 350"
+              />
+            </div>
+
+            <div>
+              <label
+                for="food-expiry"
+                class="block text-sm font-medium text-gray-700"
+                >Fecha de Vencimiento</label
+              >
+              <input
+                type="date"
+                id="food-expiry"
+                name="expiryDate"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              />
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                id="cancel-btn"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                id="save-btn"
+                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+              >
+                <span id="save-spinner" class="hidden">
+                  <span class="animate-spin inline-block mr-2 text-lg">⏳</span>
+                </span>
+                <span id="save-text">Guardar</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast para notificaciones -->
+    <div
+      id="toast"
+      class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out"
+    >
+      <span id="toast-message"></span>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Extiende la interfaz Window para evitar errores de TypeScript
+  declare global {
+    interface Window {
+      editFood: (foodId: string) => void;
+      deleteFood: (foodId: string) => void;
+    }
+  }
+
+  import { authService } from "../firebase/authService.js";
+  import { foodService } from "../firebase/foodService.js";
+  import { logOut } from "../firebase/firebaseConfig.js";
+  import useEmergencyFoodStore from "../store/useStore.js";
+
+  // Store
+  const store = useEmergencyFoodStore();
+
+  // Variables globales
+  let currentUser = null;
+  let editingFoodId = null;
+  let unsubscribe = null;
+
+  // Elementos del DOM
+  const userEmail = document.getElementById("user-email");
+  const logoutBtn = document.getElementById("logout-btn");
+  const addFoodBtn = document.getElementById("add-food-btn");
+  const foodModal = document.getElementById("food-modal");
+  const foodForm = document.getElementById("food-form");
+  const modalTitle = document.getElementById("modal-title");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const saveBtn = document.getElementById("save-btn");
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+  // Elementos de estadísticas
+  const totalFoods = document.getElementById("total-foods");
+  const expiringFoods = document.getElementById("expiring-foods");
+  const totalCalories = document.getElementById("total-calories");
+
+  // Elementos de filtros
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  let currentFilter = "all";
+
+  // Elementos de lista
+  const foodsList = document.getElementById("foods-list");
+  const loadingFoods = document.getElementById("loading-foods");
+  const emptyState = document.getElementById("empty-state");
+
+  // Funciones de utilidad
+  function showToast(message, isError = false) {
+    toastMessage.textContent = message;
+    toast.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 ease-in-out ${
+      isError ? "bg-red-500" : "bg-green-500"
+    } text-white`;
+    toast.style.transform = "translateX(0)";
+
+    setTimeout(() => {
+      toast.style.transform = "translateX(100%)";
+    }, 3000);
+  }
+
+  function formatDate(date) {
+    if (!date) return "";
+    const d = new Date(date.seconds ? date.seconds * 1000 : date);
+    return d.toLocaleDateString("es-ES");
+  }
+
+  function getDaysUntilExpiry(expiryDate) {
+    const expiry = new Date(
+      expiryDate.seconds ? expiryDate.seconds * 1000 : expiryDate
+    );
+    const today = new Date();
+    const diffTime = expiry.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  }
+
+  function getExpiryStatusClass(days) {
+    if (days < 0) return "bg-red-100 text-red-800";
+    if (days <= 7) return "bg-orange-100 text-orange-800";
+    if (days <= 30) return "bg-yellow-100 text-yellow-800";
+    return "bg-green-100 text-green-800";
+  }
+
+  function getExpiryStatusText(days) {
+    if (days < 0) return `Vencido hace ${Math.abs(days)} días`;
+    if (days === 0) return "Vence hoy";
+    if (days === 1) return "Vence mañana";
+    return `Vence en ${days} días`;
+  }
+
+  // Actualizar estadísticas
+  function updateStats(foods) {
+    const total = foods.length;
+    const expiring = foods.filter(
+      (food) => getDaysUntilExpiry(food.expiryDate) <= 30
+    ).length;
+    const calories = foods.reduce(
+      (sum, food) => sum + food.calories * food.quantity,
+      0
+    );
+
+    totalFoods.textContent = total;
+    expiringFoods.textContent = expiring;
+    totalCalories.textContent = calories.toLocaleString();
+  }
+  // Renderizar lista de alimentos
+  function renderFoodsList(foods) {
+    loadingFoods.classList.add("hidden");
+
+    // Filtrar por categoría
+    const filteredFoods =
+      currentFilter === "all"
+        ? foods
+        : foods.filter((food) => food.category === currentFilter);
+
+    if (filteredFoods.length === 0) {
+      emptyState.classList.remove("hidden");
+      return;
+    }
+
+    emptyState.classList.add("hidden");
+
+    const foodsHTML = filteredFoods
+      .map((food) => {
+        const daysUntilExpiry = getDaysUntilExpiry(food.expiryDate);
+        const statusClass = getExpiryStatusClass(daysUntilExpiry);
+        const statusText = getExpiryStatusText(daysUntilExpiry);
+
+        // Mapear categorías a emojis
+        const categoryEmojis = {
+          latas: "🥫",
+          paquetes: "📦",
+          frescos: "🥬",
+          frascos: "🫙",
+          otros: "📋",
+        };
+        const categoryEmoji = categoryEmojis[food.category] || "📋";
+
+        return `
+        <div class="px-4 py-4 border-b border-gray-200 hover:bg-gray-50">
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <span class="text-lg">${categoryEmoji}</span>
+                  <h4 class="text-sm font-medium text-gray-900">${food.name}</h4>
+                </div>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                  ${statusText}
+                </span>
+              </div>
+              <div class="mt-1 text-sm text-gray-500 ml-7">
+                <span class="mr-4">Cantidad: ${food.quantity} ${food.unit}</span>
+                <span class="mr-4">Calorías: ${food.calories * food.quantity}</span>
+                <span>Vencimiento: ${formatDate(food.expiryDate)}</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2 ml-4">
+              <button
+                onclick="editFood('${food.id}')"
+                class="text-blue-600 hover:text-blue-800 text-sm font-medium"
+              >
+                Editar
+              </button>
+              <button
+                onclick="deleteFood('${food.id}')"
+                class="text-red-600 hover:text-red-800 text-sm font-medium"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      })
+      .join("");
+
+    foodsList.innerHTML = foodsHTML;
+  }
+
+  // Abrir modal
+  function openModal(food = null) {
+    editingFoodId = food?.id || null;
+    modalTitle.textContent = food ? "Editar Alimento" : "Agregar Alimento";
+
+    if (food) {
+      (document.getElementById("food-name") as HTMLInputElement).value =
+        food.name || "";
+      (document.getElementById("food-category") as HTMLSelectElement).value =
+        food.category || "";
+      (document.getElementById("food-quantity") as HTMLInputElement).value =
+        food.quantity || "";
+      (document.getElementById("food-unit") as HTMLSelectElement).value =
+        food.unit || "";
+      (document.getElementById("food-calories") as HTMLInputElement).value =
+        food.calories || "";
+      const expiryDate = food.expiryDate
+        ? new Date(food.expiryDate.seconds * 1000)
+        : new Date();
+      (document.getElementById("food-expiry") as HTMLInputElement).value =
+        expiryDate.toISOString().split("T")[0];
+    } else {
+      (foodForm as HTMLFormElement).reset();
+    }
+
+    foodModal.classList.remove("hidden");
+  }
+
+  // Cerrar modal
+  function closeModal() {
+    foodModal.classList.add("hidden");
+    editingFoodId = null;
+  }
+
+  // Funciones globales para los botones
+  window.editFood = (foodId) => {
+    const food = store.getState().foods.find((f) => f.id === foodId);
+    if (food) {
+      openModal(food);
+    }
+  };
+
+  window.deleteFood = async (foodId) => {
+    if (!confirm("¿Estás seguro de que quieres eliminar este alimento?")) {
+      return;
+    }
+
+    try {
+      await foodService.deleteFood(currentUser.uid, foodId);
+      showToast("Alimento eliminado exitosamente");
+    } catch (error) {
+      showToast("Error al eliminar alimento: " + error.message, true);
+    }
+  };
+
+  // Event listeners
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await logOut();
+      store.logout();
+      window.location.href = "/";
+    } catch (error) {
+      showToast("Error al cerrar sesión", true);
+    }
+  });
+  addFoodBtn.addEventListener("click", () => openModal());
+  cancelBtn.addEventListener("click", closeModal);
+  // Event listeners para filtros
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // Remover estilos activos de todos los botones y aplicar estilos inactivos
+      filterBtns.forEach((b) => {
+        b.classList.remove("bg-blue-600", "text-white");
+        b.classList.add("bg-gray-100", "text-gray-600");
+      });
+
+      // Aplicar estilos activos al botón clickeado
+      const target = e.target as HTMLElement;
+      target.classList.remove("bg-gray-100", "text-gray-600");
+      target.classList.add("bg-blue-600", "text-white");
+
+      // Actualizar filtro actual
+      currentFilter = target.id.replace("filter-", "");
+
+      // Re-renderizar la lista con el filtro aplicado
+      const currentFoods = store.getState().foods;
+      renderFoodsList(currentFoods);
+    });
+  });
+
+  // Cerrar modal al hacer click fuera
+  foodModal.addEventListener("click", (e) => {
+    if (e.target === foodModal) {
+      closeModal();
+    }
+  });
+
+  // Manejo del formulario
+  foodForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const foodData = {
+      name: formData.get("name"),
+      category: formData.get("category"),
+      quantity: parseInt(formData.get("quantity") as string),
+      unit: formData.get("unit"),
+      calories: parseInt(formData.get("calories") as string),
+      expiryDate: new Date(formData.get("expiryDate") as string),
+    };
+
+    // Mostrar loading
+    document.getElementById("save-spinner").classList.remove("hidden");
+    document.getElementById("save-text").textContent = "Guardando...";
+    (saveBtn as HTMLButtonElement).disabled = true;
+
+    try {
+      if (editingFoodId) {
+        await foodService.updateFood(currentUser.uid, editingFoodId, foodData);
+        showToast("Alimento actualizado exitosamente");
+      } else {
+        await foodService.addFood(currentUser.uid, foodData);
+        showToast("Alimento agregado exitosamente");
+      }
+
+      closeModal();
+    } catch (error) {
+      showToast("Error al guardar alimento: " + error.message, true);
+    } finally {
+      // Ocultar loading
+      document.getElementById("save-spinner").classList.add("hidden");
+      document.getElementById("save-text").textContent = "Guardar";
+      (saveBtn as HTMLButtonElement).disabled = false;
+    }
+  });
+  // Verificar autenticación y cargar datos
+  authService.onAuthStateChanged(async (user) => {
+    if (!user) {
+      window.location.href = "/";
+      return;
+    }
+
+    currentUser = user;
+    userEmail.textContent = user.email;
+
+    store.setUser({
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+    });
+
+    // Suscribirse a cambios en los alimentos
+    unsubscribe = foodService.onFoodsChange(user.uid, (foods) => {
+      store.setFoods(foods);
+      updateStats(foods);
+      renderFoodsList(foods);
+    });
+
+    // Verificar alimentos próximos a vencer y mostrar toast
+    setTimeout(async () => {
+      await foodService.checkExpiringFoodsAndShowToast(user.uid);
+    }, 1000); // Esperar 1 segundo para que se cargue la página
+  });
+
+  // Limpiar suscripción al salir
+  window.addEventListener("beforeunload", () => {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  });
+</script>

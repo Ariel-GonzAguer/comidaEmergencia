@@ -9,6 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.10.0"
+    "astro": "^5.10.0",
+    "firebase": "^11.9.1",
+    "immer": "^10.1.1",
+    "react-hot-toast": "^2.5.2"
+  },
+  "devDependencies": {
+    "@midudev/tailwind-animations": "^0.2.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/vite": "^4.1.10",
+    "tailwindcss": "^4.1.10"
   }
 }

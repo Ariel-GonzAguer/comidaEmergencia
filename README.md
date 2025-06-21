@@ -1,48 +1,164 @@
-# Astro Starter Kit: Basics
+# Alimentos de Emergencia PWA
 
-```sh
-npm create astro@latest -- --template basics
-```
+Una aplicación web progresiva para gestionar el inventario de alimentos de emergencia, construida con Astro, Firebase y Tailwind CSS.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## ✨ Características
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- 🔐 **Autenticación segura** con Firebase Auth (email/contraseña)
+- 📦 **Gestión de inventario** de alimentos de emergencia
+- 📅 **Seguimiento de fechas de vencimiento** con alertas automáticas
+- ⚠️ **Toast notifications** para alimentos próximos a vencer (30 días)
+- 📊 **Estadísticas** de total de alimentos, próximos a vencer y calorías totales
+- 🎨 **UI moderna** con Tailwind CSS
+- 🔄 **Actualizaciones en tiempo real** con Firestore (colección: `emergenciaDataTotal`)
+- 📱 **Diseño responsivo** para móviles y escritorio
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🏗️ Tecnologías Utilizadas
 
-## 🚀 Project Structure
+- **Astro** - Framework web moderno
+- **Firebase** - Autenticación y base de datos
+- **Firestore** - Base de datos NoSQL en tiempo real
+- **Tailwind CSS** - Framework de CSS utilitario
+- **Zustand** - Gestión de estado ligera
+- **JavaScript** - Lenguaje de programación
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Estructura del Proyecto
 
 ```text
 /
 ├── public/
 │   └── favicon.svg
 ├── src/
+│   ├── components/
+│   ├── firebase/
+│   │   ├── firebaseConfig.js
+│   │   ├── authService.js
+│   │   └── foodService.js
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── pages/
+│   │   ├── index.astro (Login)
+│   │   └── dashboard.astro
+│   ├── store/
+│   │   └── useStore.js
+│   └── styles/
+│       └── global.css
+├── .env.example
+├── astro.config.mjs
+├── package.json
+└── tailwind.config.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Configuración
 
-## 🧞 Commands
+1. **Clonar el repositorio**
+   ```bash
+   git clone [tu-repositorio]
+   cd comidaEmergenciaPWA
+   ```
 
-All commands are run from the root of the project, from a terminal:
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-| Command                   | Action                                           |
+3. **Configurar Firebase**
+   - Crear un proyecto en [Firebase Console](https://console.firebase.google.com)
+   - Habilitar Authentication con email/contraseña
+   - Crear una base de datos Firestore
+   - Copiar la configuración de Firebase
+
+4. **Variables de entorno**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Editar `.env` y agregar tu API key de Firebase:
+   ```
+   VITE_FIREBASE_API_KEY=tu_api_key_aqui
+   ```
+
+5. **Ejecutar en desarrollo**
+   ```bash
+   npm run dev
+   ```
+
+## 🧞 Comandos Disponibles
+
+| Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm install`             | Instala las dependencias                         |
+| `npm run dev`             | Inicia el servidor de desarrollo en `localhost:4321` |
+| `npm run build`           | Construye el sitio para producción en `./dist/` |
+| `npm run preview`         | Previsualiza la construcción localmente         |
 
-## 👀 Want to learn more?
+## 📱 Funcionalidades
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Autenticación
+- Registro de nuevos usuarios
+- Inicio de sesión con email y contraseña
+- Cierre de sesión seguro
+- Persistencia de sesión
+
+### Gestión de Alimentos
+- Agregar nuevos alimentos con:
+  - Nombre del alimento
+  - Cantidad y unidad
+  - Calorías por unidad
+  - Fecha de vencimiento
+- Editar alimentos existentes
+- Eliminar alimentos
+- Vista en tiempo real de cambios
+
+### Dashboard
+- Estadísticas del inventario
+- Lista de alimentos ordenada por fecha de vencimiento
+- Alertas visuales para alimentos próximos a vencer
+- Contador de calorías totales
+
+## 🔧 Configuración de Firebase
+
+### Firestore Rules
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      match /foods/{foodId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+}
+```
+
+### Authentication
+- Habilitar el proveedor "Email/Password" en Firebase Console
+- Configurar dominios autorizados si es necesario
+
+## 🎨 Personalización
+
+### Estilos
+Los estilos están construidos con Tailwind CSS. Puedes personalizar:
+- Colores en `tailwind.config.mjs`
+- Estilos globales en `src/styles/global.css`
+
+### Funcionalidades
+- Estados de Zustand en `src/store/useStore.js`
+- Servicios de Firebase en `src/firebase/`
+- Componentes Astro en `src/pages/` y `src/layouts/`
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT.
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor:
+1. Fork el proyecto
+2. Crea una rama para tu feature
+3. Commit tus cambios
+4. Push a la rama
+5. Abre un Pull Request
