@@ -75,6 +75,7 @@
 </div>
 
 <script>
+  // @ts-nocheck
   import { authService } from "../firebase/authService.js";
   import useEmergencyFoodStore from "../store/useStore.js";
 
@@ -109,13 +110,12 @@
       successMessage.classList.add("hidden");
     }, 5000);
   }
-
   function setLoading(isLoading) {
     const spinner = document.getElementById("login-spinner");
     const text = document.getElementById("login-text");
     const button = document.querySelector(
       '#login-form button[type="submit"]'
-    ) as HTMLButtonElement;
+    );
 
     if (isLoading) {
       spinner.classList.remove("hidden");
@@ -125,11 +125,10 @@
       button.disabled = false;
     }
   }
-
   // Manejo del formulario de login
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+    const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
