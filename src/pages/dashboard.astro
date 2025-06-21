@@ -3,21 +3,21 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Dashboard - Alimentos de Emergencia">
-  <div class="min-h-screen bg-gray-50">
+  <div>
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm">
+    <nav>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <h1 class="text-xl font-semibold text-gray-900">
+            <h1 class="text-sm sm:text-xl font-semibold text-white">
               Alimentos de Emergencia
             </h1>
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-2">
             <span id="user-email" class="text-sm text-gray-500"></span>
             <button
               id="logout-btn"
-              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-md text-sm font-medium"
             >
               Cerrar Sesión
             </button>
@@ -116,14 +116,13 @@ import Layout from "../layouts/Layout.astro";
           id="add-food-btn"
           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center"
         >
-          <span class="mr-2">➕</span>
           Agregar Alimento
         </button>
       </div>
       <!-- Filtros -->
       <div class="mb-6">
         <div class="flex flex-wrap gap-2">
-          <label class="text-sm font-medium text-gray-700 mr-2"
+          <label class="text-sm font-medium text-white mr-2"
             >Filtrar por categoría:</label
           >
           <button
