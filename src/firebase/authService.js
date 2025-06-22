@@ -1,8 +1,9 @@
-import { 
-  signInWithEmailAndPassword, 
+import {
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged
 } from "firebase/auth";
+
 import { auth } from "./firebaseConfig.js";
 
 export const authService = {
@@ -42,7 +43,7 @@ export const authService = {
       'auth/invalid-credential': 'Credenciales inválidas',
       'auth/too-many-requests': 'Demasiados intentos fallidos. Intenta más tarde',
     };
-    
+
     return errorMessages[errorCode] || 'Error de autenticación';
   }
 };

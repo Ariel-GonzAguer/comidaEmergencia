@@ -12,12 +12,11 @@ import Layout from "../layouts/Layout.astro";
             <h1 class="text-sm sm:text-xl font-semibold text-white">
               Alimentos de Emergencia
             </h1>
-          </div>
-          <div class="flex items-center space-x-2">
+          </div>          <div class="flex items-center space-x-2">
             <span id="user-email" class="text-sm text-gray-500"></span>
             <button
               id="logout-btn"
-              class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-md text-sm font-medium"
+              class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-md text-sm font-medium cursor-pointer"
             >
               Cerrar Sesión
             </button>
@@ -109,12 +108,11 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
         </div>
-      </div>
-      <!-- Botón agregar alimento -->
+      </div>      <!-- Botón agregar alimento -->
       <div class="mb-6">
         <button
           id="add-food-btn"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
         >
           Agregar Alimento
         </button>
@@ -124,40 +122,39 @@ import Layout from "../layouts/Layout.astro";
         <div class="flex flex-wrap gap-2">
           <label class="text-sm font-medium text-white mr-2"
             >Filtrar por categoría:</label
-          >
-          <button
+          >          <button
             id="filter-all"
-            class="px-3 py-1 text-xs rounded-full bg-blue-600 text-white hover:bg-blue-700 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-blue-600 text-white hover:bg-blue-700 filter-btn cursor-pointer"
           >
             📋 Todas
           </button>
           <button
             id="filter-latas"
-            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🥫 Latas
           </button>
           <button
             id="filter-paquetes"
-            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             📦 Paquetes
           </button>
           <button
             id="filter-frescos"
-            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
-            🥬 Frescos
+            🍹 Frescos
           </button>
           <button
             id="filter-frascos"
-            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🫙 Frascos
           </button>
           <button
             id="filter-otros"
-            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             📋 Otros
           </button>
@@ -312,20 +309,18 @@ import Layout from "../layouts/Layout.astro";
                 required
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
               />
-            </div>
-
-            <div class="flex justify-end space-x-3 pt-4">
+            </div>            <div class="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
                 id="cancel-btn"
-                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 id="save-btn"
-                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
               >
                 <span id="save-spinner" class="hidden">
                   <span class="animate-spin inline-block mr-2 text-lg">⏳</span>
@@ -431,22 +426,23 @@ import Layout from "../layouts/Layout.astro";
     if (days === 1) return "Vence mañana";
     return `Vence en ${days} días`;
   }
-
   // Actualizar estadísticas
   function updateStats(foods) {
     const total = foods.length;
     const expiring = foods.filter(
       (food) => getDaysUntilExpiry(food.expiryDate) <= 30
     ).length;
+    
+    // Calcular calorías totales: solo suma de calorías (sin multiplicar por cantidad)
     const calories = foods.reduce(
-      (sum, food) => sum + food.calories * food.quantity,
+      (sum, food) => sum + Number(food.calories),
       0
     );
 
     totalFoods.textContent = total;
     expiringFoods.textContent = expiring;
     totalCalories.textContent = calories.toLocaleString();
-  }  // Renderizar lista de alimentos
+  }// Renderizar lista de alimentos
   function renderFoodsList(foods) {
     loadingFoods.classList.add("hidden");
 
@@ -495,20 +491,19 @@ import Layout from "../layouts/Layout.astro";
               </div>
               <div class="mt-1 text-sm text-gray-500 ml-7">
                 <span class="mr-4">Cantidad: ${food.quantity} ${food.unit}</span>
-                <span class="mr-4">Calorías: ${food.calories * food.quantity}</span>
+                <span class="mr-4">Calorías: ${food.calories}</span>
                 <span>Vencimiento: ${formatDate(food.expiryDate)}</span>
               </div>
-            </div>
-            <div class="flex items-center space-x-2 ml-4">
+            </div>            <div class="flex items-center space-x-2 ml-4">
               <button
                 onclick="editFood('${food.id}')"
-                class="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                class="text-blue-600 hover:text-blue-800 text-sm font-medium cursor-pointer"
               >
                 Editar
               </button>
               <button
                 onclick="deleteFood('${food.id}')"
-                class="text-red-600 hover:text-red-800 text-sm font-medium"
+                class="text-red-600 hover:text-red-800 text-sm font-medium cursor-pointer"
               >
                 Eliminar
               </button>

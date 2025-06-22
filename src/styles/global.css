@@ -1,4 +1,2 @@
 @import "tailwindcss";
-@plugin "@midudev/tailwind-animations";
 @plugin "@tailwindcss/forms";
-
