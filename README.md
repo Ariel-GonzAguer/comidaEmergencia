@@ -5,7 +5,7 @@
 [![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-Una aplicación web para gestionar el inventario de alimentos de emergencia, construida con **Astro**, **Firebase** y **Tailwind CSS**. Diseñada para ser simple, intuitiva y funcional.
+Una aplicación web **Open Source** para gestionar el inventario de alimentos de emergencia, construida con **Astro**, **Firebase** y **Tailwind CSS**. Diseñada para ser simple, intuitiva y funcional.
 
 ## ✨ Características
 
@@ -33,8 +33,8 @@ Una aplicación web para gestionar el inventario de alimentos de emergencia, con
 
 ### Firestore Database
 ```
-coleccionPersonalComida(collection)
-└── documentoPersonalComida (document)
+emergenciaDataTotal(collection)
+└── comidaEmergenciaCasa (document)
     ├── latas: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     ├── paquetes: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     ├── frescos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
@@ -104,11 +104,15 @@ PUBLIC_VITE_FIREBASE_API_KEY=tu_api_key_aqui
 ```
 
 ### 5. Configurar reglas de Firestore
+Con esta configuración solo las personas autenticadas pueden leer y actualizar el documento.
+
+Cada usuario se debe agregar manualmente en la sección de Firebase Auth.
+
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /coleccionPersonalComida/documentoPersonalComida {
+    match /emergenciaDataTotal/comidaEmergenciaCasa {
       allow read, write: if request.auth != null;
     }
   }
