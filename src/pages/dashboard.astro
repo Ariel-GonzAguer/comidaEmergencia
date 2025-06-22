@@ -128,8 +128,7 @@ import Layout from "../layouts/Layout.astro";
           <button
             id="filter-all"
             class="px-3 py-1 text-xs rounded-full bg-fuchsia-700 text-white hover:bg-fuchsia-600 filter-btn cursor-pointer"
-          >
-            📋 Todas
+          >            📋 Todas
           </button>
           <button
             id="filter-latas"
@@ -147,7 +146,7 @@ import Layout from "../layouts/Layout.astro";
             id="filter-frescos"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
-            🍹 Frescos
+            🥬 Frescos
           </button>
           <button
             id="filter-frascos"
@@ -156,10 +155,33 @@ import Layout from "../layouts/Layout.astro";
             🫙 Frascos
           </button>
           <button
+            id="filter-bebidas"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
+          >
+            🥤 Bebidas
+          </button>
+          <button
+            id="filter-congelados"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
+          >
+            🧊 Congelados
+          </button>
+          <button
+            id="filter-granos"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
+          >
+            🌾 Granos
+          </button>          <button
             id="filter-otros"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             📋 Otros
+          </button>
+          <button
+            id="filter-condimentos"
+            class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
+          >
+            🧂 Condimentos
           </button>
         </div>
       </div>
@@ -229,8 +251,7 @@ import Layout from "../layouts/Layout.astro";
               <label
                 for="food-category"
                 class="block text-sm font-medium text-gray-700">Categoría</label
-              >
-              <select
+              >              <select
                 id="food-category"
                 name="category"
                 required
@@ -239,8 +260,11 @@ import Layout from "../layouts/Layout.astro";
                 <option value="">Seleccionar categoría</option>
                 <option value="latas">🥫 Latas</option>
                 <option value="paquetes">📦 Paquetes</option>
-                <option value="frescos">🍹 Frescos</option>
+                <option value="frescos">🥬 Frescos</option>
                 <option value="frascos">🫙 Frascos</option>
+                <option value="bebidas">🥤 Bebidas</option>
+                <option value="congelados">🧊 Congelados</option>                <option value="granos">🌾 Granos</option>
+                <option value="condimentos">🧂 Condimentos</option>
                 <option value="otros">📋 Otros</option>
               </select>
             </div>
@@ -264,22 +288,19 @@ import Layout from "../layouts/Layout.astro";
               <label
                 for="food-unit"
                 class="block text-sm font-medium text-gray-700">Unidad</label
-              >
-              <select
+              >              <select
                 id="food-unit"
                 name="unit"
                 required
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
               >
                 <option value="">Seleccionar unidad</option>
-                <option value="kg">Kilogramos</option>
-                <option value="g">Gramos</option>
-                <option value="lb">Libras</option>
-                <option value="unidades">Unidades</option>
-                <option value="latas">Latas</option>
-                <option value="paquetes">Paquetes</option>
-                <option value="botellas">Botellas</option>
-                <option value="litros">Litros</option>
+                <option value="gramos">Gramos (g)</option>
+                <option value="mililitros">Mililitros (ml)</option>
+                <option value="kilogramos">Kilogramos (kg)</option>
+                <option value="litros">Litros (L)</option>
+                <option value="botella">Botella (750ml)</option>
+                <option value="paquete/lata">Paquete/Lata</option>
               </select>
             </div>
 
@@ -287,7 +308,7 @@ import Layout from "../layouts/Layout.astro";
               <label
                 for="food-calories"
                 class="block text-sm font-medium text-gray-700"
-                >Calorías por unidad</label
+                >Calorías</label
               >
               <input
                 type="number"
@@ -300,8 +321,7 @@ import Layout from "../layouts/Layout.astro";
               />
             </div>
 
-            <div>
-              <label
+            <div>              <label
                 for="food-expiry"
                 class="block text-sm font-medium text-gray-700"
                 >Fecha de Vencimiento</label
@@ -312,6 +332,7 @@ import Layout from "../layouts/Layout.astro";
                 name="expiryDate"
                 required
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                style="color-scheme: light;"
               />
             </div>
             <div class="flex justify-end space-x-3 pt-4">
@@ -401,11 +422,16 @@ import Layout from "../layouts/Layout.astro";
       toast.style.transform = "translateX(100%)";
     }, 3000);
   }
-
   function formatDate(date) {
     if (!date) return "";
     const d = new Date(date.seconds ? date.seconds * 1000 : date);
     return d.toLocaleDateString("es-ES");
+  }
+
+  function formatDateForInput(date) {
+    if (!date) return "";
+    const d = new Date(date.seconds ? date.seconds * 1000 : date);
+    return d.toISOString().split("T")[0];
   }
 
   function getDaysUntilExpiry(expiryDate) {
@@ -469,14 +495,16 @@ import Layout from "../layouts/Layout.astro";
       .map((food) => {
         const daysUntilExpiry = getDaysUntilExpiry(food.expiryDate);
         const statusClass = getExpiryStatusClass(daysUntilExpiry);
-        const statusText = getExpiryStatusText(daysUntilExpiry);
-
-        // Mapear categorías a emojis
+        const statusText = getExpiryStatusText(daysUntilExpiry);        // Mapear categorías a emojis
         const categoryEmojis = {
           latas: "🥫",
           paquetes: "📦",
-          frescos: "🍹",
+          frescos: "🥬",
           frascos: "🫙",
+          bebidas: "🥤",
+          congelados: "🧊",
+          granos: "🌾",
+          condimentos: "🧂",
           otros: "📋",
         };
         const categoryEmoji = categoryEmojis[food.category] || "📋";
@@ -529,15 +557,9 @@ import Layout from "../layouts/Layout.astro";
     if (food) {
       document.getElementById("food-name").value = food.name || "";
       document.getElementById("food-category").value = food.category || "";
-      document.getElementById("food-quantity").value = food.quantity || "";
-      document.getElementById("food-unit").value = food.unit || "";
+      document.getElementById("food-quantity").value = food.quantity || "";      document.getElementById("food-unit").value = food.unit || "";
       document.getElementById("food-calories").value = food.calories || "";
-      const expiryDate = food.expiryDate
-        ? new Date(food.expiryDate.seconds * 1000)
-        : new Date();
-      document.getElementById("food-expiry").value = expiryDate
-        .toISOString()
-        .split("T")[0];
+      document.getElementById("food-expiry").value = formatDateForInput(food.expiryDate);
     } else {
       foodForm.reset();
     }

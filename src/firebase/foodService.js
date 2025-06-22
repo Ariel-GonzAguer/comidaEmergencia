@@ -15,7 +15,7 @@ const DOCUMENT_ID = import.meta.env.PUBLIC_FIRESTORE_DOCUMENT_ID || 'default_doc
 const getDocRef = () => doc(db, COLLECTION_NAME, DOCUMENT_ID);
 
 // Categorías disponibles
-const CATEGORIES = ['latas', 'paquetes', 'frescos', 'frascos', 'otros'];
+const CATEGORIES = ['latas', 'paquetes', 'frescos', 'frascos', 'bebidas', 'congelados', 'granos', 'otros', 'condimentos'];
 
 // Función para generar ID único
 function generateId() {
