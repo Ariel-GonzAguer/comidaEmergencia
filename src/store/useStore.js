@@ -1,4 +1,4 @@
-// Store simple sin Zustand para Astro
+// Store simple sin Zustand para Astro 🚀
 class EmergencyFoodStore {
   constructor() {
     this.state = {

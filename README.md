@@ -7,16 +7,16 @@
 
 Una aplicación web **Open Source/Código Abierto** para gestionar el inventario de alimentos de emergencia, construida con **Astro**, **Firebase** y **Tailwind CSS**. Diseñada para ser simple, intuitiva y funcional.
 
-> **🔒 IMPORTANTE - CONFIGURACIÓN REQUERIDA**: Este proyecto requiere configuración personalizada de nombres de colecciones y documentos de Firebase por razones de seguridad. Consulte la sección [Configuración e Instalación](#-configuración-e-instalación) para instrucciones detalladas. **Es muy fácil de hacer**.
-
 ## ✨ Características
 
 ### 🔐 Autenticación y Seguridad
+
 - **Autenticación segura** con Firebase Auth (email/contraseña)
 - **Gestión de sesiones** con persistencia automática
 - **Redirección inteligente** según estado de autenticación
 
 ### 📦 Gestión Avanzada de Inventario
+
 - **9 categorías de alimentos** (latas, paquetes, frescos, frascos, bebidas, congelados, granos, condimentos, otros)
 - **Búsqueda en tiempo real** por nombre de alimento
 - **Filtrado interactivo** por categorías con botones visuales
@@ -24,6 +24,7 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 - **Campo de notas opcional** para información adicional de cada alimento
 
 ### 🏠 Ubicaciones Personalizables
+
 - **Gestión de ubicaciones** - hasta 4 ubicaciones personalizables
 - **Nombres editables** para cada ubicación (máx. 20 caracteres)
 - **Selector de emoji interactivo** con 24 emojis disponibles
@@ -31,17 +32,20 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 - **Persistencia local** de configuraciones personalizadas
 
 ### 📅 Control de Vencimientos
+
 - **Seguimiento inteligente** de fechas de vencimiento
 - **Alertas automáticas** con codificación por colores
 - **Notificaciones toast** para alimentos próximos a vencer (30 días)
 - **Estados visuales**: vencido (rojo), próximo a vencer ≤7 días (naranja), ≤30 días (amarillo), bueno (verde)
 
 ### 📊 Dashboard Inteligente
+
 - **Estadísticas en tiempo real** (total alimentos, próximos a vencer, calorías totales)
 - **Visualización dinámica** con iconos y colores
 - **Actualizaciones automáticas** al agregar/editar/eliminar alimentos
 
 ### ♿ Accesibilidad y UX
+
 - **ARIA labels completos** en todos los controles interactivos
 - **Navegación por teclado** totalmente funcional
 - **Compatibilidad con lectores de pantalla**
@@ -49,6 +53,7 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 - **Animaciones sutiles** y transiciones suaves
 
 ### 🔄 Funcionalidades Técnicas
+
 - **Actualizaciones en tiempo real** con Firestore
 - **Gestión de estado avanzada** con store personalizado
 - **Validación de datos** para prevenir errores de Firebase
@@ -63,6 +68,7 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 - **[Tailwind CSS](https://tailwindcss.com/)** - Framework de CSS utilitario
 - **JavaScript (ES6+)** - Sin TypeScript para simplicidad → pero usted puede hacer y compartir su versión tipada 🔥
 - **Vite** - Herramientas de desarrollo
+
 
 ## 🗄️ Estructura de Datos
 
@@ -81,29 +87,27 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
     ├── condimentos: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
     └── otros: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
 ```
+> **🔒 IMPORTANTE - CONFIGURACIÓN REQUERIDA**: Este proyecto requiere configuración personalizada de nombres de colecciones y documentos de Firebase por razones de seguridad. Consulte la sección [Configuración e Instalación](#-configuración-e-instalación) para instrucciones detalladas. **Es muy fácil de hacer**.
 
-### Ubicaciones Personalizadas (localStorage)
-
-```javascript
-[
-  { id: "despensa", name: "Despensa", emoji: "🏠", enabled: true },
-  { id: "refrigerador", name: "Refrigerador", emoji: "❄️", enabled: true },
-  { id: "congelador", name: "Congelador", emoji: "🧊", enabled: true },
-  { id: "alacena", name: "Alacena", emoji: "📦", enabled: true }
-]
-```
-
-> **⚠️ Importante**: Debe elegir sus propios nombres para la colección y documento. Los valores mostrados son placeholders que debe reemplazar por sus propios nombres únicos.
 
 ## 📁 Estructura del Proyecto
 
 ```text
 comidaEmergencia/
+├── .github/                     # archivos para github
 ├── public/
-│   └── favicon.ico             
+│   └── favicon.ico
 ├── src/
-│   ├── components/
-│   │   └── login.astro          # Componente de login
+│   ├── components/              # Componentes Astro reutilizables
+│   │   ├── login.astro          # Componente de login
+│   │   ├── Navbar.astro         # Barra de navegación
+│   │   ├── StatsCards.astro     # Tarjetas de estadísticas
+│   │   ├── ActionButtons.astro  # Botones de acción principales
+│   │   ├── SearchAndFilters.astro # Búsqueda y filtros
+│   │   ├── FoodsList.astro      # Lista de alimentos
+│   │   ├── FoodModal.astro      # Modal agregar/editar alimento
+│   │   ├── LocationsModal.astro # Modal gestión de ubicaciones
+│   │   └── Toast.astro          # Notificaciones toast
 │   ├── firebase/
 │   │   ├── firebaseConfig.js    # Configuración de Firebase
 │   │   ├── authService.js       # Servicio de autenticación
@@ -111,8 +115,10 @@ comidaEmergencia/
 │   ├── layouts/
 │   │   └── Layout.astro         # Layout principal
 │   ├── pages/
-│   │   ├── index.astro          # Página de login
+│   │   ├── index.astro          # Página de Inicio/login
 │   │   └── dashboard.astro      # Dashboard principal
+│   ├── scripts/                 # Lógica JavaScript separada
+│   │   └── dashboard.js         # Lógica principal del dashboard
 │   ├── store/
 │   │   └── useStore.js          # Store de estado (sin Zustand)
 │   └── styles/
@@ -120,10 +126,34 @@ comidaEmergencia/
 ├── .env                         # Variables de entorno
 ├── .gitignore                   # Archivos ignorados por Git
 ├── astro.config.mjs             # Configuración de Astro
+├── CONTRIBUITING.md             # Guía de Contribución
+├── LICENCE.txt                  # Licencia GNU Affero General Public License v3.0 (AGPL-3.0)
 ├── package.json                 # Dependencias y scripts
-├── README.md                    # Documentación
-└── tailwind.config.mjs          # Configuración de Tailwind
+└── README.md                    # Documentación
 ```
+
+### 🧩 Arquitectura de Componentes
+
+**Separación por Responsabilidades**:
+
+- **`dashboard.astro`** - Archivo principal que importa y organiza todos los componentes
+- **`Navbar.astro`** - Barra de navegación con email de usuario y logout
+- **`StatsCards.astro`** - Tarjetas de estadísticas (total alimentos, próximos a vencer, calorías)
+- **`ActionButtons.astro`** - Botones principales (Agregar Alimento, Gestionar Ubicaciones)
+- **`SearchAndFilters.astro`** - Controles de búsqueda, ordenamiento y filtros por categoría
+- **`FoodsList.astro`** - Lista principal de alimentos con estados de carga y vacío
+- **`FoodModal.astro`** - Modal completo para agregar/editar alimentos
+- **`LocationsModal.astro`** - Modal para gestión de ubicaciones personalizadas
+- **`Toast.astro`** - Componente de notificaciones emergentes
+
+**Lógica Centralizada**:
+
+- **`dashboard.js`** → Toda la lógica JavaScript en un archivo separado
+  - Event listeners y manejo de eventos
+  - Funciones de renderizado y actualización
+  - Interacciones con Firebase
+  - Gestión de estado y modales
+
 
 ## 🚀 Configuración e Instalación
 
@@ -157,7 +187,7 @@ npm install
 
 ⚠️ **IMPORTANTE PARA SEGURIDAD**: Por razones de seguridad, debe elegir sus propios nombres únicos para la colección y documento de Firestore.
 
-Estos nombres se configuran a través de variables de entorno para mayor seguridad y flexibilidad.
+Estos nombres se configurarán a través de variables de entorno para mayor seguridad y flexibilidad, a la hora de desarrollo en local y al desplegar. 
 
 **Recomendaciones para nombres seguros:**
 
@@ -179,8 +209,6 @@ PUBLIC_FIRESTORE_COLLECTION_NAME=su_nombre_coleccion_unico
 PUBLIC_FIRESTORE_DOCUMENT_ID=su_documento_id_unico
 ```
 
-> **🔒 Importante**: Elija nombres únicos y no predecibles para mayor seguridad. Nunca use valores como "users", "data", "foods", etc.
-
 > **📋 Si ya tiene el proyecto funcionando:**
 >
 > - Use los mismos nombres que tiene actualmente en Firebase
@@ -189,9 +217,12 @@ PUBLIC_FIRESTORE_DOCUMENT_ID=su_documento_id_unico
 
 ### 6. Configurar reglas de Firestore
 
+Estas reglas son las que realmente hacen seguro el acceso a su aplicación web. 
+Esta sección **es la más importate** en cuanto a seguridad, pues es lo que permite restringir/limitar el acceso, y con esto poder contralar mejor el uso de plan gratuito (Spark) de Firebase.
+
 ⚠️ **IMPORTANTE**: Use los mismos nombres que configuró en las variables de entorno del paso anterior.
 
-Con esta configuración solo las personas autenticadas pueden leer y actualizar el documento.
+Con esta configuración **solo las personas autenticadas** pueden leer y actualizar el documento.
 
 Cada usuario se debe agregar manualmente en la sección de Firebase Auth.
 
@@ -214,6 +245,13 @@ service cloud.firestore {
 > }
 > ```
 
+Las reglas se pueden hacer más estrictas de así requerirlo. Para mayor seguridad, considere:
+
+- Implementar reglas más específicas por usuario
+- Validar estructura de datos en las reglas
+- Limitar operaciones por campos específicos
+
+
 ### 7. Ejecutar en desarrollo
 
 ```bash
@@ -225,7 +263,7 @@ La aplicación estará disponible en `http://localhost:4321`
 > **✅ Checklist de configuración:**
 >
 > - [ ] Proyecto Firebase creado
-> - [ ] Authentication habilitado
+> - [ ] Firebase Authentication habilitado
 > - [ ] Firestore creado
 > - [ ] Variables de entorno configuradas en `.env`
 > - [ ] Nombres únicos elegidos para colección/documento
@@ -287,13 +325,11 @@ La aplicación estará disponible en `http://localhost:4321`
 **Selector de Emoji Interactivo**:
 
 - 🎨 **Grid visual de emojis**
-- 🏠 **Emojis predefinidos**: hogar, cocina, almacenamiento
+- 🏠 **Emojis predefinidos**
 - 🔧 **Cambio en tiempo real** en formularios y listas
 - 💾 **Persistencia automática** en localStorage
 
-**Emojis Disponibles**: 🏠 ❄️ 🧊 📦 🏪 🍽️ 🥫 🚪 🏘️ 🏔️ 🧺 📋 🎒 🛒 📱 💼 🗄️ 🗃️ 📂 📁 🏆 🎯 🔒 🔑
-
-### �Dashboard Inteligente
+### �Dashboard
 
 **Estadísticas Dinámicas**:
 
@@ -301,7 +337,7 @@ La aplicación estará disponible en `http://localhost:4321`
 - **⚠️ Próximos a vencer** - alimentos ≤30 días para vencer
 - **⚡ Total calorías** - suma de todas las calorías registradas
 
-**Alertas Visuales Inteligentes** por estado de vencimiento:
+**Alertas Visuales** por estado de vencimiento:
 
 - 🔴 **Vencido** - productos que ya pasaron su fecha (rojo)
 - 🟠 **Critical** - vencen en ≤7 días (naranja)
@@ -349,13 +385,12 @@ La aplicación estará disponible en `http://localhost:4321`
 
 ### 🎨 Colores y Estilos
 
-- **Temas visuales**: Modificar colores en las clases de Tailwind CSS
 - **Estilos globales**: Personalizar en `src/styles/global.css`
 - **Componentes**: Cada componente Astro es totalmente personalizable
 
 ### 📏 Unidades de Medida Disponibles
 
-El sistema incluye **6 unidades de medida** para máxima flexibilidad:
+El sistema incluye **6 unidades de medida**:
 
 - **Gramos (g)** - Para productos secos y sólidos pequeños
 - **Mililitros (ml)** - Para líquidos en pequeñas cantidades
@@ -374,17 +409,11 @@ El sistema incluye **6 unidades de medida** para máxima flexibilidad:
 - **Persistencia**: Configuraciones guardadas automáticamente en localStorage
 
 **Emojis Disponibles para Ubicaciones**:
+
 ```
-🏠 ❄️ 🧊 📦 🏪 🍽️ 🥫 🚪 🏘️ 🏔️ 🧺 📋 
+🏠 ❄️ 🧊 📦 🏪 🍽️ 🥫 🚪 🏘️ 🏔️ 🧺 📋
 🎒 🛒 📱 💼 🗄️ 🗃️ 📂 📁 🏆 🎯 🔒 🔑
 ```
-
-### 🔧 Personalización Técnica
-
-**Variables de Entorno**:
-- Nombres de colecciones y documentos de Firebase personalizables
-- Configuración de seguridad flexible
-- Entornos de desarrollo y producción separados
 
 ## 🚀 Despliegue
 
@@ -437,37 +466,11 @@ El sistema incluye **6 unidades de medida** para máxima flexibilidad:
 - **Touch-friendly** interfaces para dispositivos móviles
 - **Grid adaptativo** para diferentes tamaños de pantalla
 
-## 🔒 Consideraciones de Seguridad
-
-### Configuración Personalizada Requerida
-
-Por razones de seguridad, **NUNCA** use los nombres de colecciones y documentos tal como aparecen en ejemplos públicos. Siempre:
-
-1. **Elija nombres únicos** para sus colecciones y documentos
-2. **Use variables de entorno** para configurar estos nombres
-3. **No use nombres predecibles** como "users", "data", etc.
-4. **Configure las reglas de Firestore** correctamente
-5. **Mantenga privadas** sus credenciales de Firebase
-
-### Archivos de Configuración
+### Sobre Archivos de Configuración
 
 - **`.env`**: Contiene las variables de entorno (NUNCA subir al repositorio)
 - **`foodService.js`**: Lee automáticamente las variables de entorno
-- **Reglas de Firestore**: Deben coincidir con los nombres en `.env`
-
-### Reglas de Firestore
-
-Las reglas incluidas en este proyecto permiten acceso solo a usuarios autenticados. Para mayor seguridad, considere:
-
-- Implementar reglas más específicas por usuario
-- Validar estructura de datos en las reglas
-- Limitar operaciones por campos específicos
-
-### Variables de Entorno
-
-- Nunca incluya credenciales reales en el código
-- Use archivos `.env` que no se suban al repositorio
-- Considere usar diferentes proyectos Firebase para desarrollo y producción
+- **Reglas de Firestore** en la Consola de Firebase: Deben coincidir con los nombres en `.env`
 
 ## 🐛 Issues y Soporte
 
@@ -487,14 +490,14 @@ Antes de crear un issue:
 
 ¡Las contribuciones son bienvenidas! Principalmente para las funcionalidades del roadmap. Para contribuir:
 
-1. **Revisa el [Roadmap](#-roadmap---próximas-funcionalidades)** para ver qué funcionalidades están planeadas
-2. **Haz Fork** del proyecto
-3. **Crea** una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-4. **Desarrolla** siguiendo las guías de estilo existentes
-5. **Prueba** tu implementación con diferentes casos de uso
-6. **Haz Commit** de tus cambios (`git commit -m 'Add some AmazingFeature'`)
-7. **Haz Push** a la rama (`git push origin feature/AmazingFeature`)
-8. **Abre** un Pull Request con descripción detallada
+1. **Revise el [Roadmap](#-roadmap---próximas-funcionalidades)** para ver qué funcionalidades están planeadas
+2. **Haga Fork** del proyecto
+3. **Cree** una rama para su feature (`git checkout -b feature/AmazingFeature`)
+4. **Desarrolle** siguiendo las guías de estilo existentes
+5. **Pruebe** su implementación con diferentes casos de uso
+6. **Haga Commit** de sus cambios (`git commit -m 'Add some AmazingFeature'`)
+7. **Haga Push** a la rama (`git push origin feature/AmazingFeature`)
+8. **Abra** un Pull Request con descripción detallada
 
 ### 🎯 Áreas Prioritarias para Contribuir
 
@@ -506,14 +509,14 @@ Antes de crear un issue:
 - **🏷️ Tagging System** - Sistema de etiquetas personalizables
 - **🔔 Smart Notifications** - Notificaciones push inteligentes
 
-📖 **Para guías detalladas de contribución, revisa [CONTRIBUTING.md](CONTRIBUTING.md)**
+📖 **Para guías detalladas de contribución, revise [CONTRIBUTING.md](CONTRIBUTING.md)**
 
 ### Guías de Contribución
 
 - Mantener el código simple y legible
 - Usar emojis o íconos consistentes en la UI
 - Seguir las convenciones de naming existentes
-- Añadir comentarios para lógica compleja
+- Añadir comentarios para lógica compleja o cuando lo considere necesario
 - Respetar los términos de la licencia AGPL v3
 - Asegurar que cualquier modificación mantenga la disponibilidad del código fuente
 
@@ -536,42 +539,48 @@ La AGPL v3 es una licencia copyleft que garantiza que:
 - 🌐 **Disponibilidad de código**: Si ofrece el software como servicio web, debe proporcionar el código fuente a los usuarios
 - 📝 **Preservación de derechos**: Debe mantener los avisos de copyright y licencia
 
-Para más información sobre la AGPL v3, visita: https://www.gnu.org/licenses/agpl-3.0.html
+Para más información sobre la AGPL v3, visite: https://www.gnu.org/licenses/agpl-3.0.html
 
 ## 👨‍💻 Autor
 
-**Ariel González Aguer**
+**Ariel 🔥**
 
 - GitHub: [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer)
+- Sitio Web [Gato Rojo Lab](https://gatorojolab.com)
 
 ## 🚀 Novedades y Mejoras Recientes
 
 ### ✨ Versión Actual - Funcionalidades Implementadas 22/6/2025
 
 **🔍 Búsqueda y Filtrado Avanzado**:
+
 - Búsqueda en tiempo real por nombre de alimento
 - Filtros interactivos por categorías con estados visuales
 - Ordenamiento múltiple (nombre, categoría, vencimiento, calorías, fecha agregado)
 
 **🏠 Sistema de Ubicaciones Personalizable**:
+
 - Gestión completa de hasta 4 ubicaciones
 - Editor de nombres con validación (máx. 20 caracteres)
 - Selector de emoji interactivo con 24 opciones
 - Persistencia automática en localStorage
 
 **♿ Accesibilidad y UX Mejoradas**:
+
 - ARIA labels completos en todos los controles
 - Navegación por teclado 100% funcional
 - Compatibilidad con lectores de pantalla
 - Estados de loading y confirmaciones de seguridad
 
 **📝 Campo de Notas**:
+
 - Información adicional opcional para cada alimento
 - Visualización discreta en la lista de alimentos
 - Ideal para recordatorios y detalles especiales
 
 **🛠️ Correcciones Técnicas**:
-- Eliminación del error "Unsupported field value: undefined" en Firestore
+
+- Eliminación del error "Unsupported field value: undefined"
 - Validación robusta de datos antes del guardado
 - Manejo mejorado de campos numéricos y fechas
 
@@ -580,31 +589,37 @@ Para más información sobre la AGPL v3, visita: https://www.gnu.org/licenses/ag
 **🌟 Funcionalidades Sugeridas**:
 
 - **📱 PWA (Progressive Web App)**
+
   - Instalación como app nativa
   - Funcionamiento offline
   - Notificaciones push para vencimientos
 
 - **📊 Exportación/Importación de Datos**
+
   - Backup en formato CSV/JSON
   - Importación masiva de inventarios
   - Sincronización entre dispositivos
 
 - **📷 Escáner de Códigos de Barras**
+
   - Adición rápida de productos
   - Base de datos de productos integrada
   - Información nutricional automática
 
 - **🌙 Modo Oscuro**
+
   - Tema dark/light switcheable
   - Preferencias del sistema automáticas
   - Mejor experiencia nocturna
 
 - **📈 Gráficos y Estadísticas Avanzadas**
+
   - Visualización de consumo por categorías
   - Tendencias de vencimiento
   - Reportes mensuales/anuales
 
 - **🏷️ Sistema de Etiquetas**
+
   - Tags personalizables para alimentos
   - Filtrado por múltiples etiquetas
   - Organización más granular
@@ -614,25 +629,18 @@ Para más información sobre la AGPL v3, visita: https://www.gnu.org/licenses/ag
   - Alertas por email/SMS
   - Configuración de frecuencia
 
-**🤝 ¿Quieres Contribuir?**
+**🤝 ¿Quiere Contribuir?**
 
 ¡Estas funcionalidades están abiertas para contribuciones de la comunidad! Si le interesa implementar alguna:
 
-1. Revisa los [Issues abiertos](https://github.com/Ariel-GonzAguer/comidaEmergencia/issues)
-2. Crea un nuevo Issue para discutir la funcionalidad
-3. Haz Fork del proyecto y comienza a desarrollar
-4. Envía un Pull Request con tus cambios
-
-## 🙏 Agradecimientos
-
-- [Astro](https://astro.build/) por el increíble framework
-- [Firebase](https://firebase.google.com/) por el backend confiable
-- [Tailwind CSS](https://tailwindcss.com/) por el styling eficiente
-- La comunidad open source por la inspiración
+1. Revise los [Issues abiertos](https://github.com/Ariel-GonzAguer/comidaEmergencia/issues)
+2. Cree un nuevo Issue para discutir la funcionalidad
+3. Haga Fork del proyecto y comience a desarrollar
+4. Envíe un Pull Request con los cambios
 
 ---
 
 <div align="center">
-  <p>Hecho con ❤️ para la gestión de alimentos de emergencia</p>
+  <p>Hecho libre para todo el mundo 🌍</p>
   <p>⭐ ¡Dele una estrella si le gusta el proyecto!</p>
 </div>
