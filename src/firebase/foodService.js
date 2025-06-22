@@ -22,6 +22,43 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
+// Función para limpiar datos y eliminar campos undefined
+function cleanFoodData(foodData) {
+  const cleanData = {};
+  
+  // Lista de campos válidos para un alimento
+  const validFields = [
+    'name', 'category', 'quantity', 'unit', 'calories', 'expiryDate', 'location', 
+    'notes', 'dateAdded', 'id', 'createdAt', 'updatedAt'
+  ];
+  
+  // Copiar solo campos válidos que no sean undefined o null
+  validFields.forEach(field => {
+    if (foodData[field] !== undefined && foodData[field] !== null) {
+      // Validación especial para números
+      if (field === 'quantity' || field === 'calories') {
+        const numValue = Number(foodData[field]);
+        if (!isNaN(numValue) && isFinite(numValue)) {
+          cleanData[field] = numValue;
+        }
+      } else {
+        cleanData[field] = foodData[field];
+      }
+    }
+  });
+  
+  // Asegurar que los campos requeridos tengan valores por defecto
+  if (!cleanData.name || cleanData.name.trim() === '') cleanData.name = 'Sin nombre';
+  if (!cleanData.category) cleanData.category = 'otros';
+  if (!cleanData.quantity || cleanData.quantity <= 0) cleanData.quantity = 1;
+  if (!cleanData.unit) cleanData.unit = 'unidad';
+  if (!cleanData.location) cleanData.location = 'despensa';
+  if (!cleanData.notes) cleanData.notes = '';
+  if (!cleanData.calories || cleanData.calories < 0) cleanData.calories = 0;
+  
+  return cleanData;
+}
+
 // Función para obtener todos los alimentos
 export async function getAllFoods() {
   try {
@@ -64,14 +101,18 @@ export async function getAllFoods() {
 export async function addFood(userId, foodData) {
   try {
     const docRef = getDocRef();
+    
+    // Limpiar los datos antes de crear el objeto
+    const cleanedData = cleanFoodData(foodData);
+    
     const newFood = {
-      ...foodData,
+      ...cleanedData,
       id: generateId(),
       createdAt: new Date(),
       updatedAt: new Date()
     };
     
-    const category = foodData.category;
+    const category = newFood.category;
     if (!CATEGORIES.includes(category)) {
       throw new Error('Categoría no válida');
     }
@@ -137,15 +178,15 @@ export async function updateFood(userId, foodId, foodData) {
     if (!foodFound) {
       throw new Error('Alimento no encontrado');
     }
-    
-    // Preparar el alimento actualizado
+      // Preparar el alimento actualizado
+    const cleanedData = cleanFoodData(foodData);
     const updatedFood = {
-      ...foodData,
+      ...cleanedData,
       id: foodId,
       updatedAt: new Date()
     };
     
-    const newCategory = foodData.category;
+    const newCategory = updatedFood.category;
     if (!CATEGORIES.includes(newCategory)) {
       throw new Error('Categoría no válida');
     }

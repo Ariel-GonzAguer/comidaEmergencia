@@ -109,76 +109,121 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
         </div>
-      </div>
-      <!-- Botón agregar alimento -->
-      <div class="mb-6">
+      </div>      <!-- Botones de acción -->
+      <div class="mb-6 flex flex-wrap gap-3">
         <button
           id="add-food-btn"
           class="bg-fuchsia-950 border-2 border-fuchsia-700 hover:bg-fuchsia-700 hover:border-fuchsia-400 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
         >
           Agregar Alimento
         </button>
-      </div>
-      <!-- Filtros -->
-      <div class="mb-6">
+        <button
+          id="manage-locations-btn"
+          class="bg-blue-950 border-2 border-blue-700 hover:bg-blue-700 hover:border-blue-400 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
+        >
+          🏠 Gestionar Ubicaciones
+        </button>
+      </div><!-- Controles de búsqueda y filtros -->
+      <div class="mb-6 space-y-4">
+        <!-- Barra de búsqueda -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="flex-1">
+            <label for="search-input" class="block text-sm font-medium text-white mb-2">
+              Buscar alimentos:
+            </label>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar por nombre de alimento..."
+              aria-label="Buscar alimentos por nombre"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <label for="sort-select" class="block text-sm font-medium text-white mb-2">
+              Ordenar por:
+            </label>
+            <select
+              id="sort-select"
+              aria-label="Ordenar alimentos por criterio"
+              class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            >
+              <option value="name">Nombre</option>
+              <option value="category">Categoría</option>
+              <option value="expiry">Fecha de vencimiento</option>
+              <option value="calories">Calorías</option>
+              <option value="dateAdded">Fecha agregado</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Filtros por categoría -->
         <div class="flex flex-wrap gap-2">
           <label class="text-sm font-medium text-white mr-2"
             >Filtrar por categoría:</label
-          >
-          <button
+          >          <button
             id="filter-all"
+            aria-label="Mostrar todos los alimentos"
             class="px-3 py-1 text-xs rounded-full bg-fuchsia-700 text-white hover:bg-fuchsia-600 filter-btn cursor-pointer"
           >            📋 Todas
           </button>
           <button
             id="filter-latas"
+            aria-label="Filtrar por categoría latas"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🥫 Latas
           </button>
           <button
             id="filter-paquetes"
+            aria-label="Filtrar por categoría paquetes"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             📦 Paquetes
           </button>
           <button
             id="filter-frescos"
+            aria-label="Filtrar por categoría frescos"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🥬 Frescos
-          </button>
-          <button
+          </button>          <button
             id="filter-frascos"
+            aria-label="Filtrar por categoría frascos"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🫙 Frascos
           </button>
           <button
             id="filter-bebidas"
+            aria-label="Filtrar por categoría bebidas"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🥤 Bebidas
           </button>
           <button
             id="filter-congelados"
+            aria-label="Filtrar por categoría congelados"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🧊 Congelados
           </button>
           <button
             id="filter-granos"
+            aria-label="Filtrar por categoría granos"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🌾 Granos
           </button>          <button
             id="filter-otros"
+            aria-label="Filtrar por categoría otros"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             📋 Otros
           </button>
           <button
             id="filter-condimentos"
+            aria-label="Filtrar por categoría condimentos"
             class="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 filter-btn cursor-pointer"
           >
             🧂 Condimentos
@@ -319,9 +364,7 @@ import Layout from "../layouts/Layout.astro";
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 placeholder="Ej: 350"
               />
-            </div>
-
-            <div>              <label
+            </div>            <div>              <label
                 for="food-expiry"
                 class="block text-sm font-medium text-gray-700"
                 >Fecha de Vencimiento</label
@@ -334,6 +377,41 @@ import Layout from "../layouts/Layout.astro";
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 style="color-scheme: light;"
               />
+            </div>
+
+            <div>
+              <label
+                for="food-location"
+                class="block text-sm font-medium text-gray-700"
+                >Ubicación</label
+              >
+              <select
+                id="food-location"
+                name="location"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              >
+                <option value="">Seleccionar ubicación</option>
+                <option value="despensa">🏠 Despensa</option>
+                <option value="refrigerador">❄️ Refrigerador</option>
+                <option value="congelador">🧊 Congelador</option>
+                <option value="alacena">📦 Alacena</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="food-notes"
+                class="block text-sm font-medium text-gray-700"
+                >Notas (opcional)</label
+              >
+              <textarea
+                id="food-notes"
+                name="notes"
+                rows="3"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                placeholder="Ej: Comprado en oferta, para usar primero, regalo de..."
+              ></textarea>
             </div>
             <div class="flex justify-end space-x-3 pt-4">
               <button
@@ -355,6 +433,48 @@ import Layout from "../layouts/Layout.astro";
               </button>
             </div>
           </form>
+        </div>
+      </div>    </div>
+
+    <!-- Modal para gestionar ubicaciones -->
+    <div
+      id="locations-modal"
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden"
+      role="dialog"
+      aria-labelledby="locations-modal-title"
+      aria-modal="true"
+    >      <div
+        class="relative top-20 mx-auto p-5 border w-[480px] shadow-lg rounded-md bg-white"
+      >
+        <div class="mt-3">
+          <h3 id="locations-modal-title" class="text-lg font-medium text-gray-900 mb-4">
+            🏠 Gestionar Ubicaciones
+          </h3>
+          <div class="space-y-4">            <p class="text-sm text-gray-600 mb-4">
+              Personaliza hasta 4 ubicaciones para organizar tus alimentos. Puedes cambiar el nombre y emoji de cada ubicación:
+            </p>
+            
+            <div id="locations-list" class="space-y-3">
+              <!-- Las ubicaciones se cargarán dinámicamente -->
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-4 border-t">
+              <button
+                type="button"
+                id="locations-cancel-btn"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                id="locations-save-btn"
+                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 cursor-pointer"
+              >
+                Guardar Ubicaciones
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -384,18 +504,26 @@ import Layout from "../layouts/Layout.astro";
   let currentUser = null;
   let editingFoodId = null;
   let unsubscribe = null;
-
   // Elementos del DOM
   const userEmail = document.getElementById("user-email");
   const logoutBtn = document.getElementById("logout-btn");
   const addFoodBtn = document.getElementById("add-food-btn");
+  const manageLocationsBtn = document.getElementById("manage-locations-btn");
   const foodModal = document.getElementById("food-modal");
+  const locationsModal = document.getElementById("locations-modal");
   const foodForm = document.getElementById("food-form");
   const modalTitle = document.getElementById("modal-title");
   const cancelBtn = document.getElementById("cancel-btn");
+  const locationsCancelBtn = document.getElementById("locations-cancel-btn");
+  const locationsSaveBtn = document.getElementById("locations-save-btn");
   const saveBtn = document.getElementById("save-btn");
   const toast = document.getElementById("toast");
   const toastMessage = document.getElementById("toast-message");
+  
+  // Elementos de búsqueda y ordenamiento
+  const searchInput = document.getElementById("search-input");
+  const sortSelect = document.getElementById("sort-select");
+  
   // Elementos de estadísticas
   const totalFoods = document.getElementById("total-foods");
   const expiringFoods = document.getElementById("expiring-foods");
@@ -404,11 +532,22 @@ import Layout from "../layouts/Layout.astro";
   // Elementos de filtros
   const filterBtns = document.querySelectorAll(".filter-btn");
   let currentFilter = "all";
+  let searchTerm = "";
+  let sortBy = "name";
+  
   // Elementos de lista
   const foodsList = document.getElementById("foods-list");
   const foodsContainer = document.getElementById("foods-container");
   const loadingFoods = document.getElementById("loading-foods");
   const emptyState = document.getElementById("empty-state");
+
+  // Ubicaciones predeterminadas
+  const defaultLocations = [
+    { id: "despensa", name: "Despensa", emoji: "🏠", enabled: true },
+    { id: "refrigerador", name: "Refrigerador", emoji: "❄️", enabled: true },
+    { id: "congelador", name: "Congelador", emoji: "🧊", enabled: true },
+    { id: "alacena", name: "Alacena", emoji: "📦", enabled: true }
+  ];
 
   // Funciones de utilidad
   function showToast(message, isError = false) {
@@ -473,15 +612,39 @@ import Layout from "../layouts/Layout.astro";
     totalFoods.textContent = total;
     expiringFoods.textContent = expiring;
     totalCalories.textContent = calories.toLocaleString();
-  } // Renderizar lista de alimentos
+  }  // Renderizar lista de alimentos
   function renderFoodsList(foods) {
     loadingFoods.classList.add("hidden");
 
+    // Filtrar por búsqueda
+    let filteredFoods = foods.filter(food => 
+      food.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     // Filtrar por categoría
-    const filteredFoods =
-      currentFilter === "all"
-        ? foods
-        : foods.filter((food) => food.category === currentFilter);
+    if (currentFilter !== "all") {
+      filteredFoods = filteredFoods.filter((food) => food.category === currentFilter);
+    }
+
+    // Ordenar alimentos
+    filteredFoods.sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "category":
+          return a.category.localeCompare(b.category);
+        case "expiry":
+          return new Date(a.expiryDate.seconds ? a.expiryDate.seconds * 1000 : a.expiryDate) - 
+                 new Date(b.expiryDate.seconds ? b.expiryDate.seconds * 1000 : b.expiryDate);
+        case "calories":
+          return b.calories - a.calories;
+        case "dateAdded":
+          return new Date(b.dateAdded?.seconds ? b.dateAdded.seconds * 1000 : b.dateAdded || 0) - 
+                 new Date(a.dateAdded?.seconds ? a.dateAdded.seconds * 1000 : a.dateAdded || 0);
+        default:
+          return 0;
+      }
+    });
 
     if (filteredFoods.length === 0) {
       emptyState.classList.remove("hidden");
@@ -495,7 +658,9 @@ import Layout from "../layouts/Layout.astro";
       .map((food) => {
         const daysUntilExpiry = getDaysUntilExpiry(food.expiryDate);
         const statusClass = getExpiryStatusClass(daysUntilExpiry);
-        const statusText = getExpiryStatusText(daysUntilExpiry);        // Mapear categorías a emojis
+        const statusText = getExpiryStatusText(daysUntilExpiry);        
+        
+        // Mapear categorías a emojis
         const categoryEmojis = {
           latas: "🥫",
           paquetes: "📦",
@@ -507,7 +672,11 @@ import Layout from "../layouts/Layout.astro";
           condimentos: "🧂",
           otros: "📋",
         };
-        const categoryEmoji = categoryEmojis[food.category] || "📋";
+        const categoryEmoji = categoryEmojis[food.category] || "📋";        // Mapear ubicaciones a emojis personalizados
+        const locations = getStoredLocations();
+        const locationData = locations.find(loc => loc.id === food.location);
+        const locationEmoji = locationData ? locationData.emoji : "�";
+        const locationName = locationData ? locationData.name : (food.location || 'No especificada');
 
         return `
         <div class="px-4 py-4 border-b border-gray-200 hover:bg-gray-50">
@@ -517,6 +686,7 @@ import Layout from "../layouts/Layout.astro";
                 <div class="flex items-center space-x-2">
                   <span class="text-lg">${categoryEmoji}</span>
                   <h4 class="text-sm font-medium text-gray-900">${food.name}</h4>
+                  <span class="text-xs text-gray-500">${locationEmoji} ${locationName}</span>
                 </div>
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
                   ${statusText}
@@ -525,18 +695,22 @@ import Layout from "../layouts/Layout.astro";
               <div class="mt-1 text-sm text-gray-500 ml-7">
                 <span class="mr-4">Cantidad: ${food.quantity} ${food.unit}</span>
                 <span class="mr-4">Calorías: ${food.calories}</span>
-                <span>Vencimiento: ${formatDate(food.expiryDate)}</span>
+                <span class="mr-4">Vencimiento: ${formatDate(food.expiryDate)}</span>
               </div>
-            </div>            <div class="flex items-center space-x-2 ml-4">
+              ${food.notes ? `<div class="mt-1 text-xs text-gray-400 ml-7 italic">📝 ${food.notes}</div>` : ''}
+            </div>            
+            <div class="flex items-center space-x-2 ml-4">
               <button
                 onclick="editFood('${food.id}')"
                 class="text-blue-600 hover:text-blue-800 text-sm font-medium cursor-pointer"
+                aria-label="Editar ${food.name}"
               >
                 Editar
               </button>
               <button
                 onclick="deleteFood('${food.id}')"
                 class="text-red-600 hover:text-red-800 text-sm font-medium cursor-pointer"
+                aria-label="Eliminar ${food.name}"
               >
                 Eliminar
               </button>
@@ -549,17 +723,23 @@ import Layout from "../layouts/Layout.astro";
 
     foodsContainer.innerHTML = foodsHTML;
   }
-
   // Abrir modal
   function openModal(food = null) {
     editingFoodId = food?.id || null;
     modalTitle.textContent = food ? "Editar Alimento" : "Agregar Alimento";
+    
+    // Cargar ubicaciones disponibles
+    loadLocationOptions();
+    
     if (food) {
       document.getElementById("food-name").value = food.name || "";
       document.getElementById("food-category").value = food.category || "";
-      document.getElementById("food-quantity").value = food.quantity || "";      document.getElementById("food-unit").value = food.unit || "";
+      document.getElementById("food-quantity").value = food.quantity || "";      
+      document.getElementById("food-unit").value = food.unit || "";
       document.getElementById("food-calories").value = food.calories || "";
       document.getElementById("food-expiry").value = formatDateForInput(food.expiryDate);
+      document.getElementById("food-location").value = food.location || "";
+      document.getElementById("food-notes").value = food.notes || "";
     } else {
       foodForm.reset();
     }
@@ -592,6 +772,168 @@ import Layout from "../layouts/Layout.astro";
       showToast("Error al eliminar alimento: " + error.message, true);
     }
   };
+  // Funciones para gestión de ubicaciones
+  function getStoredLocations() {
+    const stored = localStorage.getItem('emergency-food-locations');
+    return stored ? JSON.parse(stored) : defaultLocations;
+  }
+
+  function saveLocations(locations) {
+    localStorage.setItem('emergency-food-locations', JSON.stringify(locations));
+  }
+  function loadLocationOptions() {
+    const locations = getStoredLocations();
+    const locationSelect = document.getElementById("food-location");
+    
+    // Limpiar opciones existentes excepto la primera
+    locationSelect.innerHTML = '<option value="">Seleccionar ubicación</option>';
+    
+    // Añadir ubicaciones habilitadas con sus emojis personalizados
+    locations.filter(loc => loc.enabled).forEach(location => {
+      const option = document.createElement('option');
+      option.value = location.id;
+      option.textContent = `${location.emoji} ${location.name}`;
+      locationSelect.appendChild(option);
+    });
+  }
+  function renderLocationsManager() {
+    const locations = getStoredLocations();
+    const container = document.getElementById('locations-list');
+      // Lista de emojis disponibles para ubicaciones
+    const availableEmojis = [
+      '🏠', '❄️', '🧊', '📦', '🏪', '🍽️', '🥫', '🚪', 
+      '🏘️', '�️', '🧺', '📋', '🎒', '🛒', '📱', '💼',
+      '🗄️', '🗃️', '📂', '📁', '🏆', '🎯', '🔒', '🔑'
+    ];
+    
+    container.innerHTML = locations.map((location, index) => `
+      <div class="p-3 border rounded-md space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3 flex-1">
+            <!-- Selector de emoji -->
+            <div class="relative">
+              <button 
+                type="button"
+                class="emoji-selector-btn text-2xl border border-gray-300 rounded-md p-1 hover:bg-gray-50"
+                data-index="${index}"
+              >
+                ${location.emoji}
+              </button>
+              <div class="emoji-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-2 grid grid-cols-6 gap-1 w-48 z-10 hidden">
+                ${availableEmojis.map(emoji => `
+                  <button 
+                    type="button" 
+                    class="emoji-option text-lg hover:bg-gray-100 rounded p-1"
+                    data-emoji="${emoji}"
+                    data-index="${index}"
+                  >
+                    ${emoji}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+            
+            <!-- Input de nombre -->
+            <input 
+              type="text" 
+              value="${location.name}" 
+              data-index="${index}"
+              class="location-name-input flex-1 px-2 py-1 border border-gray-300 rounded-md text-sm"
+              maxlength="20"
+              placeholder="Nombre de ubicación"
+            />
+          </div>
+          
+          <!-- Checkbox de habilitado -->
+          <label class="flex items-center ml-3">
+            <input 
+              type="checkbox" 
+              ${location.enabled ? 'checked' : ''} 
+              data-index="${index}"
+              class="location-enabled-checkbox mr-2"
+            />
+            <span class="text-sm text-gray-600">Activa</span>
+          </label>
+        </div>
+      </div>
+    `).join('');
+    
+    // Añadir event listeners para los selectores de emoji
+    setupEmojiSelectors();
+  }
+  function setupEmojiSelectors() {
+    // Event listeners para abrir/cerrar dropdowns de emoji
+    document.querySelectorAll('.emoji-selector-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = btn.nextElementSibling;
+        
+        // Cerrar otros dropdowns
+        document.querySelectorAll('.emoji-dropdown').forEach(d => {
+          if (d !== dropdown) d.classList.add('hidden');
+        });
+        
+        // Toggle del dropdown actual
+        dropdown.classList.toggle('hidden');
+      });
+    });
+    
+    // Event listeners para seleccionar emoji
+    document.querySelectorAll('.emoji-option').forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const emoji = option.dataset.emoji;
+        const index = option.dataset.index;
+        const btn = document.querySelector(`[data-index="${index}"].emoji-selector-btn`);
+        const dropdown = option.closest('.emoji-dropdown');
+        
+        // Actualizar el botón con el nuevo emoji
+        btn.textContent = emoji;
+        
+        // Cerrar el dropdown
+        dropdown.classList.add('hidden');
+      });
+    });
+    
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.emoji-dropdown').forEach(dropdown => {
+        dropdown.classList.add('hidden');
+      });
+    });
+  }
+
+  function openLocationsModal() {
+    renderLocationsManager();
+    locationsModal.classList.remove("hidden");
+  }
+
+  function closeLocationsModal() {
+    locationsModal.classList.add("hidden");
+  }
+
+  function saveLocationsFromModal() {
+    const locations = getStoredLocations();
+    const nameInputs = document.querySelectorAll('.location-name-input');
+    const enabledInputs = document.querySelectorAll('.location-enabled-checkbox');
+    const emojiButtons = document.querySelectorAll('.emoji-selector-btn');
+    
+    nameInputs.forEach((input, index) => {
+      locations[index].name = input.value.trim() || locations[index].name;
+    });
+    
+    enabledInputs.forEach((input, index) => {
+      locations[index].enabled = input.checked;
+    });
+    
+    emojiButtons.forEach((btn, index) => {
+      locations[index].emoji = btn.textContent.trim();
+    });
+    
+    saveLocations(locations);
+    closeLocationsModal();
+    showToast("Ubicaciones actualizadas correctamente");
+  }
 
   // Event listeners
   logoutBtn.addEventListener("click", async () => {
@@ -603,8 +945,25 @@ import Layout from "../layouts/Layout.astro";
       showToast("Error al cerrar sesión", true);
     }
   });
+  
   addFoodBtn.addEventListener("click", () => openModal());
-  cancelBtn.addEventListener("click", closeModal); // Event listeners para filtros
+  manageLocationsBtn.addEventListener("click", () => openLocationsModal());
+  cancelBtn.addEventListener("click", closeModal);
+  locationsCancelBtn.addEventListener("click", closeLocationsModal);
+  locationsSaveBtn.addEventListener("click", saveLocationsFromModal);
+
+  // Event listeners para búsqueda y ordenamiento
+  searchInput.addEventListener("input", (e) => {
+    searchTerm = e.target.value;
+    const foods = store.getState().foods;
+    renderFoodsList(foods);
+  });
+
+  sortSelect.addEventListener("change", (e) => {
+    sortBy = e.target.value;
+    const foods = store.getState().foods;
+    renderFoodsList(foods);
+  });// Event listeners para filtros
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       // Remover estilos activos de todos los botones y aplicar estilos inactivos
@@ -626,23 +985,29 @@ import Layout from "../layouts/Layout.astro";
       renderFoodsList(currentFoods);
     });
   });
-
   // Cerrar modal al hacer click fuera
   foodModal.addEventListener("click", (e) => {
     if (e.target === foodModal) {
       closeModal();
     }
-  }); // Manejo del formulario
-  foodForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  });
 
-    // Obtener datos del formulario de manera simple
+  // Cerrar modal de ubicaciones al hacer click fuera
+  locationsModal.addEventListener("click", (e) => {
+    if (e.target === locationsModal) {
+      closeLocationsModal();
+    }
+  });  // Manejo del formulario
+  foodForm.addEventListener("submit", async (e) => {
+    e.preventDefault();    // Obtener datos del formulario de manera simple
     const name = document.getElementById("food-name").value;
     const category = document.getElementById("food-category").value;
-    const quantity = parseInt(document.getElementById("food-quantity").value);
+    const quantity = parseInt(document.getElementById("food-quantity").value) || 1;
     const unit = document.getElementById("food-unit").value;
-    const calories = parseInt(document.getElementById("food-calories").value);
+    const calories = parseInt(document.getElementById("food-calories").value) || 0;
     const expiryDate = new Date(document.getElementById("food-expiry").value);
+    const location = document.getElementById("food-location").value;
+    const notes = document.getElementById("food-notes").value.trim();
 
     const foodData = {
       name,
@@ -651,7 +1016,14 @@ import Layout from "../layouts/Layout.astro";
       unit,
       calories,
       expiryDate,
+      location,
+      notes
     };
+
+    // Solo añadir dateAdded si es un nuevo alimento
+    if (!editingFoodId) {
+      foodData.dateAdded = new Date();
+    }
 
     // Mostrar loading
     document.getElementById("save-spinner").classList.remove("hidden");

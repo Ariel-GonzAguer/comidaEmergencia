@@ -11,15 +11,48 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 
 ## ✨ Características
 
-- 🔐 **Autenticación segura** con Firebase Auth (email/contraseña)
-- 📦 **Gestión completa de inventario** con 9 categorías (latas, paquetes, frescos, frascos, bebidas, congelados, granos, condimentos, otros) - se estarán agregando más.
-- 🏷️ **Filtrado por categorías**
-- 📅 **Seguimiento de fechas de vencimiento** con alertas automáticas
-- ⚠️ **Notificaciones toast** para alimentos próximos a vencer (30 días)
-- 📊 **Dashboard con estadísticas** (total alimentos, próximos a vencer, calorías totales)
-- 🎨 **UI moderna y amigable**
-- 🔄 **Actualizaciones en tiempo real** con Firestore
-- 📱 **Diseño responsivo**
+### 🔐 Autenticación y Seguridad
+- **Autenticación segura** con Firebase Auth (email/contraseña)
+- **Gestión de sesiones** con persistencia automática
+- **Redirección inteligente** según estado de autenticación
+
+### 📦 Gestión Avanzada de Inventario
+- **9 categorías de alimentos** (latas, paquetes, frescos, frascos, bebidas, congelados, granos, condimentos, otros)
+- **Búsqueda en tiempo real** por nombre de alimento
+- **Filtrado interactivo** por categorías con botones visuales
+- **Ordenamiento múltiple** (nombre, categoría, fecha vencimiento, calorías, fecha agregado)
+- **Campo de notas opcional** para información adicional de cada alimento
+
+### 🏠 Ubicaciones Personalizables
+- **Gestión de ubicaciones** - hasta 4 ubicaciones personalizables
+- **Nombres editables** para cada ubicación (máx. 20 caracteres)
+- **Selector de emoji interactivo** con 24 emojis disponibles
+- **Habilitación/deshabilitación** de ubicaciones según necesidad
+- **Persistencia local** de configuraciones personalizadas
+
+### 📅 Control de Vencimientos
+- **Seguimiento inteligente** de fechas de vencimiento
+- **Alertas automáticas** con codificación por colores
+- **Notificaciones toast** para alimentos próximos a vencer (30 días)
+- **Estados visuales**: vencido (rojo), próximo a vencer ≤7 días (naranja), ≤30 días (amarillo), bueno (verde)
+
+### 📊 Dashboard Inteligente
+- **Estadísticas en tiempo real** (total alimentos, próximos a vencer, calorías totales)
+- **Visualización dinámica** con iconos y colores
+- **Actualizaciones automáticas** al agregar/editar/eliminar alimentos
+
+### ♿ Accesibilidad y UX
+- **ARIA labels completos** en todos los controles interactivos
+- **Navegación por teclado** totalmente funcional
+- **Compatibilidad con lectores de pantalla**
+- **UI moderna y responsive** optimizada para móviles y escritorio
+- **Animaciones sutiles** y transiciones suaves
+
+### 🔄 Funcionalidades Técnicas
+- **Actualizaciones en tiempo real** con Firestore
+- **Gestión de estado avanzada** con store personalizado
+- **Validación de datos** para prevenir errores de Firebase
+- **Manejo robusto de errores** con mensajes descriptivos
 
 ## 🏗️ Stack Tecnológico
 
@@ -38,15 +71,26 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 ```
 [YOUR_COLLECTION_NAME] (collection)
 └── [YOUR_DOCUMENT_ID] (document)
-    ├── latas: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── paquetes: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── frescos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── frascos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── bebidas: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── congelados: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── granos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    ├── condimentos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
-    └── otros: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
+    ├── latas: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── paquetes: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── frescos: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── frascos: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── bebidas: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── congelados: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── granos: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    ├── condimentos: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+    └── otros: [ {id, name, quantity, unit, calories, expiryDate, location, notes, dateAdded}, ... ]
+```
+
+### Ubicaciones Personalizadas (localStorage)
+
+```javascript
+[
+  { id: "despensa", name: "Despensa", emoji: "🏠", enabled: true },
+  { id: "refrigerador", name: "Refrigerador", emoji: "❄️", enabled: true },
+  { id: "congelador", name: "Congelador", emoji: "🧊", enabled: true },
+  { id: "alacena", name: "Alacena", emoji: "📦", enabled: true }
+]
 ```
 
 > **⚠️ Importante**: Debe elegir sus propios nombres para la colección y documento. Los valores mostrados son placeholders que debe reemplazar por sus propios nombres únicos.
@@ -200,75 +244,147 @@ La aplicación estará disponible en `http://localhost:4321`
 
 ### 🔐 Autenticación
 
-- Login con email y contraseña
-- Redirección automática según estado de autenticación
-- Logout seguro
-- Persistencia de sesión
+- **Login seguro** con email y contraseña
+- **Redirección automática** según estado de autenticación
+- **Logout seguro** con limpieza de estado
+- **Persistencia de sesión** entre visitas
 
-### 🍕 Gestión de Alimentos
+### 🍕 Gestión Avanzada de Alimentos
 
-**Agregar alimentos** con:
+**Agregar/Editar alimentos** con información completa:
 
-- Nombre del alimento
-- Categoría (🥫 Latas, 📦 Paquetes, 🥬 Frescos, 🫙 Frascos, 🥤 Bebidas, 🧊 Congelados, 🌾 Granos, 🧂 Condimentos, 📋 Otros)
-- Cantidad y unidad
-- Calorías por unidad
-- Fecha de vencimiento
+- **Nombre del alimento** (requerido)
+- **Categoría** - 9 opciones disponibles (🥫 Latas, 📦 Paquetes, 🥬 Frescos, 🫙 Frascos, 🥤 Bebidas, 🧊 Congelados, 🌾 Granos, 🧂 Condimentos, 📋 Otros)
+- **Cantidad y unidad** de medida
+- **Calorías** por unidad
+- **Fecha de vencimiento** con validación
+- **Ubicación personalizable** (hasta 4 ubicaciones)
+- **Notas opcionales** para información adicional
 
-**Funciones adicionales**:
+**Búsqueda y Filtrado**:
 
-- ✏️ Editar alimentos existentes
-- 🗑️ Eliminar alimentos
-- 🔍 Filtrar por categorías
-- 📊 Vista en tiempo real de cambios
+- 🔍 **Búsqueda en tiempo real** por nombre de alimento
+- 🏷️ **Filtros por categoría** con botones interactivos
+- 📊 **Ordenamiento múltiple**: nombre, categoría, fecha vencimiento, calorías, fecha agregado
+- 🎯 **Resultados instantáneos** sin recargar página
 
-### 📊 Dashboard
+**Operaciones CRUD**:
 
-- **Estadísticas dinámicas**:
-  - Total de alimentos
-  - Alimentos próximos a vencer (≤30 días)
-  - Total de calorías
-- **Alertas visuales** por estado de vencimiento
-- **Filtros interactivos** por categoría
-- **Interface amigable** con emojis
+- ✏️ **Editar alimentos** existentes manteniendo historial
+- 🗑️ **Eliminar alimentos** con confirmación de seguridad
+- �️ **Vista en tiempo real** de todos los cambios
+- � **Interface responsive** en todos los dispositivos
 
-### 🗂️ Categorías de Alimentos
+### 🏠 Gestión de Ubicaciones Personalizadas
 
-El sistema organiza los alimentos en 9 categorías principales:
+**Configuración Flexible**:
 
-- 🥫 **Latas** - Conservas, atún, vegetales enlatados, salsas
-- 📦 **Paquetes** - Pasta, arroz empaquetado, cereales, snacks
-- 🥬 **Frescos** - Frutas, verduras, productos perecederos
-- 🫙 **Frascos** - Mermeladas, miel, productos en vidrio
-- 🥤 **Bebidas** - Jugos, refrescos, agua embotellada
-- 🧊 **Congelados** - Carnes, pescados, vegetales congelados
-- 🌾 **Granos** - Legumbres, cereales a granel, harinas
-- 🧂 **Condimentos** - Especias, sal, aceites, vinagres
-- 📋 **Otros** - Productos que no encajan en otras categorías
+- **Hasta 4 ubicaciones** configurables independientemente
+- **Nombres editables** de hasta 20 caracteres
+- **Selector de emoji** con 24 opciones disponibles
+- **Habilitación individual** de cada ubicación
 
-### 🔔 Notificaciones
+**Selector de Emoji Interactivo**:
 
-- Toast automático para alimentos próximos a vencer
-- Alertas visuales en la lista de alimentos
-- Estados de color según días restantes
+- 🎨 **Grid visual de emojis**
+- 🏠 **Emojis predefinidos**: hogar, cocina, almacenamiento
+- 🔧 **Cambio en tiempo real** en formularios y listas
+- 💾 **Persistencia automática** en localStorage
+
+**Emojis Disponibles**: 🏠 ❄️ 🧊 📦 🏪 🍽️ 🥫 🚪 🏘️ 🏔️ 🧺 📋 🎒 🛒 📱 💼 🗄️ 🗃️ 📂 📁 🏆 🎯 🔒 🔑
+
+### �Dashboard Inteligente
+
+**Estadísticas Dinámicas**:
+
+- **📦 Total de alimentos** - contador en tiempo real
+- **⚠️ Próximos a vencer** - alimentos ≤30 días para vencer
+- **⚡ Total calorías** - suma de todas las calorías registradas
+
+**Alertas Visuales Inteligentes** por estado de vencimiento:
+
+- 🔴 **Vencido** - productos que ya pasaron su fecha (rojo)
+- 🟠 **Critical** - vencen en ≤7 días (naranja)
+- � **Advertencia** - vencen en ≤30 días (amarillo)
+- 🟢 **Bueno** - más de 30 días restantes (verde)
+
+**Controles Interactivos**:
+
+- 🎛️ **Filtros visuales** con estados activo/inactivo
+- 🔄 **Actualizaciones automáticas** sin recarga manual
+- 📱 **Interface adaptable** a cualquier tamaño de pantalla
+
+### ♿ Accesibilidad y Experiencia de Usuario
+
+**Cumplimiento de Estándares**:
+
+- **ARIA labels** completos en todos los controles
+- **Navegación por teclado** 100% funcional
+- **Compatibilidad con lectores de pantalla**
+- **Etiquetas descriptivas** para cada elemento interactivo
+
+**Experiencia Optimizada**:
+
+- **Mensajes toast** informativos para todas las acciones
+- **Confirmaciones de seguridad** para operaciones críticas
+- **Loading states** durante operaciones asíncronas
+- **Estados de error** claros y descriptivos
+
+### 🔔 Sistema de Notificaciones
+
+**Alertas Automáticas**:
+
+- 🔔 **Toast notifications** al iniciar la aplicación
+- ⏰ **Verificación automática** de alimentos próximos a vencer
+- 🎨 **Indicadores visuales** en la lista de alimentos
+- 📊 **Contador dinámico** en el dashboard
+
+**Estados de Notificación**:
+
+- ✅ **Éxito** - operaciones completadas (verde)
+- ❌ **Error** - problemas detectados (rojo)
+- ℹ️ **Información** - datos relevantes (azul)
 
 ## 🎨 Personalización
 
-### Colores y Estilos
+### 🎨 Colores y Estilos
 
-- Modificar los colores en sus respectivas clases.
-- Estilos globales en `src/styles/global.css`
+- **Temas visuales**: Modificar colores en las clases de Tailwind CSS
+- **Estilos globales**: Personalizar en `src/styles/global.css`
+- **Componentes**: Cada componente Astro es totalmente personalizable
 
-### Unidades Disponibles
+### 📏 Unidades de Medida Disponibles
 
-El sistema incluye las siguientes unidades de medida:
+El sistema incluye **6 unidades de medida** para máxima flexibilidad:
 
-- **Gramos (g)** - Para productos secos y sólidos
+- **Gramos (g)** - Para productos secos y sólidos pequeños
 - **Mililitros (ml)** - Para líquidos en pequeñas cantidades
 - **Kilogramos (kg)** - Para productos en grandes cantidades
 - **Litros (L)** - Para líquidos en grandes cantidades
 - **Botella (750ml)** - Para bebidas embotelladas estándar
 - **Paquete/Lata** - Para productos empaquetados o enlatados
+
+### 🏠 Configuración de Ubicaciones
+
+**Personalización Completa**:
+
+- **Nombres**: Hasta 20 caracteres por ubicación
+- **Emojis**: 24 opciones disponibles en el selector
+- **Estados**: Habilitar/deshabilitar ubicaciones individualmente
+- **Persistencia**: Configuraciones guardadas automáticamente en localStorage
+
+**Emojis Disponibles para Ubicaciones**:
+```
+🏠 ❄️ 🧊 📦 🏪 🍽️ 🥫 🚪 🏘️ 🏔️ 🧺 📋 
+🎒 🛒 📱 💼 🗄️ 🗃️ 📂 📁 🏆 🎯 🔒 🔑
+```
+
+### 🔧 Personalización Técnica
+
+**Variables de Entorno**:
+- Nombres de colecciones y documentos de Firebase personalizables
+- Configuración de seguridad flexible
+- Entornos de desarrollo y producción separados
 
 ## 🚀 Despliegue
 
@@ -284,21 +400,42 @@ El sistema incluye las siguientes unidades de medida:
 2. Configurar variables de entorno
 3. Deploy automático
 
-## 🔧 Desarrollo
+## 🔧 Desarrollo y Arquitectura
 
-### Estructura del Estado
+### 🏗️ Estructura del Estado
 
-El estado se maneja con una clase personalizada en `src/store/useStore.js`:
+**Estado centralizado** con clase personalizada en `src/store/useStore.js`:
 
-- Persistencia en localStorage
-- Métodos para usuarios y alimentos
-- Estado de carga
+- **Persistencia automática** en localStorage
+- **Métodos específicos** para usuarios y alimentos
+- **Estados de carga** y manejo de errores
+- **Sincronización** entre componentes
 
-### Servicios Firebase
+### 🔥 Servicios Firebase
 
-- `authService.js` - Autenticación
-- `foodService.js` - CRUD de alimentos
-- `firebaseConfig.js` - Configuración
+**Servicios especializados**:
+
+- **`authService.js`** - Autenticación y gestión de usuarios
+- **`foodService.js`** - CRUD completo de alimentos con validación
+- **`firebaseConfig.js`** - Configuración segura y variables de entorno
+
+### 🧪 Validación de Datos
+
+**Prevención de errores Firestore**:
+
+- **Validación pre-guardado** de todos los campos
+- **Valores por defecto** para campos numéricos
+- **Manejo de campos undefined** y null
+- **Sanitización de datos** antes del envío
+
+### 📱 Responsive Design
+
+**Adaptabilidad completa**:
+
+- **Mobile-first approach** con Tailwind CSS
+- **Breakpoints optimizados** (sm, md, lg, xl)
+- **Touch-friendly** interfaces para dispositivos móviles
+- **Grid adaptativo** para diferentes tamaños de pantalla
 
 ## 🔒 Consideraciones de Seguridad
 
@@ -348,13 +485,26 @@ Antes de crear un issue:
 
 ## 🤝 Contribuir
 
-¡Las contribuciones son bienvenidas! Para contribuir:
+¡Las contribuciones son bienvenidas! Principalmente para las funcionalidades del roadmap. Para contribuir:
 
-1. **Haga Fork** del proyecto
-2. **Cree** una rama para su feature (`git checkout -b feature/AmazingFeature`)
-3. **Haga Commit** de sus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. **Haga Push** a la rama (`git push origin feature/AmazingFeature`)
-5. **Abra** un Pull Request
+1. **Revisa el [Roadmap](#-roadmap---próximas-funcionalidades)** para ver qué funcionalidades están planeadas
+2. **Haz Fork** del proyecto
+3. **Crea** una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+4. **Desarrolla** siguiendo las guías de estilo existentes
+5. **Prueba** tu implementación con diferentes casos de uso
+6. **Haz Commit** de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+7. **Haz Push** a la rama (`git push origin feature/AmazingFeature`)
+8. **Abre** un Pull Request con descripción detallada
+
+### 🎯 Áreas Prioritarias para Contribuir
+
+- **🌍 Internacionalización** - Traducir a otros idiomas
+- **🔧 PWA Implementation** - Conversión a Progressive Web App
+- **📊 Data Export/Import** - Funcionalidades de backup y restore
+- **📷 Barcode Scanner** - Integración de escáner de códigos
+- **📈 Advanced Analytics** - Gráficos y estadísticas mejoradas
+- **🏷️ Tagging System** - Sistema de etiquetas personalizables
+- **🔔 Smart Notifications** - Notificaciones push inteligentes
 
 📖 **Para guías detalladas de contribución, revisa [CONTRIBUTING.md](CONTRIBUTING.md)**
 
@@ -393,6 +543,85 @@ Para más información sobre la AGPL v3, visita: https://www.gnu.org/licenses/ag
 **Ariel González Aguer**
 
 - GitHub: [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer)
+
+## 🚀 Novedades y Mejoras Recientes
+
+### ✨ Versión Actual - Funcionalidades Implementadas 22/6/2025
+
+**🔍 Búsqueda y Filtrado Avanzado**:
+- Búsqueda en tiempo real por nombre de alimento
+- Filtros interactivos por categorías con estados visuales
+- Ordenamiento múltiple (nombre, categoría, vencimiento, calorías, fecha agregado)
+
+**🏠 Sistema de Ubicaciones Personalizable**:
+- Gestión completa de hasta 4 ubicaciones
+- Editor de nombres con validación (máx. 20 caracteres)
+- Selector de emoji interactivo con 24 opciones
+- Persistencia automática en localStorage
+
+**♿ Accesibilidad y UX Mejoradas**:
+- ARIA labels completos en todos los controles
+- Navegación por teclado 100% funcional
+- Compatibilidad con lectores de pantalla
+- Estados de loading y confirmaciones de seguridad
+
+**📝 Campo de Notas**:
+- Información adicional opcional para cada alimento
+- Visualización discreta en la lista de alimentos
+- Ideal para recordatorios y detalles especiales
+
+**🛠️ Correcciones Técnicas**:
+- Eliminación del error "Unsupported field value: undefined" en Firestore
+- Validación robusta de datos antes del guardado
+- Manejo mejorado de campos numéricos y fechas
+
+### 🎯 Roadmap - Próximas Funcionalidades
+
+**🌟 Funcionalidades Sugeridas**:
+
+- **📱 PWA (Progressive Web App)**
+  - Instalación como app nativa
+  - Funcionamiento offline
+  - Notificaciones push para vencimientos
+
+- **📊 Exportación/Importación de Datos**
+  - Backup en formato CSV/JSON
+  - Importación masiva de inventarios
+  - Sincronización entre dispositivos
+
+- **📷 Escáner de Códigos de Barras**
+  - Adición rápida de productos
+  - Base de datos de productos integrada
+  - Información nutricional automática
+
+- **🌙 Modo Oscuro**
+  - Tema dark/light switcheable
+  - Preferencias del sistema automáticas
+  - Mejor experiencia nocturna
+
+- **📈 Gráficos y Estadísticas Avanzadas**
+  - Visualización de consumo por categorías
+  - Tendencias de vencimiento
+  - Reportes mensuales/anuales
+
+- **🏷️ Sistema de Etiquetas**
+  - Tags personalizables para alimentos
+  - Filtrado por múltiples etiquetas
+  - Organización más granular
+
+- **🔔 Notificaciones Inteligentes**
+  - Recordatorios personalizables
+  - Alertas por email/SMS
+  - Configuración de frecuencia
+
+**🤝 ¿Quieres Contribuir?**
+
+¡Estas funcionalidades están abiertas para contribuciones de la comunidad! Si le interesa implementar alguna:
+
+1. Revisa los [Issues abiertos](https://github.com/Ariel-GonzAguer/comidaEmergencia/issues)
+2. Crea un nuevo Issue para discutir la funcionalidad
+3. Haz Fork del proyecto y comienza a desarrollar
+4. Envía un Pull Request con tus cambios
 
 ## 🙏 Agradecimientos
 
