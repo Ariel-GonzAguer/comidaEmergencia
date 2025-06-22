@@ -12,7 +12,8 @@ import Layout from "../layouts/Layout.astro";
             <h1 class="text-sm sm:text-xl font-semibold text-white">
               Alimentos de Emergencia
             </h1>
-          </div>          <div class="flex items-center space-x-2">
+          </div>
+          <div class="flex items-center space-x-2">
             <span id="user-email" class="text-sm text-gray-500"></span>
             <button
               id="logout-btn"
@@ -108,11 +109,12 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
         </div>
-      </div>      <!-- Botón agregar alimento -->
+      </div>
+      <!-- Botón agregar alimento -->
       <div class="mb-6">
         <button
           id="add-food-btn"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
+          class="bg-fuchsia-950 border-2 border-fuchsia-700 hover:bg-fuchsia-700 hover:border-fuchsia-400 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
         >
           Agregar Alimento
         </button>
@@ -122,9 +124,10 @@ import Layout from "../layouts/Layout.astro";
         <div class="flex flex-wrap gap-2">
           <label class="text-sm font-medium text-white mr-2"
             >Filtrar por categoría:</label
-          >          <button
+          >
+          <button
             id="filter-all"
-            class="px-3 py-1 text-xs rounded-full bg-blue-600 text-white hover:bg-blue-700 filter-btn cursor-pointer"
+            class="px-3 py-1 text-xs rounded-full bg-fuchsia-700 text-white hover:bg-fuchsia-600 filter-btn cursor-pointer"
           >
             📋 Todas
           </button>
@@ -165,12 +168,13 @@ import Layout from "../layouts/Layout.astro";
       <div class="bg-white shadow overflow-hidden sm:rounded-md">
         <div class="px-4 py-5 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Inventario de Alimentos
+            Inventario Total
           </h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-500">
             Lista de todos tus alimentos de emergencia
           </p>
-        </div>        <div id="foods-list" class="border-t border-gray-200">
+        </div>
+        <div id="foods-list" class="border-t border-gray-200">
           <div id="loading-foods" class="px-4 py-5 text-center text-gray-500">
             <span class="animate-spin inline-block text-3xl mb-2">⏳</span>
             <br />Cargando alimentos...
@@ -235,7 +239,7 @@ import Layout from "../layouts/Layout.astro";
                 <option value="">Seleccionar categoría</option>
                 <option value="latas">🥫 Latas</option>
                 <option value="paquetes">📦 Paquetes</option>
-                <option value="frescos">🥬 Frescos</option>
+                <option value="frescos">🍹 Frescos</option>
                 <option value="frascos">🫙 Frascos</option>
                 <option value="otros">📋 Otros</option>
               </select>
@@ -309,7 +313,8 @@ import Layout from "../layouts/Layout.astro";
                 required
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
               />
-            </div>            <div class="flex justify-end space-x-3 pt-4">
+            </div>
+            <div class="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
                 id="cancel-btn"
@@ -432,7 +437,7 @@ import Layout from "../layouts/Layout.astro";
     const expiring = foods.filter(
       (food) => getDaysUntilExpiry(food.expiryDate) <= 30
     ).length;
-    
+
     // Calcular calorías totales: solo suma de calorías (sin multiplicar por cantidad)
     const calories = foods.reduce(
       (sum, food) => sum + Number(food.calories),
@@ -442,7 +447,7 @@ import Layout from "../layouts/Layout.astro";
     totalFoods.textContent = total;
     expiringFoods.textContent = expiring;
     totalCalories.textContent = calories.toLocaleString();
-  }// Renderizar lista de alimentos
+  } // Renderizar lista de alimentos
   function renderFoodsList(foods) {
     loadingFoods.classList.add("hidden");
 
@@ -520,7 +525,8 @@ import Layout from "../layouts/Layout.astro";
   // Abrir modal
   function openModal(food = null) {
     editingFoodId = food?.id || null;
-    modalTitle.textContent = food ? "Editar Alimento" : "Agregar Alimento";    if (food) {
+    modalTitle.textContent = food ? "Editar Alimento" : "Agregar Alimento";
+    if (food) {
       document.getElementById("food-name").value = food.name || "";
       document.getElementById("food-category").value = food.category || "";
       document.getElementById("food-quantity").value = food.quantity || "";
@@ -529,8 +535,9 @@ import Layout from "../layouts/Layout.astro";
       const expiryDate = food.expiryDate
         ? new Date(food.expiryDate.seconds * 1000)
         : new Date();
-      document.getElementById("food-expiry").value =
-        expiryDate.toISOString().split("T")[0];
+      document.getElementById("food-expiry").value = expiryDate
+        .toISOString()
+        .split("T")[0];
     } else {
       foodForm.reset();
     }
@@ -575,7 +582,7 @@ import Layout from "../layouts/Layout.astro";
     }
   });
   addFoodBtn.addEventListener("click", () => openModal());
-  cancelBtn.addEventListener("click", closeModal);  // Event listeners para filtros
+  cancelBtn.addEventListener("click", closeModal); // Event listeners para filtros
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       // Remover estilos activos de todos los botones y aplicar estilos inactivos
@@ -603,10 +610,10 @@ import Layout from "../layouts/Layout.astro";
     if (e.target === foodModal) {
       closeModal();
     }
-  });  // Manejo del formulario
+  }); // Manejo del formulario
   foodForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     // Obtener datos del formulario de manera simple
     const name = document.getElementById("food-name").value;
     const category = document.getElementById("food-category").value;

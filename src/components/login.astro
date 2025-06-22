@@ -11,12 +11,7 @@
       <!-- Formulario de inicio de sesión -->
       <form id="login-form" class="space-y-6">
         <div>
-          <label
-            for="login-email"
-            class="block text-5xl"
-          >
-            🐈
-          </label>
+          <label for="login-email" class="block text-5xl text-amber-50">🐈 Email</label>
           <input
             id="login-email"
             name="email"
@@ -27,12 +22,7 @@
         </div>
 
         <div>
-          <label
-            for="login-password"
-            class="block text-5xl text-right"
-          >
-            🍕
-          </label>
+          <label for="login-password" class="block text-5xl text-amber-50">🍕 Contraseña</label>
           <input
             id="login-password"
             name="password"
@@ -40,7 +30,8 @@
             required
             class="mt-1 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
           />
-        </div>        <div>
+        </div>
+        <div>
           <button
             type="submit"
             class="group relative w-full flex justify-center py-2 px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
@@ -48,7 +39,7 @@
             <span id="login-spinner" class="hidden">
               <span class="animate-spin inline-block mr-3 text-lg">⏳</span>
             </span>
-            <span id="login-text" class="block text-7xl">🛵</span>
+            <span id="login-text" class="block text-3xl text-amber-50 border-2 border-fuchsia-500 p-4 bg-fuchsia-900 rounded hover:bg-fuchsia-500 hover:border-fuchsia-300 hover:text-fuchsia-950">Iniciar sesión</span>
           </button>
         </div>
       </form>
@@ -111,9 +102,7 @@
   function setLoading(isLoading) {
     const spinner = document.getElementById("login-spinner");
     const text = document.getElementById("login-text");
-    const button = document.querySelector(
-      '#login-form button[type="submit"]'
-    );
+    const button = document.querySelector('#login-form button[type="submit"]');
 
     if (isLoading) {
       spinner.classList.remove("hidden");
