@@ -191,7 +191,7 @@ La aplicación estará disponible en `http://localhost:4321`
 ### 🍕 Gestión de Alimentos
 **Agregar alimentos** con:
 - Nombre del alimento
-- Categoría (🥫 Latas, 📦 Paquetes, 🥬 Frescos, 🫙 Frascos, 📋 Otros)
+- Categoría (🥫 Latas, 📦 Paquetes, 🍹 Frescos, 🫙 Frascos, 📋 Otros)
 - Cantidad y unidad
 - Calorías por unidad
 - Fecha de vencimiento
@@ -228,7 +228,7 @@ Editar en `src/pages/dashboard.astro`:
 const categoryEmojis = {
   latas: "🥫",
   paquetes: "📦", 
-  frescos: "🥬",
+  frescos: "🍹",
   frascos: "🫙",
   otros: "📋"
 };
