@@ -1,8 +1,18 @@
 import { db } from './firebaseConfig.js';
 import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
 
+// 🔒 CONFIGURACIÓN DE FIRESTORE - Variables de entorno
+// Configure estos valores en su archivo .env
+const COLLECTION_NAME = import.meta.env.PUBLIC_FIRESTORE_COLLECTION_NAME || 'default_collection';
+const DOCUMENT_ID = import.meta.env.PUBLIC_FIRESTORE_DOCUMENT_ID || 'default_document';
+
+// ⚠️ IMPORTANTE: 
+// 1. Agregue estas variables a su archivo .env
+// 2. Actualice las reglas de Firestore con los mismos nombres
+// 3. Nunca suba el archivo .env al repositorio
+
 // Referencia al documento principal
-const getDocRef = () => doc(db, 'emergenciaDataTotal', 'comidaEmergenciaCasa');
+const getDocRef = () => doc(db, COLLECTION_NAME, DOCUMENT_ID);
 
 // Categorías disponibles
 const CATEGORIES = ['latas', 'paquetes', 'frescos', 'frascos', 'otros'];

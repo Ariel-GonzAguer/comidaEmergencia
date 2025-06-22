@@ -7,6 +7,8 @@
 
 Una aplicación web **Open Source** para gestionar el inventario de alimentos de emergencia, construida con **Astro**, **Firebase** y **Tailwind CSS**. Diseñada para ser simple, intuitiva y funcional.
 
+> **🔒 IMPORTANTE - CONFIGURACIÓN REQUERIDA**: Este proyecto requiere configuración personalizada de nombres de colecciones y documentos de Firebase por razones de seguridad. Consulte la sección [Configuración e Instalación](#-configuración-e-instalación) para instrucciones detalladas.
+
 ## ✨ Características
 
 - 🔐 **Autenticación segura** con Firebase Auth (email/contraseña)
@@ -33,14 +35,16 @@ Una aplicación web **Open Source** para gestionar el inventario de alimentos de
 
 ### Firestore Database
 ```
-emergenciaDataTotal(collection)
-└── comidaEmergenciaCasa (document)
+[YOUR_COLLECTION_NAME] (collection)
+└── [YOUR_DOCUMENT_ID] (document)
     ├── latas: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     ├── paquetes: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     ├── frescos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     ├── frascos: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
     └── otros: [ {id, name, quantity, unit, calories, expiryDate}, ... ]
 ```
+
+> **⚠️ Importante**: Debe elegir sus propios nombres para la colección y documento. Los valores mostrados son placeholders que debe reemplazar por sus propios nombres únicos por seguridad.
 
 ## 📁 Estructura del Proyecto
 
@@ -97,13 +101,39 @@ npm install
 3. Crear una base de datos **Cloud Firestore**
 4. Obtener la configuración del proyecto
 
-### 4. Variables de entorno
+### 4. Configurar nombres de colección y documento
+
+⚠️ **IMPORTANTE PARA SEGURIDAD**: Por razones de seguridad, debe elegir sus propios nombres únicos para la colección y documento de Firestore.
+
+Estos nombres se configuran a través de variables de entorno para mayor seguridad y flexibilidad.
+
+**Recomendaciones para nombres seguros:**
+- Use nombres únicos que no sean obvios
+- Incluya números o fechas
+- Evite nombres genéricos como "foods", "data", "users"
+- Ejemplos: `alimentos_familia_2024`, `inventario_casa_xyz`, `emergency_food_abc123`
+
+### 5. Variables de entorno
 Crear archivo `.env` en la raíz del proyecto:
 ```env
+# Firebase API Key
 PUBLIC_VITE_FIREBASE_API_KEY=tu_api_key_aqui
+
+# Firestore Collection/Document Names (CAMBIE ESTOS VALORES POR SEGURIDAD)
+PUBLIC_FIRESTORE_COLLECTION_NAME=su_nombre_coleccion_unico
+PUBLIC_FIRESTORE_DOCUMENT_ID=su_documento_id_unico
 ```
 
-### 5. Configurar reglas de Firestore
+> **🔒 Importante**: Elija nombres únicos y no predecibles para mayor seguridad. Nunca use valores como "users", "data", "foods", etc.
+
+> **📋 Si ya tiene el proyecto funcionando:**
+> - Use los mismos nombres que tiene actualmente en Firebase
+> - Agregue las variables al `.env` con sus nombres existentes
+> - No necesita crear nuevas colecciones/documentos
+
+### 6. Configurar reglas de Firestore
+⚠️ **IMPORTANTE**: Use los mismos nombres que configuró en las variables de entorno del paso anterior.
+
 Con esta configuración solo las personas autenticadas pueden leer y actualizar el documento.
 
 Cada usuario se debe agregar manualmente en la sección de Firebase Auth.
@@ -112,19 +142,34 @@ Cada usuario se debe agregar manualmente en la sección de Firebase Auth.
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /emergenciaDataTotal/comidaEmergenciaCasa {
+    match /{collection_name}/{document_id} {
       allow read, write: if request.auth != null;
     }
   }
 }
 ```
 
-### 6. Ejecutar en desarrollo
+> **Ejemplo**: Si configuró `PUBLIC_FIRESTORE_COLLECTION_NAME=mi_comida_123` y `PUBLIC_FIRESTORE_DOCUMENT_ID=inventario_abc`, la regla sería:
+> ```javascript
+> match /mi_comida_123/inventario_abc {
+>   allow read, write: if request.auth != null;
+> }
+> ```
+
+### 7. Ejecutar en desarrollo
 ```bash
 npm run dev
 ```
 
 La aplicación estará disponible en `http://localhost:4321`
+
+> **✅ Checklist de configuración:**
+> - [ ] Proyecto Firebase creado
+> - [ ] Authentication habilitado
+> - [ ] Firestore creado
+> - [ ] Variables de entorno configuradas en `.env`
+> - [ ] Nombres únicos elegidos para colección/documento
+> - [ ] Reglas de Firestore actualizadas con sus nombres específicos
 
 ## 🧞 Comandos Disponibles
 
@@ -213,6 +258,33 @@ El estado se maneja con una clase personalizada en `src/store/useStore.js`:
 - `authService.js` - Autenticación
 - `foodService.js` - CRUD de alimentos  
 - `firebaseConfig.js` - Configuración
+
+## 🔒 Consideraciones de Seguridad
+
+### Configuración Personalizada Requerida
+Por razones de seguridad, **NUNCA** use los nombres de colecciones y documentos tal como aparecen en ejemplos públicos. Siempre:
+
+1. **Elija nombres únicos** para sus colecciones y documentos
+2. **Use variables de entorno** para configurar estos nombres
+3. **No use nombres predecibles** como "users", "data", etc.
+4. **Configure las reglas de Firestore** correctamente
+5. **Mantenga privadas** sus credenciales de Firebase
+
+### Archivos de Configuración
+- **`.env`**: Contiene las variables de entorno (NUNCA subir al repositorio)
+- **`foodService.js`**: Lee automáticamente las variables de entorno
+- **Reglas de Firestore**: Deben coincidir con los nombres en `.env`
+
+### Reglas de Firestore
+Las reglas incluidas en este proyecto permiten acceso solo a usuarios autenticados. Para mayor seguridad, considere:
+- Implementar reglas más específicas por usuario
+- Validar estructura de datos en las reglas
+- Limitar operaciones por campos específicos
+
+### Variables de Entorno
+- Nunca incluya credenciales reales en el código
+- Use archivos `.env` que no se suban al repositorio
+- Considere usar diferentes proyectos Firebase para desarrollo y producción
 
 ## 🐛 Issues y Soporte
 
