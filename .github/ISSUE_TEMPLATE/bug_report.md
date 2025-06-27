@@ -29,7 +29,7 @@ Si aplica, agregue screenshots para ayudar a explicar su problema.
 - OS: [ej. Windows 11, macOS Sonoma, Ubuntu 22.04]
 - Navegador: [ej. Chrome 120, Firefox 121, Safari 17]
 - Versión de Node.js: [ej. 18.17.0]
-- Versión del proyecto: [ej. 0.0.1]
+- Versión del proyecto: [ej. 0.0.1] (este dato lo puede ver en el package.json).
 
 ## 📱 Información Adicional (si aplica)
 - Dispositivo: [ej. iPhone 15, Samsung Galaxy S23]
@@ -42,5 +42,5 @@ Agregue cualquier otro contexto sobre el problema aquí.
 Si hay mensajes de error en la consola, inclúyalos aquí:
 
 ```
-Pegue los logs aquí
+Pegue los logs acá
 ```

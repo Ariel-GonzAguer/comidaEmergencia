@@ -1,9 +1,9 @@
 {
   "name": "comidaemergencia",
   "version": "2.0.0",
-  "description": "Una aplicación web para gestionar el inventario de alimentos de emergencia, construida con Astro, Firebase y Tailwind CSS.",
+  "description": "Una aplicación web OPEN SOURCE/CÓDIGO ABIERTO para gestionar el inventario de alimentos de emergencia, construida con Astro, Firebase y Tailwind CSS.",
   "type": "module",
-  "author": "Ariel González Aguer",
+  "author": "Ariel Gonzales Agüero",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/Ariel-GonzAguer/comidaEmergencia#readme",
   "repository": {
@@ -14,11 +14,17 @@
     "url": "https://github.com/Ariel-GonzAguer/comidaEmergencia/issues"
   },
   "keywords": [
+    "open-source",
+    "codigo-abierto",
+    "comida",
+    "emergencia",
+    "food",
+    "emergency-food",
+    "food-management",
+    "inventory",
     "astro",
     "firebase",
     "tailwind",
-    "emergency-food",
-    "inventory-management",
     "web-app",
     "javascript"
   ],
@@ -30,8 +36,7 @@
   },
   "dependencies": {
     "astro": "^5.10.0",
-    "firebase": "^11.9.1",
-    "immer": "^10.1.1"
+    "firebase": "^11.9.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
