@@ -1,5 +1,6 @@
 ---
 // Modal para agregar/editar alimentos
+import ExpiredDateInput from "./expiredDateInput.astro";
 ---
 
 <div
@@ -120,14 +121,7 @@
             for="food-expiry"
             class="block text-sm font-medium text-gray-700"
           >Fecha de Vencimiento</label>
-          <input
-            type="date"
-            id="food-expiry"
-            name="expiryDate"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            style="color-scheme: light;"
-          />
+          <ExpiredDateInput />
         </div>
 
         <!-- Ubicación -->

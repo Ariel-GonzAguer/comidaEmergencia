@@ -1,15 +1,15 @@
 # 🤝 Guía de Contribución
 
-¡Gracias por su interés en contribuir en este proyecto **Open Source/Código Abierto**! Este documento le guiará a través del proceso de contribución.
+¡Gracias por su interés en contribuir a **Alimentos de Emergencia**! Este documento le guiará a través del proceso de contribución.
 
 ## 📋 Código de Conducta
 
-Al participar en este proyecto, acepta mantener un ambiente respetuoso y constructivo. Esperamos que usted:
+Al participar en este proyecto, acepta mantener un ambiente respetuoso y constructivo. Esperamos:
 
-- 🤝 Sea respetuoso con otras personas colaboradoras
-- 💬 Tenga comunicación constructiva y profesional
-- 🎯 Se enfoque en lo que es mejor para la comunidad
-- 🌟 Mostrar empatía hacia otras personas de la comunidad
+- 🤝 Ser respetuoso con otros colaboradores
+- 💬 Comunicación constructiva y profesional
+- 🎯 Enfocarse en lo que es mejor para la comunidad
+- 🌟 Mostrar empatía hacia otros miembros de la comunidad
 
 ## 🚀 Cómo Contribuir
 
@@ -109,6 +109,7 @@ git push origin feature/nombre-descriptivo
 ### JavaScript
 - Usar **ES6+** features
 - **const/let** en lugar de var
+- **Arrow functions** cuando sea apropiado
 - **Destructuring** para objetos y arrays
 - **Template literals** para strings
 
@@ -194,4 +195,4 @@ Todos los contribuidores serán reconocidos en el README y en las releases notes
 
 ---
 
-¡Gracias por hacer que este proyecto sea mejor! 🎉
+¡Gracias por hacer que **Alimentos de Emergencia** sea mejor! 🎉

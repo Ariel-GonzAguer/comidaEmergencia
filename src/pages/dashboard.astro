@@ -40,10 +40,20 @@ import Toast from "../components/Toast.astro";
 </Layout>
 
 <script>
-  import { initializeDashboard } from "../scripts/dashboard.js";
+  import { initializeDashboard, resetDashboard } from "../scripts/dashboard.js";
   
-  // Inicializar el dashboard cuando se carga la página
-  document.addEventListener('DOMContentLoaded', () => {
+  // Función para inicializar el dashboard
+  function setupDashboard() {
     initializeDashboard();
-  });
+  }
+  
+  // Resetear antes de cada navegación
+  function cleanupDashboard() {
+    resetDashboard();
+  }
+  
+  // Inicializar en la carga inicial y en cada navegación
+  document.addEventListener('DOMContentLoaded', setupDashboard);
+  document.addEventListener('astro:page-load', setupDashboard);
+  document.addEventListener('astro:before-preparation', cleanupDashboard);
 </script>

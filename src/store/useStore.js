@@ -1,10 +1,16 @@
 // Store simple sin Zustand para Astro 🚀
-class EmergencyFoodStore {
-  constructor() {
+class EmergencyFoodStore {  constructor() {
     this.state = {
       user: null,
       isLoading: false,
-      foods: []
+      foods: [],
+      survivalData: {
+        days: 0,
+        totalCalories: 0,
+        dailyNeed: 0,
+        numPeople: 1,
+        lastCalculated: null
+      }
     };
     
     // Cargar estado desde localStorage
@@ -26,13 +32,13 @@ class EmergencyFoodStore {
       console.error('Error loading from storage:', error);
     }
   }
-
   // Guardar en localStorage
   saveToStorage() {
     try {
-      // Solo persistir el usuario
+      // Persistir usuario y datos de supervivencia
       const persistState = {
-        user: this.state.user
+        user: this.state.user,
+        survivalData: this.state.survivalData
       };
       localStorage.setItem('comidaEmergencia-localStorage', JSON.stringify(persistState));
     } catch (error) {
@@ -96,6 +102,25 @@ class EmergencyFoodStore {
   deleteFood(id) {
     this.state.foods = this.state.foods.filter(food => food.id !== id);
     this.notify();
+  }
+
+  setSurvivalData(survivalData) {
+    this.state.survivalData = {
+      ...this.state.survivalData,
+      ...survivalData,
+      lastCalculated: new Date().toISOString()
+    };
+    this.saveToStorage();
+    this.notify();
+  }
+
+  getSurvivalData() {
+    return this.state.survivalData;
+  }
+  
+  // Obtener usuario actual
+  getCurrentUser() {
+    return this.state.user;
   }
 }
 

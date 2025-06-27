@@ -1,0 +1,2 @@
+- [ ] modularizar script principal.
+- [ ] agregar más categorías. 

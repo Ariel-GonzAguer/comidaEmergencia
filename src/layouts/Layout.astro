@@ -1,15 +1,17 @@
 ---
 import '../styles/global.css';
 const { title } = Astro.props;
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
-<html lang="es" translate="yes">
+<html lang="es-ES" translate="yes">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Gestión de alimentos de emergencia" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <ClientRouter />
     <title>{title}</title>
   </head>
   <body class="bg-slate-900 min-h-screen font-mono">

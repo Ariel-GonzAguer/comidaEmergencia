@@ -5,6 +5,7 @@ import { authService } from "../firebase/authService.js";
 import useEmergencyFoodStore from "../store/useStore.js";
 
 // Importar módulos especializados
+import { showToast } from "./utils.js";
 import { 
   updateStats, 
   handleFoodSubmit, 
@@ -14,23 +15,17 @@ import {
   handleSearch, 
   handleSort, 
   handleCategoryFilter,
-  initializeFoodGlobalFunctions,
-  resetFilters
+  initializeFoodGlobalFunctions 
 } from "./foodManager.js";
-
 import { 
   loadLocationOptions, 
   openLocationsModal, 
   closeLocationsModal, 
   saveLocationsFromModal 
 } from "./locationManager.js";
-
 import { setupCustomDateInput } from "./customInputs.js";
-
 import { setupAuth, setupNavigation, handleLogout } from "./authManager.js";
-
 import { getDOMElements, setupEventListeners } from "./domManager.js";
-
 import { 
   calculateAndShowSurvival,
   updateSurvivalCard,
@@ -43,27 +38,13 @@ import {
 // Store
 const store = useEmergencyFoodStore();
 
-// Variable global para el usuario actual
+// Variables globales
 let currentUser = null;
-let isInitialized = false;
-
-// Actualizar currentUser cuando cambie la autenticación
-authService.onAuthStateChanged((user) => {
-  currentUser = user;
-});
 
 /**
  * Función principal de inicialización del dashboard
  */
 export function initializeDashboard() {
-  // Evitar inicialización múltiple
-  if (isInitialized) {
-    console.log('Dashboard ya está inicializado');
-    return;
-  }
-
-  console.log('Inicializando dashboard...');
-  
   // Obtener elementos del DOM
   const elements = getDOMElements();
   
@@ -94,7 +75,19 @@ export function initializeDashboard() {
   // Configurar el input personalizado de fecha
   setupCustomDateInput();
   
-  // Configurar autenticación
+  // Configurar autenticación y obtener función para usuario actual
+  const getCurrentUser = setupAuth(store, updateStats, renderFoodsList, updateSurvivalCard);
+  
+  // Actualizar referencia al usuario actual cuando cambie la autenticación
+  const originalOnAuthStateChanged = authService.onAuthStateChanged;
+  authService.onAuthStateChanged = (callback) => {
+    return originalOnAuthStateChanged((user) => {
+      currentUser = user;
+      callback(user);
+    });
+  };
+  
+  // Configurar autenticación (esto manejará la actualización de currentUser internamente)
   setupAuth(store, updateStats, renderFoodsList, updateSurvivalCard);
   
   // Inicializar funciones globales para alimentos
@@ -102,17 +95,4 @@ export function initializeDashboard() {
   
   // Cargar ubicaciones disponibles
   loadLocationOptions();
-  
-  // Marcar como inicializado
-  isInitialized = true;
-  console.log('Dashboard inicializado correctamente');
-}
-
-/**
- * Función para resetear el estado del dashboard (útil para navegaciones)
- */
-export function resetDashboard() {
-  isInitialized = false;
-  resetFilters();
-  console.log('Dashboard reseteado');
 }
