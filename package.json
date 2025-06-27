@@ -1,6 +1,6 @@
 {
   "name": "comidaemergencia",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "Una aplicación web para gestionar el inventario de alimentos de emergencia, construida con Astro, Firebase y Tailwind CSS.",
   "type": "module",
   "author": "Ariel González Aguer",

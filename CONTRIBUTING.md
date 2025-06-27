@@ -1,15 +1,15 @@
 # 🤝 Guía de Contribución
 
-¡Gracias por su interés en contribuir a **Alimentos de Emergencia**! Este documento le guiará a través del proceso de contribución.
+¡Gracias por su interés en contribuir a **comidaEmergencia**! Este documento le guiará a través del proceso de contribución.
 
 ## 📋 Código de Conducta
 
 Al participar en este proyecto, acepta mantener un ambiente respetuoso y constructivo. Esperamos:
 
-- 🤝 Ser respetuoso con otros colaboradores
-- 💬 Comunicación constructiva y profesional
-- 🎯 Enfocarse en lo que es mejor para la comunidad
-- 🌟 Mostrar empatía hacia otros miembros de la comunidad
+- 🤝 Sea respetuoso con otras personas colaboradoras
+- 💬 Tenga una comunicación constructiva y profesional
+- 🎯 Se enfocaque en lo que es mejor para la comunidad
+- 🌟 Muestre empatía hacia otros miembros de la comunidad
 
 ## 🚀 Cómo Contribuir
 
@@ -75,7 +75,7 @@ git checkout -b fix/descripcion-del-fix
 
 - **Mantenga** el código simple y legible
 - **Siga** las convenciones existentes
-- **Use** emojis consistentes en la UI
+- **Use** emojis consistentes en la UI (si quiere usar íconos, puede abrir un issue)
 - **Añada** comentarios para lógica compleja
 - **Pruebe** sus cambios localmente
 
@@ -102,14 +102,13 @@ git push origin feature/nombre-descriptivo
    - **¿Qué** cambia este PR?
    - **¿Por qué** es necesario?
    - **¿Cómo** se puede probar?
-4. Enlace issues relacionados
+4. Número del issue que trata su PR
 
 ## 📏 Estándares de Código
 
 ### JavaScript
 - Usar **ES6+** features
 - **const/let** en lugar de var
-- **Arrow functions** cuando sea apropiado
 - **Destructuring** para objetos y arrays
 - **Template literals** para strings
 
@@ -195,4 +194,4 @@ Todos los contribuidores serán reconocidos en el README y en las releases notes
 
 ---
 
-¡Gracias por hacer que **Alimentos de Emergencia** sea mejor! 🎉
+¡Gracias por hacer que **comidamergencia** sea mejor para todas y todos! 🎉

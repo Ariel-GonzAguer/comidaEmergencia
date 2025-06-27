@@ -1,7 +1,6 @@
 # Arquitectura del Proyecto
 
 ## Estructura del Proyecto
-
 ```
 src/
 ├── components/    # Componentes Astro reutilizables
@@ -16,7 +15,6 @@ src/
 ## Cómo Funciona
 
 ### 1. Arquitectura Modular
-
 El proyecto utiliza una **arquitectura por módulos** donde cada funcionalidad está separada en módulos especializados:
 
 - **`dashboard.js`** - Orquestador principal que importa todos los módulos
@@ -29,35 +27,32 @@ El proyecto utiliza una **arquitectura por módulos** donde cada funcionalidad e
 - **`utils.js`** - Funciones utilitarias compartidas
 
 ### 2. Patrón de Inicialización Modular
-
 Cada página principal importa y orquesta módulos especializados:
 
 ```javascript
 export function initializeDashboard() {
   // Obtener elementos del DOM una sola vez
   const elements = getDOMElements();
-
+  
   // Configurar navegación
   setupNavigation(elements);
-
+  
   // Configurar event listeners con manejadores específicos
   const handlers = {
     handleLogout: () => handleLogout(store),
-    openModal,
-    closeModal,
+    openModal, closeModal,
     handleFoodSubmit: (e) => handleFoodSubmit(e, currentUser),
-    calculateAndShowSurvival,
+    calculateAndShowSurvival
   };
-
+  
   setupEventListeners(elements, handlers);
-
+  
   // Configurar autenticación con callbacks
   setupAuth(store, updateStats, renderFoodsList, updateSurvivalCard);
 }
 ```
 
-**¿Por qué?**
-
+**¿Por qué?** 
 - **Separación de responsabilidades**: Cada módulo tiene una función específica
 - **Reutilización**: Los módulos se pueden usar en diferentes páginas
 - **Mantenibilidad**: Cambios en una funcionalidad no afectan otras
@@ -66,7 +61,6 @@ export function initializeDashboard() {
 ### 3. Funcionalidades Principales
 
 #### Dashboard (Inventario)
-
 - **Gestión de alimentos**: Agregar/editar/eliminar con validación
 - **Búsqueda inteligente**: Por nombre con filtrado en tiempo real
 - **Filtros avanzados**: Por categoría y ordenamiento múltiple
@@ -76,7 +70,6 @@ export function initializeDashboard() {
 - **Input de fecha personalizado**: Formato español (DD/MM/AAAA)
 
 #### Recetas
-
 - **Gestión completa**: Crear/editar/eliminar recetas con ingredientes
 - **Cálculo inteligente**: Porciones disponibles según inventario actual
 - **Ingredientes dinámicos**: Selección desde inventario existente
@@ -86,7 +79,6 @@ export function initializeDashboard() {
 - **Estadísticas de uso**: Contador de veces cocinada cada receta
 
 #### Calculadora de Supervivencia ⭐ NUEVO
-
 - **Cálculo inteligente**: Días de supervivencia considerando vencimientos
 - **Configuración personalizable**: Calorías por persona y número de personas
 - **Algoritmo avanzado**: Prioriza alimentos por fecha de vencimiento
@@ -96,44 +88,41 @@ export function initializeDashboard() {
 ### 4. Servicios Firebase
 
 #### foodService.js
-
 ```javascript
 // Gestión completa de alimentos con validación
 class FoodService {
-  async addFood(userId, foodData) {}
-  async updateFood(userId, foodId, data) {}
-  async deleteFood(userId, foodId) {}
-  onFoodsChange(userId, callback) {} // Escucha cambios en tiempo real
-  checkExpiringFoodsAndShowToast(userId) {} // Notificaciones automáticas
+  async addFood(userId, foodData) { }
+  async updateFood(userId, foodId, data) { }
+  async deleteFood(userId, foodId) { }
+  onFoodsChange(userId, callback) { } // Escucha cambios en tiempo real
+  checkExpiringFoodsAndShowToast(userId) { } // Notificaciones automáticas
 }
 ```
 
 #### recipeService.js
-
 ```javascript
 // Gestión de recetas con lógica inteligente
 class RecipeService {
-  async addRecipe(userId, recipeData) {}
-  async updateRecipe(userId, recipeId, data) {}
-  async deleteRecipe(userId, recipeId) {}
-  async markAsCooked(userId, recipeId) {} // Incrementa contador
-  onRecipesChange(userId, callback) {} // Tiempo real
-
+  async addRecipe(userId, recipeData) { }
+  async updateRecipe(userId, recipeId, data) { }
+  async deleteRecipe(userId, recipeId) { }
+  async markAsCooked(userId, recipeId) { } // Incrementa contador
+  onRecipesChange(userId, callback) { } // Tiempo real
+  
   // 🧮 Funciones de cálculo inteligente
-  calculateAvailableServings(recipe, foods) {} // Porciones posibles
-  getMissingIngredients(recipe, foods) {} // Ingredientes faltantes
+  calculateAvailableServings(recipe, foods) { } // Porciones posibles
+  getMissingIngredients(recipe, foods) { } // Ingredientes faltantes
 }
 ```
 
 #### authService.js
-
 ```javascript
 // Autenticación y gestión de usuarios
 class AuthService {
-  async signInWithEmail(email, password) {}
-  async signUpWithEmail(email, password) {}
-  async signOut() {}
-  onAuthStateChanged(callback) {} // Estado de autenticación
+  async signInWithEmail(email, password) { }
+  async signUpWithEmail(email, password) { }
+  async signOut() { }
+  onAuthStateChanged(callback) { } // Estado de autenticación
 }
 ```
 
@@ -156,7 +145,6 @@ UI actualizada automáticamente
 ```
 
 #### Manejo de Eventos Centralizado
-
 ```javascript
 // domManager.js - Configuración centralizada de eventos
 export function setupEventListeners(elements, handlers) {
@@ -164,7 +152,7 @@ export function setupEventListeners(elements, handlers) {
   elements.addFoodBtn?.addEventListener("click", () => handlers.openModal());
   elements.searchInput?.addEventListener("input", handlers.handleSearch);
   elements.formElement?.addEventListener("submit", handlers.handleFoodSubmit);
-
+  
   // Event listeners específicos para cada funcionalidad
   setupSurvivalCalculatorEvents(elements, handlers);
   setupFilterEvents(elements, handlers);
@@ -172,7 +160,6 @@ export function setupEventListeners(elements, handlers) {
 ```
 
 #### Estado Reactivo
-
 - **Store centralizado**: `useEmergencyFoodStore()` con estado global
 - **Persistencia automática**: localStorage para configuraciones
 - **Suscripciones Firebase**: Actualizaciones en tiempo real
@@ -181,31 +168,28 @@ export function setupEventListeners(elements, handlers) {
 ### 6. Navegación y Estado
 
 #### Navegación Móvil
-
 - **Menú hamburguesa responsivo**: Funcional en todas las páginas
 - **Navegación adaptativa**: Optimizada para touch y escritorio
 - **Event handling**: Configurado en `authManager.js` con `setupNavigation()`
 
 #### Gestión de Estado
-
 - **Estado por página**: Cada página maneja su propio estado y lifecycle
-- **Persistencia selectiva**:
+- **Persistencia selectiva**: 
   - Ubicaciones → localStorage
   - Configuración supervivencia → localStorage
   - Datos principales → Firebase en tiempo real
 - **Cleanup automático**: Desuscripción de listeners al cambiar página
 
 #### Lifecycle de Páginas
-
 ```javascript
 // recipes.js - Ejemplo de manejo de lifecycle
 export function initializeRecipes() {
   if (isInitialized) return; // Evitar inicialización múltiple
-
+  
   setupAuth();
   setupEventListeners();
   setupNavigation();
-
+  
   isInitialized = true;
 }
 
@@ -220,35 +204,30 @@ export function resetRecipes() {
 ## Características Técnicas
 
 ### ✅ Arquitectura Modular
-
 - **Separación de responsabilidades**: Cada módulo tiene una función específica
 - **Composición funcional**: Los módulos se importan y combinan según necesidad
 - **Event delegation**: Manejo centralizado de eventos en `domManager.js`
 - **Inyección de dependencias**: Funciones reciben dependencies como parámetros
 
 ### ✅ Tiempo Real y Performance
-
 - **Actualizaciones automáticas**: Sin recarga manual, todo en tiempo real
 - **Sincronización multi-dispositivo**: Firebase Firestore real-time
 - **Optimización de queries**: Listeners específicos por usuario
 - **Estado consistente**: Sincronización entre store local y Firebase
 
 ### ✅ Responsive y UX
-
 - **Mobile-first**: Diseño prioritario para móviles
 - **Menú adaptativo**: Hamburguesa en móvil, horizontal en escritorio
 - **UI optimizada**: Touch-friendly con feedback visual
 - **Loading states**: Indicadores de carga y estados vacíos
 
 ### ✅ Accesibilidad y Calidad
-
 - **ARIA labels completos**: Navegación accesible
 - **Keyboard navigation**: Soporte completo de teclado
 - **Screen reader compatible**: Semántica HTML correcta
 - **Input validation**: Validación robusta en frontend y backend
 
 ### ✅ Características Avanzadas
-
 - **Input de fecha español**: Formato DD/MM/AAAA nativo
 - **Calculadora de supervivencia**: Algoritmo inteligente considerando vencimientos
 - **Sistema de notificaciones**: Toast automático para alimentos próximos a vencer
@@ -262,7 +241,6 @@ export function resetRecipes() {
 La arquitectura modular permite agregar funcionalidades fácilmente:
 
 #### 1. Crear Servicios Firebase
-
 ```javascript
 // planningService.js
 export const planningService = {
@@ -271,42 +249,39 @@ export const planningService = {
   },
   onPlansChange(userId, callback) {
     // Listener en tiempo real
-  },
+  }
 };
 ```
 
 #### 2. Crear Módulo de Lógica
-
 ```javascript
 // planningManager.js
-export function handlePlanSubmit(planData) {}
-export function renderPlansList(plans) {}
-export function updatePlanStats(plans) {}
+export function handlePlanSubmit(planData) { }
+export function renderPlansList(plans) { }
+export function updatePlanStats(plans) { }
 ```
 
 #### 3. Crear Página Principal
-
 ```javascript
 // planning.js
-import { planningService } from "../firebase/planningService.js";
-import { handlePlanSubmit, renderPlansList } from "./planningManager.js";
+import { planningService } from '../firebase/planningService.js';
+import { handlePlanSubmit, renderPlansList } from './planningManager.js';
 
 export function initializePlanning() {
   const elements = getDOMElements();
-  const handlers = { handlePlanSubmit /* otros handlers */ };
-
+  const handlers = { handlePlanSubmit, /* otros handlers */ };
+  
   setupEventListeners(elements, handlers);
   setupAuth(store, updateStats, renderPlansList);
 }
 ```
 
 #### 4. Integrar con Componentes Astro
-
 ```astro
 <!-- planning.astro -->
 <script>
   import { initializePlanning } from "../scripts/planning.js";
-
+  
   document.addEventListener("DOMContentLoaded", () => {
     initializePlanning();
   });

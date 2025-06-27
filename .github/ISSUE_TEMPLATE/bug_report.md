@@ -7,14 +7,14 @@ assignees: ''
 ---
 
 ## 🐛 Descripción del Bug
-Una descripción clara y concisa de cuál es el bug.
+Una descripción clara y concisa de cuál es el bug/error.
 
 ## 🔄 Pasos para Reproducir
 Pasos para reproducir el comportamiento:
-1. Ve a '...'
-2. Haz clic en '....'
+1. Vaya a '...'
+2. Haga clic en '....'
 3. Scroll hasta '....'
-4. Ve el error
+4. Vea el error en '...'
 
 ## ✅ Comportamiento Esperado
 Una descripción clara y concisa de lo que esperaba que pasara.

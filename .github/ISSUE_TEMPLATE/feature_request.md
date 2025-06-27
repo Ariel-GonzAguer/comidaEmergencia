@@ -6,19 +6,23 @@ labels: enhancement
 assignees: ""
 ---
 
-## 💡 ¿Su solicitud de feature está relacionada con un problema? Descríbalo.
+## 💡 Describa su solicitud de feature/funcionalidad detalladamente. ¿Cuál es la mejora que quisiera agregar?
 
-Una descripción clara y concisa de cuál es el problema. Ej. Me frustra cuando [...], Creo que le hace falta [...] para [...].
+Ej:
+Agregar [...].
 
-## 🎯 Describa la solución que le gustaría
+## 🎯 ¿Cómo mejoraría su feature/funcionalidad  el uso de este proyecto?
 
-Una descripción clara y concisa de lo que quiere que pase.
+Ej:
+Agregando esta funcionalidad se lograría [...].
 
-## 🔄 Describa alternativas que haya considerado
+## 🔄 ¿Cómo agregaría este feature/funcionalidad ?
 
-Una descripción clara y concisa de cualquier solución o feature alternativa que haya considerado.
+Ej:
+Creando un componente que [...].
 
 ## 📱 ¿En qué plataforma sería útil?
+<!-- Si es Ambas, solo marque esa opción -->
 
 - [ ] Escritorio
 - [ ] Móvil
@@ -28,6 +32,7 @@ Una descripción clara y concisa de cualquier solución o feature alternativa qu
 
 - [ ] 🔐 Autenticación/Seguridad
 - [ ] 🍕 Gestión de Alimentos
+- [ ] 🥖 Recetas
 - [ ] 📊 Dashboard/Estadísticas
 - [ ] 🎨 UI/UX
 - [ ] 📱 Responsividad
@@ -35,6 +40,7 @@ Una descripción clara y concisa de cualquier solución o feature alternativa qu
 - [ ] ⚡ Performance
 - [ ] 🌐 Internacionalización
 - [ ] 🔧 Configuración
+- [ ] 🏗️ Arquitectura
 - [ ] 📋 Otra
 
 ## 🎨 Mockups o Ejemplos (Opcional)

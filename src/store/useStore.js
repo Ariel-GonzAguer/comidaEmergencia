@@ -1,5 +1,6 @@
 // Store simple sin Zustand para Astro 🚀
-class EmergencyFoodStore {  constructor() {
+class EmergencyFoodStore {
+  constructor() {
     this.state = {
       user: null,
       isLoading: false,
@@ -12,10 +13,10 @@ class EmergencyFoodStore {  constructor() {
         lastCalculated: null
       }
     };
-    
+
     // Cargar estado desde localStorage
     this.loadFromStorage();
-    
+
     // Listeners para cambios
     this.listeners = new Set();
   }
@@ -117,7 +118,7 @@ class EmergencyFoodStore {  constructor() {
   getSurvivalData() {
     return this.state.survivalData;
   }
-  
+
   // Obtener usuario actual
   getCurrentUser() {
     return this.state.user;
