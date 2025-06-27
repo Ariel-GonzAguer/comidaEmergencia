@@ -64,6 +64,7 @@ Una aplicación web **Open Source/Código Abierto** para gestionar el inventario
 - **Navegación por teclado** totalmente funcional con focus management
 - **Compatibilidad con lectores de pantalla** y tecnologías asistivas
 - **UI moderna y responsive** optimizada para móviles y escritorio
+- **Navegación SPA optimizada** con hamburger menu robusto y sin conflictos
 - **Animaciones sutiles** y transiciones suaves sin afectar performance
 - **Estados de loading** y feedback visual en todas las operaciones
 
@@ -151,6 +152,7 @@ comidaEmergencia/
 │   │   ├── locationManager.js   # Gestión de ubicaciones
 │   │   ├── authManager.js       # Manejo de autenticación
 │   │   ├── domManager.js        # Gestión de DOM y eventos
+│   │   ├── navigationManager.js # Navegación centralizada y hamburger menu
 │   │   ├── survivalCalculator.js # Calculadora de supervivencia ⭐ NUEVO
 │   │   ├── customInputs.js      # Inputs personalizados (fecha español)
 │   │   └── utils.js             # Funciones utilitarias compartidas
@@ -291,6 +293,7 @@ Para información detallada sobre la arquitectura del proyecto, patrones de dise
 
 - **Arquitectura modular** con separación clara de responsabilidades
 - **Event handling centralizado** con delegation pattern
+- **Navegación SPA unificada** con gestión inteligente de event listeners
 - **Store personalizado** con persistencia automática
 - **Servicios Firebase especializados** con lógica de negocio
 - **Componentes Astro reutilizables** con props tipadas

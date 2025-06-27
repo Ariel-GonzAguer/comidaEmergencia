@@ -26,7 +26,8 @@ export function setupAuth(store, updateStats, renderFoodsList, updateSurvivalCar
 
     const userEmail = document.getElementById("user-email");
     if (userEmail) {
-      userEmail.textContent = user.email;
+      const userName = user.email.split('@')[0];
+      userEmail.textContent = userName;
     }
 
     store.setUser({
@@ -46,7 +47,7 @@ export function setupAuth(store, updateStats, renderFoodsList, updateSurvivalCar
     const storeUnsubscribe = store.subscribe((state) => {
       updateSurvivalCard();
     });
-    
+
     // Cargar datos iniciales de supervivencia
     updateSurvivalCard();
 
@@ -72,28 +73,22 @@ export function setupAuth(store, updateStats, renderFoodsList, updateSurvivalCar
 }
 
 /**
- * Configura la navegación y resaltado de página actual
+ * Configura solo el botón de logout (la navegación se maneja en navigationManager.js)
  * @param {Object} elements - Elementos del DOM
  */
 export function setupNavigation(elements) {
-  // Botón menú móvil
-  if (elements.mobileMenuBtn && elements.mobileMenu) {
-    elements.mobileMenuBtn.addEventListener("click", () => {
-      elements.mobileMenu.classList.toggle("hidden");
+  // Configurar botón de logout
+  if (elements.logoutBtn) {
+    elements.logoutBtn.addEventListener("click", async () => {
+      try {
+        await authService.signOut();
+        window.location.href = "/";
+      } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+        showToast("Error al cerrar sesión", true);
+      }
     });
   }
-
-  // Resaltar la página actual en la navegación
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll("[id^='nav-']");
-  
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === currentPath) {
-      link.classList.add("bg-green-800", "text-white");
-      link.classList.remove("hover:text-gray-300");
-    }
-  });
 }
 
 /**

@@ -22,7 +22,7 @@ class RecipeService {
       const docRef = doc(db, COLLECTION_NAME, DOCUMENT_ID);
 
       // Generar ID único para la receta
-      const recipeId = 'recipe_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      const recipeId = 'recipe_' + Date.now() + '_' + crypto.randomUUID().substring(0, 8);
 
       const recipe = {
         id: recipeId,

@@ -19,10 +19,7 @@
             <dt class="text-sm font-medium text-gray-500 truncate">
               Total Alimentos
             </dt>
-            <dd
-              id="total-foods"
-              class="text-lg font-medium text-gray-900"
-            >
+            <dd id="total-foods" class="text-lg font-medium text-gray-900">
               0
             </dd>
           </dl>
@@ -47,10 +44,7 @@
             <dt class="text-sm font-medium text-gray-500 truncate">
               Próximos a Vencer
             </dt>
-            <dd
-              id="expiring-foods"
-              class="text-lg font-medium text-gray-900"
-            >
+            <dd id="expiring-foods" class="text-lg font-medium text-gray-900">
               0
             </dd>
           </dl>
@@ -75,13 +69,12 @@
             <dt class="text-sm font-medium text-gray-500 truncate">
               Total Calorías
             </dt>
-            <dd
-              id="total-calories"
-              class="text-lg font-medium text-gray-900"
-            >
+            <dd id="total-calories" class="text-lg font-medium text-gray-900">
               0
             </dd>
-          </dl>        </div>      </div>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -107,9 +100,7 @@
             >
               -
             </dd>
-            <dd class="text-xs text-gray-500" id="survival-people-info">
-              -
-            </dd>
+            <dd class="text-xs text-gray-500" id="survival-people-info">-</dd>
           </dl>
         </div>
       </div>
@@ -129,15 +120,22 @@
         </div>
       </div>
       <div class="ml-3">
-        <h3 class="text-lg font-medium text-gray-900">Calculadora de Supervivencia</h3>
-        <p class="text-sm text-gray-500">Estima cuánto tiempo podrás sobrevivir con tu inventario actual</p>
+        <h3 class="text-lg font-medium text-gray-900">
+          Calculadora de Supervivencia
+        </h3>
+        <p class="text-sm text-gray-500">
+          Estima cuánto tiempo podrás sobrevivir con tu inventario actual
+        </p>
       </div>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
       <!-- Número de personas -->
       <div>
-        <label for="num-people" class="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          for="num-people"
+          class="block text-sm font-medium text-gray-700 mb-1"
+        >
           👥 Número de personas
         </label>
         <input
@@ -151,10 +149,13 @@
           value="1"
         />
       </div>
-      
+
       <!-- Calorías por persona -->
       <div>
-        <label for="daily-calories" class="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          for="daily-calories"
+          class="block text-sm font-medium text-gray-700 mb-1"
+        >
           🍽️ Calorías por persona/día
         </label>
         <input
@@ -168,7 +169,7 @@
           value="2000"
         />
       </div>
-      
+
       <!-- Botón calcular -->
       <div class="flex items-end">
         <button
@@ -180,26 +181,41 @@
         </button>
       </div>
     </div>
-    
+
     <!-- Resultado -->
     <div id="survival-result" class="hidden">
       <div class="border-t pt-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="text-center p-3 bg-blue-50 rounded-md">
-            <div class="text-2xl font-bold text-blue-600" id="result-days">-</div>
+            <div class="text-2xl font-bold text-blue-600" id="result-days">
+              -
+            </div>
             <div class="text-sm text-blue-600">Días de supervivencia</div>
           </div>
           <div class="text-center p-3 bg-green-50 rounded-md">
-            <div class="text-2xl font-bold text-green-600" id="result-total-calories">-</div>
-            <div class="text-sm text-green-600">Calorías totales disponibles</div>
+            <div
+              class="text-2xl font-bold text-green-600"
+              id="result-total-calories"
+            >
+              -
+            </div>
+            <div class="text-sm text-green-600">
+              Calorías totales disponibles
+            </div>
           </div>
           <div class="text-center p-3 bg-orange-50 rounded-md">
-            <div class="text-2xl font-bold text-orange-600" id="result-daily-need">-</div>
+            <div
+              class="text-2xl font-bold text-orange-600"
+              id="result-daily-need"
+            >
+              -
+            </div>
             <div class="text-sm text-orange-600">Calorías necesarias/día</div>
           </div>
         </div>
         <div class="mt-3 text-xs text-gray-500 text-center">
-          ⚠️ El cálculo considera fechas de vencimiento y prioriza alimentos que vencen más pronto
+          ⚠️ El cálculo considera fechas de vencimiento y prioriza alimentos que
+          vencen más pronto
         </div>
       </div>
     </div>

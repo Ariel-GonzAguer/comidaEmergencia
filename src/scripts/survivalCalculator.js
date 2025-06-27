@@ -9,7 +9,7 @@ const store = useEmergencyFoodStore();
 export function getDailyCalories() {
   const input = document.getElementById("daily-calories");
   if (!input) return 2000; // Valor por defecto
-  
+
   const value = parseInt(input.value);
   return isNaN(value) || value <= 0 ? 2000 : value;
 }
@@ -17,7 +17,7 @@ export function getDailyCalories() {
 export function getNumPeople() {
   const input = document.getElementById("num-people");
   if (!input) return 1; // Valor por defecto
-  
+
   const value = parseInt(input.value);
   return isNaN(value) || value <= 0 ? 1 : value;
 }
@@ -42,7 +42,7 @@ export function loadDailyCalories() {
   try {
     const stored = localStorage.getItem('dailyCalories');
     if (stored) return parseInt(stored);
-    
+
     // Si no hay en localStorage, usar del store
     const survivalData = store.getSurvivalData();
     return survivalData.dailyNeed > 0 ? Math.floor(survivalData.dailyNeed / Math.max(survivalData.numPeople, 1)) : 2000;
@@ -56,7 +56,7 @@ export function loadNumPeople() {
   try {
     const stored = localStorage.getItem('numPeople');
     if (stored) return parseInt(stored);
-    
+
     // Si no hay en localStorage, usar del store
     const survivalData = store.getSurvivalData();
     return survivalData.numPeople || 1;
@@ -82,7 +82,7 @@ export function calculateSurvivalDays(foods, dailyCaloriesPerPerson, numPeople) 
       const expiryDate = new Date(food.expiryDate.seconds ? food.expiryDate.seconds * 1000 : food.expiryDate);
       expiryDate.setHours(23, 59, 59, 999); // Final del día de vencimiento
       const daysUntilExpiry = Math.ceil((expiryDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-      
+
       return {
         ...food,
         expiryDate: expiryDate,
@@ -104,8 +104,8 @@ export function calculateSurvivalDays(foods, dailyCaloriesPerPerson, numPeople) 
 
   // Simular día por día
   while (currentDay < 365 && workingFoods.some(food => !usedFoods.has(food.id) && food.daysUntilExpiry >= currentDay && food.calories > 0)) {
-    const availableFoods = workingFoods.filter(food => 
-      !usedFoods.has(food.id) && 
+    const availableFoods = workingFoods.filter(food =>
+      !usedFoods.has(food.id) &&
       food.daysUntilExpiry >= currentDay &&
       food.calories > 0
     );
@@ -115,14 +115,14 @@ export function calculateSurvivalDays(foods, dailyCaloriesPerPerson, numPeople) 
     // Usar alimentos que vencen más pronto primero
     for (const food of availableFoods) {
       if (remainingDailyCalories <= 0) break;
-      
+
       const caloriesNeeded = Math.min(food.calories, remainingDailyCalories);
       remainingDailyCalories -= caloriesNeeded;
       totalUsableCalories += caloriesNeeded;
-      
+
       // Reducir las calorías del alimento
       food.calories -= caloriesNeeded;
-      
+
       // Si el alimento se agotó, marcarlo como usado
       if (food.calories <= 0) {
         usedFoods.add(food.id);
@@ -137,7 +137,7 @@ export function calculateSurvivalDays(foods, dailyCaloriesPerPerson, numPeople) 
       // No hay suficientes calorías disponibles para este día
       break;
     }
-    
+
     currentDay++;
   }
 
@@ -153,7 +153,7 @@ export function updateSurvivalCard() {
   const survivalData = store.getSurvivalData();
   const survivalDaysCardEl = document.getElementById("survival-days-card");
   const survivalPeopleInfoEl = document.getElementById("survival-people-info");
-  
+
   if (survivalDaysCardEl && survivalPeopleInfoEl) {
     if (survivalData.days > 0 && survivalData.lastCalculated) {
       survivalDaysCardEl.textContent = `${survivalData.days} días`;
@@ -170,7 +170,7 @@ export function calculateAndShowSurvival() {
   const foods = store.getState().foods || [];
   const dailyCaloriesPerPerson = getDailyCalories();
   const numPeople = getNumPeople();
-  
+
   if (foods.length === 0) {
     // Importar showToast dinámicamente para evitar dependencias circulares
     import('./utils.js').then(({ showToast }) => {
@@ -178,10 +178,10 @@ export function calculateAndShowSurvival() {
     });
     return;
   }
-  
+
   // Calcular datos de supervivencia
   const survivalData = calculateSurvivalDays(foods, dailyCaloriesPerPerson, numPeople);
-  
+
   // Preparar datos para el store
   const storeData = {
     days: survivalData.days,
@@ -189,19 +189,19 @@ export function calculateAndShowSurvival() {
     dailyNeed: survivalData.totalDailyNeed,
     numPeople: numPeople
   };
-  
+
   // Guardar en el store
   store.setSurvivalData(storeData);
-  
+
   // Mostrar resultado en la calculadora
   const resultContainer = document.getElementById("survival-result");
   const resultDays = document.getElementById("result-days");
   const resultTotalCalories = document.getElementById("result-total-calories");
   const resultDailyNeed = document.getElementById("result-daily-need");
-  
+
   if (resultContainer && resultDays && resultTotalCalories && resultDailyNeed) {
     resultContainer.classList.remove("hidden");
-    
+
     // Formatear y mostrar días
     if (survivalData.days > 0) {
       resultDays.textContent = survivalData.days;
@@ -214,13 +214,13 @@ export function calculateAndShowSurvival() {
       resultDays.className = "text-2xl font-bold text-red-600";
       resultDays.nextElementSibling.className = "text-sm text-red-600";
     }
-    
+
     // Mostrar calorías totales
     resultTotalCalories.textContent = survivalData.usableCalories.toLocaleString();
-    
+
     // Mostrar necesidad diaria
     resultDailyNeed.textContent = survivalData.totalDailyNeed.toLocaleString();
-    
+
     // Mensaje detallado
     let message = `Calculado para ${numPeople} persona${numPeople > 1 ? 's' : ''}: `;
     if (survivalData.days > 0) {
@@ -228,7 +228,7 @@ export function calculateAndShowSurvival() {
     } else {
       message += "No hay suficientes calorías disponibles";
     }
-    
+
     // Importar showToast dinámicamente
     import('./utils.js').then(({ showToast }) => {
       showToast(message, survivalData.days === 0);
@@ -241,11 +241,11 @@ export function setupSurvivalCalculatorEvents() {
   const dailyCaloriesInput = document.getElementById("daily-calories");
   const numPeopleInput = document.getElementById("num-people");
   const calculateBtn = document.getElementById("calculate-survival-btn");
-  
+
   if (dailyCaloriesInput) {
     // Cargar valor guardado
     dailyCaloriesInput.value = loadDailyCalories();
-    
+
     // Guardar cambios
     dailyCaloriesInput.addEventListener("input", () => {
       const value = parseInt(dailyCaloriesInput.value);
@@ -254,11 +254,11 @@ export function setupSurvivalCalculatorEvents() {
       }
     });
   }
-  
+
   if (numPeopleInput) {
     // Cargar valor guardado
     numPeopleInput.value = loadNumPeople();
-    
+
     // Guardar cambios
     numPeopleInput.addEventListener("input", () => {
       const value = parseInt(numPeopleInput.value);
@@ -267,7 +267,7 @@ export function setupSurvivalCalculatorEvents() {
       }
     });
   }
-  
+
   // Botón calcular supervivencia
   if (calculateBtn) {
     calculateBtn.addEventListener("click", () => {

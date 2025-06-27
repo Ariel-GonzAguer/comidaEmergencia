@@ -5,33 +5,34 @@ import { authService } from "../firebase/authService.js";
 import useEmergencyFoodStore from "../store/useStore.js";
 
 // Importar módulos especializados
-import { 
-  updateStats, 
-  handleFoodSubmit, 
-  renderFoodsList, 
-  openModal, 
-  closeModal, 
-  handleSearch, 
-  handleSort, 
+import {
+  updateStats,
+  handleFoodSubmit,
+  renderFoodsList,
+  openModal,
+  closeModal,
+  handleSearch,
+  handleSort,
   handleCategoryFilter,
   initializeFoodGlobalFunctions,
   resetFilters
 } from "./foodManager.js";
 
-import { 
-  loadLocationOptions, 
-  openLocationsModal, 
-  closeLocationsModal, 
-  saveLocationsFromModal 
+import {
+  loadLocationOptions,
+  openLocationsModal,
+  closeLocationsModal,
+  saveLocationsFromModal
 } from "./locationManager.js";
 
 import { setupCustomDateInput } from "./customInputs.js";
 
-import { setupAuth, setupNavigation, handleLogout } from "./authManager.js";
+import { setupAuth } from "./authManager.js";
 
 import { getDOMElements, setupEventListeners } from "./domManager.js";
+import { setupNavigation } from "./navigationManager.js";
 
-import { 
+import {
   calculateAndShowSurvival,
   updateSurvivalCard,
   loadDailyCalories,
@@ -56,23 +57,22 @@ authService.onAuthStateChanged((user) => {
  * Función principal de inicialización del dashboard
  */
 export function initializeDashboard() {
-  // Evitar inicialización múltiple
+  // Evitar inicialización múltiple en la misma carga
   if (isInitialized) {
     console.log('Dashboard ya está inicializado');
     return;
   }
 
   console.log('Inicializando dashboard...');
-  
+
   // Obtener elementos del DOM
   const elements = getDOMElements();
-  
-  // Configurar navegación
-  setupNavigation(elements);
-  
+
+  // Configurar navegación (menú móvil y estado activo)
+  setupNavigation();
+
   // Configurar event listeners con todas las funciones manejadoras
   const handlers = {
-    handleLogout: () => handleLogout(store),
     openModal,
     closeModal,
     openLocationsModal,
@@ -88,21 +88,21 @@ export function initializeDashboard() {
     saveDailyCalories,
     saveNumPeople
   };
-  
+
   setupEventListeners(elements, handlers);
-  
+
   // Configurar el input personalizado de fecha
   setupCustomDateInput();
-  
+
   // Configurar autenticación
   setupAuth(store, updateStats, renderFoodsList, updateSurvivalCard);
-  
+
   // Inicializar funciones globales para alimentos
   initializeFoodGlobalFunctions(store);
-  
+
   // Cargar ubicaciones disponibles
   loadLocationOptions();
-  
+
   // Marcar como inicializado
   isInitialized = true;
   console.log('Dashboard inicializado correctamente');
@@ -116,3 +116,15 @@ export function resetDashboard() {
   resetFilters();
   console.log('Dashboard reseteado');
 }
+
+// Configurar listeners para navegación de Astro
+document.addEventListener("astro:after-swap", () => {
+  // Solo reinicializar si estamos en la página del dashboard
+  if (window.location.pathname === "/dashboard") {
+    console.log("Reinicializando dashboard después de navegación de Astro");
+    resetDashboard();
+    setTimeout(() => {
+      initializeDashboard();
+    }, 100);
+  }
+});

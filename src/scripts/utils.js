@@ -11,13 +11,12 @@
 export function showToast(message, isError = false) {
   const toast = document.getElementById("toast");
   const toastMessage = document.getElementById("toast-message");
-  
+
   if (!toast || !toastMessage) return;
-  
+
   toastMessage.textContent = message;
-  toast.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 ease-in-out ${
-    isError ? "bg-red-500" : "bg-green-500"
-  } text-white`;
+  toast.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 ease-in-out ${isError ? "bg-red-500" : "bg-green-500"
+    } text-white`;
   toast.style.transform = "translateX(0)";
 
   setTimeout(() => {
@@ -32,12 +31,12 @@ export function showToast(message, isError = false) {
  */
 export function formatDateToSpanish(dateString) {
   if (!dateString) return '';
-  
+
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
-  
+
   return `${day}/${month}/${year}`;
 }
 
@@ -48,15 +47,15 @@ export function formatDateToSpanish(dateString) {
  */
 export function formatDateToISO(spanishDate) {
   if (!spanishDate) return '';
-  
+
   // Espera formato dd/mm/yyyy
   const parts = spanishDate.split('/');
   if (parts.length !== 3) return '';
-  
+
   const day = parts[0];
   const month = parts[1];
   const year = parts[2];
-  
+
   // Retorna formato yyyy-mm-dd para input type="date"
   return `${year}-${month}-${day}`;
 }

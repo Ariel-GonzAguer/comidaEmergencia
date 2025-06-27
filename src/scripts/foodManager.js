@@ -45,7 +45,7 @@ export function updateStats(foods) {
  */
 export async function handleFoodSubmit(e, currentUser) {
   e.preventDefault();
-  
+
   // Obtener datos del formulario
   const name = document.getElementById("food-name")?.value;
   const category = document.getElementById("food-category")?.value;
@@ -76,7 +76,7 @@ export async function handleFoodSubmit(e, currentUser) {
   const saveSpinner = document.getElementById("save-spinner");
   const saveText = document.getElementById("save-text");
   const saveBtn = document.getElementById("save-btn");
-  
+
   if (saveSpinner) saveSpinner.classList.remove("hidden");
   if (saveText) saveText.textContent = "Guardando...";
   if (saveBtn) saveBtn.disabled = true;
@@ -113,7 +113,7 @@ export function renderFoodsList(foods) {
   if (loadingFoods) loadingFoods.classList.add("hidden");
 
   // Filtrar por búsqueda
-  let filteredFoods = foods.filter(food => 
+  let filteredFoods = foods.filter(food =>
     food.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -130,13 +130,13 @@ export function renderFoodsList(foods) {
       case "category":
         return a.category.localeCompare(b.category);
       case "expiry":
-        return new Date(a.expiryDate.seconds ? a.expiryDate.seconds * 1000 : a.expiryDate) - 
-               new Date(b.expiryDate.seconds ? b.expiryDate.seconds * 1000 : b.expiryDate);
+        return new Date(a.expiryDate.seconds ? a.expiryDate.seconds * 1000 : a.expiryDate) -
+          new Date(b.expiryDate.seconds ? b.expiryDate.seconds * 1000 : b.expiryDate);
       case "calories":
         return b.calories - a.calories;
       case "dateAdded":
-        return new Date(b.dateAdded?.seconds ? b.dateAdded.seconds * 1000 : b.dateAdded || 0) - 
-               new Date(a.dateAdded?.seconds ? a.dateAdded.seconds * 1000 : a.dateAdded || 0);
+        return new Date(b.dateAdded?.seconds ? b.dateAdded.seconds * 1000 : b.dateAdded || 0) -
+          new Date(a.dateAdded?.seconds ? a.dateAdded.seconds * 1000 : a.dateAdded || 0);
       default:
         return 0;
     }
@@ -155,7 +155,7 @@ export function renderFoodsList(foods) {
       const daysUntilExpiry = getDaysUntilExpiry(food.expiryDate);
       const statusClass = getExpiryStatusClass(daysUntilExpiry);
       const statusText = getExpiryStatusText(daysUntilExpiry);
-      
+
       // Mapear categorías a emojis
       const categoryEmojis = {
         latas: "🥫",
@@ -169,7 +169,7 @@ export function renderFoodsList(foods) {
         otros: "📋",
       };
       const categoryEmoji = categoryEmojis[food.category] || "📋";
-      
+
       // Mapear ubicaciones a emojis personalizados
       const locations = getStoredLocations();
       const locationData = locations.find(loc => loc.id === food.location);
@@ -233,14 +233,14 @@ export function openModal(food = null) {
   const modalTitle = document.getElementById("modal-title");
   const foodModal = document.getElementById("food-modal");
   const foodForm = document.getElementById("food-form");
-  
+
   if (modalTitle) {
     modalTitle.textContent = food ? "Editar Alimento" : "Agregar Alimento";
   }
-  
+
   // Cargar ubicaciones disponibles
   loadLocationOptions();
-  
+
   if (food) {
     const nameInput = document.getElementById("food-name");
     const categoryInput = document.getElementById("food-category");
@@ -251,7 +251,7 @@ export function openModal(food = null) {
     const expiryDisplayInput = document.getElementById("food-expiry-display");
     const locationInput = document.getElementById("food-location");
     const notesInput = document.getElementById("food-notes");
-    
+
     if (nameInput) nameInput.value = food.name || "";
     if (categoryInput) categoryInput.value = food.category || "";
     if (quantityInput) quantityInput.value = food.quantity || "";
@@ -259,7 +259,7 @@ export function openModal(food = null) {
     if (caloriesInput) caloriesInput.value = food.calories || "";
     if (locationInput) locationInput.value = food.location || "";
     if (notesInput) notesInput.value = food.notes || "";
-    
+
     // Manejar fecha con el nuevo componente personalizado
     if (food.expiryDate && expiryInput && expiryDisplayInput) {
       let dateValue;
@@ -268,14 +268,14 @@ export function openModal(food = null) {
       } else {
         dateValue = new Date(food.expiryDate);
       }
-      
+
       const isoDate = dateValue.toISOString().split('T')[0];
       expiryInput.value = isoDate;
       expiryDisplayInput.value = formatDateToSpanish(isoDate);
     }
   } else {
     if (foodForm) foodForm.reset();
-    
+
     // Limpiar también los campos de fecha personalizados
     const expiryDisplayInput = document.getElementById("food-expiry-display");
     const expiryInput = document.getElementById("food-expiry");
@@ -343,7 +343,7 @@ export function handleSort(e) {
  */
 export function handleCategoryFilter(e) {
   const filterBtns = document.querySelectorAll(".filter-btn");
-  
+
   // Remover estilos activos de todos los botones
   filterBtns.forEach((b) => {
     b.classList.remove("bg-blue-600", "text-white");
@@ -372,21 +372,21 @@ export function resetFilters() {
   currentFilter = "all";
   searchTerm = "";
   sortBy = "name";
-  
+
   // Limpiar campos de UI
   const searchInput = document.getElementById("search-input");
   const sortSelect = document.getElementById("sort-select");
-  
+
   if (searchInput) searchInput.value = "";
   if (sortSelect) sortSelect.value = "name";
-  
+
   // Resetear botones de filtro
   const filterBtns = document.querySelectorAll(".filter-btn");
   filterBtns.forEach((btn) => {
     btn.classList.remove("bg-blue-600", "text-white");
     btn.classList.add("bg-gray-100", "text-gray-600");
   });
-  
+
   // Activar el botón "all"
   const allFilterBtn = document.getElementById("filter-all");
   if (allFilterBtn) {
@@ -399,7 +399,7 @@ export function resetFilters() {
 export function initializeFoodGlobalFunctions(store) {
   // Guardar referencia al store
   storeInstance = store;
-  
+
   // Funciones globales para los botones
   window.editFood = (foodId) => {
     const food = store.getState().foods.find((f) => f.id === foodId);

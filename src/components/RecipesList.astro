@@ -5,9 +5,7 @@
 <div class="bg-white shadow overflow-hidden sm:rounded-md">
   <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
     <div>
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
-        Mis Recetas
-      </h3>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Mis Recetas</h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500">
         Recetas disponibles y porciones que puedes hacer
       </p>
@@ -16,13 +14,22 @@
       id="add-recipe-btn"
       class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center cursor-pointer"
     >
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      <svg
+        class="w-4 h-4 mr-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
       </svg>
       Agregar Receta
     </button>
   </div>
-  
+
   <!-- Filtros de recetas -->
   <div class="px-4 py-3 bg-gray-50 border-t border-b border-gray-200">
     <div class="flex flex-wrap gap-4 items-center">
@@ -35,7 +42,7 @@
           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
         />
       </div>
-      
+
       <!-- Filtro por disponibilidad -->
       <div>
         <select
@@ -48,7 +55,7 @@
           <option value="missing">Con ingredientes faltantes</option>
         </select>
       </div>
-      
+
       <!-- Filtro por categoría -->
       <div>
         <select
@@ -83,7 +90,8 @@
         No tienes recetas aún
       </h3>
       <p class="text-sm text-gray-500 mb-4">
-        Comienza agregando tu primera receta para ver cuántas porciones puedes hacer
+        Comienza agregando tu primera receta para ver cuántas porciones puedes
+        hacer
       </p>
       <button
         onclick="document.getElementById('add-recipe-btn').click()"

@@ -80,7 +80,7 @@ export function renderLocationsManager() {
             >
               ${location.emoji}
             </button>
-            <div class="emoji-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-2 w-48 z-10" style="display: none; grid-template-columns: repeat(6, 1fr); gap: 0.25rem;">
+            <div class="emoji-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-2 w-48 z-10 hidden grid-cols-6 gap-1">
               ${availableEmojis.map(emoji => `
                 <button 
                   type="button" 
@@ -135,11 +135,20 @@ function setupEmojiSelectors() {
       
       // Cerrar otros dropdowns
       document.querySelectorAll('.emoji-dropdown').forEach(d => {
-        if (d !== dropdown) d.style.display = 'none';
+        if (d !== dropdown) {
+          d.classList.add('hidden');
+          d.classList.remove('grid');
+        }
       });
       
       // Toggle del dropdown actual
-      dropdown.style.display = dropdown.style.display === 'grid' ? 'none' : 'grid';
+      if (dropdown.classList.contains('hidden')) {
+        dropdown.classList.remove('hidden');
+        dropdown.classList.add('grid');
+      } else {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('grid');
+      }
     });
   });
   
@@ -153,7 +162,8 @@ function setupEmojiSelectors() {
       
       if (btn) {
         btn.textContent = emoji;
-        this.closest('.emoji-dropdown').style.display = 'none';
+        this.closest('.emoji-dropdown').classList.add('hidden');
+        this.closest('.emoji-dropdown').classList.remove('grid');
       }
     });
   });
@@ -161,7 +171,8 @@ function setupEmojiSelectors() {
   // Cerrar dropdowns al hacer clic fuera
   document.addEventListener('click', function() {
     document.querySelectorAll('.emoji-dropdown').forEach(dropdown => {
-      dropdown.style.display = 'none';
+      dropdown.classList.add('hidden');
+      dropdown.classList.remove('grid');
     });
   });
 }

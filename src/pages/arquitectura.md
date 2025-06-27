@@ -168,9 +168,12 @@ export function setupEventListeners(elements, handlers) {
 ### 6. Navegación y Estado
 
 #### Navegación Móvil
-- **Menú hamburguesa responsivo**: Funcional en todas las páginas
-- **Navegación adaptativa**: Optimizada para touch y escritorio
-- **Event handling**: Configurado en `authManager.js` con `setupNavigation()`
+- **Menú hamburguesa centralizado**: Toda la lógica está en `navigationManager.js`
+- **Patrón unificado**: `setupNavigation()` maneja menú móvil, enlaces activos y eventos de navegación
+- **Separación de responsabilidades**: 
+  - `navigationManager.js`: Menú móvil y navegación activa
+  - `authManager.js`: Solo botón de logout
+- **Prevención de duplicados**: Solo una fuente de la lógica del menú móvil
 
 #### Gestión de Estado
 - **Estado por página**: Cada página maneja su propio estado y lifecycle

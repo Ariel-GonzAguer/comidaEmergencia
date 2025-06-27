@@ -5,6 +5,8 @@ import { authService } from "../firebase/authService.js";
 import { foodService } from "../firebase/foodService.js";
 import { recipeService } from "../firebase/recipeService.js";
 import useEmergencyFoodStore from "../store/useStore.js";
+import { showToast } from "./utils.js";
+import { setupNavigation } from "./navigationManager.js";
 
 // Variables globales
 let currentUser = null;
@@ -25,13 +27,16 @@ export function initializeRecipes() {
     console.log('Recetas ya están inicializadas');
     return;
   }
-  
+
   console.log('Inicializando recetas...');
-  
+
   setupAuth();
-  setupEventListeners();
+  // Configurar navegación centralizada
   setupNavigation();
-  
+
+  // Configurar event listeners específicos de recetas
+  setupRecipeEventListeners();
+
   // Marcar como inicializado
   isInitialized = true;
   console.log('Recetas inicializadas correctamente');
@@ -48,7 +53,8 @@ function setupAuth() {
     currentUser = user;
     const userEmail = document.getElementById("user-email");
     if (userEmail) {
-      userEmail.textContent = user.email;
+      const userName = user.email.split('@')[0];
+      userEmail.textContent = userName;
     }
 
     // Suscribirse a cambios en recetas y alimentos
@@ -80,8 +86,8 @@ function setupAuth() {
   });
 }
 
-// Configurar event listeners
-function setupEventListeners() {
+// Configurar event listeners específicos de recetas
+function setupRecipeEventListeners() {
   // Botón agregar receta
   const addRecipeBtn = document.getElementById("add-recipe-btn");
   if (addRecipeBtn) {
@@ -131,31 +137,6 @@ function setupEventListeners() {
   if (categoryFilter) {
     categoryFilter.addEventListener("change", filterRecipes);
   }
-}
-
-// Función para configurar navegación
-function setupNavigation() {
-  // Botón menú móvil
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  }
-
-  // Resaltar la página actual en la navegación
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll("[id^='nav-']");
-
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === currentPath) {
-      link.classList.add("bg-green-800", "text-white");
-      link.classList.remove("hover:text-gray-300");
-    }
-  });
 }
 
 // Actualizar estadísticas de recetas
@@ -678,23 +659,6 @@ function showRecipeDetails(recipe) {
   document.body.classList.add("overflow-hidden");
 }
 
-// Función auxiliar para mostrar toast
-function showToast(message, isError = false) {
-  const toast = document.getElementById("toast");
-  const toastMessage = document.getElementById("toast-message");
-
-  if (!toast || !toastMessage) return;
-
-  toastMessage.textContent = message;
-  toast.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 ease-in-out ${isError ? "bg-red-500" : "bg-green-500"
-    } text-white`;
-  toast.style.transform = "translateX(0)";
-
-  setTimeout(() => {
-    toast.style.transform = "translateX(100%)";
-  }, 3000);
-}
-
 /**
  * Función para resetear el estado de recetas (útil para navegaciones)
  */
@@ -702,3 +666,18 @@ export function resetRecipes() {
   isInitialized = false;
   console.log('Recetas reseteadas');
 }
+
+// Manejar navegación SPA de Astro
+document.addEventListener('astro:after-swap', () => {
+  console.log('Astro SPA navigation detected in recipes');
+
+  // Solo re-inicializar si estamos en la página de recetas
+  if (window.location.pathname === '/recipes') {
+    console.log('Re-initializing recipes after SPA navigation');
+    resetRecipes();
+    // Pequeño delay para asegurar que el DOM esté listo
+    setTimeout(() => {
+      initializeRecipes();
+    }, 100);
+  }
+});

@@ -182,9 +182,12 @@ export function setupEventListeners(elements, handlers) {
 
 #### Navegación Móvil
 
-- **Menú hamburguesa responsivo**: Funcional en todas las páginas
-- **Navegación adaptativa**: Optimizada para touch y escritorio
-- **Event handling**: Configurado en `authManager.js` con `setupNavigation()`
+- **Menú hamburguesa centralizado**: Toda la lógica está en `navigationManager.js`
+- **Patrón unificado**: `setupNavigation()` maneja menú móvil, enlaces activos y eventos de navegación
+- **Separación de responsabilidades**: 
+  - `navigationManager.js`: Menú móvil y navegación activa
+  - `authManager.js`: Solo botón de logout
+- **Prevención de duplicados**: Solo una fuente de la lógica del menú móvil
 
 #### Gestión de Estado
 
@@ -194,6 +197,34 @@ export function setupEventListeners(elements, handlers) {
   - Configuración supervivencia → localStorage
   - Datos principales → Firebase en tiempo real
 - **Cleanup automático**: Desuscripción de listeners al cambiar página
+
+#### Patrón de Navegación Unificado
+
+```javascript
+// Patrón implementado en cada página:
+
+// 1. Dashboard (dashboard.js)
+import { setupNavigation } from "./navigationManager.js";
+import { setupNavigation as setupAuthNavigation } from "./authManager.js";
+
+// Configurar navegación móvil y resaltado
+setupNavigation();
+// Configurar solo logout
+setupAuthNavigation(elements);
+
+// 2. Recetas (recipes.js)
+import { setupNavigation } from "./navigationManager.js";
+
+// Una sola llamada que maneja todo
+setupNavigation();
+```
+
+**Beneficios del patrón unificado**:
+- ✅ Elimina código duplicado
+- ✅ Previene conflictos entre event listeners
+- ✅ Facilita el mantenimiento
+- ✅ Consistencia entre páginas
+- ✅ Una sola fuente de la lógica del menú móvil
 
 #### Lifecycle de Páginas
 
