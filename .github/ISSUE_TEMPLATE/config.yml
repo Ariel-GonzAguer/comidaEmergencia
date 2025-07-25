@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: 💬 Discusión General
-    url: https://github.com/Ariel-GonzAguer/comidaEmergencia/discussions
-    about: Para preguntas generales, ideas y discusiones sobre el proyecto
-  - name: 🆘 Soporte
-    url: https://github.com/Ariel-GonzAguer/comidaEmergencia/discussions/categories/q-a
-    about: Para obtener ayuda con el uso o configuración del proyecto
