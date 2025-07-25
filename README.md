@@ -1,12 +1,10 @@
-# 🍱 comidaEmergencia
+# 🍱 comidaEmergencia - Rama Astro
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Astro](https://img.shields.io/badge/Built%20with-Astro-FF5D01?logo=astro&logoColor=white)](https://astro.build/)
 [![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/11b85a54-57de-4cc2-968f-5809d09fc3f6/deploy-status)](https://app.netlify.com/projects/comidaemergencia/deploys/deploy-status?branch=main)
-
-# IMPORTANTE: El proyecto empezará un proceso de migración a React sin Astro. La migración espero terminarla antes de finales de octubre.
 
 Una aplicación web **Open Source/Código Abierto** para gestionar el inventario de alimentos de emergencia **y recetas**, construida con **Astro**, **Firebase** y **Tailwind CSS**. Diseñada para ser simple, intuitiva y funcional.
 
