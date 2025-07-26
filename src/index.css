@@ -9,6 +9,8 @@
   --color-error: red;
   --color-good: green;
   --color-warning: yellow;
+  --color-atencion: oklch(84.1% 0.238 128.85);
+  --color-atencion-secundary: oklch(87.9% 0.169 91.605);
 
   --font-primary: 'Courier New', monospace;
   --font-secondary: 'Tahoma', sans-serif;

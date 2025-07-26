@@ -7,15 +7,39 @@ import Comida from "../paginas/Comida.jsx";
 import Recetas from "../paginas/Recetas.jsx";
 import FAQs from "../paginas/FAQs.jsx";
 
+// protector de rutas
+import Protected from "../componentes/Protected.jsx";
+
 // layout
 import BaseLayout from "../layouts/BaseLayout.jsx";
 
 // rutas
 const rutas = [
   { path: "/", component: <Login /> },
-  { path: "/home", component: <Comida /> },
-  { path: "/recetas", component: <Recetas /> },
-  { path: "/faqs", component: <FAQs /> },
+  {
+    path: "/home",
+    component: (
+      <Protected>
+        <Comida />
+      </Protected>
+    ),
+  },
+  {
+    path: "/recetas",
+    component: (
+      <Protected>
+        <Recetas />
+      </Protected>
+    ),
+  },
+  {
+    path: "/faqs",
+    component: (
+      <Protected>
+        <FAQs />
+      </Protected>
+    ),
+  },
 ];
 
 export default function MichiRouter() {
