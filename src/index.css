@@ -1,3 +1,15 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/forms";
 @plugin "@midudev/tailwind-animations";
+
+
+@theme {
+  --color-text: white;
+  --color-background: oklch(21.6% 0.006 56.043);
+  --color-error: red;
+  --color-good: green;
+  --color-warning: yellow;
+
+  --font-primary: 'Courier New', monospace;
+  --font-secondary: 'Tahoma', sans-serif;
+}

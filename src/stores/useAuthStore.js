@@ -1,69 +1,45 @@
-import { create } from 'zustand';
-import { immer } from 'zustand/middleware/immer';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import { persist } from "zustand/middleware";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
 
-const useStore = create( //change the name of the store
+const useAuthStore = create()(
   persist(
     immer((set) => ({
-      // Estados
-      state1: null,
-      state2: false,
-      state3: 'ejemplo de tienda zustand',
-      state4: [],
-      state5: {
-        string: 'ejemplo de tienda zustand',
-        number: 42,
+      user: {
+        email: null,
       },
 
-      // Acciones
-      actionA: (paramOpcional) =>
+      setUser: (user) =>
         set((state) => {
-          // Código relacionado con el estado
+          state.user = user;
         }),
-
-      actionB: (paramOpcional) =>
-        set((state) => {
-          // Código relacionado con el estado
-        }),
-
-      fetchAction: async () => {
-        set((state) => {
-          // Código relacionado con el estado
-        });
-
+        
+      logOut: async () => {
         try {
-          const response = await fetch(
-            "https://jsonplaceholder.typicode.com/users" // URL de ejemplo
-          );
-          const result = await response.json();
+          localStorage.clear();
           set((state) => {
-            // Código relacionado con el estado
+            state.user = null;
           });
+
+          // Finalmente hacemos el signOut de Firebase
+          await signOut(auth);
         } catch (error) {
-          set((state) => {
-            // Código relacionado con el estado
-          });
+          console.error("Error al cerrar sesión:", error);
+          throw error; // Propagamos el error para manejarlo en el componente
         }
       },
-
-      asyncAction: async (paramOpcional, paramOpcional2) =>
-        setTimeout(
-          () => {
-            set((state) => ({
-              /* Código relacionado con el estado */
-            }));
-          }, 1000 // Tiempo de ejecución en ms
-        ),
-
-      actionC: () =>
-        set({
-          /* Código relacionado con el estado */
-        }),
     })),
     {
-      name: 'auth-store', // Nombre de la clave en el local storage
+      name: "useAuthStore", // Nombre del local storage
+      version: 1, // versión del esquema de almacenamiento
+      partialize: (state) => ({
+        // solo persistir los estados que queremos
+        user: state.user,
+      }),
     }
   )
 );
 
-export default useStore;
+export default useAuthStore;
