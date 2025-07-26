@@ -39,43 +39,45 @@ export default function Login(props) {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center">
-      <h2 className="text-2xl font-bold mb-4">Comida emergencia</h2>
-      <form
-        action=""
-        className="text-background flex flex-col items-center justify-center"
-        onSubmit={handleSubmit}
-      >
-        <label className="text-text" htmlFor="email">
-          Email:
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="mb-6"
-          ref={emailRef}
-          required
-        />
-
-        <label className="text-text" htmlFor="password">
-          Contraseña:
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="mb-6"
-          ref={passwordRef}
-          required
-        />
-        <button
-          className="border-2 border-atencion p-4 text-text font-bold cursor-pointer"
-          type="submit"
+    <section className="flex flex-col items-center justify-center h-full">
+      <div>
+        <h2 className="text-3xl font-bold mb-4">Comida emergencia</h2>
+        <form
+          action=""
+          className="text-background flex flex-col items-center justify-center"
+          onSubmit={handleSubmit}
         >
-          Iniciar sesión
-        </button>
-      </form>
+          <label className="text-text" htmlFor="email">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="mb-6"
+            ref={emailRef}
+            required
+          />
+
+          <label className="text-text" htmlFor="password">
+            Contraseña:
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="mb-6"
+            ref={passwordRef}
+            required
+          />
+          <button
+            className="border-2 border-atencion p-4 text-text font-bold cursor-pointer hover:bg-atencion-secundary hover:border-background hover:text-background transition-colors duration-200"
+            type="submit"
+          >
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
     </section>
   );
 }

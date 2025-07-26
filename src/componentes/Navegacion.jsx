@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useAuthStore from "../stores/useAuthStore";
 
 export default function Navegacion() {
   const [hovered, setHovered] = useState(null);
@@ -8,6 +9,12 @@ export default function Navegacion() {
     { href: "/recetas", label: "Recetas" },
     { href: "/faqs", label: "FAQs" },
   ];
+
+  const { user } = useAuthStore();
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <nav className="border-b-2 border-atencion-secundary w-full">
