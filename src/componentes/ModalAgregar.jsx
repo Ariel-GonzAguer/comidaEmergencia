@@ -1,0 +1,1 @@
+// Hacer que este modal funcione tanto para agregar comida como lugares, recetas, etc.
