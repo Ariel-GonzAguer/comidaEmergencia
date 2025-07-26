@@ -1,8 +1,13 @@
+// hooks
+import { useState, useEffect } from "react";
+
+// componentes
+import ComidaActual from "../componentes/ComidaActual";
 
 export default function Comida() {
   return (
     <>
-      <h2>Comida</h2>
+      <ComidaActual />
     </>
   );
 }

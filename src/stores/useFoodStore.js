@@ -1,25 +1,57 @@
+// zustand
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
+
+// firestore
+import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+const documento = "comidaEmergenciaCasa"; // nombre del documento en Firestore
 
 const useStore = create( //change the name of the store
   persist(
     immer((set) => ({
       // Estados
-      state1: null,
-      state2: false,
-      state3: 'ejemplo de tienda zustand',
-      state4: [],
-      state5: {
-        string: 'ejemplo de tienda zustand',
-        number: 42,
-      },
+      recetas: [],
+      alimentos: [],
+      lugares: [],
+      notas: [],
 
       // Acciones
-      actionA: (paramOpcional) =>
+      agregarAlimento: async (alimento) => {
+        // obtener el documento de la base de datos
+        const docRef = doc(db, "emergenciaDataTotal", documento);
+        const docSnap = await getDoc(docRef);
+
+         if (!docSnap.exists()) {
+            console.error("El documento de la empresa no existe");
+            return false;
+          }
+
+          const alimentos = docSnap.data().alimentos || [];
+
         set((state) => {
-          // Código relacionado con el estado
-        }),
+          state.alimentos.push(alimento);
+        });
+      },
+
+      agregarReceta: (receta) => {
+        set((state) => {
+          state.recetas.push(receta);
+        });
+      },
+
+      agregarLugar: (lugar) => {
+        set((state) => {
+          state.lugares.push(lugar);
+        });
+      },
+
+      agregarNota: (nota) => {
+        set((state) => {
+          state.notas.push(nota);
+        });
+      },
 
       actionB: (paramOpcional) =>
         set((state) => {
