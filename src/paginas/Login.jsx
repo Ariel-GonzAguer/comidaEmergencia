@@ -17,6 +17,8 @@ export default function Login(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
 
   // hook de navegación
   const navigate = useNavigate();
@@ -33,57 +35,67 @@ export default function Login(props) {
     const password = passwordRef.current.value;
 
     try {
+      setLoading(true);
+      setError(null);
       await signInWithEmailAndPassword(auth, email, password);
       setUser(email);
       getFirebaseData();
-      console.log(`"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`);
+      console.log(
+        `"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`
+      );
+      setLoading(false);
+      // redirigir a la página de inicio
       navigate("/home");
     } catch (error) {
+      setLoading(false);
+      // manejar errores de autenticación
       setError(error.message);
+      alert("Error al iniciar sesión: " + error.message);
       console.log(error.message);
     }
   }
 
   return (
-    <section className="flex flex-col items-center justify-center h-full">
-      <div>
-        <h2 className="text-3xl font-bold mb-4">Comida emergencia</h2>
-        <form
-          action=""
-          className="text-background flex flex-col items-center justify-center"
-          onSubmit={handleSubmit}
-        >
-          <label className="text-text" htmlFor="email">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="mb-6"
-            ref={emailRef}
-            required
-          />
+    <section className="flex flex-col items-center justify-center h-full mt-16">
+      <h2 className="text-3xl font-bold mb-4">Comida emergencia</h2>
+      <form
+        action=""
+        className="text-background flex flex-col items-center justify-center"
+        onSubmit={handleSubmit}
+      >
+        <label className="text-text" htmlFor="email">
+          Email:
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          className="mb-6"
+          ref={emailRef}
+          required
+        />
 
-          <label className="text-text" htmlFor="password">
-            Contraseña:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="mb-6"
-            ref={passwordRef}
-            required
-          />
-          <button
-            className="border-2 border-atencion p-4 text-text font-bold cursor-pointer hover:bg-atencion-secundary hover:border-background hover:text-background transition-colors duration-200"
-            type="submit"
-          >
-            Iniciar sesión
-          </button>
-        </form>
-      </div>
+        <label className="text-text" htmlFor="password">
+          Contraseña:
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          className="mb-6"
+          ref={passwordRef}
+          required
+        />
+        <button
+          className="border-2 border-atencion p-4 text-text font-bold cursor-pointer hover:bg-atencion-secundary hover:border-background hover:text-background transition-colors duration-200"
+          type="submit"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+      {loading && (
+        <img src="/OrangeCat_SVG.svg" alt="Cargando..." />
+      )}
     </section>
   );
 }

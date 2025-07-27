@@ -8,6 +8,10 @@ export default function Navegacion() {
     { href: "/home", label: "Comida" },
     { href: "/recetas", label: "Recetas" },
     { href: "/faqs", label: "FAQs" },
+    { href: "/notas", label: "Notas" },
+    { href: "/lugares", label: "Lugares" },
+    { href: "/botiquin", label: "Botiquín" },
+    { href: "/otros", label: "Otros" },
   ];
 
   const { user } = useAuthStore();

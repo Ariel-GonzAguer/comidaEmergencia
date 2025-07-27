@@ -13,6 +13,20 @@ import Otros from "../clases/OtrosItemClass";
 import useStore from "../stores/useStore";
 
 export default function ModalAgregar({ tipo }) {
+  // store
+  const store = useStore();
+  const { agregarElemento } = useStore();
+
+  // validar tipo para desarrollo
+  if (!Object.keys(store).includes(tipo)) {
+    console.error(
+      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(
+        ", "
+      )}.`
+    );
+    return null;
+  }
+
   // refs
   const nombreRef = useRef();
   const ingredientesRecetaRef = useRef();
@@ -23,10 +37,6 @@ export default function ModalAgregar({ tipo }) {
   const cantidadRef = useRef();
   const fechaVencimientoRef = useRef();
   const tipoRef = useRef();
-
-  // store
-  const store = useStore();
-  const { agregarElemento } = useStore();
 
   // funciones
   function handleAgregar(e, tipo) {
@@ -48,11 +58,9 @@ export default function ModalAgregar({ tipo }) {
         fechaVencimientoRef.current.value
       );
       agregarElemento(nuevoAlimento, tipo);
-
     } else if (tipo === "lugares") {
       const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
       agregarElemento(nuevoLugar, tipo);
-
     } else if (tipo === "notas") {
       const nuevaNota = Nota.crearNota(
         nombreRef.current.value,
@@ -67,7 +75,6 @@ export default function ModalAgregar({ tipo }) {
         instruccionesRecetaRef.current.value
       );
       agregarElemento(nuevaReceta, tipo);
-
     } else if (tipo === "botiquin") {
       const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
         nombreRef.current.value,
@@ -76,7 +83,6 @@ export default function ModalAgregar({ tipo }) {
         fechaVencimientoRef.current.value
       );
       agregarElemento(nuevoBotiquinItem, tipo);
-      
     } else if (tipo === "otros") {
       const nuevoOtro = Otros.crearOtrosItem(
         nombreRef.current.value,

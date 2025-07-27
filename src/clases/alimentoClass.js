@@ -5,7 +5,11 @@ class Alimento {
     this.tipo = tipo;
     this.calorias = calorias;
     this.cantidad = cantidad;
-    this.fechaVencimiento = fechaVencimiento;
+    this.fechaVencimiento = new Date(fechaVencimiento).toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
     this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
