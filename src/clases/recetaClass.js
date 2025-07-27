@@ -1,11 +1,10 @@
 class Receta {
-  id = `${this.nombre}-${randomUUID()}`;
-
   constructor(nombre, ingredientes, calorias, instrucciones) {
     this.nombre = nombre;
     this.ingredientes = ingredientes;
     this.calorias = calorias;
     this.instrucciones = instrucciones;
+    this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
   getNombre() {
@@ -18,6 +17,10 @@ class Receta {
 
   getInstrucciones() {
     return this.instrucciones;
+  }
+
+  setCalorias(calorias) {
+    this.calorias = calorias;
   }
 
   getCalorias() {

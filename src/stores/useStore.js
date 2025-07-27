@@ -2,9 +2,9 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
-import { getData, agregarElemento, eliminarElemento, actualizarElemento } from '../servicios/firebaseService';
+import { getData, agregarElementoFB, eliminarElementoFB, actualizarElementoFB } from '../servicios/firebaseService';
 
-const useStore = create( //change the name of the store
+const useStore = create()( //change the name of the store
   persist(
     immer((set) => ({
       // Estados
@@ -36,10 +36,11 @@ const useStore = create( //change the name of the store
 
       agregarElemento: async (elemento, key) => {
         try {
-          const data = await agregarElemento(elemento, key);
+          const data = await agregarElementoFB(elemento, key);
           if (data) {
             set((state) => {
-              state[key] = { ...state[key], [elemento.nombre]: elemento };
+              const nuevoEstado = { ...state[key], [elemento.nombre]: elemento };
+              state[key] = nuevoEstado;
             });
           }
         } catch (error) {
@@ -49,7 +50,7 @@ const useStore = create( //change the name of the store
 
       eliminarElemento: async (key, nombre) => {
         try {
-          const data = await eliminarElemento(key, nombre);
+          const data = await eliminarElementoFB(key, nombre);
           if (data) {
             set((state) => {
               delete state[key][nombre];
@@ -62,10 +63,11 @@ const useStore = create( //change the name of the store
 
       actualizarElemento: async (key, nombre, nuevoElemento) => {
         try {
-          const data = await actualizarElemento(key, nombre, nuevoElemento);
+          const data = await actualizarElementoFB(key, nombre, nuevoElemento);
           if (data) {
             set((state) => {
-              state[key][nombre] = nuevoElemento;
+              const nuevoEstado = { ...state[key], [nombre]: nuevoElemento };
+              state[key] = nuevoEstado;
             });
           }
         } catch (error) {
@@ -74,7 +76,16 @@ const useStore = create( //change the name of the store
       },
     })),
     {
-      name: 'food-store', // Nombre de la clave en el local storage
+      name: 'useStore', // Nombre de la clave en el local storage
+      version: 1, // versión del esquema de almacenamiento
+      partialize: (state) => ({
+        alimentos: state.alimentos,
+        botiquin: state.botiquin,
+        lugares: state.lugares,
+        otros: state.otros,
+        notas: state.notas,
+        recetas: state.recetas,
+      }),
     }
   )
 );

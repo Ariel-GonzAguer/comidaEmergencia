@@ -1,51 +1,88 @@
 // hooks
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 // clases
 import Alimento from "../clases/AlimentoClass";
 import Lugar from "../clases/lugarClass";
 import Nota from "../clases/notaClass";
 import Receta from "../clases/recetaClass";
+import BotiquinItem from "../clases/BotiquinItemClass";
+import Otros from "../clases/OtrosItemClass";
 
-export default function ModalAgregar(props) {
+// store
+import useStore from "../stores/useStore";
+
+export default function ModalAgregar({ tipo }) {
   // refs
-  const nombreComidaRef = useRef();
-  const ingredientesComidaRef = useRef();
-  const instruccionesComidaRef = useRef();
-  const caloriasComidaRef = useRef();
-  const nombreLugarRef = useRef();
-  const tituloNotaRef = useRef();
+  const nombreRef = useRef();
+  const ingredientesRecetaRef = useRef();
+  const instruccionesRecetaRef = useRef();
+  const caloriasRef = useRef();
   const contenidoNotaRef = useRef();
+  const usoRef = useRef();
+  const cantidadRef = useRef();
+  const fechaVencimientoRef = useRef();
+  const tipoRef = useRef();
+
+  // store
+  const store = useStore();
+  const { agregarElemento } = useStore();
 
   // funciones
-  function handleAgregar(e) {
+  function handleAgregar(e, tipo) {
     e.preventDefault();
 
-    if (props.tipo === "comida") {
-      const nuevoAlimento = Alimento.crearAlimento(
-        nombreComidaRef.current.value,
-        ingredientesComidaRef.current.value,
-        caloriasComidaRef.current.value,
-        instruccionesComidaRef.current.value
+    if (store[tipo][nombreRef.current.value]) {
+      alert(
+        `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`
       );
-      props.agregarAlimento(nuevoAlimento);
-    } else if (props.tipo === "lugar") {
-      const nuevoLugar = Lugar.crearLugar(nombreLugarRef.current.value);
-      props.agregarLugar(nuevoLugar);
-    } else if (props.tipo === "nota") {
+      return;
+    }
+
+    if (tipo === "alimentos") {
+      const nuevoAlimento = Alimento.crearAlimento(
+        nombreRef.current.value,
+        tipoRef.current.value,
+        caloriasRef.current.value,
+        cantidadRef.current.value,
+        fechaVencimientoRef.current.value
+      );
+      agregarElemento(nuevoAlimento, tipo);
+
+    } else if (tipo === "lugares") {
+      const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
+      agregarElemento(nuevoLugar, tipo);
+
+    } else if (tipo === "notas") {
       const nuevaNota = Nota.crearNota(
-        tituloNotaRef.current.value,
+        nombreRef.current.value,
         contenidoNotaRef.current.value
       );
-      props.agregarNota(nuevaNota);
-    } else if (props.tipo === "receta") {
+      agregarElemento(nuevaNota, tipo);
+    } else if (tipo === "recetas") {
       const nuevaReceta = Receta.crearReceta(
-        nombreComidaRef.current.value,
-        ingredientesComidaRef.current.value,
-        caloriasComidaRef.current.value,
-        instruccionesComidaRef.current.value
+        nombreRef.current.value,
+        ingredientesRecetaRef.current.value,
+        caloriasRef.current.value,
+        instruccionesRecetaRef.current.value
       );
-      props.agregarReceta(nuevaReceta);
+      agregarElemento(nuevaReceta, tipo);
+
+    } else if (tipo === "botiquin") {
+      const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
+        nombreRef.current.value,
+        usoRef.current.value,
+        cantidadRef.current.value,
+        fechaVencimientoRef.current.value
+      );
+      agregarElemento(nuevoBotiquinItem, tipo);
+      
+    } else if (tipo === "otros") {
+      const nuevoOtro = Otros.crearOtrosItem(
+        nombreRef.current.value,
+        usoRef.current.value
+      );
+      agregarElemento(nuevoOtro, tipo);
     }
 
     // Limpiar los campos del formulario
@@ -53,102 +90,97 @@ export default function ModalAgregar(props) {
   }
 
   return (
-    <div className="modal">
-      <h2>Agregar {props.tipo}</h2>
-      <form onSubmit={handleAgregar}>
+    <div className="flex flex-col items-center justify-center ">
+      <h2>Agregar {tipo}</h2>
+      <form
+        onSubmit={(e) => handleAgregar(e, tipo)}
+        className="flex flex-col gap-2 w-2xs border-4 border-gray-300 p-4 rounded-lg"
+      >
         {/* Campos del formulario según el tipo */}
 
-        {props.tipo === "comida" && (
-          <>
-            <label htmlFor="nombre-comida">Nombre de la comida</label>
-            <input
-              type="text"
-              id="nombre-comida"
-              placeholder="Nombre de la comida"
-            />
-            <label htmlFor="ingredientes-comida">Ingredientes</label>
-            <input
-              type="text"
-              id="ingredientes-comida"
-              placeholder="Ingredientes"
-            />
-            <label htmlFor="instrucciones-comida">Instrucciones</label>
-            <input
-              type="text"
-              id="instrucciones-comida"
-              placeholder="Instrucciones"
-            />
-            <label htmlFor="calorias-comida">Calorías</label>
-            <input type="number" id="calorias-comida" placeholder="Calorías" />
-          </>
-        )}
+        <label htmlFor="nombre">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          placeholder="Nombre"
+          className="text-background"
+          ref={nombreRef}
+        />
 
-        {props.tipo === "lugar" && (
+        {tipo === "alimentos" && (
           <>
-            <label htmlFor="nombre-lugar">Nombre del lugar</label>
+            <label htmlFor="tipo">Tipo</label>
             <input
               type="text"
-              id="nombre-lugar"
-              placeholder="Nombre del lugar"
+              id="tipo"
+              placeholder="Tipo"
+              className="text-background"
+              ref={tipoRef}
             />
           </>
         )}
 
-        {props.tipo === "nota" && (
+        {(tipo === "alimentos" || tipo === "botiquin") && (
           <>
-            <label htmlFor="nombre-nota">Nombre de la nota</label>
+            <label htmlFor="cantidad">Cantidad</label>
             <input
               type="text"
-              id="nombre-nota"
-              placeholder="Nombre de la nota"
+              id="cantidad"
+              placeholder="Cantidad"
+              ref={cantidadRef}
+              className="text-background"
             />
+          </>
+        )}
+
+        {(tipo === "alimentos" || tipo === "recetas") && (
+          <>
+            <label htmlFor="calorias-receta">Calorías</label>
+            <input
+              type="number"
+              id="calorias-receta"
+              placeholder="Calorías"
+              ref={caloriasRef}
+              className="text-background"
+            />
+          </>
+        )}
+
+        {tipo === "notas" && (
+          <>
             <label htmlFor="contenido-nota">Contenido de la nota</label>
             <textarea
               id="contenido-nota"
               placeholder="Contenido de la nota"
+              ref={contenidoNotaRef}
+              className="text-background"
             ></textarea>
           </>
         )}
 
-        {props.tipo === "receta" && (
+        {tipo === "recetas" && (
           <>
-            <label htmlFor="nombre-receta">Nombre de la receta</label>
-            <input
-              type="text"
-              id="nombre-receta"
-              placeholder="Nombre de la receta"
-            />
-            <label htmlFor="ingredientes-receta">Ingredientes</label>
+            |<label htmlFor="ingredientes-receta">Ingredientes</label>
             <input
               type="text"
               id="ingredientes-receta"
+              ref={ingredientesRecetaRef}
               placeholder="Ingredientes"
+              className="text-background"
             />
             <label htmlFor="instrucciones-receta">Instrucciones</label>
             <input
               type="text"
               id="instrucciones-receta"
               placeholder="Instrucciones"
+              className="text-background"
+              ref={instruccionesRecetaRef}
             />
-            <label htmlFor="calorias-receta">Calorías</label>
-            <input type="number" id="calorias-receta" placeholder="Calorías" />
           </>
         )}
 
-        {props.tipo === "botiquinItem" && (
+        {(tipo === "botiquinItem" || tipo === "alimentos") && (
           <>
-            <label htmlFor="nombre-botiquin-item">Nombre del ítem</label>
-            <input
-              type="text"
-              id="nombre-botiquin-item"
-              placeholder="Nombre del ítem"
-            />
-            <label htmlFor="cantidad-botiquin-item">Cantidad</label>
-            <input
-              type="number"
-              id="cantidad-botiquin-item"
-              placeholder="Cantidad"
-            />
             <label htmlFor="fecha-vencimiento-botiquin-item">
               Fecha de vencimiento
             </label>
@@ -156,25 +188,30 @@ export default function ModalAgregar(props) {
               type="date"
               id="fecha-vencimiento-botiquin-item"
               placeholder="Fecha de vencimiento"
+              className="text-background"
+              ref={fechaVencimientoRef}
             />
-            <label htmlFor="uso-botiquin-item">Uso</label>
-            <input type="text" id="uso-botiquin-item" placeholder="Uso" />
           </>
         )}
 
-        {props.tipo === "otros" && (
+        {(tipo === "otros" || tipo === "botiquin") && (
           <>
-            <label htmlFor="nombre-otros">Nombre</label>
-            <input type="text" id="nombre-otros" placeholder="Nombre" />
-            <label htmlFor="descripcion-otros">Descripción</label>
+            <label htmlFor="descripcion-otros">Uso</label>
             <textarea
-              id="descripcion-otros"
-              placeholder="Descripción"
+              id="uso-otros"
+              ref={usoRef}
+              placeholder="Uso"
+              className="text-background"
             ></textarea>
           </>
         )}
 
-        <button type="submit">Agregar</button>
+        <button
+          type="submit"
+          className="bg-atencion-secundary text-background font-bold py-2 px-4 rounded hover:font-extrabold hover:scale-101 transition-all duration-300 cursor-pointer"
+        >
+          Agregar
+        </button>
       </form>
     </div>
   );

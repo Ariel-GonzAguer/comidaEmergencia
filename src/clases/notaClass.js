@@ -1,14 +1,14 @@
 class Nota {
-  id = `${this.nombre}-${randomUUID()}`;
+  fecha = new Date().toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   constructor(nombre, contenido) {
     this.nombre = nombre;
     this.contenido = contenido;
-    this.fecha = new Date().toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
   getNota() {
@@ -19,8 +19,8 @@ class Nota {
     };
   }
 
-  static crearNota(nombre, contenido, fecha) {
-    return new Nota(nombre, contenido, fecha);
+  static crearNota(nombre, contenido) {
+    return new Nota(nombre, contenido);
   }
 }
 

@@ -1,11 +1,10 @@
 class BotiquinItem {
-  id = `${this.nombre}-${randomUUID()}`;
-
   constructor(nombre, uso, cantidad, fechaVencimiento) {
     this.nombre = nombre;
     this.uso = uso;
     this.cantidad = cantidad;
     this.fechaVencimiento = fechaVencimiento;
+    this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
   getNombre() {

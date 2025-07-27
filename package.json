@@ -21,6 +21,7 @@
     "openai": "^5.10.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-error-boundary": "^6.0.0",
     "sonner": "^2.0.6",
     "tailwindcss": "^4.1.11",
     "vite-plugin-pwa": "^1.0.2",

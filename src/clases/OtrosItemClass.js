@@ -1,21 +1,20 @@
 class OtrosItem {
-  id = `${this.nombre}-${randomUUID()}`;
-
-  constructor(nombre, descripcion) {
+  constructor(nombre, uso) {
     this.nombre = nombre;
-    this.descripcion = descripcion;
+    this.uso = uso;
+    this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
   getNombre() {
     return this.nombre;
   }
 
-  getDescripcion() {
-    return this.descripcion;
+  getUso() {
+    return this.uso;
   }
 
-  static crearOtrosItem(nombre, descripcion) {
-    return new OtrosItem(nombre, descripcion);
+  static crearOtrosItem(nombre, uso) {
+    return new OtrosItem(nombre, uso);
   }
 }
 

@@ -10,7 +10,7 @@ export async function openAI_RecipeService(request) {
     const response = await client.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "genere una receta con los ingredientes ingresados" },
+        { role: "system", content: "genere una receta con los ingredientes ingresados. La receta debe tener 3 secciones: ingredientes, instrucciones y notas." },
         { role: "user", content: input },
       ],
     });
@@ -23,7 +23,7 @@ export async function openAI_RecipeService(request) {
     });
   } catch (error) {
     console.error("Error in OpenAI request:", error);
-    return new Response(JSON.stringify({ error: "Failed to generate response" }), {
+    return new Response(JSON.stringify({ error: "Error al generar la receta" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });

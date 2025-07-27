@@ -36,7 +36,7 @@ export default function Login(props) {
       await signInWithEmailAndPassword(auth, email, password);
       setUser(email);
       getFirebaseData();
-      console.log("Inicio de sesión exitoso");
+      console.log(`"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`);
       navigate("/home");
     } catch (error) {
       setError(error.message);

@@ -1,11 +1,12 @@
 class Alimento {
-  id = `${this.nombre}-${randomUUID()}`;
 
-  constructor(nombre, tipo, calorias, cantidad) {
+  constructor(nombre, tipo, calorias, cantidad, fechaVencimiento) {
     this.nombre = nombre;
     this.tipo = tipo;
     this.calorias = calorias;
     this.cantidad = cantidad;
+    this.fechaVencimiento = fechaVencimiento;
+    this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
 
   getNombre() {
@@ -16,6 +17,12 @@ class Alimento {
     return this.tipo;
   }
 
+  getFechaVencimiento() {
+    return this.fechaVencimiento;
+  }
+  setFechaVencimiento(fechaVencimiento) {
+    this.fechaVencimiento = fechaVencimiento;
+  }
   getCalorias() {
     return this.calorias;
   }
@@ -24,8 +31,8 @@ class Alimento {
     return this.cantidad;
   }
 
-  static crearAlimento(nombre, tipo, calorias, cantidad) {
-    return new Alimento(nombre, tipo, calorias, cantidad);
+  static crearAlimento(nombre, tipo, calorias, cantidad, fechaVencimiento) {
+    return new Alimento(nombre, tipo, calorias, cantidad, fechaVencimiento);
   }
 
 }
