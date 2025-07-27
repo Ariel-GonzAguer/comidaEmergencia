@@ -55,8 +55,9 @@ export default function ModalAgregar(props) {
   return (
     <div className="modal">
       <h2>Agregar {props.tipo}</h2>
-      <form>
+      <form onSubmit={handleAgregar}>
         {/* Campos del formulario según el tipo */}
+
         {props.tipo === "comida" && (
           <>
             <label htmlFor="nombre-comida">Nombre de la comida</label>
@@ -81,6 +82,7 @@ export default function ModalAgregar(props) {
             <input type="number" id="calorias-comida" placeholder="Calorías" />
           </>
         )}
+
         {props.tipo === "lugar" && (
           <>
             <label htmlFor="nombre-lugar">Nombre del lugar</label>
@@ -91,13 +93,14 @@ export default function ModalAgregar(props) {
             />
           </>
         )}
+
         {props.tipo === "nota" && (
           <>
-            <label htmlFor="titulo-nota">Título de la nota</label>
+            <label htmlFor="nombre-nota">Nombre de la nota</label>
             <input
               type="text"
-              id="titulo-nota"
-              placeholder="Título de la nota"
+              id="nombre-nota"
+              placeholder="Nombre de la nota"
             />
             <label htmlFor="contenido-nota">Contenido de la nota</label>
             <textarea
@@ -106,6 +109,71 @@ export default function ModalAgregar(props) {
             ></textarea>
           </>
         )}
+
+        {props.tipo === "receta" && (
+          <>
+            <label htmlFor="nombre-receta">Nombre de la receta</label>
+            <input
+              type="text"
+              id="nombre-receta"
+              placeholder="Nombre de la receta"
+            />
+            <label htmlFor="ingredientes-receta">Ingredientes</label>
+            <input
+              type="text"
+              id="ingredientes-receta"
+              placeholder="Ingredientes"
+            />
+            <label htmlFor="instrucciones-receta">Instrucciones</label>
+            <input
+              type="text"
+              id="instrucciones-receta"
+              placeholder="Instrucciones"
+            />
+            <label htmlFor="calorias-receta">Calorías</label>
+            <input type="number" id="calorias-receta" placeholder="Calorías" />
+          </>
+        )}
+
+        {props.tipo === "botiquinItem" && (
+          <>
+            <label htmlFor="nombre-botiquin-item">Nombre del ítem</label>
+            <input
+              type="text"
+              id="nombre-botiquin-item"
+              placeholder="Nombre del ítem"
+            />
+            <label htmlFor="cantidad-botiquin-item">Cantidad</label>
+            <input
+              type="number"
+              id="cantidad-botiquin-item"
+              placeholder="Cantidad"
+            />
+            <label htmlFor="fecha-vencimiento-botiquin-item">
+              Fecha de vencimiento
+            </label>
+            <input
+              type="date"
+              id="fecha-vencimiento-botiquin-item"
+              placeholder="Fecha de vencimiento"
+            />
+            <label htmlFor="uso-botiquin-item">Uso</label>
+            <input type="text" id="uso-botiquin-item" placeholder="Uso" />
+          </>
+        )}
+
+        {props.tipo === "otros" && (
+          <>
+            <label htmlFor="nombre-otros">Nombre</label>
+            <input type="text" id="nombre-otros" placeholder="Nombre" />
+            <label htmlFor="descripcion-otros">Descripción</label>
+            <textarea
+              id="descripcion-otros"
+              placeholder="Descripción"
+            ></textarea>
+          </>
+        )}
+
         <button type="submit">Agregar</button>
       </form>
     </div>

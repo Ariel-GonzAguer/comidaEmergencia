@@ -9,6 +9,8 @@ import { useNavigate } from "@arielgonzaguer/michi-router";
 
 // store de autenticación
 import useAuthStore from "../stores/useAuthStore";
+// store de comida
+import useStore from "../stores/useStore";
 
 export default function Login(props) {
   // refs y estados del formulario
@@ -22,6 +24,9 @@ export default function Login(props) {
   // store de autenticación
   const { setUser } = useAuthStore();
 
+  // store de comida
+  const { getFirebaseData } = useStore();
+
   async function handleSubmit(e) {
     e.preventDefault();
     const email = emailRef.current.value;
@@ -30,6 +35,7 @@ export default function Login(props) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setUser(email);
+      getFirebaseData();
       console.log("Inicio de sesión exitoso");
       navigate("/home");
     } catch (error) {

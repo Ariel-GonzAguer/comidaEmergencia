@@ -24,7 +24,7 @@ export default function firabaseService() {
 
   agregarElemento = async (elemento, key) => {
     // validación de datos
-    const keysArray = ['alimentos', 'lugares', 'notas', 'recetas'];
+    const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'botiquin', 'otros'];
     if (!keysArray.includes(key)) {
       console.error("key invalida. Debe ser una de las siguientes:", keysArray.join(", "));
       return null;
@@ -103,5 +103,45 @@ export default function firabaseService() {
     }
   };
 
-  return { getData, agregarElemento, eliminarElemento };
+  actualizarElemento = async (key, nombre, nuevoElemento) => {
+    // validación de datos
+    const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'botiquin', 'otros'];
+    if (!keysArray.includes(key)) {
+      console.error("key invalida. Debe ser una de las siguientes:", keysArray.join(", "));
+      return null;
+    }
+
+    try {
+      const docRef = doc(db, coleccion, documento);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        console.error("Ese documento no existe");
+        return null;
+      }
+      const data = docSnap.data();
+      if (!data[key] || typeof data[key] !== 'object') {
+        console.error("Ese campo no existe o no es un objeto válido");
+        return null;
+      }
+
+      const keyActualizada = {
+        ...data[key],
+        [nombre]: { ...nuevoElemento }
+      };
+
+      await updateDoc(docRef, {
+        [key]: keyActualizada
+      });
+
+      console.log("Documento actualizado con éxito");
+      return keyActualizada;
+
+    } catch (error) {
+      console.error("Error actualizando documento:", error);
+      throw error; // Propagar el error para su manejo en el componente
+    }
+  };
+
+  return { getData, agregarElemento, eliminarElemento, actualizarElemento };
 }
