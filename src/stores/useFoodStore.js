@@ -2,54 +2,57 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
-
-// firestore
-import { getDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase/firebaseConfig";
-const documento = "comidaEmergenciaCasa"; // nombre del documento en Firestore
+import { getData, agregarElemento, eliminarElemento } from '../servicios/firebaseService';
 
 const useStore = create( //change the name of the store
   persist(
     immer((set) => ({
       // Estados
-      recetas: [],
-      alimentos: [],
-      lugares: [],
-      notas: [],
+      recetas: {},
+      alimentos: {},
+      lugares: {},
+      notas: {},
 
       // Acciones
-      agregarAlimento: async (alimento) => {
-        // obtener el documento de la base de datos
-        const docRef = doc(db, "emergenciaDataTotal", documento);
-        const docSnap = await getDoc(docRef);
-
-         if (!docSnap.exists()) {
-            console.error("El documento de la empresa no existe");
-            return false;
+      getFullData: async () => {
+        try {
+          const data = await getData();
+          if (data) {
+            set((state) => {
+              state.recetas = data.recetas || {};
+              state.alimentos = data.alimentos || {};
+              state.lugares = data.lugares || {};
+              state.notas = data.notas || {};
+            });
           }
+        } catch (error) {
+          console.error('Error al obtener los datos:', error);
+        }
+      },
 
-          const alimentos = docSnap.data().alimentos || [];
 
+
+      agregarAlimento: async (alimento) => {
         set((state) => {
-          state.alimentos.push(alimento);
+          state.alimentos[alimento.nombre] = alimento;
         });
       },
 
       agregarReceta: (receta) => {
         set((state) => {
-          state.recetas.push(receta);
+          state.recetas[receta.nombre] = receta;
         });
       },
 
       agregarLugar: (lugar) => {
         set((state) => {
-          state.lugares.push(lugar);
+          state.lugares[lugar.nombre] = lugar;
         });
       },
 
       agregarNota: (nota) => {
         set((state) => {
-          state.notas.push(nota);
+          state.notas[nota.nombre] = nota;
         });
       },
 
