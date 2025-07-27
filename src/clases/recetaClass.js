@@ -1,5 +1,5 @@
 class Receta {
-  constructor(nombre, ingredientes, calorias, instrucciones) {
+  constructor(nombre, ingredientes = {}, calorias, instrucciones) {
     this.nombre = nombre;
     this.ingredientes = ingredientes;
     this.calorias = calorias;

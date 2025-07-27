@@ -166,7 +166,7 @@ export default function ModalAgregar({ tipo }) {
 
         {tipo === "recetas" && (
           <>
-            |<label htmlFor="ingredientes-receta">Ingredientes</label>
+            <label htmlFor="ingredientes-receta">Ingredientes</label>
             <input
               type="text"
               id="ingredientes-receta"
