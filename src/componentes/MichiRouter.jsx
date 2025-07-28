@@ -6,6 +6,10 @@ import Login from "../paginas/Login.jsx";
 import Home from "../paginas/Home.jsx";
 import Recetas from "../paginas/Recetas.jsx";
 import FAQs from "../paginas/FAQs.jsx";
+import Notas from "../paginas/Notas.jsx";
+import Lugares from "../paginas/Lugares.jsx";
+import Botiquin from "../paginas/Botiquin.jsx";
+import Otros from "../paginas/Otros.jsx";
 
 // protector de rutas
 import Protected from "../componentes/Protected.jsx";
@@ -29,6 +33,38 @@ const rutas = [
     component: (
       <Protected>
         <Recetas />
+      </Protected>
+    ),
+  },
+  {
+    path: "/notas",
+    component: (
+      <Protected>
+        <Notas />
+      </Protected>
+    ),
+  },
+  {
+    path: "/lugares",
+    component: (
+      <Protected>
+        <Lugares />
+      </Protected>
+    ),
+  },
+  {
+    path: "/botiquin",
+    component: (
+      <Protected>
+        <Botiquin />
+      </Protected>
+    ),
+  },
+  {
+    path: "/otros",
+    component: (
+      <Protected>
+        <Otros />
       </Protected>
     ),
   },

@@ -15,7 +15,7 @@ import useStore from "../stores/useStore";
 export default function ModalAgregar({ tipo }) {
   // store
   const store = useStore();
-  const { agregarElemento } = useStore();
+  const { agregarElemento, lugares } = useStore();
 
   // validar tipo para desarrollo
   if (!Object.keys(store).includes(tipo)) {
@@ -37,6 +37,7 @@ export default function ModalAgregar({ tipo }) {
   const cantidadRef = useRef();
   const fechaVencimientoRef = useRef();
   const tipoRef = useRef();
+  const lugarRef = useRef();
 
   // funciones
   function handleAgregar(e, tipo) {
@@ -50,14 +51,28 @@ export default function ModalAgregar({ tipo }) {
     }
 
     if (tipo === "alimentos") {
+      // Prevenir si no hay lugares disponibles
+      const lugaresArray = Object.keys(lugares);
+      if (lugaresArray.length === 0) {
+        alert("Debes agregar al menos un lugar antes de agregar alimentos.");
+        return;
+      }
+      // Buscar el objeto lugar correspondiente por id
+      const lugarSeleccionado = lugares[lugarRef.current.value];
+      if (!lugarSeleccionado) {
+        alert("Selecciona una ubicación válida.");
+        return;
+      }
       const nuevoAlimento = Alimento.crearAlimento(
         nombreRef.current.value,
         tipoRef.current.value,
         caloriasRef.current.value,
         cantidadRef.current.value,
-        fechaVencimientoRef.current.value
+        fechaVencimientoRef.current.value,
+        lugarSeleccionado
       );
       agregarElemento(nuevoAlimento, tipo);
+      console.log("Nuevo alimento agregado:", nuevoAlimento);
     } else if (tipo === "lugares") {
       const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
       agregarElemento(nuevoLugar, tipo);
@@ -123,6 +138,26 @@ export default function ModalAgregar({ tipo }) {
               className="text-background"
               ref={tipoRef}
             />
+            <label htmlFor="lugar">Ubicación</label>
+            <select
+              name="lugar"
+              id="lugar"
+              ref={lugarRef}
+              defaultValue={Object.keys(lugares)[0] || ""}
+              disabled={Object.keys(lugares).length === 0}
+              className="text-background"
+            >
+              {Object.entries(lugares).map(([id, lugar]) => (
+                <option key={id} value={id} className="text-background">
+                  {lugar.nombre}
+                </option>
+              ))}
+            </select>
+            {Object.keys(lugares).length === 0 && (
+              <p className="text-red-500 text-xs">
+                Agrega un lugar antes de agregar alimentos.
+              </p>
+            )}
           </>
         )}
 

@@ -15,6 +15,7 @@ export default function ComidaActual() {
               <th className="border px-2 py-1">Fecha de vencimiento</th>
               <th className="border px-2 py-1">Calorías</th>
               <th className="border px-2 py-1">Tipo</th>
+              <th className="border px-2 py-1">Ubicación</th>
             </tr>
           </thead>
           <tbody>
@@ -27,6 +28,7 @@ export default function ComidaActual() {
                 </td>
                 <td className="border px-2 py-1">{alimento.calorias}</td>
                 <td className="border px-2 py-1">{alimento.tipo}</td>
+                <td className="border px-2 py-1">{alimento.ubicacion.nombre}</td>
               </tr>
             ))}
           </tbody>

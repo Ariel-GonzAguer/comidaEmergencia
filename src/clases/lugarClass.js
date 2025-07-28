@@ -14,7 +14,7 @@ class Lugar {
     return this.alimentos;
   }
 
-  agregarAlimento(alimento) {
+  static agregarAlimento(alimento) {
     this.alimentos[alimento.getNombre()] = alimento;
   }
 
@@ -22,7 +22,7 @@ class Lugar {
     delete this.alimentos[nombre];
   }
 
-  moverAlimento(nombre, nuevoLugar) {
+  static moverAlimento(nombre, nuevoLugar) {
     if (this.alimentos[nombre]) {
       nuevoLugar.agregarAlimento(this.alimentos[nombre]);
       this.eliminarAlimento(nombre);

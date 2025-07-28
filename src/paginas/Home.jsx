@@ -34,7 +34,8 @@ export default function Home() {
       >
         <ComidaActual />
 
-        {/* <AgregarModal tipo="alimentos" /> */}
+        <AgregarModal tipo="lugares" />
+        <AgregarModal tipo="alimentos" />
       </ErrorBoundary>
     </>
   );

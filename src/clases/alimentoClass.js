@@ -1,10 +1,11 @@
 class Alimento {
 
-  constructor(nombre, tipo, calorias, cantidad, fechaVencimiento) {
+  constructor(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
     this.nombre = nombre;
     this.tipo = tipo;
     this.calorias = calorias;
     this.cantidad = cantidad;
+    this.ubicacion = ubicacion;
     this.fechaVencimiento = new Date(fechaVencimiento).toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
@@ -35,8 +36,14 @@ class Alimento {
     return this.cantidad;
   }
 
-  static crearAlimento(nombre, tipo, calorias, cantidad, fechaVencimiento) {
-    return new Alimento(nombre, tipo, calorias, cantidad, fechaVencimiento);
+  getUbicacion() {
+    return this.ubicacion;
+  }
+
+
+
+  static crearAlimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
+    return new Alimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion);
   }
 
 }
