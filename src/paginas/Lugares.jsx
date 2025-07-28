@@ -4,12 +4,11 @@ import useStore from "../stores/useStore";
 export default function Lugares(props) {
   // store
   const { lugares } = useStore();
-  console.log("lugares values", Object.values(lugares));
 
   return (
     <section className="flex flex-col items-center justify-center h-full mt-16">
       {Object.keys(lugares).length > 0 ? (
-        Object.values(lugares).map((value) => (
+        Object.entries(lugares).map(([, value]) => (
           <article
             id={value.id}
             key={value.id}
@@ -18,7 +17,9 @@ export default function Lugares(props) {
             <h3>{value.nombre}</h3>
             <ul>
               {Object.values(value.alimentos).map((elemento) => (
-                <li key={elemento.id}>{elemento.nombre}</li>
+                <li key={elemento.id}>
+                  {elemento.nombre} - {elemento.cantidad}
+                </li>
               ))}
             </ul>
           </article>

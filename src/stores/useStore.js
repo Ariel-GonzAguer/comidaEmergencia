@@ -39,8 +39,20 @@ const useStore = create()( //change the name of the store
           const data = await agregarElementoFB(elemento, key);
           if (data) {
             set((state) => {
+              // Agregar alimento al store global
               const nuevoEstado = { ...state[key], [elemento.nombre]: elemento };
               state[key] = nuevoEstado;
+              // Si es un alimento, también agregarlo al lugar correspondiente usando el nombre
+              if (key === "alimentos" && elemento.ubicacion && elemento.ubicacion.nombre) {
+                const lugarNombre = elemento.ubicacion.nombre;
+                if (state.lugares[lugarNombre]) {
+                  // Inicializar alimentos si no existe
+                  if (!state.lugares[lugarNombre].alimentos) {
+                    state.lugares[lugarNombre].alimentos = {};
+                  }
+                  state.lugares[lugarNombre].alimentos[elemento.nombre] = elemento;
+                }
+              }
             });
           }
         } catch (error) {

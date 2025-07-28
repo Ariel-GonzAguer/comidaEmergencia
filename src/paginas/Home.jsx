@@ -12,17 +12,10 @@ import ComidaActual from "../componentes/ComidaActual";
 
 // store
 import useStore from "../stores/useStore";
-useStore.persist.rehydrate(); // <- fuerza escritura / lectura
 
 export default function Home() {
   // store
-  const { alimentos, lugares, otros, notas, recetas } = useStore();
-
-  const [alimentosObject, setAlimentosObject] = useState({});
-
-  useEffect(() => {
-    setAlimentosObject(alimentos);
-  }, [alimentos]);
+  const { getFirebaseData } = useStore();
 
   return (
     <>
@@ -33,6 +26,13 @@ export default function Home() {
         }}
       >
         <ComidaActual />
+
+        <button
+          onClick={getFirebaseData}
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          Actualizar
+        </button>
 
         <AgregarModal tipo="lugares" />
         <AgregarModal tipo="alimentos" />
