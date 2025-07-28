@@ -1,17 +1,27 @@
+// hooks
+import { useState } from "react";
+
+// componentes
 import AgregarModal from "./AgregarModal";
 
+export default function AgregarButton({ tipo }) {
+  // Estado para manejar la visibilidad del modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-export default function AgregarButton({ props }) {
-  const elemento = props.elemento;
+  // Función para abrir el modal
+  function openModal() {
+    setIsModalOpen(true);
+  }
 
-  // Función para manejar el clic en el botón
-  function handleClick() {
-    openModal(elemento);
+  // Función para cerrar el modal
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
   return (
     <>
-      <button onClick={handleClick}>Agregar {elemento}</button>
+      <button onClick={openModal}>Agregar {tipo}</button>
+      {isModalOpen && <AgregarModal tipo={tipo} closeModal={closeModal} />}
     </>
   );
 }

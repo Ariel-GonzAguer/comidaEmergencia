@@ -12,7 +12,7 @@ import Otros from "../clases/OtrosItemClass";
 // store
 import useStore from "../stores/useStore";
 
-export default function ModalAgregar({ tipo }) {
+export default function ModalAgregar({ tipo, closeModal }) {
   // store
   const store = useStore();
   const { agregarElemento, lugares } = useStore();
@@ -63,7 +63,10 @@ export default function ModalAgregar({ tipo }) {
         alert("Selecciona una ubicación válida.");
         return;
       }
-      const ubicacionPlano = { id: lugarSeleccionado.id, nombre: lugarSeleccionado.nombre };
+      const ubicacionPlano = {
+        id: lugarSeleccionado.id,
+        nombre: lugarSeleccionado.nombre,
+      };
       const nuevoAlimento = Alimento.crearAlimento(
         nombreRef.current.value,
         tipoRef.current.value,
@@ -74,15 +77,20 @@ export default function ModalAgregar({ tipo }) {
       );
       agregarElemento(nuevoAlimento, tipo);
       console.log("Nuevo alimento agregado:", nuevoAlimento);
+      closeModal();
     } else if (tipo === "lugares") {
       const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
       agregarElemento(nuevoLugar, tipo);
+      console.log("Nuevo lugar agregado:", nuevoLugar);
+      closeModal();
     } else if (tipo === "notas") {
       const nuevaNota = Nota.crearNota(
         nombreRef.current.value,
         contenidoNotaRef.current.value
       );
       agregarElemento(nuevaNota, tipo);
+      console.log("Nueva nota agregada:", nuevaNota);
+      closeModal();
     } else if (tipo === "recetas") {
       const nuevaReceta = Receta.crearReceta(
         nombreRef.current.value,
@@ -91,6 +99,8 @@ export default function ModalAgregar({ tipo }) {
         instruccionesRecetaRef.current.value
       );
       agregarElemento(nuevaReceta, tipo);
+      console.log("Nueva receta agregada:", nuevaReceta);
+      closeModal();
     } else if (tipo === "botiquin") {
       const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
         nombreRef.current.value,
@@ -99,12 +109,19 @@ export default function ModalAgregar({ tipo }) {
         fechaVencimientoRef.current.value
       );
       agregarElemento(nuevoBotiquinItem, tipo);
+      console.log("Nuevo botiquín item agregado:", nuevoBotiquinItem);
+      closeModal();
     } else if (tipo === "otros") {
       const nuevoOtro = Otros.crearOtrosItem(
         nombreRef.current.value,
         usoRef.current.value
       );
       agregarElemento(nuevoOtro, tipo);
+      console.log("Nuevo otro item agregado:", nuevoOtro);
+      closeModal();
+    } else {
+      console.error(`Tipo "${tipo}" no válido.`);
+      return;
     }
 
     // Limpiar los campos del formulario
@@ -112,7 +129,10 @@ export default function ModalAgregar({ tipo }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <dialog
+      id="agregar-modal"
+      className="flex flex-col items-center justify-center bg-background text-text p-4 rounded-lg shadow-lg"
+    >
       <h2>Agregar {tipo}</h2>
       <form
         onSubmit={(e) => handleAgregar(e, tipo)}
@@ -254,7 +274,15 @@ export default function ModalAgregar({ tipo }) {
         >
           Agregar
         </button>
+        <button
+          type="button"
+          id="cancelar-agregar-button"
+          className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-300"
+          onClick={closeModal}
+        >
+          Cancelar
+        </button>
       </form>
-    </div>
+    </dialog>
   );
 }

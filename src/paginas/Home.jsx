@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // componentes
-import AgregarModal from "../componentes/AgregarModal";
+import AgregarButton from "../componentes/AgregarButton";
 
 // error-bundary
 import { ErrorBoundary } from "react-error-boundary";
@@ -11,11 +11,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import ComidaActual from "../componentes/ComidaActual";
 
 // store
-import useStore from "../stores/useStore";
 
 export default function Home() {
   // store
-  const { getFirebaseData } = useStore();
 
   return (
     <>
@@ -26,16 +24,8 @@ export default function Home() {
         }}
       >
         <ComidaActual />
+        <AgregarButton tipo="alimentos" />
 
-        <button
-          onClick={getFirebaseData}
-          className="bg-blue-500 text-white p-2 rounded"
-        >
-          Actualizar
-        </button>
-
-        <AgregarModal tipo="lugares" />
-        <AgregarModal tipo="alimentos" />
       </ErrorBoundary>
     </>
   );
