@@ -249,7 +249,7 @@ export default function ModalAgregar({ tipo }) {
 
         <button
           type="submit"
-          className="bg-atencion-secundary text-background font-bold py-2 px-4 rounded hover:font-extrabold hover:scale-101 transition-all duration-300 cursor-pointer"
+          className="bg-light-secundary text-background font-bold py-2 px-4 rounded hover:font-extrabold hover:scale-101 transition-all duration-300 cursor-pointer"
         >
           Agregar
         </button>

@@ -19,7 +19,6 @@ export default function Login(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
   // hook de navegación
   const navigate = useNavigate();
 
@@ -87,15 +86,13 @@ export default function Login(props) {
           required
         />
         <button
-          className="border-2 border-atencion p-4 text-text font-bold cursor-pointer hover:bg-atencion-secundary hover:border-background hover:text-background transition-colors duration-200"
+          className="border-2 border-light-secundary p-4 text-text font-bold cursor-pointer hover:bg-light-secundary hover:border-background hover:text-background transition-colors duration-200"
           type="submit"
         >
           Iniciar sesión
         </button>
       </form>
-      {loading && (
-        <img src="/OrangeCat_SVG.svg" alt="Cargando..." />
-      )}
+      {loading && <img src="/OrangeCat_SVG.svg" alt="Cargando..." />}
     </section>
   );
 }

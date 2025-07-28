@@ -21,7 +21,7 @@ export default function Navegacion() {
   }
 
   return (
-    <nav className="border-b-2 border-atencion-secundary w-full">
+    <nav className="border-b-2 border-light-secundary w-full">
       <ul className="flex items-center justify-between px-4 py-2">
         {links.map((link, idx) => (
           <li
