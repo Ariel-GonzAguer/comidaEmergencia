@@ -63,13 +63,15 @@ export default function ModalAgregar({ tipo }) {
         alert("Selecciona una ubicación válida.");
         return;
       }
+      // Solo guardar id y nombre del lugar
+      const ubicacionPlano = { id: lugarSeleccionado.id, nombre: lugarSeleccionado.nombre };
       const nuevoAlimento = Alimento.crearAlimento(
         nombreRef.current.value,
         tipoRef.current.value,
         caloriasRef.current.value,
         cantidadRef.current.value,
         fechaVencimientoRef.current.value,
-        lugarSeleccionado
+        ubicacionPlano
       );
       agregarElemento(nuevoAlimento, tipo);
       console.log("Nuevo alimento agregado:", nuevoAlimento);
