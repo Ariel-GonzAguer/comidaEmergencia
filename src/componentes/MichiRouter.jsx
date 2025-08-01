@@ -4,6 +4,7 @@ import { RouterProvider as MichiProvider } from "@arielgonzaguer/michi-router";
 // componentes
 import Login from "../paginas/Login.jsx";
 import Home from "../paginas/Home.jsx";
+import Comida from "../paginas/Comida.jsx";
 import Recetas from "../paginas/Recetas.jsx";
 import FAQs from "../paginas/FAQs.jsx";
 import Notas from "../paginas/Notas.jsx";
@@ -25,6 +26,14 @@ const rutas = [
     component: (
       <Protected>
         <Home />
+      </Protected>
+    ),
+  },
+  {
+    path: "/comida",
+    component: (
+      <Protected>
+        <Comida />
       </Protected>
     ),
   },

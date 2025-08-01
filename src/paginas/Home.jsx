@@ -1,32 +1,27 @@
-// hooks
-import { useState, useEffect } from "react";
-
 // componentes
 import AgregarButton from "../componentes/AgregarButton";
 
 // error-bundary
 import { ErrorBoundary } from "react-error-boundary";
 
-// componentes
-import ComidaActual from "../componentes/ComidaActual";
-
-// store
+// data
+import { keysArray } from "../servicios/firebaseService";
 
 export default function Home() {
-  // store
-
   return (
-    <>
+    <section className="flex flex-col items-center justify-center">
       <ErrorBoundary
         fallback={<div>Something went wrong</div>}
         onError={(error, info) => {
           console.error("ErrorBoundary caught an error:", error, info);
         }}
       >
-        <ComidaActual />
-        <AgregarButton tipo="alimentos" />
-
+        <section className="flex items-center justify-center w-full mt-4 flex-wrap m-[0_auto]">
+          {keysArray.map((key) => {
+            return <AgregarButton key={key} tipo={key} />;
+          })}
+        </section>
       </ErrorBoundary>
-    </>
+    </section>
   );
 }

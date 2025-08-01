@@ -5,7 +5,8 @@ export default function Navegacion() {
   const [hovered, setHovered] = useState(null);
 
   const links = [
-    { href: "/home", label: "Comida" },
+    { href: "/home", label: "Inicio" },
+    { href: "/comida", label: "Comida" },
     { href: "/recetas", label: "Recetas" },
     { href: "/faqs", label: "FAQs" },
     { href: "/notas", label: "Notas" },
@@ -16,7 +17,7 @@ export default function Navegacion() {
 
   const { user } = useAuthStore();
 
-  if (!user) {
+  if (!user || window.location.pathname === "/") {
     return null;
   }
 

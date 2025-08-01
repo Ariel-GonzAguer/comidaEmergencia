@@ -7,7 +7,7 @@ const coleccion = "emergenciaData"; // nombre de la colección en Firestore
 
 // Array de claves válidas para los campos
 // agregar más claves según sea necesario
-const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'botiquin', 'otros'];
+export const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'botiquin', 'otros'];
 
 // verifica si la clave es válida
 function validarKey(key) {

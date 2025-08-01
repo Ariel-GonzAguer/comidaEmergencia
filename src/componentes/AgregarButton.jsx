@@ -20,7 +20,13 @@ export default function AgregarButton({ tipo }) {
 
   return (
     <>
-      <button onClick={openModal}>Agregar {tipo}</button>
+      <button
+        key={tipo}
+        onClick={openModal}
+        className="w-48 h-18 m-2 bg-light-secundary text-background font-bold py-2 px-4 rounded hover:bg-light-primary transition-all duration-300 cursor-pointer"
+      >
+        Agregar {tipo}
+      </button>
       {isModalOpen && <AgregarModal tipo={tipo} closeModal={closeModal} />}
     </>
   );

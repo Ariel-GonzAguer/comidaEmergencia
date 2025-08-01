@@ -130,8 +130,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
   return (
     <dialog
+      key={tipo}
       id="agregar-modal"
-      className="flex flex-col items-center justify-center bg-background text-text p-4 rounded-lg shadow-lg"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center bg-background text-text p-4 rounded-lg shadow-lg"
     >
       <h2>Agregar {tipo}</h2>
       <form
