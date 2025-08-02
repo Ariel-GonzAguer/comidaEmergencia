@@ -282,14 +282,14 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
         <button
           type="submit"
-          className="bg-light-secundary text-background font-bold py-2 px-4 rounded hover:font-extrabold hover:scale-101 transition-all duration-300 cursor-pointer"
+          className="bg-light-secundary text-background font-bold py-2 px-4 rounded hover:bg-atencion transition-all duration-300 cursor-pointer"
         >
           Agregar
         </button>
         <button
           type="button"
           id="cancelar-agregar-button"
-          className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-300 cursor-pointer"
+          className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-warning hover:text-background transition-colors duration-300 cursor-pointer"
           onClick={closeModal}
         >
           Cancelar

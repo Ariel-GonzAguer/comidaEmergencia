@@ -13,12 +13,13 @@ export default function ComidaActual() {
   const [form, setForm] = useState({});
 
   // store
-  const { alimentos, actualizarElemento } = useStore();
+  const { alimentos, lugares, actualizarElemento } = useStore();
 
-  // clase para tr en modo editar
+  // clase para elementos de la tabla
   const classTrEditando = "border border-white px-2 py-1 text-black";
+  const classTh = "border px-2 py-1";
 
-  const handleEditClick = (alimento) => {
+  function handleEditClick(alimento) {
     setEditando(alimento.id);
     setForm({
       nombre: alimento.nombre,
@@ -28,13 +29,13 @@ export default function ComidaActual() {
       tipo: alimento.tipo,
       ubicacion: alimento.ubicacion,
     });
-  };
+  }
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  }
 
-  const handleSave = async (id) => {
+  async function handleSave(id) {
     await actualizarElemento("alimentos", id, {
       ...alimentos[id],
       ...form,
@@ -43,11 +44,11 @@ export default function ComidaActual() {
     });
     setEditando(null);
     mostrarToastStrategy.success("Alimento actualizado");
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setEditando(null);
-  };
+  }
 
   return (
     <section className="flex flex-col items-center justify-center w-[98%] m-[0_auto] mt-4">
@@ -56,13 +57,19 @@ export default function ComidaActual() {
         <table className="min-w-[600px] border border-gray-300 text-center m-[0_auto]">
           <thead>
             <tr>
-              <th className="border px-2 py-1">Nombre</th>
-              <th className="border px-2 py-1">Cantidad</th>
-              <th className="border px-2 py-1">Fecha de vencimiento</th>
-              <th className="border px-2 py-1">Calorías</th>
-              <th className="border px-2 py-1">Tipo</th>
-              <th className="border px-2 py-1">Ubicación</th>
-              <th className="border px-2 py-1">Acciones</th>
+              {[
+                "Nombre",
+                "Cantidad",
+                "Fecha de vencimiento",
+                "Calorías",
+                "Tipo",
+                "Ubicación",
+                "Acciones",
+              ].map((header) => (
+                <th key={header} title={header} className={classTh}>
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -85,7 +92,7 @@ export default function ComidaActual() {
                         type="number"
                         value={form.cantidad}
                         onChange={handleChange}
-                        className="w-16"
+                        className="w-24"
                       />
                     </td>
                     <td className={classTrEditando}>
@@ -93,7 +100,7 @@ export default function ComidaActual() {
                         name="fechaVencimiento"
                         value={form.fechaVencimiento}
                         onChange={handleChange}
-                        className="w-32"
+                        className="w-54"
                       />
                     </td>
                     <td className={classTrEditando}>
@@ -102,7 +109,7 @@ export default function ComidaActual() {
                         type="number"
                         value={form.calorias}
                         onChange={handleChange}
-                        className="w-16"
+                        className="w-24"
                       />
                     </td>
                     <td className={classTrEditando}>
@@ -110,16 +117,17 @@ export default function ComidaActual() {
                         name="tipo"
                         value={form.tipo}
                         onChange={handleChange}
-                        className="w-20"
+                        className="w-24"
                       />
                     </td>
                     <td className={classTrEditando}>
-                      <input
-                        name="ubicacion"
-                        value={form.ubicacion.nombre}
-                        onChange={handleChange}
-                        className="w-20"
-                      />
+                      <select name="ubicacion" className="w-24" id="">
+                        {Object.entries(lugares).map(([id, lugar]) => (
+                          <option key={id} value={id}>
+                            {lugar.nombre}
+                          </option>
+                        ))}
+                      </select>
                     </td>
                     <td className="p-2 flex gap-2 justify-center items-center">
                       <button
