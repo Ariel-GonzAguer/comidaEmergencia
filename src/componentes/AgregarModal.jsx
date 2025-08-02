@@ -12,6 +12,9 @@ import Otros from "../clases/OtrosItemClass";
 // store
 import useStore from "../stores/useStore";
 
+// estrategia de toast
+import mostrarToastStrategy from "../scripts/estrategias/toastStrategy";
+
 export default function ModalAgregar({ tipo, closeModal }) {
   // store
   const store = useStore();
@@ -44,88 +47,95 @@ export default function ModalAgregar({ tipo, closeModal }) {
     e.preventDefault();
 
     if (store[tipo][nombreRef.current.value]) {
-      alert(
+      mostrarToastStrategy.default(
         `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`
       );
       return;
     }
 
-    if (tipo === "alimentos") {
-      // Prevenir si no hay lugares disponibles
-      const lugaresArray = Object.keys(lugares);
-      if (lugaresArray.length === 0) {
-        alert("Debes agregar al menos un lugar antes de agregar alimentos.");
+    try {
+      if (tipo === "alimentos") {
+        // Prevenir si no hay lugares disponibles
+        const lugaresArray = Object.keys(lugares);
+        if (lugaresArray.length === 0) {
+          alert("Debes agregar al menos un lugar antes de agregar alimentos.");
+          return;
+        }
+        // Buscar el objeto lugar correspondiente por id
+        const lugarSeleccionado = lugares[lugarRef.current.value];
+        if (!lugarSeleccionado) {
+          alert("Selecciona una ubicación válida.");
+          return;
+        }
+        const ubicacionPlano = {
+          id: lugarSeleccionado.id,
+          nombre: lugarSeleccionado.nombre,
+        };
+        const nuevoAlimento = Alimento.crearAlimento(
+          nombreRef.current.value,
+          tipoRef.current.value,
+          caloriasRef.current.value,
+          cantidadRef.current.value,
+          fechaVencimientoRef.current.value,
+          ubicacionPlano
+        );
+        agregarElemento(nuevoAlimento, tipo);
+        console.log("Nuevo alimento agregado:", nuevoAlimento);
+        closeModal();
+      } else if (tipo === "lugares") {
+        const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
+        agregarElemento(nuevoLugar, tipo);
+        console.log("Nuevo lugar agregado:", nuevoLugar);
+        closeModal();
+      } else if (tipo === "notas") {
+        const nuevaNota = Nota.crearNota(
+          nombreRef.current.value,
+          contenidoNotaRef.current.value
+        );
+        agregarElemento(nuevaNota, tipo);
+        console.log("Nueva nota agregada:", nuevaNota);
+        closeModal();
+      } else if (tipo === "recetas") {
+        const nuevaReceta = Receta.crearReceta(
+          nombreRef.current.value,
+          ingredientesRecetaRef.current.value,
+          caloriasRef.current.value,
+          instruccionesRecetaRef.current.value
+        );
+        agregarElemento(nuevaReceta, tipo);
+        console.log("Nueva receta agregada:", nuevaReceta);
+        closeModal();
+      } else if (tipo === "botiquin") {
+        const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
+          nombreRef.current.value,
+          usoRef.current.value,
+          cantidadRef.current.value,
+          fechaVencimientoRef.current.value
+        );
+        agregarElemento(nuevoBotiquinItem, tipo);
+        console.log("Nuevo botiquín item agregado:", nuevoBotiquinItem);
+        closeModal();
+      } else if (tipo === "otros") {
+        const nuevoOtro = Otros.crearOtrosItem(
+          nombreRef.current.value,
+          usoRef.current.value
+        );
+        agregarElemento(nuevoOtro, tipo);
+        console.log("Nuevo otro item agregado:", nuevoOtro);
+        closeModal();
+      } else {
+        console.error(`Tipo "${tipo}" no válido.`);
         return;
       }
-      // Buscar el objeto lugar correspondiente por id
-      const lugarSeleccionado = lugares[lugarRef.current.value];
-      if (!lugarSeleccionado) {
-        alert("Selecciona una ubicación válida.");
-        return;
-      }
-      const ubicacionPlano = {
-        id: lugarSeleccionado.id,
-        nombre: lugarSeleccionado.nombre,
-      };
-      const nuevoAlimento = Alimento.crearAlimento(
-        nombreRef.current.value,
-        tipoRef.current.value,
-        caloriasRef.current.value,
-        cantidadRef.current.value,
-        fechaVencimientoRef.current.value,
-        ubicacionPlano
-      );
-      agregarElemento(nuevoAlimento, tipo);
-      console.log("Nuevo alimento agregado:", nuevoAlimento);
-      closeModal();
-    } else if (tipo === "lugares") {
-      const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
-      agregarElemento(nuevoLugar, tipo);
-      console.log("Nuevo lugar agregado:", nuevoLugar);
-      closeModal();
-    } else if (tipo === "notas") {
-      const nuevaNota = Nota.crearNota(
-        nombreRef.current.value,
-        contenidoNotaRef.current.value
-      );
-      agregarElemento(nuevaNota, tipo);
-      console.log("Nueva nota agregada:", nuevaNota);
-      closeModal();
-    } else if (tipo === "recetas") {
-      const nuevaReceta = Receta.crearReceta(
-        nombreRef.current.value,
-        ingredientesRecetaRef.current.value,
-        caloriasRef.current.value,
-        instruccionesRecetaRef.current.value
-      );
-      agregarElemento(nuevaReceta, tipo);
-      console.log("Nueva receta agregada:", nuevaReceta);
-      closeModal();
-    } else if (tipo === "botiquin") {
-      const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
-        nombreRef.current.value,
-        usoRef.current.value,
-        cantidadRef.current.value,
-        fechaVencimientoRef.current.value
-      );
-      agregarElemento(nuevoBotiquinItem, tipo);
-      console.log("Nuevo botiquín item agregado:", nuevoBotiquinItem);
-      closeModal();
-    } else if (tipo === "otros") {
-      const nuevoOtro = Otros.crearOtrosItem(
-        nombreRef.current.value,
-        usoRef.current.value
-      );
-      agregarElemento(nuevoOtro, tipo);
-      console.log("Nuevo otro item agregado:", nuevoOtro);
-      closeModal();
-    } else {
-      console.error(`Tipo "${tipo}" no válido.`);
+      mostrarToastStrategy.success("Elemento agregado");
+    } catch (error) {
+      console.error("Error al agregar elemento:", error);
+      mostrarToastStrategy.error("Error al agregar elemento");
       return;
+    } finally {
+      // Limpiar los campos del formulario
+      e.target.reset();
     }
-
-    // Limpiar los campos del formulario
-    e.target.reset();
   }
 
   return (
