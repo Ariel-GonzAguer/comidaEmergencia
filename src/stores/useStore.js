@@ -29,6 +29,7 @@ const useStore = create()( //change the name of the store
               state.recetas = data.recetas || {};
             });
           }
+          console.log('Datos obtenidos con éxito');
         } catch (error) {
           console.error('Error al obtener los datos:', error);
         }
@@ -53,15 +54,21 @@ const useStore = create()( //change the name of the store
                   if (!state.lugares[lugarId].alimentos) state.lugares[lugarId].alimentos = {};
                   state.lugares[lugarId].alimentos[elemento.id] = elemento;
                 });
+                // Serializar todos los alimentos a objetos planos
+                const alimentosPlanos = {};
+                const alimentosOriginales = { ...(lugarActual.alimentos || {}), [elemento.id]: elemento };
+                Object.entries(alimentosOriginales).forEach(([id, alimento]) => {
+                  alimentosPlanos[id] = JSON.parse(JSON.stringify(alimento));
+                });
                 lugarActualizado = {
                   ...lugarActual,
-                  alimentos: { ...(lugarActual.alimentos || {}), [elemento.id]: elemento }
+                  alimentos: alimentosPlanos
                 };
               }
             }
             // 3. Actualizar en Firestore el lugar si hubo actualización local
             if (lugarActualizado) {
-              await actualizarElementoFB("lugares", lugarActualizado.id, lugarActualizado);
+              await actualizarElementoFB("lugares", lugarActualizado.id, JSON.parse(JSON.stringify(lugarActualizado)));
             }
           }
         } catch (error) {

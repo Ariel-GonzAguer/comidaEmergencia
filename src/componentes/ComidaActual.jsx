@@ -43,7 +43,7 @@ export default function ComidaActual() {
       calorias: Number(form.calorias),
     });
     setEditando(null);
-    mostrarToastStrategy.success("Alimento actualizado");
+    mostrarToastStrategy("success", { mensaje: "Alimento actualizado" });
   }
 
   function handleCancel() {
@@ -161,7 +161,7 @@ export default function ComidaActual() {
                       <button
                         className="bg-error text-white px-2 py-1 rounded cursor-pointer border-2 border-error hover:border-warning"
                         onClick={() =>
-                          mostrarToastStrategy.eliminar(alimento.id)
+                          mostrarToastStrategy("eliminar", { key: "alimentos", id: alimento.id })
                         }
                       >
                         Eliminar

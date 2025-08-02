@@ -47,9 +47,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
     e.preventDefault();
 
     if (store[tipo][nombreRef.current.value]) {
-      mostrarToastStrategy.default(
-        `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`
-      );
+      mostrarToastStrategy("default", {
+        mensaje: `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`,
+      });
       return;
     }
 
@@ -127,10 +127,10 @@ export default function ModalAgregar({ tipo, closeModal }) {
         console.error(`Tipo "${tipo}" no válido.`);
         return;
       }
-      mostrarToastStrategy.success("Elemento agregado");
+      mostrarToastStrategy("success", { mensaje: "Elemento agregado" });
     } catch (error) {
       console.error("Error al agregar elemento:", error);
-      mostrarToastStrategy.error("Error al agregar elemento");
+      mostrarToastStrategy("error", { mensaje: "Error al agregar elemento" });
       return;
     } finally {
       // Limpiar los campos del formulario
