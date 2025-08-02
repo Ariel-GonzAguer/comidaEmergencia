@@ -23,18 +23,19 @@ export default function Navegacion() {
 
   return (
     <nav className="border-b-2 border-light-secundary w-full">
-      <ul className="flex items-center justify-between px-4 py-2">
+      <ul className="flex items-center justify-between flex-wrap px-4 py-2">
         {links.map((link, idx) => (
           <li
             key={link.href}
             onMouseEnter={() => setHovered(idx)}
             onMouseLeave={() => setHovered(null)}
-            className={
-              hovered === null
+            className={`
+              mx-2 my-2
+              ${hovered === null
                 ? "hover:text-atencion-secundary hover:font-bold transition-colors duration-200 hover:no-underline"
                 : hovered === idx
                 ? "text-atencion-secundary font-bold transition-colors duration-200"
-                : "opacity-50 transition-opacity duration-200"
+                : "opacity-50 transition-opacity duration-200"}`
             }
           >
             <a href={link.href}>{link.label}</a>

@@ -4,8 +4,8 @@ import Navegacion from "../componentes/Navegacion";
 
 export default function BaseLayout({ children }) {
   return (
-    <section className="bg-background min-h-screen text-text font-primary flex flex-col text-lg">
-      <Toaster />
+    <section className="bg-background min-h-screen text-text font-primary flex flex-col text-lg cursor-default">
+      <Toaster position="top-right" richColors visibleToasts={1} closeButton={true} />
       <Navegacion />
       {/* la class flex-1 permite que el contenido principal ocupe el espacio restante */}
       <main className="flex-1">{children}</main>

@@ -5,14 +5,14 @@
 
 @theme {
   --color-text: white;
-  --color-background: oklch(21.6% 0.006 56.043);
+  --color-background: oklch(21.6% 0.006 56.043); /*stone-900*/
   --color-error: red;
   --color-good: green;
   --color-warning: yellow;
-  --color-atencion: oklch(84.1% 0.238 128.85);
-  --color-atencion-secundary: oklch(87.9% 0.169 91.605);
-  --color-light-primary: oklch(89.9% 0.061 343.231);
-  --color-light-secundary: oklch(82.8% 0.111 230.318);
+  --color-atencion: oklch(84.1% 0.238 128.85); /*lime-400*/
+  --color-atencion-secundary: oklch(87.9% 0.169 91.605); /*amber-300*/
+  --color-light-primary: oklch(89.9% 0.061 343.231); /*pink-200*/
+  --color-light-secundary: oklch(82.8% 0.111 230.318); /*sky-300*/
 
   --font-primary: 'Courier New', monospace;
   --font-secondary: 'Tahoma', sans-serif;

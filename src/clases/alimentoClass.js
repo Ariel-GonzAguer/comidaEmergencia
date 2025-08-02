@@ -3,8 +3,8 @@ class Alimento {
   constructor(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
     this.nombre = nombre;
     this.tipo = tipo;
-    this.calorias = calorias;
-    this.cantidad = cantidad;
+    this.calorias = Number(calorias) || 0;
+    this.cantidad = Number(cantidad) || 0;
     this.ubicacion = ubicacion;
     this.fechaVencimiento = new Date(fechaVencimiento).toLocaleDateString('es-ES', {
       year: 'numeric',

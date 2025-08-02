@@ -133,6 +133,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
       key={tipo}
       id="agregar-modal"
       className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center bg-background text-text p-4 rounded-lg shadow-lg"
+      onClose={closeModal}
     >
       <h2>Agregar {tipo}</h2>
       <form
@@ -278,7 +279,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
         <button
           type="button"
           id="cancelar-agregar-button"
-          className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-300"
+          className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-300 cursor-pointer"
           onClick={closeModal}
         >
           Cancelar

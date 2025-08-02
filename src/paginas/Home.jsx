@@ -7,9 +7,15 @@ import { ErrorBoundary } from "react-error-boundary";
 // data
 import { keysArray } from "../servicios/firebaseService";
 
+// store
+import useStore from "../stores/useStore";
+
 export default function Home() {
+  const { alimentos } = useStore();
+
+
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col items-center justify-center h-full">
       <ErrorBoundary
         fallback={<div>Something went wrong</div>}
         onError={(error, info) => {
@@ -21,6 +27,7 @@ export default function Home() {
             return <AgregarButton key={key} tipo={key} />;
           })}
         </section>
+        {/* <p>Total calorías: {caloriasTotales}</p> */}
       </ErrorBoundary>
     </section>
   );

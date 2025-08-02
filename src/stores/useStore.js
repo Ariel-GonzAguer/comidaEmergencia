@@ -40,7 +40,7 @@ const useStore = create()( //change the name of the store
           if (data) {
             set((state) => {
               // Agregar alimento al store global
-              const nuevoEstado = { ...state[key], [elemento.nombre]: elemento };
+              const nuevoEstado = { ...state[key], [elemento.id]: elemento };
               state[key] = nuevoEstado;
               // Si es un alimento, también agregarlo al lugar correspondiente usando el nombre
               if (key === "alimentos" && elemento.ubicacion && elemento.ubicacion.nombre) {
@@ -50,7 +50,7 @@ const useStore = create()( //change the name of the store
                   if (!state.lugares[lugarNombre].alimentos) {
                     state.lugares[lugarNombre].alimentos = {};
                   }
-                  state.lugares[lugarNombre].alimentos[elemento.nombre] = elemento;
+                  state.lugares[lugarNombre].alimentos[elemento.id] = elemento;
                 }
               }
             });
@@ -60,12 +60,12 @@ const useStore = create()( //change the name of the store
         }
       },
 
-      eliminarElemento: async (key, nombre) => {
+      eliminarElemento: async (key, id) => {
         try {
-          const data = await eliminarElementoFB(key, nombre);
+          const data = await eliminarElementoFB(key, id);
           if (data) {
             set((state) => {
-              delete state[key][nombre];
+              delete state[key][id];
             });
           }
         } catch (error) {
@@ -73,12 +73,12 @@ const useStore = create()( //change the name of the store
         }
       },
 
-      actualizarElemento: async (key, nombre, nuevoElemento) => {
+      actualizarElemento: async (key, id, nuevoElemento) => {
         try {
-          const data = await actualizarElementoFB(key, nombre, nuevoElemento);
+          const data = await actualizarElementoFB(key, id, nuevoElemento);
           if (data) {
             set((state) => {
-              const nuevoEstado = { ...state[key], [nombre]: nuevoElemento };
+              const nuevoEstado = { ...state[key], [id]: nuevoElemento };
               state[key] = nuevoEstado;
             });
           }

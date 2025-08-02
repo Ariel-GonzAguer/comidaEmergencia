@@ -52,7 +52,7 @@ export async function agregarElementoFB(elemento, key) {
     }
     const keyActualizada = {
       ...data[key],
-      [elemento.nombre]: { ...elemento }
+      [elemento.id]: { ...elemento }
     };
     await updateDoc(docRef, {
       [key]: keyActualizada
@@ -65,7 +65,7 @@ export async function agregarElementoFB(elemento, key) {
   }
 }
 
-export async function eliminarElementoFB(key, nombre) {
+export async function eliminarElementoFB(key, id) {
   if (!validarKey(key)) return null;
 
   try {
@@ -83,7 +83,7 @@ export async function eliminarElementoFB(key, nombre) {
     const keyActualizada = {
       ...data[key],
     };
-    delete keyActualizada[nombre];
+    delete keyActualizada[id];
     await updateDoc(docRef, {
       [key]: keyActualizada
     });
@@ -95,7 +95,7 @@ export async function eliminarElementoFB(key, nombre) {
   }
 }
 
-export async function actualizarElementoFB(key, nombre, nuevoElemento) {
+export async function actualizarElementoFB(key, id, nuevoElemento) {
   if (!validarKey(key)) return null;
 
   try {
@@ -112,7 +112,7 @@ export async function actualizarElementoFB(key, nombre, nuevoElemento) {
     }
     const keyActualizada = {
       ...data[key],
-      [nombre]: { ...nuevoElemento }
+      [id]: { ...nuevoElemento }
     };
     await updateDoc(docRef, {
       [key]: keyActualizada
