@@ -38,22 +38,31 @@ const useStore = create()( //change the name of the store
         try {
           const data = await agregarElementoFB(elemento, key);
           if (data) {
+            // 1. Actualizar estado local: key
             set((state) => {
-              // Agregar alimento al store global
-              const nuevoEstado = { ...state[key], [elemento.id]: elemento };
-              state[key] = nuevoEstado;
-              // Si es un alimento, también agregarlo al lugar correspondiente usando el nombre
-              if (key === "alimentos" && elemento.ubicacion && elemento.ubicacion.nombre) {
-                const lugarNombre = elemento.ubicacion.nombre;
-                if (state.lugares[lugarNombre]) {
-                  // Inicializar alimentos si no existe
-                  if (!state.lugares[lugarNombre].alimentos) {
-                    state.lugares[lugarNombre].alimentos = {};
-                  }
-                  state.lugares[lugarNombre].alimentos[elemento.id] = elemento;
-                }
-              }
+              state[key] = { ...state[key], [elemento.id]: elemento };
             });
+            // 2. Si es un alimento, actualizar estado local del lugar
+            let lugarActualizado;
+            if (key === "alimentos" && elemento.ubicacion && elemento.ubicacion.id) {
+              const lugarId = elemento.ubicacion.id;
+              const storeState = useStore.getState();
+              const lugarActual = storeState.lugares[lugarId];
+              if (lugarActual) {
+                set((state) => {
+                  if (!state.lugares[lugarId].alimentos) state.lugares[lugarId].alimentos = {};
+                  state.lugares[lugarId].alimentos[elemento.id] = elemento;
+                });
+                lugarActualizado = {
+                  ...lugarActual,
+                  alimentos: { ...(lugarActual.alimentos || {}), [elemento.id]: elemento }
+                };
+              }
+            }
+            // 3. Actualizar en Firestore el lugar si hubo actualización local
+            if (lugarActualizado) {
+              await actualizarElementoFB("lugares", lugarActualizado.id, lugarActualizado);
+            }
           }
         } catch (error) {
           console.error('Error al agregar el elemento:', error);
@@ -78,7 +87,7 @@ const useStore = create()( //change the name of the store
           const data = await actualizarElementoFB(key, id, nuevoElemento);
           if (data) {
             set((state) => {
-              const nuevoEstado = { ...state[key], [id]: nuevoElemento };
+              const nuevoEstado = { ...state[key], [nombre]: nuevoElemento };
               state[key] = nuevoEstado;
             });
           }
