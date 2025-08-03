@@ -23,7 +23,6 @@ const useAuthStore = create()(
             state.user = null;
           });
 
-          // Finalmente hacemos el signOut de Firebase
           await signOut(auth);
         } catch (error) {
           console.error("Error al cerrar sesión:", error);

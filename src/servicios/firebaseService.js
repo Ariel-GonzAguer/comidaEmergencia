@@ -9,7 +9,12 @@ const coleccion = "emergenciaData"; // nombre de la colección en Firestore
 // agregar más claves según sea necesario
 export const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'botiquin', 'otros'];
 
-// verifica si la clave es válida
+/**
+ * Valida si la clave proporcionada existe en el array de claves permitidas.
+ *
+ * @param {string} key - La clave a validar.
+ * @returns {boolean} Devuelve true si la clave es válida, de lo contrario false.
+ */
 function validarKey(key) {
   if (!keysArray.includes(key)) {
     console.error("key invalida. Debe ser una de las siguientes:", keysArray.join(", "));
@@ -18,6 +23,14 @@ function validarKey(key) {
   return true;
 }
 
+/**
+ * Recupera los datos de un documento específico de Firestore.
+ *
+ * @async
+ * @function
+ * @returns {Promise<Object|null>} Los datos del documento si existen, de lo contrario null.
+ * @throws Mostrará un error y devolverá null si el documento no existe o si ocurre un error durante la obtención.
+ */
 export async function getData() {
   try {
     const docRef = doc(db, coleccion, documento);
@@ -35,6 +48,16 @@ export async function getData() {
   }
 }
 
+/**
+ * Agrega un elemento a un campo específico de un documento en Firebase Firestore.
+ *
+ * @async
+ * @function agregarElementoFB
+ * @param {Object} elemento - El elemento a agregar, debe contener una propiedad `id`.
+ * @param {string} key - La clave del campo dentro del documento donde se agregará el elemento.
+ * @returns {Promise<Object|null>} El objeto actualizado del campo si la operación fue exitosa, o `null` si hubo un error de validación o el documento/campo no existe.
+ * @throws {Error} Si ocurre un error durante la actualización del documento en Firestore.
+ */
 export async function agregarElementoFB(elemento, key) {
   if (!validarKey(key)) return null;
 
@@ -65,6 +88,16 @@ export async function agregarElementoFB(elemento, key) {
   }
 }
 
+/**
+ * Elimina un elemento de un campo objeto dentro de un documento en Firebase Firestore.
+ *
+ * @async
+ * @function eliminarElementoFB
+ * @param {string} key - El nombre del campo (key) dentro del documento que contiene el objeto.
+ * @param {string} id - El identificador del elemento a eliminar dentro del objeto.
+ * @returns {Promise<Object|null>} El objeto actualizado después de eliminar el elemento, o null si no se pudo realizar la operación.
+ * @throws {Error} Si ocurre un error al actualizar el documento.
+ */
 export async function eliminarElementoFB(key, id) {
   if (!validarKey(key)) return null;
 
@@ -95,6 +128,17 @@ export async function eliminarElementoFB(key, id) {
   }
 }
 
+/**
+ * Actualiza un elemento específico dentro de un campo objeto en un documento de Firebase.
+ *
+ * @async
+ * @function
+ * @param {string} key - El nombre del campo (key) dentro del documento que contiene el objeto a actualizar.
+ * @param {string} id - El identificador del elemento dentro del objeto que se va a actualizar o agregar.
+ * @param {Object} nuevoElemento - El nuevo valor del elemento que se va a establecer bajo el id especificado.
+ * @returns {Promise<Object|null>} Retorna el objeto actualizado bajo la key especificada, o null si la operación falla.
+ * @throws Lanza un error si ocurre un problema durante la actualización del documento.
+ */
 export async function actualizarElementoFB(key, id, nuevoElemento) {
   if (!validarKey(key)) return null;
 

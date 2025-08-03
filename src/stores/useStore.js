@@ -4,6 +4,27 @@ import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
 import { getData, agregarElementoFB, eliminarElementoFB, actualizarElementoFB } from '../servicios/firebaseService';
 
+/**
+ * Store de Zustand para gestionar datos de alimentos y suministros de emergencia, con persistencia e integración de immer.
+ *
+ * @typedef {Object} StoreState
+ * @property {Object} alimentos - Alimentos, indexados por ID.
+ * @property {Object} botiquin - Elementos del botiquín, indexados por ID.
+ * @property {Object} lugares - Lugares, indexados por ID.
+ * @property {Object} otros - Otros elementos, indexados por ID.
+ * @property {Object} notas - Notas, indexadas por ID.
+ * @property {Object} recetas - Recetas, indexadas por ID.
+ * @property {function(): Promise<void>} getFirebaseData - Obtiene todos los datos de Firebase y actualiza el store.
+ * @property {function(Object, string): Promise<void>} agregarElemento - Agrega un elemento a la clave indicada y actualiza lugares relacionados si es necesario.
+ * @property {function(string, string): Promise<void>} eliminarElemento - Elimina un elemento por clave e ID, actualizando lugares relacionados si corresponde.
+ * @property {function(string, string, Object): Promise<void>} actualizarElemento - Actualiza un elemento por clave e ID, gestionando cambios de ubicación para alimentos.
+ *
+ * @type {import('zustand').UseBoundStore<import('zustand').StoreApi<StoreState>>}
+ *
+ * @example
+ * const alimentos = useStore(state => state.alimentos);
+ * await useStore.getState().agregarElemento(nuevoAlimento, 'alimentos');
+ */
 const useStore = create()( //change the name of the store
   persist(
     immer((set) => ({

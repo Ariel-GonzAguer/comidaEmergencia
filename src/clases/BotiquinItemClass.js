@@ -1,3 +1,32 @@
+/**
+ * Clase que representa un ítem del botiquín de emergencia.
+ * 
+ * @class
+ * @classdesc Representa un elemento del botiquín, incluyendo su nombre, uso, cantidad, fecha de vencimiento y un identificador único.
+ * 
+ * @param {string} nombre - Nombre del ítem.
+ * @param {string} uso - Descripción del uso del ítem.
+ * @param {number} cantidad - Cantidad disponible del ítem.
+ * @param {string|Date} fechaVencimiento - Fecha de vencimiento del ítem (puede ser string o Date).
+ * 
+ * @property {string} nombre - Nombre del ítem.
+ * @property {string} uso - Uso del ítem.
+ * @property {number} cantidad - Cantidad disponible.
+ * @property {string} fechaVencimiento - Fecha de vencimiento en formato local (es-ES).
+ * @property {string} id - Identificador único del ítem.
+ * 
+ * @method getNombre Obtiene el nombre del ítem.
+ * @method getUso Obtiene el uso del ítem.
+ * @method getCantidad Obtiene la cantidad disponible del ítem.
+ * @method getFechaVencimiento Obtiene la fecha de vencimiento del ítem.
+ * @static
+ * @method crearBotiquinItem Crea una nueva instancia de BotiquinItem.
+ * @param {string} nombre - Nombre del ítem.
+ * @param {string} uso - Uso del ítem.
+ * @param {number} cantidad - Cantidad disponible.
+ * @param {string|Date} fechaVencimiento - Fecha de vencimiento.
+ * @returns {BotiquinItem} Nueva instancia de BotiquinItem.
+ */
 class BotiquinItem {
   constructor(nombre, uso, cantidad, fechaVencimiento) {
     this.nombre = nombre;

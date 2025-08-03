@@ -8,6 +8,16 @@ export default function LogOutButton(currentPath) {
     return null;
   }
 
+  // Cerrar sesión
+  /**
+   * Maneja el proceso de cierre de sesión del usuario.
+   * Intenta cerrar la sesión, navega a la página principal si tiene éxito,
+   * y muestra una alerta si ocurre un error durante el cierre de sesión.
+   *
+   * @async
+   * @function handleLogOut
+   * @returns {Promise<void>} Se resuelve cuando el proceso de cierre de sesión finaliza.
+   */
   async function handleLogOut() {
     try {
       await logOut();

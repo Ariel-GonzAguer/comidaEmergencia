@@ -1,6 +1,14 @@
 import { useState } from "react";
 import useAuthStore from "../stores/useAuthStore";
 
+/**
+ * El componente Navegacion muestra una barra de navegación con enlaces a diferentes secciones de la aplicación.
+ * La barra de navegación solo se muestra si el usuario está autenticado y la ruta actual no es la raíz ("/").
+ * Cada enlace se resalta al pasar el mouse, y los enlaces no seleccionados se ven semitransparentes para dar retroalimentación visual.
+ *
+ * @component
+ * @returns {JSX.Element|null} El elemento de la barra de navegación, o null si el usuario no está autenticado o está en la ruta raíz.
+ */
 export default function Navegacion() {
   const [hovered, setHovered] = useState(null);
 

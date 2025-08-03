@@ -43,6 +43,15 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const lugarRef = useRef();
 
   // funciones
+  /**
+   * Maneja la lógica para agregar diferentes tipos de elementos (alimentos, lugares, notas, recetas, botiquín, otros) al store.
+   * Previene duplicados y valida los datos según el tipo de elemento.
+   * Muestra mensajes de éxito o error mediante un sistema de notificaciones (toast).
+   * Limpia el formulario al finalizar.
+   *
+   * @param {React.FormEvent} e - El evento de envío del formulario.
+   * @param {string} tipo - El tipo de elemento a agregar. Puede ser "alimentos", "lugares", "notas", "recetas", "botiquin" u "otros".
+   */
   function handleAgregar(e, tipo) {
     e.preventDefault();
 
