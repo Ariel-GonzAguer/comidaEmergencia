@@ -27,14 +27,21 @@ export default function ComidaActual() {
       fechaVencimiento: alimento.fechaVencimiento,
       calorias: alimento.calorias,
       tipo: alimento.tipo,
-      ubicacion: alimento.ubicacion,
+      ubicacion: alimento.ubicacion ? { id: alimento.ubicacion.id, nombre: alimento.ubicacion.nombre } : null,
     });
   }
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === "ubicacion") {
+      const lugarObj = lugares[e.target.value];
+      setForm({
+        ...form,
+        ubicacion: lugarObj ? { id: lugarObj.id, nombre: lugarObj.nombre } : null,
+      });
+    } else {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    }
   }
-
   async function handleSave(id) {
     await actualizarElemento("alimentos", id, {
       ...alimentos[id],
@@ -121,7 +128,12 @@ export default function ComidaActual() {
                       />
                     </td>
                     <td className={classTrEditando}>
-                      <select name="ubicacion" className="w-24" id="">
+                      <select
+                        name="ubicacion"
+                        className="w-24"
+                        value={form.ubicacion?.id || ""}
+                        onChange={handleChange}
+                      >
                         {Object.entries(lugares).map(([id, lugar]) => (
                           <option key={id} value={id}>
                             {lugar.nombre}
@@ -161,7 +173,10 @@ export default function ComidaActual() {
                       <button
                         className="bg-error text-white px-2 py-1 rounded cursor-pointer border-2 border-error hover:border-warning"
                         onClick={() =>
-                          mostrarToastStrategy("eliminar", { key: "alimentos", id: alimento.id })
+                          mostrarToastStrategy("eliminar", {
+                            key: "alimentos",
+                            id: alimento.id,
+                          })
                         }
                       >
                         Eliminar

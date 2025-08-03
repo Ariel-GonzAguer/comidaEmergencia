@@ -9,7 +9,7 @@ const eliminarElemento = useStore.getState().eliminarElemento;
 /**
  * Objeto que contiene estrategias para mostrar diferentes tipos de notificaciones toast.
  *
- * @namespace mostrarToastObject
+ * @namespace toastStrategiesObject
  *
  * @property {Function} success - Muestra una notificación toast de éxito.
  * @param {Object} params
@@ -21,7 +21,7 @@ const eliminarElemento = useStore.getState().eliminarElemento;
  *
  * @property {Function} eliminar - Muestra un toast con confirmación de eliminación y acciones.
  * @param {Object} params
- * @param {string} params.key - La clave que identifica el elemento a eliminar.
+ * @param {string} params.key - La clave que identifica el tipo de elemento a eliminar.
  * @param {string|number} params.id - El ID del elemento a eliminar.
  * @param {string} [params.mensaje='¿Desea eliminar este elemento permanentemente?'] - El mensaje de confirmación.
  *
@@ -39,6 +39,7 @@ const toastStrategiesObject = {
       },
     });
   },
+
   error: ({ mensaje }) => {
     toast.error(mensaje, {
       duration: 3000,
@@ -48,6 +49,7 @@ const toastStrategiesObject = {
       },
     });
   },
+
   eliminar: ({ key, id, mensaje = '¿Desea eliminar este elemento permanentemente?' }) => {
     toast(mensaje, {
       duration: 3000,
@@ -83,6 +85,7 @@ const toastStrategiesObject = {
       },
     });
   },
+
   default: ({ mensaje }) => {
     toast(mensaje, {
       duration: 3000,

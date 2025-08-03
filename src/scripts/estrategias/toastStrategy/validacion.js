@@ -1,9 +1,9 @@
 // data
 import { keysArray } from '../../../servicios/firebaseService'
 
-const tiposValidos = ['success', 'error', 'eliminar'];
+const tiposValidos = ['success', 'error', 'eliminar', 'default'];
 
-export default function validaEstrategia(tipo, payload) {
+export default function validarEstrategia(tipo, payload) {
   if (typeof payload !== 'object' || payload === null) {
     console.error("Payload debe ser un objeto");
     return;
