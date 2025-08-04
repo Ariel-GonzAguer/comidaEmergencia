@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/11b85a54-57de-4cc2-968f-5809d09fc3f6/deploy-status)](https://app.netlify.com/projects/comidaemergencia/deploys/deploy-status?branch=main)
 
-Liany <3 estuvo aquí
+---
 
 # IMPORTANTE: El proyecto empezará un proceso de migración a React sin Astro. La migración espero terminarla antes de finales de octubre.
 
