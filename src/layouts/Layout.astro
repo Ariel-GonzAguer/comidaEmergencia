@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 const { title } = Astro.props;
-import { ClientRouter } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
@@ -19,7 +18,6 @@ import { ClientRouter } from "astro:transitions";
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <ClientRouter />
     <title>{title}</title>
   </head>
   <body class="bg-slate-900 min-h-screen font-mono">
