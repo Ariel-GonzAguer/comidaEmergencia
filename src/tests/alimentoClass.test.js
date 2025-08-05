@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import Alimento from '../clases/AlimentoClass';
+import Alimento from '../../src/clases/AlimentoClass.js';
 
 describe('Alimento Class', () => {
   const nombre = 'Manzana';

@@ -6,4 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 // configurar después vitePWA
 export default defineConfig({
   plugins: [react(), tailwindcss(), VitePWA({})],
+  // Configuración de pruebas con Vitest
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/tests/setupTests.js',
+    include: ['src/**/*.{test,spec}.{js,jsx}'],
+  },
 })
