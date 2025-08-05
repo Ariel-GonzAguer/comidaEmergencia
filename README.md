@@ -109,4 +109,4 @@ comidaEmergencia/
 
 ---
 
-© 2025 Ariel GonzAguer. Proyecto open source bajo licencia MIT.
+© 2025 Ariel GonzAguer. Proyecto open source bajo licencia AGPL.
