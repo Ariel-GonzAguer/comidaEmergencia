@@ -19,7 +19,7 @@ export default function Navegacion() {
     { href: "/faqs", label: "FAQs" },
     { href: "/notas", label: "Notas" },
     { href: "/lugares", label: "Lugares" },
-    { href: "/botiquin", label: "Botiquín" },
+    { href: "/medicamentos", label: "Medicamentos" },
     { href: "/otros", label: "Otros" },
   ];
 

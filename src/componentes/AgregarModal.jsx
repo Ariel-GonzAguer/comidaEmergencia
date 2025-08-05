@@ -6,7 +6,7 @@ import Alimento from "../clases/AlimentoClass";
 import Lugar from "../clases/lugarClass";
 import Nota from "../clases/notaClass";
 import Receta from "../clases/recetaClass";
-import BotiquinItem from "../clases/BotiquinItemClass";
+import Medicamento from "../clases/MedicamentoClass";
 import Otros from "../clases/OtrosItemClass";
 
 // store
@@ -44,13 +44,13 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
   // funciones
   /**
-   * Maneja la lógica para agregar diferentes tipos de elementos (alimentos, lugares, notas, recetas, botiquín, otros) al store.
+   * Maneja la lógica para agregar diferentes tipos de elementos (alimentos, lugares, notas, recetas, medicamentos, otros) al store.
    * Previene duplicados y valida los datos según el tipo de elemento.
    * Muestra mensajes de éxito o error mediante un sistema de notificaciones (toast).
    * Limpia el formulario al finalizar.
    *
    * @param {React.FormEvent} e - El evento de envío del formulario.
-   * @param {string} tipo - El tipo de elemento a agregar. Puede ser "alimentos", "lugares", "notas", "recetas", "botiquin" u "otros".
+   * @param {string} tipo - El tipo de elemento a agregar. Puede ser "alimentos", "lugares", "notas", "recetas", "medicamentos" u "otros".
    */
   function handleAgregar(e, tipo) {
     e.preventDefault();
@@ -114,15 +114,15 @@ export default function ModalAgregar({ tipo, closeModal }) {
         agregarElemento(nuevaReceta, tipo);
         console.log("Nueva receta agregada:", nuevaReceta);
         closeModal();
-      } else if (tipo === "botiquin") {
-        const nuevoBotiquinItem = BotiquinItem.crearBotiquinItem(
+      } else if (tipo === "medicamentos") {
+        const nuevoMedicamento = Medicamento.crearMedicamento(
           nombreRef.current.value,
           usoRef.current.value,
           cantidadRef.current.value,
           fechaVencimientoRef.current.value
         );
-        agregarElemento(nuevoBotiquinItem, tipo);
-        console.log("Nuevo botiquín item agregado:", nuevoBotiquinItem);
+        agregarElemento(nuevoMedicamento, tipo);
+        console.log("Nuevo medicamento agregado:", nuevoMedicamento);
         closeModal();
       } else if (tipo === "otros") {
         const nuevoOtro = Otros.crearOtrosItem(
@@ -203,7 +203,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "alimentos" || tipo === "botiquin") && (
+        {(tipo === "alimentos" || tipo === "medicamentos") && (
           <>
             <label htmlFor="cantidad">Cantidad</label>
             <input
@@ -262,14 +262,14 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "botiquinItem" || tipo === "alimentos") && (
+        {(tipo === "medicamentos" || tipo === "alimentos") && (
           <>
-            <label htmlFor="fecha-vencimiento-botiquin-item">
+            <label htmlFor="fecha-vencimiento-medicamento">
               Fecha de vencimiento
             </label>
             <input
               type="date"
-              id="fecha-vencimiento-botiquin-item"
+              id="fecha-vencimiento-medicamento"
               placeholder="Fecha de vencimiento"
               className="text-background"
               ref={fechaVencimientoRef}
@@ -277,7 +277,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "otros" || tipo === "botiquin") && (
+        {(tipo === "otros" || tipo === "medicamentos") && (
           <>
             <label htmlFor="descripcion-otros">Uso</label>
             <textarea

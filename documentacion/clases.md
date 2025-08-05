@@ -3,7 +3,7 @@
 ## ¿Qué es una clase?
 En programación orientada a objetos, una clase es una plantilla o molde que define las propiedades y métodos que tendrán los objetos creados a partir de ella. Permite organizar y reutilizar el código de manera estructurada.
 
-En este proyecto, las clases representan los distintos tipos de elementos que se gestionan: alimentos, lugares, recetas, notas, ítems de botiquín y otros.
+En este proyecto, las clases representan los distintos tipos de elementos que se gestionan: alimentos, lugares, recetas, notas, medicamentos y otros.
 
 ## ¿Dónde están?
 Las clases se encuentran en la carpeta:
@@ -11,7 +11,7 @@ Las clases se encuentran en la carpeta:
 ```
 src/clases/
 ├── AlimentoClass.js
-├── BotiquinItemClass.js
+├── MedicamentoClass.js
 ├── LugarClass.js
 ├── NotaClass.js
 ├── OtrosItemClass.js

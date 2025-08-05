@@ -83,6 +83,7 @@ vercel dev
 
 - Lea el `CODE_OF_CONDUCT.md` antes de contribuir.
 - Lea los archivos en la carpeta `documentacion/`.
+- Lea `STYLE_GUIDE.md` antes de hacer PR.
 - Sea respetuoso y paciente en las discusiones.
 - Si tiene dudas, abra un issue o pregunte en el Pull Request.
 

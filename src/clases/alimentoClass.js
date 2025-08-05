@@ -69,8 +69,6 @@ class Alimento {
     return this.ubicacion;
   }
 
-
-
   static crearAlimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
     return new Alimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion);
   }

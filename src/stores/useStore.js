@@ -9,7 +9,7 @@ import { getData, agregarElementoFB, eliminarElementoFB, actualizarElementoFB } 
  *
  * @typedef {Object} StoreState
  * @property {Object} alimentos - Alimentos, indexados por ID.
- * @property {Object} botiquin - Elementos del botiquín, indexados por ID.
+ * @property {Object} medicamentos - Medicamentos, indexados por ID.
  * @property {Object} lugares - Lugares, indexados por ID.
  * @property {Object} otros - Otros elementos, indexados por ID.
  * @property {Object} notas - Notas, indexadas por ID.
@@ -30,7 +30,7 @@ const useStore = create()( //change the name of the store
     immer((set) => ({
       // Estados
       alimentos: {},
-      botiquin: {},
+      medicamentos: {},
       lugares: {},
       otros: {},
       notas: {},
@@ -43,7 +43,7 @@ const useStore = create()( //change the name of the store
           if (data) {
             set((state) => {
               state.alimentos = data.alimentos || {};
-              state.botiquin = data.botiquin || {};
+              state.medicamentos = data.medicamentos || {};
               state.lugares = data.lugares || {};
               state.otros = data.otros || {};
               state.notas = data.notas || {};
@@ -225,7 +225,7 @@ const useStore = create()( //change the name of the store
       version: 1, // versión del esquema de almacenamiento
       partialize: (state) => ({
         alimentos: state.alimentos,
-        botiquin: state.botiquin,
+        medicamentos: state.medicamentos,
         lugares: state.lugares,
         otros: state.otros,
         notas: state.notas,

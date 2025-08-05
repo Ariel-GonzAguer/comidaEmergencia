@@ -1,9 +1,9 @@
 /**
- * Clase que representa un ítem del botiquín de emergencia.
- * 
- * @class
- * @classdesc Representa un elemento del botiquín, incluyendo su nombre, uso, cantidad, fecha de vencimiento y un identificador único.
- * 
+ * Clase que representa un Medicamento.
+ *
+ * @class Medicamento
+ * @classdesc Representa un Medicamento, incluyendo su nombre, uso, cantidad, fecha de vencimiento y un identificador único.
+ *
  * @param {string} nombre - Nombre del ítem.
  * @param {string} uso - Descripción del uso del ítem.
  * @param {number} cantidad - Cantidad disponible del ítem.
@@ -20,14 +20,14 @@
  * @method getCantidad Obtiene la cantidad disponible del ítem.
  * @method getFechaVencimiento Obtiene la fecha de vencimiento del ítem.
  * @static
- * @method crearBotiquinItem Crea una nueva instancia de BotiquinItem.
+ * @method crearMedicamento Crea una nueva instancia de Medicamento.
  * @param {string} nombre - Nombre del ítem.
  * @param {string} uso - Uso del ítem.
  * @param {number} cantidad - Cantidad disponible.
  * @param {string|Date} fechaVencimiento - Fecha de vencimiento.
- * @returns {BotiquinItem} Nueva instancia de BotiquinItem.
+ * @returns {Medicamento} Nueva instancia de Medicamento.
  */
-class BotiquinItem {
+class Medicamento {
   constructor(nombre, uso, cantidad, fechaVencimiento) {
     this.nombre = nombre;
     this.uso = uso;
@@ -56,10 +56,10 @@ class BotiquinItem {
     return this.fechaVencimiento;
   }
 
-  static crearBotiquinItem(nombre, uso, cantidad, fechaVencimiento) {
-    return new BotiquinItem(nombre, uso, cantidad, fechaVencimiento);
+  static crearMedicamento(nombre, uso, cantidad, fechaVencimiento) {
+    return new Medicamento(nombre, uso, cantidad, fechaVencimiento);
   }
 
 
 }
-export default BotiquinItem;
+export default Medicamento;

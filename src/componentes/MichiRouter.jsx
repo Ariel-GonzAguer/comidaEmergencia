@@ -9,7 +9,7 @@ import Recetas from "../paginas/Recetas.jsx";
 import FAQs from "../paginas/FAQs.jsx";
 import Notas from "../paginas/Notas.jsx";
 import Lugares from "../paginas/Lugares.jsx";
-import Botiquin from "../paginas/Botiquin.jsx";
+import Medicamentos from "../paginas/Medicamentos.jsx";
 import Otros from "../paginas/Otros.jsx";
 
 // protector de rutas
@@ -62,10 +62,10 @@ const rutas = [
     ),
   },
   {
-    path: "/botiquin",
+    path: "/medicamentos",
     component: (
       <Protected>
-        <Botiquin />
+        <Medicamentos />
       </Protected>
     ),
   },

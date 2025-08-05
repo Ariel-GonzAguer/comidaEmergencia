@@ -1,9 +1,9 @@
 # ComidaEmergencia (Rama versionReact)
 
-Este proyecto es una aplicación de gestión de alimentos, botiquín, notas, recetas y otros recursos para situaciones de emergencia. Está desarrollado en React con Zustand para el manejo de estado global y Firebase como backend para autenticación y almacenamiento de datos.
+Este proyecto es una aplicación de gestión de alimentos, medicamentos, notas, recetas y otros recursos para situaciones de emergencia. Está desarrollado en React con Zustand para el manejo de estado global y Firebase como backend para autenticación y almacenamiento de datos.
 
 ## Características principales
-- Gestión de alimentos, botiquín, lugares, notas, recetas y otros ítems.
+- Gestión de alimentos, medicamentos, lugares, notas, recetas y otros ítems.
 - Persistencia local y sincronización en tiempo real con Firestore.
 - Autenticación de usuarios con Firebase Auth.
 - Edición y eliminación de elementos con confirmación y notificaciones (Sonner).
@@ -28,7 +28,7 @@ comidaEmergencia/
 │   ├── main.jsx
 │   ├── clases/
 │   │   ├── AlimentoClass.js
-│   │   ├── BotiquinItemClass.js
+│   │   ├── Medicamento.js
 │   │   ├── LugarClass.js
 │   │   ├── NotaClass.js
 │   │   ├── OtrosItemClass.js
@@ -49,7 +49,7 @@ comidaEmergencia/
 │   ├── layouts/
 │   │   └── BaseLayout.jsx
 │   ├── paginas/
-│   │   ├── Botiquin.jsx
+│   │   ├── Medicamentos.jsx
 │   │   ├── Comida.jsx
 │   │   ├── FAQs.jsx
 │   │   ├── Home.jsx

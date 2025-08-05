@@ -1,13 +1,13 @@
 // store
 import useStore from "../stores/useStore";
 
-export default function Botiquin() {
+export default function Medicamentos() {
   // store
-  const { botiquin } = useStore();
+  const { medicamentos } = useStore();
   return (
     <section className="flex flex-col items-center justify-center h-full mt-16">
-      {Object.entries(botiquin).length > 0 ? (
-        Object.entries(botiquin).map(([id, item]) => (
+      {Object.entries(medicamentos).length > 0 ? (
+        Object.entries(medicamentos).map(([id, item]) => (
           <article key={id}>
             <h3>{item.nombre}</h3>
             <p>Descripción: {item.descripcion}</p>
@@ -15,7 +15,7 @@ export default function Botiquin() {
           </article>
         ))
       ) : (
-        <p>No hay elementos en el botiquín.</p>
+        <p>No hay medicamentos aún.</p>
       )}
     </section>
   );
