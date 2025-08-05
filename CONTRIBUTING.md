@@ -1,13 +1,16 @@
 # Guía para Colaborar
 
-¡Gracias por su interés en contribuir a ComidaEmergencia! Siga estos pasos para colaborar de manera efectiva y ordenada.
+¡Gracias por su interés en contribuir a ComidaEmergencia! Hay varias formas de colaborar: reportar bugs, proponer features, trabajar en features, crear/mejorar documentación y testear.
 
-## 1. Haga un fork del repositorio
+## Colaborar con código
+ Siga estos pasos para colaborar de manera efectiva y ordenada.
+
+### 1. Haga un fork del repositorio
 
 - Vaya a la página principal del repositorio en GitHub.
 - Haga clic en el botón **Fork** (arriba a la derecha) para crear una copia en su cuenta.
 
-## 2. Clone su fork
+### 2. Clone su fork
 
 - En su cuenta, haga clic en el botón **Code** y copie la URL.
 - Abra su terminal y ejecute:
@@ -16,27 +19,27 @@
   cd comidaEmergencia
   ```
 
-## 3. Cree una rama para su cambio
+### 3. Cree una rama para su cambio
 
 - Es recomendable crear una rama específica para cada mejora o corrección:
   ```bash
   git checkout -b nombre-de-su-rama
   ```
 
-## 4. Instale las dependencias
+### 4. Instale las dependencias
 
 - Instale las dependencias del proyecto:
   ```bash
   npm install
   ```
 
-## 5. Realice sus cambios
+### 5. Realice sus cambios
 
 - Realice los cambios necesarios en el código.
 - Asegúrese de seguir las buenas prácticas y el estilo del proyecto.
 - Si agrega nuevas funcionalidades, incluya documentación y/o ejemplos.
 
-## 6. Pruebe su código
+### 6. Pruebe su código
 
 - Ejecute la app localmente:
   ```bash
@@ -49,7 +52,7 @@
 vercel dev
 ```
 
-## 7. Haga commit y push
+### 7. Haga commit y push
 
 - Añada sus cambios y escriba un mensaje de commit claro:
   ```bash
@@ -58,11 +61,11 @@ vercel dev
   git push origin nombre-de-su-rama
   ```
 
-## 8. Abra un Pull Request
+### 8. Abra un Pull Request
 
 - Vaya a su fork en GitHub.
-- Haga clic en **Compare & pull request**.
-- Describa claramente su cambio y por qué es útil.
+- Haga clic en **Contribute** y seleccione la opción para realizar un Pull Request.
+- Llene el template/plantilla para hacer su Pull Request.
 - Si su cambio resuelve un issue, menciónelo (por ejemplo, `Closes #12`).
 
 ## 9. Espere revisión

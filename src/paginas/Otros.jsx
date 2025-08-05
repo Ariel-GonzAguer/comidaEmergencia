@@ -1,6 +1,6 @@
 // store
 import useStore from "../stores/useStore";
-export default function Otros(props) {
+export default function Otros() {
   // store
   const { otros } = useStore();
   return (

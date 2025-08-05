@@ -7,11 +7,8 @@ import { ErrorBoundary } from "react-error-boundary";
 // data
 import { keysArray } from "../servicios/firebaseService";
 
-// store
-import useStore from "../stores/useStore";
 
 export default function Home() {
-  const { alimentos } = useStore();
 
 
   return (

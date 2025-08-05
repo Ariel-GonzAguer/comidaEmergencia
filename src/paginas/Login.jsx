@@ -12,11 +12,11 @@ import useAuthStore from "../stores/useAuthStore";
 // store de comida
 import useStore from "../stores/useStore";
 
-export default function Login(props) {
+export default function Login() {
   // refs y estados del formulario
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // hook de navegación

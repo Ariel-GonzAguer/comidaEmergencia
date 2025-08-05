@@ -1,3 +1,3 @@
-export default function FAQs(props) {
+export default function FAQs() {
   return <section>code</section>;
 }

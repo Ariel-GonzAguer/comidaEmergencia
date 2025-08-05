@@ -65,6 +65,7 @@ const toastStrategiesObject = {
             toast.success('Elemento eliminado correctamente');
           } catch (error) {
             toast.error('Error al eliminar el elemento');
+            console.error('Error al eliminar el elemento:', error);
           }
         },
       },

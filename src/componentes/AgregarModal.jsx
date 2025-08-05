@@ -20,17 +20,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const store = useStore();
   const { agregarElemento, lugares } = useStore();
 
-  // validar tipo para desarrollo
-  if (!Object.keys(store).includes(tipo)) {
-    console.error(
-      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(
-        ", "
-      )}.`
-    );
-    return null;
-  }
-
-  // refs
+    // refs
   const nombreRef = useRef();
   const ingredientesRecetaRef = useRef();
   const instruccionesRecetaRef = useRef();
@@ -41,6 +31,16 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const fechaVencimientoRef = useRef();
   const tipoRef = useRef();
   const lugarRef = useRef();
+
+  // validar tipo para desarrollo
+  if (!Object.keys(store).includes(tipo)) {
+    console.error(
+      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(
+        ", "
+      )}.`
+    );
+    return null;
+  }
 
   // funciones
   /**

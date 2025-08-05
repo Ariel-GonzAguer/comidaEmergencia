@@ -1,7 +1,7 @@
 // store
 import useStore from "../stores/useStore";
 
-export default function Lugares(props) {
+export default function Lugares() {
   // store
   const { lugares } = useStore();
 
