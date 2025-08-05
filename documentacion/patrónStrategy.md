@@ -17,7 +17,7 @@ Suponga que tiene varias formas de mostrar notificaciones (éxito, error, confir
 En este proyecto, el patrón Strategy se utiliza para manejar las notificaciones tipo toast (mensajes emergentes) de manera flexible y extensible.
 
 ### ¿Dónde?
-- Carpeta: `src/scripts/estrategias/toastStrategy/`
+- Carpeta: `src/scripts/strategies/toastStrategy/`
   - `toastStrategiesObject.js`: Define las estrategias concretas para cada tipo de toast (éxito, error, eliminar, etc.).
   - `index.js`: Función principal que selecciona y ejecuta la estrategia adecuada según el tipo de notificación.
   - `validacion.js`: Valida que la estrategia y los datos sean correctos antes de ejecutar la acción.
@@ -30,7 +30,7 @@ En este proyecto, el patrón Strategy se utiliza para manejar las notificaciones
 
 #### Ejemplo de uso en código
 ```js
-import mostrarToastStrategy from "../scripts/estrategias/toastStrategy";
+import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 
 // Mostrar un toast de éxito
 mostrarToastStrategy("success", { mensaje: "Elemento guardado correctamente" });

@@ -5,7 +5,7 @@ import { useState } from "react";
 import useStore from "../stores/useStore";
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/estrategias/toastStrategy";
+import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 
 export default function ComidaActual() {
   // estados

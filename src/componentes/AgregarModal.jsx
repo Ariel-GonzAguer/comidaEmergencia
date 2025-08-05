@@ -13,7 +13,7 @@ import Otros from "../clases/OtrosItemClass";
 import useStore from "../stores/useStore";
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/estrategias/toastStrategy";
+import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 
 export default function ModalAgregar({ tipo, closeModal }) {
   // store
