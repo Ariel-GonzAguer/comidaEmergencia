@@ -76,11 +76,24 @@ vercel dev
 
 ---
 
-### Consejos
+## Reporte de Bugs y Propuestas de Funcionalidades
 
-- Lea el `CODE_OF_CONDUCT.md` antes de contribuir.
-- Lea el archivo `ARCHITECTURE.md`.
-- Sea respetuoso y paciente en las discusiones.
-- Si tiene dudas, abra un issue o pregunte en el Pull Request.
+### ¿Cómo reportar un bug?
 
-¡Gracias por ayudar a mejorar ComidaEmergencia!
+- Diríjase a la sección de [Issues](https://github.com/Ariel-GonzAguer/comidaEmergencia/issues) del repositorio.
+- Haga clic en **New Issue** y seleccione la plantilla **Bug report**.
+- Describa el problema de forma clara, incluyendo:
+  - Pasos para reproducir el error
+  - Comportamiento esperado y observado
+  - Capturas de pantalla o mensajes de error relevantes
+  - Información sobre su entorno (navegador, sistema operativo, etc.)
+- No incluya información sensible o privada.
+
+### ¿Cómo proponer una nueva funcionalidad?
+
+- Vaya a la sección de [Issues](https://github.com/Ariel-GonzAguer/comidaEmergencia/issues).
+- Haga clic en **New Issue** y seleccione la plantilla **Feature request**.
+- Explique claramente la funcionalidad propuesta, su utilidad y posibles casos de uso.
+- Si es posible, sugiera cómo podría implementarse o ejemplos de otros proyectos.
+
+El equipo de mantenimiento revisará su propuesta y podrá pedirle detalles adicionales si es necesario.
