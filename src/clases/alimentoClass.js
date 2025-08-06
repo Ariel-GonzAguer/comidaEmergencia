@@ -28,7 +28,6 @@
  * @returns {Alimento} Nueva instancia de Alimento.
  */
 class Alimento {
-
   constructor(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
     this.nombre = nombre;
     this.tipo = tipo;

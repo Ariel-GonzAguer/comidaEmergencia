@@ -66,9 +66,12 @@ comidaEmergencia/
 │   │           └── validacion.js
 │   ├── servicios/
 │   │   └── firebaseService.js
-│   └── stores/
-│       ├── useAuthStore.js
-│       └── useStore.js
+│   ├── stores/
+│   │   ├── useAuthStore.js
+│   │   └── useStore.js
+│   └── tests/
+│       ├──setupTests.js
+│       └── ...
 ├── .gitignore
 ├── CODE_OF_CONDUCT.md
 ├── LICENCE.txt

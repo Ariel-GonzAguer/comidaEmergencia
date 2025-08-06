@@ -2,9 +2,9 @@
  * Clase que representa un Lugar donde se almacenan alimentos.
  * 
  * @class
- * @property {Object.<string, Object>} alimentos - Diccionario de alimentos almacenados en el lugar, indexados por nombre.
  * @property {string} nombre - Nombre del lugar.
  * @property {string} id - Identificador único del lugar.
+ * @property {Object.<string, Object>} alimentos - Diccionario de alimentos almacenados en el lugar, indexados por nombre.
  * 
  * @method getNombre Obtiene el nombre del lugar.
  * @returns {string} El nombre del lugar.
@@ -30,11 +30,10 @@
  * @returns {Lugar} Nueva instancia de Lugar.
  */
 class Lugar {
-  alimentos = {};
-
-  constructor(nombre) {
+  constructor(nombre, alimentos = {}) {
     this.nombre = nombre;
     this.id = `${this.nombre}-${crypto.randomUUID()}`;
+    this.alimentos = alimentos;
   }
 
   getNombre() {
@@ -45,7 +44,7 @@ class Lugar {
     return this.alimentos;
   }
 
-  static agregarAlimento(alimento) {
+  agregarAlimento(alimento) {
     this.alimentos[alimento.getNombre()] = alimento;
   }
 
@@ -53,7 +52,7 @@ class Lugar {
     delete this.alimentos[nombre];
   }
 
-  static moverAlimento(nombre, nuevoLugar) {
+  moverAlimento(nombre, nuevoLugar) {
     if (this.alimentos[nombre]) {
       nuevoLugar.agregarAlimento(this.alimentos[nombre]);
       this.eliminarAlimento(nombre);
@@ -62,8 +61,8 @@ class Lugar {
     }
   }
 
-  static crearLugar(nombre) {
-    return new Lugar(nombre);
+  static crearLugar(nombre, alimentos = {}) {
+    return new Lugar(nombre, alimentos);
   }
 }
 

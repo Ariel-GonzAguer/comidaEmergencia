@@ -7,12 +7,14 @@ Esta guía de estilo tiene como objetivo unificar convenciones de código, nombr
 ## 1. Estructura y nombres de archivos
 
 - Carpeta `src/`:
+
   - Componentes de React en `src/componentes/` con extensión `.jsx` o `.tsx` y nombre en **PascalCase** (por ejemplo, `AgregarButton.jsx`).
   - Hooks en `src/hooks/` en **camelCase** (por ejemplo, `useAuthStore.js`).
   - Servicios en `src/servicios/` en **camelCase** (por ejemplo, `firebaseService.js`).
   - Clases de dominio en `src/clases/` en **PascalCase** (por ejemplo, `RecetaClass.js`).
   - Scripts auxiliares en `src/scripts/` en **camelCase** (por ejemplo, `dashboard.js`).
   - Patrones de diseño en `src/scripts` dentro de su respectiva carpeta (por ejemplo `scripts/factories` para patrón Factory Method) o si es una nueva estrategia dentro de `src/scripts/strategies/`.
+  - Tests en `src/tests/` con extensión `.test.js`.
 
 - Archivos de configuración y documentación en la raíz:
   - `README.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `STYLE_GUIDE.md`, `SECURITY.md`, `CHANGELOG.md`, `ARCHITECTURE.md`, `.eslintrc.js`, `vite.config.js`, etc.
@@ -31,7 +33,7 @@ Esta guía de estilo tiene como objetivo unificar convenciones de código, nombr
   // Componente en PascalCase
   function MiComponente({ prop }) {
     return <div>{prop}</div>;
-  };
+  }
   export default MiComponente;
   ```
 - Hooks deben comenzar con `use`: `useEmergencyFoodStore`, `useAuthStore`.
@@ -45,9 +47,13 @@ Esta guía de estilo tiene como objetivo unificar convenciones de código, nombr
 ## 3. Formato de Markdown
 
 - Use:
-``` js / jsx
+
+```js / jsx
+
 ```
+
 para bloques de código. Ver ejemplo de Componentes funcionales arriba.
+
 - Encabezados en **Mayúscula Inicial** y sin punto final.
 - Líneas en blanco entre párrafos y secciones.
 - Listas con guión (`-`) y espacio.
@@ -66,6 +72,7 @@ Descripción más detallada (opcional).
 ```
 
 - **tipos**:
+
   - `feat`: nueva funcionalidad
   - `fix`: corrección de bug
   - `docs`: cambios en documentación
@@ -78,6 +85,7 @@ Descripción más detallada (opcional).
 - Mensaje de descripción en español breve y claro.
 
 Ejemplo:
+
 ```
 feat(Comida): agregar validación de fecha de vencimiento
 ```
@@ -114,4 +122,4 @@ Al terminar, envíe un Pull Request contra `main` y siga la [plantilla de PR](.g
 
 ---
 
-*Última actualización: 05/08/2025*
+_Última actualización: 05/08/2025_
