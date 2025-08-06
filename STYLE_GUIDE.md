@@ -49,6 +49,7 @@ Esta guía de estilo tiene como objetivo unificar convenciones de código, nombr
 - Use:
 
 ```js / jsx
+// código
 
 ```
 

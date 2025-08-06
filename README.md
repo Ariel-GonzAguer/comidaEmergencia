@@ -100,7 +100,7 @@ comidaEmergencia/
    ```bash
    npm install
    ```
-3. Configura tus credenciales de Firebase en `/src/firebase/firebaseConfig.js`.
+3. Configura tus credenciales de Firebase en `/src/firebase/firebaseConfig.js`. La API KEY es recomendable declararla en un archivo .env
 4. Inicia la aplicación:
    ```bash
    npm run dev
@@ -108,8 +108,8 @@ comidaEmergencia/
 
 ## Notas
 - Esta rama (`versionReact`) es la versión migrada a React y Zustand.
-- Para reportar errores o sugerencias, abre un issue o pull request.
+- Para reportar errores o sugerencias, abre un issue.
 
 ---
 
-© 2025 Ariel GonzAguer. Proyecto open source bajo licencia AGPL.
+Proyecto open source bajo licencia AGPL.

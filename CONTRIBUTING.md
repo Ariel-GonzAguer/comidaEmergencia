@@ -60,6 +60,7 @@ vercel dev
   git commit -m "Descripción clara de su cambio"
   git push origin nombre-de-su-rama
   ```
+- **Si utiliza la opción de Source Control de VS Code (la interfaz gráfica para manejar Git), escriba ccm, después presione CTRL+BARRA DE ESPACIO para obtener una plantilla de commit.**
 
 ### 8. Abra un Pull Request
 
