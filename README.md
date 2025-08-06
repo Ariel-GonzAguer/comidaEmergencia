@@ -112,4 +112,4 @@ comidaEmergencia/
 
 ---
 
-Proyecto open source bajo licencia AGPL.
+Proyecto open source bajo licencia AGPL-3

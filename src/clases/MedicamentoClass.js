@@ -60,6 +60,5 @@ class Medicamento {
     return new Medicamento(nombre, uso, cantidad, fechaVencimiento);
   }
 
-
 }
 export default Medicamento;

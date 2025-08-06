@@ -1,7 +1,22 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import Alimento from '../../src/clases/AlimentoClass.js';
 
 describe('Alimento Class', () => {
+  // Mock crypto.randomUUID
+  const originalCrypto = global.crypto;
+  beforeAll(() => {
+    Object.defineProperty(global, 'crypto', {
+      configurable: true,
+      value: { randomUUID: vi.fn(() => 'mock-uuid') }
+    });
+  });
+  afterAll(() => {
+    Object.defineProperty(global, 'crypto', {
+      configurable: true,
+      value: originalCrypto
+    });
+  });
+
   const nombre = 'Manzana';
   const tipo = 'Fruta';
   const calorias = '52';
@@ -28,6 +43,7 @@ describe('Alimento Class', () => {
     expect(alimento.getCalorias()).toBe(Number(calorias));
     expect(alimento.getCantidad()).toBe(Number(cantidad));
     expect(alimento.getUbicacion()).toEqual(ubicacion);
+    expect(alimento.id).toBe(`${nombre}-mock-uuid`);
 
     // Verificar formato de fecha de vencimiento
     const fechaDate = new Date(fechaInput);
