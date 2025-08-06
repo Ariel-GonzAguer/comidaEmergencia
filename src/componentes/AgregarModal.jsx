@@ -3,9 +3,9 @@ import { useRef } from "react";
 
 // clases
 import Alimento from "../clases/AlimentoClass";
-import Lugar from "../clases/lugarClass";
-import Nota from "../clases/notaClass";
-import Receta from "../clases/recetaClass";
+import Lugar from "../clases/LugarClass";
+import Nota from "../clases/NotaClass";
+import Receta from "../clases/RecetaClass";
 import Medicamento from "../clases/MedicamentoClass";
 import Otros from "../clases/OtrosItemClass";
 

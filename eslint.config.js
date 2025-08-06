@@ -26,4 +26,20 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  // Reconocer globals de Vitest en archivos de prueba
+  {
+    files: ['src/**/*.test.js', 'src/**/*.test.jsx'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        global: 'readonly',
+      },
+    },
+  },
 ])
