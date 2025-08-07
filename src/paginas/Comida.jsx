@@ -7,11 +7,7 @@ import useStore from "../stores/useStore";
 export default function Comida() {
   // store
   const { alimentos } = useStore();
-  console.log("Comida:", alimentos);
+  // console.log("Comida:", alimentos);
 
-  return (
-    <>
-      <ComidaActual />
-    </>
-  );
+  return <ComidaActual />;
 }

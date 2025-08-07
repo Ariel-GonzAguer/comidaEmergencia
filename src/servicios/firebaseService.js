@@ -18,7 +18,7 @@ export const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'medicamen
 function validarKey(key) {
   if (!keysArray.includes(key)) {
     console.error("key invalida. Debe ser una de las siguientes:", keysArray.join(", "));
-    return false;
+    return null;
   }
   return true;
 }
@@ -59,7 +59,7 @@ export async function getData() {
  * @throws {Error} Si ocurre un error durante la actualización del documento en Firestore.
  */
 export async function agregarElementoFB(elemento, key) {
-  if (!validarKey(key)) return null;
+  validarKey(key);
 
   try {
     const docRef = doc(db, coleccion, documento);
@@ -99,7 +99,7 @@ export async function agregarElementoFB(elemento, key) {
  * @throws {Error} Si ocurre un error al actualizar el documento.
  */
 export async function eliminarElementoFB(key, id) {
-  if (!validarKey(key)) return null;
+  validarKey(key);
 
   try {
     const docRef = doc(db, coleccion, documento);
@@ -109,17 +109,32 @@ export async function eliminarElementoFB(key, id) {
       return null;
     }
     const data = docSnap.data();
+    // eliminar un lugar y sus alimentos asociados
+    if (key === 'lugares') {
+      const lugaresActualizada = { ...data.lugares };
+      delete lugaresActualizada[id];
+      // Filtrar alimentos que NO pertenezcan al lugar eliminado
+      const alimentosOriginal = data.alimentos || {};
+      const alimentosActualizada = Object.fromEntries(
+        Object.entries(alimentosOriginal).filter(([, alimento]) => (
+          !(alimento.ubicacion && alimento.ubicacion.id === id)
+        ))
+      );
+      await updateDoc(docRef, {
+        lugares: lugaresActualizada,
+        alimentos: alimentosActualizada,
+      });
+      console.log("Documento actualizado: lugar y alimentos eliminados con éxito");
+      return { lugares: lugaresActualizada, alimentos: alimentosActualizada };
+    }
+    // Eliminar elemento genérico de otro campo
     if (!data[key] || typeof data[key] !== 'object') {
       console.error("Ese campo no existe o no es un objeto válido");
       return null;
     }
-    const keyActualizada = {
-      ...data[key],
-    };
+    const keyActualizada = { ...data[key] };
     delete keyActualizada[id];
-    await updateDoc(docRef, {
-      [key]: keyActualizada
-    });
+    await updateDoc(docRef, { [key]: keyActualizada });
     console.log("Documento actualizado con éxito");
     return keyActualizada;
   } catch (error) {
@@ -140,7 +155,7 @@ export async function eliminarElementoFB(key, id) {
  * @throws Lanza un error si ocurre un problema durante la actualización del documento.
  */
 export async function actualizarElementoFB(key, id, nuevoElemento) {
-  if (!validarKey(key)) return null;
+  validarKey(key);
 
   try {
     const docRef = doc(db, coleccion, documento);

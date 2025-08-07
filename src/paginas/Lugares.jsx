@@ -1,6 +1,9 @@
 // store
 import useStore from "../stores/useStore";
 
+// estrategia de toast
+import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+
 export default function Lugares() {
   // store
   const { lugares } = useStore();
@@ -22,6 +25,18 @@ export default function Lugares() {
                 </li>
               ))}
             </ul>
+            <button
+              className="bg-error text-white px-2 py-1 rounded cursor-pointer border-2 border-error hover:border-warning"
+              onClick={() =>
+                mostrarToastStrategy("eliminar", {
+                  key: "lugares",
+                  id: value.id,
+                  mensaje: `¿Desea eliminar el lugar ${value.nombre} permanentemente con todo su contenido?`
+                })
+              }
+            >
+              Eliminar
+            </button>
           </article>
         ))
       ) : (

@@ -101,44 +101,54 @@ const useStore = create()( //change the name of the store
         try {
           const data = await eliminarElementoFB(key, id);
           if (data) {
+            // Si se eliminó un lugar
+            if (key === "lugares" && data.lugares && data.alimentos) {
+              set((state) => {
+                state.lugares = data.lugares;
+                state.alimentos = data.alimentos;
+              });
+              return data;
+            }
+            // Para cualquier otro key, actualizar estado directamente si viene data[key]
+            if (data[key]) {
+              set((state) => {
+                state[key] = data[key];
+              });
+              return data;
+            }
+            // Fallback: eliminar elemento del estado local
             set((state) => {
               delete state[key][id];
             });
-            // Si es un alimento, eliminarlo también del lugar correspondiente
+            // Si es un alimento, manejar eliminación en lugar
             if (key === "alimentos") {
-              // Buscar el lugar que contiene este alimento
               const storeState = useStore.getState();
-              const lugares = storeState.lugares;
               let lugarIdEncontrado = null;
-              for (const [lugarId, lugar] of Object.entries(lugares)) {
+              for (const [lugarId, lugar] of Object.entries(storeState.lugares)) {
                 if (lugar.alimentos && lugar.alimentos[id]) {
                   lugarIdEncontrado = lugarId;
                   break;
                 }
               }
               if (lugarIdEncontrado) {
-                // Eliminar del estado local
                 set((state) => {
-                  if (state.lugares[lugarIdEncontrado].alimentos) {
-                    delete state.lugares[lugarIdEncontrado].alimentos[id];
-                  }
+                  delete state.lugares[lugarIdEncontrado].alimentos[id];
                 });
-                // Serializar alimentos planos
                 const lugarActual = useStore.getState().lugares[lugarIdEncontrado];
                 const alimentosPlanos = {};
                 Object.entries(lugarActual.alimentos || {}).forEach(([aid, alimento]) => {
                   alimentosPlanos[aid] = JSON.parse(JSON.stringify(alimento));
                 });
-                const lugarActualizado = {
-                  ...lugarActual,
-                  alimentos: alimentosPlanos
-                };
+                const lugarActualizado = { ...lugarActual, alimentos: alimentosPlanos };
                 await actualizarElementoFB("lugares", lugarActualizado.id, JSON.parse(JSON.stringify(lugarActualizado)));
               }
+              return data;
             }
           }
+          return null;
         } catch (error) {
           console.error('Error al eliminar el elemento:', error);
+          throw error;
         }
       },
 
@@ -214,6 +224,7 @@ const useStore = create()( //change the name of the store
                 await actualizarElementoFB("lugares", lugarNuevoActualizado.id, JSON.parse(JSON.stringify(lugarNuevoActualizado)));
               }
             }
+            return data;
           }
         } catch (error) {
           console.error('Error al actualizar el elemento:', error);

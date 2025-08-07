@@ -4,8 +4,6 @@ import { toast } from 'sonner';
 // store
 import useStore from '../../../stores/useStore';
 
-const eliminarElemento = useStore.getState().eliminarElemento;
-
 /**
  * Objeto que contiene estrategias para mostrar diferentes tipos de notificaciones toast.
  *
@@ -61,8 +59,17 @@ const toastStrategiesObject = {
         },
         onClick: async () => {
           try {
-            await eliminarElemento(key, id);
-            toast.success('Elemento eliminado correctamente');
+            const resultPromise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(useStore.getState().eliminarElemento(key, id));
+                reject('Error al eliminar el elemento');
+              }, 2000);
+            })
+            toast.promise(resultPromise, {
+              loading: 'Eliminando...',
+              success: 'Elemento eliminado correctamente',
+              error: 'Error al eliminar el elemento',
+            })
           } catch (error) {
             toast.error('Error al eliminar el elemento');
             console.error('Error al eliminar el elemento:', error);
