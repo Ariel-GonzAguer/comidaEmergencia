@@ -106,9 +106,10 @@ comidaEmergencia/
    npm run dev
    ```
 
-## Notas
-- Esta rama (`versionReact`) es la versión migrada a React y Zustand.
-- Para reportar errores o sugerencias, abre un issue.
+## CONTRIBUYENTES
+-
+-
+-
 
 ---
 
