@@ -30,4 +30,8 @@ Para reportar cualquier incidente, por favor contacta al administrador del proye
 
 ---
 
+<<<<<<< HEAD
 Inspirado en el [Contributor Covenant](https://www.contributor-covenant.org/es/version/2/0/code_of_conduct/)
+=======
+Inspirado en el [Contributor Covenant](https://www.contributor-covenant.org/es/version/2/0/code_of_conduct/)
+>>>>>>> versionReact

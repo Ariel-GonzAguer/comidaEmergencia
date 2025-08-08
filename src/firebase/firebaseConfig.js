@@ -4,7 +4,8 @@ import { getFirestore } from "firebase/firestore";
 
 // configuración de Firebase
 const firebaseConfig = {
-  apiKey: import.meta.env.PUBLIC_VITE_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  // apiKey: "AIzaSyBeLaegkRsKOQk86beE67dUqZZRpfWVlaM",
   authDomain: "emergencia-5b0c0.firebaseapp.com",
   projectId: "emergencia-5b0c0",
   storageBucket: "emergencia-5b0c0.firebasestorage.app",

@@ -1,46 +1,46 @@
 {
-  "name": "comidaemergencia",
-  "version": "2.0.0",
-  "description": "Una aplicación web OPEN SOURCE/CÓDIGO ABIERTO para gestionar el inventario de alimentos de emergencia, construida con Astro, Firebase y Tailwind CSS.",
+  "name": "comidaemergencia_react",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "author": "Ariel Gonzales Agüero",
-  "license": "AGPL-3.0",
-  "homepage": "https://github.com/Ariel-GonzAguer/comidaEmergencia#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ariel-GonzAguer/comidaEmergencia.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Ariel-GonzAguer/comidaEmergencia/issues"
-  },
-  "keywords": [
-    "open-source",
-    "codigo-abierto",
-    "comida",
-    "emergencia",
-    "food",
-    "emergency-food",
-    "food-management",
-    "inventory",
-    "astro",
-    "firebase",
-    "tailwind",
-    "web-app",
-    "javascript"
-  ],
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
-    "astro": "^5.10.0",
-    "firebase": "^11.9.1"
+    "@arielgonzaguer/michi-router": "^1.3.0",
+    "@midudev/tailwind-animations": "^0.2.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/vite": "^4.1.11",
+    "@vercel/node": "^2.3.0",
+    "dotenv": "^17.2.1",
+    "driver.js": "^1.3.6",
+    "firebase": "^12.0.0",
+    "immer": "^10.1.1",
+    "jsdom": "^26.1.0",
+    "openai": "^5.10.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-error-boundary": "^6.0.0",
+    "sonner": "^2.0.6",
+    "tailwindcss": "^4.1.11",
+    "vite-plugin-pwa": "^1.0.2",
+    "vitest": "^3.2.4",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/vite": "^4.1.10",
-    "tailwindcss": "^4.1.10"
+    "@eslint/js": "^9.30.1",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "vite": "^7.0.4"
   }
 }
