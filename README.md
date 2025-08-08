@@ -2,21 +2,17 @@
 
 Este proyecto es una aplicación de gestión de alimentos, medicamentos, notas, recetas y otros recursos para situaciones de emergencia. Está desarrollado en React con Zustand para el manejo de estado global y Firebase como backend para autenticación y almacenamiento de datos.
 
-<<<<<<< HEAD
----
-
-# IMPORTANTE: El proyecto empezará un proceso de migración a React sin Astro. La migración espero terminarla antes de finales de octubre.
-=======
 ## Características principales
+
 - Gestión de alimentos, medicamentos, lugares, notas, recetas y otros ítems.
 - Persistencia local y sincronización en tiempo real con Firestore.
 - Autenticación de usuarios con Firebase Auth.
 - Edición y eliminación de elementos con confirmación y notificaciones (Sonner).
 - Interfaz responsiva y accesible.
 - Protección de rutas y manejo de sesiones.
->>>>>>> versionReact
 
 ## Estructura del proyecto
+
 La estructura real del proyecto es la siguiente:
 
 ```
@@ -101,6 +97,7 @@ comidaEmergencia/
 - `documentacion/`: Documentos de referencia y ayuda.
 
 ## Instalación y uso
+
 1. Clona el repositorio y entra a la carpeta del proyecto.
 2. Instala las dependencias:
    ```bash
@@ -113,17 +110,13 @@ comidaEmergencia/
    ```
 
 ## CONTRIBUYENTES
--
--
--
 
----
+-
+-
+- ***
 
-<<<<<<< HEAD
 <div align="center">
   <p>Hecho libre para todo el mundo 🌍</p>
   <p>⭐ ¡Dele una estrella si le gusta el proyecto!</p>
+  <p> Proyecto open source bajo licencia AGPL-3 </p>
 </div>
-=======
-Proyecto open source bajo licencia AGPL-3
->>>>>>> versionReact
