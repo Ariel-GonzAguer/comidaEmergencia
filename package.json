@@ -21,6 +21,7 @@
     "firebase": "^12.0.0",
     "immer": "^10.1.1",
     "jsdom": "^26.1.0",
+    "node-fetch": "2.7.0",
     "openai": "^5.10.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -42,5 +43,13 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "vite": "^7.0.4"
+  }
+  ,
+  "overrides": {
+    "esbuild": "0.25.4",
+    "@vercel/node": {
+      "esbuild": "0.25.4",
+      "path-to-regexp": "8.0.0"
+    }
   }
 }
