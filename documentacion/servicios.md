@@ -1,7 +1,7 @@
 # Servicios en ComidaEmergencia
 
 ## ¿Qué es un servicio?
-En el contexto de desarrollo de software, un servicio es un módulo o conjunto de funciones que encapsula la lógica para interactuar con recursos externos o realizar tareas específicas, como acceder a una base de datos, consumir una API o manejar autenticación.
+En el contexto de desarrollo de software, un servicio es cualquier módulo que provee funcionalidad reutilizable y centralizada, como validación, acceso a datos, lógica de negocio, etc.
 
 El uso de servicios permite separar la lógica de negocio de la lógica de acceso a datos, facilitando el mantenimiento y la reutilización del código.
 
@@ -10,6 +10,7 @@ En este proyecto, los servicios principales se encuentran en la carpeta:
 
 ```
 src/servicios/
+├── esquemasZod.js 
 └── firebaseService.js
 ```
 

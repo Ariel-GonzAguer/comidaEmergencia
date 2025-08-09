@@ -8,6 +8,15 @@ import Nota from "../clases/NotaClass";
 import Receta from "../clases/RecetaClass";
 import Medicamento from "../clases/MedicamentoClass";
 import Otros from "../clases/OtrosItemClass";
+import {
+  alimentoSchema,
+  lugarSchema,
+  notaSchema,
+  recetaSchema,
+  medicamentoSchema,
+  otrosSchema,
+  obtenerMensajesErrorZod,
+} from "../servicios/esquemasZod";
 
 // store
 import useStore from "../stores/useStore";
@@ -20,7 +29,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const store = useStore();
   const { agregarElemento, lugares } = useStore();
 
-    // refs
+  // refs
   const nombreRef = useRef();
   const ingredientesRecetaRef = useRef();
   const instruccionesRecetaRef = useRef();
@@ -63,71 +72,158 @@ export default function ModalAgregar({ tipo, closeModal }) {
     }
 
     try {
+      let validacion;
       if (tipo === "alimentos") {
         // Prevenir si no hay lugares disponibles
         const lugaresArray = Object.keys(lugares);
         if (lugaresArray.length === 0) {
-          alert("Debes agregar al menos un lugar antes de agregar alimentos.");
+          mostrarToastStrategy("error", {
+            mensaje: "No hay lugares disponibles. Agrega un lugar primero.",
+          });
           return;
         }
         // Buscar el objeto lugar correspondiente por id
         const lugarSeleccionado = lugares[lugarRef.current.value];
         if (!lugarSeleccionado) {
-          alert("Selecciona una ubicación válida.");
+          mostrarToastStrategy("error", {
+            mensaje: "Selecciona una ubicación válida.",
+          });
           return;
         }
-        const ubicacionPlano = {
-          id: lugarSeleccionado.id,
-          nombre: lugarSeleccionado.nombre,
+        const data = {
+          nombre: nombreRef.current.value,
+          tipo: tipoRef.current.value,
+          calorias: caloriasRef.current.value,
+          cantidad: cantidadRef.current.value,
+          fechaVencimiento: fechaVencimientoRef.current.value,
+          ubicacion: {
+            id: lugarSeleccionado.id,
+            nombre: lugarSeleccionado.nombre,
+          },
         };
+        validacion = alimentoSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
         const nuevoAlimento = Alimento.crearAlimento(
-          nombreRef.current.value,
-          tipoRef.current.value,
-          caloriasRef.current.value,
-          cantidadRef.current.value,
-          fechaVencimientoRef.current.value,
-          ubicacionPlano
+          validacion.data.nombre,
+          validacion.data.tipo,
+          validacion.data.calorias,
+          validacion.data.cantidad,
+          validacion.data.fechaVencimiento,
+          validacion.data.ubicacion
         );
         agregarElemento(nuevoAlimento, tipo);
         console.log("Nuevo alimento agregado:", nuevoAlimento);
         closeModal();
       } else if (tipo === "lugares") {
-        const nuevoLugar = Lugar.crearLugar(nombreRef.current.value);
+        const data = { nombre: nombreRef.current.value };
+        validacion = lugarSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
+        const nuevoLugar = Lugar.crearLugar(validacion.data.nombre);
         agregarElemento(nuevoLugar, tipo);
         console.log("Nuevo lugar agregado:", nuevoLugar);
         closeModal();
       } else if (tipo === "notas") {
+        const data = {
+          nombre: nombreRef.current.value,
+          contenido: contenidoNotaRef.current.value,
+        };
+        validacion = notaSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
         const nuevaNota = Nota.crearNota(
-          nombreRef.current.value,
-          contenidoNotaRef.current.value
+          validacion.data.nombre,
+          validacion.data.contenido
         );
         agregarElemento(nuevaNota, tipo);
         console.log("Nueva nota agregada:", nuevaNota);
         closeModal();
       } else if (tipo === "recetas") {
+        const data = {
+          nombre: nombreRef.current.value,
+          ingredientes: ingredientesRecetaRef.current.value,
+          calorias: caloriasRef.current.value,
+          instrucciones: instruccionesRecetaRef.current.value,
+        };
+        validacion = recetaSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
         const nuevaReceta = Receta.crearReceta(
-          nombreRef.current.value,
-          ingredientesRecetaRef.current.value,
-          caloriasRef.current.value,
-          instruccionesRecetaRef.current.value
+          validacion.data.nombre,
+          validacion.data.ingredientes,
+          validacion.data.calorias,
+          validacion.data.instrucciones
         );
         agregarElemento(nuevaReceta, tipo);
         console.log("Nueva receta agregada:", nuevaReceta);
         closeModal();
       } else if (tipo === "medicamentos") {
+        const data = {
+          nombre: nombreRef.current.value,
+          uso: usoRef.current.value,
+          cantidad: cantidadRef.current.value,
+          fechaVencimiento: fechaVencimientoRef.current.value,
+        };
+        validacion = medicamentoSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
         const nuevoMedicamento = Medicamento.crearMedicamento(
-          nombreRef.current.value,
-          usoRef.current.value,
-          cantidadRef.current.value,
-          fechaVencimientoRef.current.value
+          validacion.data.nombre,
+          validacion.data.uso,
+          validacion.data.cantidad,
+          validacion.data.fechaVencimiento
         );
         agregarElemento(nuevoMedicamento, tipo);
         console.log("Nuevo medicamento agregado:", nuevoMedicamento);
         closeModal();
       } else if (tipo === "otros") {
+        const data = {
+          nombre: nombreRef.current.value,
+          uso: usoRef.current.value,
+        };
+        validacion = otrosSchema.safeParse(data);
+        if (!validacion.success) {
+          mostrarToastStrategy("error", {
+            mensaje:
+              "Datos inválidos: " +
+              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+          });
+          return;
+        }
         const nuevoOtro = Otros.crearOtrosItem(
-          nombreRef.current.value,
-          usoRef.current.value
+          validacion.data.nombre,
+          validacion.data.uso
         );
         agregarElemento(nuevoOtro, tipo);
         console.log("Nuevo otro item agregado:", nuevoOtro);
