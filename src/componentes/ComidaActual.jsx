@@ -11,6 +11,7 @@ export default function ComidaActual() {
   // estados
   const [editando, setEditando] = useState(null);
   const [form, setForm] = useState({});
+  const [orden, setOrden] = useState("nombre"); // Estado para la ordenación
 
   // store
   const { alimentos, lugares, actualizarElemento } = useStore();
@@ -42,7 +43,9 @@ export default function ComidaActual() {
       fechaVencimiento: alimento.fechaVencimiento,
       calorias: alimento.calorias,
       tipo: alimento.tipo,
-      ubicacion: alimento.ubicacion ? { id: alimento.ubicacion.id, nombre: alimento.ubicacion.nombre } : null,
+      ubicacion: alimento.ubicacion
+        ? { id: alimento.ubicacion.id, nombre: alimento.ubicacion.nombre }
+        : null,
     });
   }
 
@@ -59,7 +62,9 @@ export default function ComidaActual() {
       const lugarObj = lugares[e.target.value];
       setForm({
         ...form,
-        ubicacion: lugarObj ? { id: lugarObj.id, nombre: lugarObj.nombre } : null,
+        ubicacion: lugarObj
+          ? { id: lugarObj.id, nombre: lugarObj.nombre }
+          : null,
       });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -100,22 +105,53 @@ export default function ComidaActual() {
     setEditando(null);
   }
 
+  // Función para ordenar alimentos
+  function ordenarAlimentos(alimentosObj) {
+    const alimentosArr = Object.entries(alimentosObj);
+    switch (orden) {
+      case "nombre":
+        return alimentosArr.sort(([, a], [, b]) =>
+          a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+        );
+      case "tipo":
+        return alimentosArr.sort(([, a], [, b]) =>
+          a.tipo.localeCompare(b.tipo, "es", { sensitivity: "base" })
+        );
+      case "fechaVencimiento":
+        return alimentosArr.sort(
+          ([, a], [, b]) =>
+            new Date(b.fechaVencimiento) - new Date(a.fechaVencimiento)
+        );
+      case "calorias":
+        return alimentosArr.sort(([, a], [, b]) => b.calorias - a.calorias);
+      default:
+        return alimentosArr;
+    }
+  }
+
   return (
     <section className="flex flex-col items-center justify-center w-[98%] m-[0_auto] mt-4">
       <h2>Comida Actual</h2>
+      {/* Filtro de ordenación */}
+      <div className="mb-4 flex gap-2 items-center">
+        <label htmlFor="ordenar-comida">Ordenar por:</label>
+        <select
+          id="ordenar-comida"
+          value={orden}
+          onChange={(e) => setOrden(e.target.value)}
+          className="border px-2 py-1 rounded text-background w-60"
+        >
+          <option value="nombre">Nombre (A-Z)</option>
+          <option value="tipo">Tipo (A-Z)</option>
+          <option value="fechaVencimiento">Fecha de vencimiento</option>
+          <option value="calorias">Calorías</option>
+        </select>
+      </div>
       <div className="overflow-x-auto w-full">
         <table className="min-w-[600px] border border-gray-300 text-center m-[0_auto]">
           <thead>
             <tr>
-              {[
-                "Nombre",
-                "Cantidad",
-                "Fecha de vencimiento",
-                "Calorías",
-                "Tipo",
-                "Ubicación",
-                "Acciones",
-              ].map((header) => (
+              {["Nombre","Cantidad","Fecha de vencimiento","Calorías","Tipo","Ubicación","Acciones",].map((header) => (
                 <th key={header} title={header} className={classTh}>
                   {header}
                 </th>
@@ -123,9 +159,9 @@ export default function ComidaActual() {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(alimentos).map(([id, alimento]) => (
+            {ordenarAlimentos(alimentos).map(([id, alimento]) => (
               <tr key={id}>
-                {/* modo editar */}
+                {/* ...modo editar y mostrar datos igual que antes... */}
                 {editando === id ? (
                   <>
                     <td className={classTrEditando}>
@@ -200,18 +236,13 @@ export default function ComidaActual() {
                     </td>
                   </>
                 ) : (
-                  // Mostrar datos del alimento
                   <>
                     <td className="border px-2 py-1">{alimento.nombre}</td>
                     <td className="border px-2 py-1">{alimento.cantidad}</td>
-                    <td className="border px-2 py-1">
-                      {alimento.fechaVencimiento}
-                    </td>
+                    <td className="border px-2 py-1">{alimento.fechaVencimiento}</td>
                     <td className="border px-2 py-1">{alimento.calorias}</td>
                     <td className="border px-2 py-1">{alimento.tipo}</td>
-                    <td className="border px-2 py-1">
-                      {alimento.ubicacion?.nombre}
-                    </td>
+                    <td className="border px-2 py-1">{alimento.ubicacion?.nombre}</td>
                     <td className="px-2 py-1 flex flex-col gap-2 justify-center items-center">
                       <button
                         className="bg-error text-white px-2 py-1 rounded cursor-pointer border-2 border-error hover:border-warning"

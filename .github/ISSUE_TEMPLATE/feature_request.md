@@ -36,8 +36,7 @@ Creando un componente que [...]. -->
 <!-- Borre las opciones que no use -->
 
 - [] 🔐 Autenticación/Seguridad
-- [] 🍕 Gestión de Alimentos
-- [] 🥖 Recetas
+- [] 🍕 Gestión de ítems
 - [] 📊 Dashboard/Estadísticas
 - [] 🎨 UI/UX
 - [] 📱 Responsividad
