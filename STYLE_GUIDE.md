@@ -46,14 +46,13 @@ Esta guía de estilo tiene como objetivo unificar convenciones de código, nombr
 
 ## 3. Formato de Markdown
 
-- Use:
+- Para bloques de código use:
 
 ```js / jsx
 // código
-
 ```
 
-para bloques de código. Ver ejemplo de Componentes funcionales arriba.
+Ver ejemplo de `Componentes funcionales` arriba.
 
 - Encabezados en **Mayúscula Inicial** y sin punto final.
 - Líneas en blanco entre párrafos y secciones.
@@ -91,22 +90,25 @@ Ejemplo:
 feat(Comida): agregar validación de fecha de vencimiento
 ```
 
+> [!TIP]
+> Si usa la interfaz de VS Code para hacer el commit en la rama main, escriba `ccm` y presione `ctrl` + `barra de espacio`, esto generará una plantilla con la convención de commit.
+
 ---
 
 ## 5. Flujo de trabajo de ramas
 
-- `main`: versión estable, solo merges aprobados.
-- Ramas de soporte:
-  - `feature/<descripción>`: nuevas funcionalidades.
-  - `bugfix/<descripción>`: correcciones de errores.
-  - `hotfix/<descripción>`: correcciones críticas en producción.
-  - `refactor/<descripción>`: refactorizaciones grandes.
+- `main`: versión estable en React, solo merges aprobados.
+- `experimental`: rama para desarrollo de características experimentales en React.
+- `versionAstro`: rama para desarrollo de nuevas características en Astro.
 
 Al terminar, envíe un Pull Request contra `main` y siga la [plantilla de PR](.github/PULL_REQUEST_TEMPLATE.md).
 
 ---
 
 ## 6. PR y revisión de código
+
+> [!IMPORTANT]  
+> Antes de abrir un PR asegúrese de abrir un issue relacionado, si no existe uno. **No se aceptarán PRs sin un issue asociado**.
 
 - Complete la plantilla de PR.
 - Verifique que `npm run lint` pase sin errores.
@@ -123,4 +125,4 @@ Al terminar, envíe un Pull Request contra `main` y siga la [plantilla de PR](.g
 
 ---
 
-_Última actualización: 05/08/2025_
+_Última actualización: 09/08/2025_
