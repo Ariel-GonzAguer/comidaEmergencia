@@ -48,7 +48,7 @@ export default function RecetaIA({
       setInterval(() => {
         window.location.reload();
       }, 3000);
-    } catch (error) {
+    } catch {
       mostrarToastStrategy("error", { mensaje: "Error al guardar la receta" });
     }
   }

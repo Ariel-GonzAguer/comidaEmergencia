@@ -32,8 +32,8 @@ export default function LogOutButton(currentPath) {
 
   return (
     <button onClick={handleLogOut}
-      className="border-2 border-black bg-atencion px-2 text-background
-       hover:bg-red-500 hover:text-black hover:font-bold
+      className="border-2 border-black bg-error px-2 text-background font-bold
+       hover:bg-warning hover:text-black
        transition-all duration-300 ease-in-out cursor-pointer">
       Cerrar Sesión
     </button>

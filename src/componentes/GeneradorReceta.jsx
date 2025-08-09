@@ -1,15 +1,11 @@
 // hooks
 import { useRef, useState } from "react";
 
-// validación - zod
-import { recetaSchema } from "../servicios/esquemasZod";
-
 // estrategia de toast
 import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 
 // componentes
 import RecetaIA from "./RecetaIA.jsx";
-import { set } from "zod";
 
 export default function GeneradorRecetas() {
   const [receta, setReceta] = useState({
