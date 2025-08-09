@@ -39,8 +39,7 @@ export default async function openAI_RecipeService(req, res) {
         { role: "user", content: [{ type: "text", text: Array.isArray(data.input) ? data.input.join(", ") : String(data.input) }] },
       ],
     });
-    // console.log("[openAI_RecipeService] Respuesta OpenAI:", result);
-    console.log("[openAI_RecipeService] Receta generada:", result.choices[0].message.content);
+    // console.log("[openAI_RecipeService] Receta generada:", result.choices[0].message.content);
     res.status(200).json({
       status: 200,
       output: result.choices[0].message.content

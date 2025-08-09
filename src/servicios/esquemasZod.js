@@ -23,9 +23,15 @@ export const notaSchema = z.object({
 
 export const recetaSchema = z.object({
   nombre: z.string().min(1, "El nombre es obligatorio"),
-  ingredientes: z.string().min(1, "Los ingredientes son obligatorios"),
+  ingredientes: z.union([
+    z.string().min(1, "Los ingredientes son obligatorios"),
+    z.array(z.string().min(1)).min(1, "Debe haber al menos un ingrediente")
+  ]),
   calorias: z.preprocess(val => Number(val), z.number().int().nonnegative()),
-  instrucciones: z.string().min(1, "Las instrucciones son obligatorias")
+  instrucciones: z.union([
+    z.string().min(1, "Las instrucciones son obligatorias"),
+    z.array(z.string().min(1)).min(1, "Debe haber al menos una instrucción")
+  ])
 });
 
 export const medicamentoSchema = z.object({
@@ -41,6 +47,7 @@ export const otrosSchema = z.object({
 });
 
 export function obtenerMensajesErrorZod(errorFormat) {
+  if (!errorFormat || typeof errorFormat !== "object") return ["Error de validación desconocido"];
   return Object.values(errorFormat)
     .flatMap((campo) =>
       typeof campo === "object" && campo?._errors

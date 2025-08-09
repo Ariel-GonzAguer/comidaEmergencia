@@ -61,7 +61,8 @@ class Receta {
       nombre: this.nombre,
       ingredientes: this.ingredientes,
       calorias: this.calorias,
-      instrucciones: this.instrucciones
+      instrucciones: this.instrucciones,
+      id: this.id
     };
   }
 }

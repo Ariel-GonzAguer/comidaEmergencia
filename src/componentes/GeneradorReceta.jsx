@@ -1,13 +1,25 @@
 // hooks
 import { useRef, useState } from "react";
 
+// validación - zod
+import { recetaSchema } from "../servicios/esquemasZod";
+
+// estrategia de toast
+import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+
+// componentes
+import RecetaIA from "./RecetaIA.jsx";
+import { set } from "zod";
+
 export default function GeneradorRecetas() {
   const [receta, setReceta] = useState({
     nombre: "",
     ingredientes: [],
     calorias: "",
-    notas: "",
+    instrucciones: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const [openForm, setOpenForm] = useState(false);
 
@@ -18,58 +30,67 @@ export default function GeneradorRecetas() {
   }
 
   async function handleSubmit(e) {
-    // console.log("submit");
     e.preventDefault();
-    const result = await fetch(`/api/openAI_RecipeService`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: inputRef.current.value.split(","),
-      }),
+    setLoading(true);
+    setReceta({
+      nombre: "",
+      ingredientes: [],
+      calorias: "",
+      instrucciones: "",
+      id: "",
     });
-    console.log("fetch terminado");
-    const data = await result.json();
-    console.log("json parseado");
-    console.log(result);
-    console.log("1");
-    console.log(data);
-    console.log("2");
-    // La IA retorna un JSON, así que lo parseamos directamente
-    let recetaGenerada = {};
     try {
-      recetaGenerada = JSON.parse(data.output.replace(/'/g, '"'));
+      setOpenForm(false);
+      const result = await fetch(`/api/openAI_RecipeService`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: inputRef.current.value.split(","),
+        }),
+      });
+      const data = await result.json();
+      let recetaGenerada = JSON.parse(data.output.replace(/'/g, '"'));
+      setReceta({
+        nombre: recetaGenerada.nombre || "",
+        ingredientes: [recetaGenerada.ingredientes.join(", ")],
+        calorias: recetaGenerada.calorias || "",
+        instrucciones: recetaGenerada.instrucciones || "",
+        id: recetaGenerada.id,
+      });
+      setLoading(false); // Desactivar loading tras procesar correctamente
     } catch (err) {
       console.error("Error al parsear la receta generada:", err);
-      recetaGenerada = {
-        nombre: "Error al parsear receta",
+      mostrarToastStrategy("error", {
+        mensaje:
+          "No se pudo parsear la receta generada. Mostrando texto original.",
+      });
+      setReceta({
+        nombre: "Receta generada (texto)",
         ingredientes: [],
         calorias: "",
-        instrucciones: [],
-      };
+        instrucciones: "",
+        id: "",
+      });
+      setLoading(false);
+    } finally {
+      inputRef.current.value = ""; // Limpiar el input después de enviar
     }
-    setReceta({
-      nombre: recetaGenerada.nombre || "",
-      ingredientes: recetaGenerada.ingredientes || [],
-      calorias: recetaGenerada.calorias || "",
-      notas: Array.isArray(recetaGenerada.instrucciones) ? recetaGenerada.instrucciones.join(" ") : recetaGenerada.instrucciones || "",
-    });
-    inputRef.current.value = ""; // Limpiar el input después de enviar
   }
 
   return (
     <>
       <button
         onClick={handleOpenForm}
-        className="bg-light-primary text-background font-bold py-2 px-4 rounded cursor-pointer hover:bg-light-secundary"
+        className="bg-light-primary text-background font-bold py-2 px-4 rounded cursor-pointer hover:bg-light-secundary mt-8 mb-4"
       >
         Generador de Recetas con IA
       </button>
 
       {openForm && (
         <form
-          className="flex flex-col justify-center items-center mt-4"
+          className="flex flex-col justify-center items-center mt-4 mb-4"
           onSubmit={handleSubmit}
         >
           <p>
@@ -93,27 +114,13 @@ export default function GeneradorRecetas() {
           </button>
         </form>
       )}
-      {receta.nombre && (
-        <div className="mt-4">
-          <p>
-            <strong>Nombre:</strong> {receta.nombre}
-          </p>
-
-          <strong>Ingredientes:</strong>
-          <ul>
-            {receta.ingredientes.map((ingrediente, index) => (
-              <li key={index}>{ingrediente}</li>
-            ))}
-          </ul>
-
-          <p>
-            <strong>Calorías:</strong> {receta.calorias}
-          </p>
-          <p>
-            <strong>Notas:</strong> {receta.notas}
-          </p>
-        </div>
-      )}
+      <RecetaIA
+        nombre={receta.nombre}
+        ingredientes={receta.ingredientes}
+        calorias={receta.calorias}
+        instrucciones={receta.instrucciones}
+        loadingState={loading}
+      />
     </>
   );
 }

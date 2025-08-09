@@ -25,8 +25,4 @@ El equipo de mantenimiento se compromete a:
 
 ---
 
-<<<<<<< HEAD
 **Gracias por ayudar a mantener ComidaEmergencia seguro para toda la comunidad.**
-=======
-**Gracias por ayudar a mantener ComidaEmergencia seguro para toda la comunidad.**
->>>>>>> versionReact
