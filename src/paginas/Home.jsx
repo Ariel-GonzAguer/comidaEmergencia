@@ -1,5 +1,6 @@
 // componentes
 import AgregarButton from "../componentes/AgregarButton";
+import GeneradorRecetas from "../componentes/GeneradorReceta";
 
 // error-bundary
 import { ErrorBoundary } from "react-error-boundary";
@@ -7,10 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 // data
 import { keysArray } from "../servicios/firebaseService";
 
-
 export default function Home() {
-
-
   return (
     <section className="flex flex-col items-center justify-center h-full">
       <ErrorBoundary
@@ -25,6 +23,7 @@ export default function Home() {
           })}
         </section>
         {/* <p>Total calorías: {caloriasTotales}</p> */}
+        <GeneradorRecetas />
       </ErrorBoundary>
     </section>
   );

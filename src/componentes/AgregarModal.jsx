@@ -2,12 +2,12 @@
 import { useRef } from "react";
 
 // clases
-import Alimento from "../clases/AlimentoClass";
-import Lugar from "../clases/LugarClass";
-import Nota from "../clases/NotaClass";
-import Receta from "../clases/RecetaClass";
-import Medicamento from "../clases/MedicamentoClass";
-import Otros from "../clases/OtrosItemClass";
+import Alimento from "../clases/AlimentoClass.js";
+import Lugar from "../clases/LugarClass.js";
+import Nota from "../clases/NotaClass.js";
+import Receta from "../clases/RecetaClass.js";
+import Medicamento from "../clases/MedicamentoClass.js";
+import Otros from "../clases/OtrosItemClass.js";
 import {
   alimentoSchema,
   lugarSchema,
