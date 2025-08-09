@@ -51,15 +51,18 @@ export default function ModalAgregar({ tipo, closeModal }) {
     return null;
   }
 
-  // funciones
   /**
    * Maneja la lógica para agregar diferentes tipos de elementos (alimentos, lugares, notas, recetas, medicamentos, otros) al store.
-   * Previene duplicados y valida los datos según el tipo de elemento.
-   * Muestra mensajes de éxito o error mediante un sistema de notificaciones (toast).
-   * Limpia el formulario al finalizar.
+   * - Previene duplicados.
+   * - Valida los datos usando esquemas Zod específicos para cada tipo.
+   * - Muestra mensajes de error claros usando los mensajes generados por Zod.
+   * - Muestra mensajes de éxito mediante el sistema de notificaciones (toast).
+   * - Limpia el formulario al finalizar.
    *
    * @param {React.FormEvent} e - El evento de envío del formulario.
    * @param {string} tipo - El tipo de elemento a agregar. Puede ser "alimentos", "lugares", "notas", "recetas", "medicamentos" u "otros".
+   * @description
+   * Utiliza los esquemas Zod para validar los datos antes de crear el elemento. Si la validación falla, muestra los mensajes de error específicos en el toast. Si la validación es exitosa, agrega el elemento al store y muestra un mensaje de éxito.
    */
   function handleAgregar(e, tipo) {
     e.preventDefault();
