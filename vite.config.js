@@ -6,6 +6,9 @@ import { VitePWA } from "vite-plugin-pwa";
 // configurar después vitePWA
 export default defineConfig({
   plugins: [react(), tailwindcss(), VitePWA({})],
+  build: {
+    chunkSizeWarningLimit: 1000 // Límite aumentado a 1000 kB
+  },
   // Configuración de pruebas con Vitest
   test: {
     globals: true,
