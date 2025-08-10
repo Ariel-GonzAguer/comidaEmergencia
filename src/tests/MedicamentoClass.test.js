@@ -1,6 +1,6 @@
 /* eslint-env vitest */
 import { describe, it, expect, vi } from 'vitest';
-import Medicamento from '../clases/medicamentoClass.js';
+import Medicamento from '../clases/MedicamentoClass.js';
 
 describe('Medicamento', () => {
   // Mock crypto.randomUUID

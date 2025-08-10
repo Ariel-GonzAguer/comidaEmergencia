@@ -19,7 +19,7 @@ import { useState } from "react";
 import useStore from "../stores/useStore";
 
 // clases
-import RecetaClass from "../clases/recetaClass.js";
+import RecetaClass from "../clases/RecetaClass.js";
 
 // estrategia de toast
 import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
