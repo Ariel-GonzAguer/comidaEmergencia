@@ -1,112 +1,162 @@
 # ComidaEmergencia
 
-Este proyecto es una aplicación de gestión de alimentos, medicamentos, notas, recetas y otros recursos para situaciones de emergencia. Está desarrollado en React con Zustand para el manejo de estado global y Firebase como backend para autenticación y almacenamiento de datos.
+Aplicación Web de Código Abierto / Open Source para gestionar alimentos, medicamentos, notas, recetas y recursos en emergencias.
+**React + Vite + Zustand + Firebase + Tailwind + Vitest**
 
-## Características principales
+<p align="left">
+   <a href="https://vercel.com/" target="_blank"><img alt="Vercel" src="https://img.shields.io/badge/Vercel-Deploy-black?logo=vercel" /></a>
+   <a href="https://firebase.google.com/" target="_blank"><img alt="Firebase" src="https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?logo=firebase&logoColor=black" /></a>
+   <a href="https://tailwindcss.com/" target="_blank"><img alt="Tailwind CSS" src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss&logoColor=white" /></a>
+   <a href="https://zustand-demo.pmnd.rs/" target="_blank"><img alt="Zustand" src="https://img.shields.io/badge/Zustand-Estado-8A2BE2" /></a>
+   <a href="https://vitejs.dev/" target="_blank"><img alt="Vite" src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white" /></a>
+   <a href="https://vitest.dev/" target="_blank"><img alt="Vitest" src="https://img.shields.io/badge/Vitest-Tests-6E9F18?logo=vitest&logoColor=white" /></a>
+   <a href="https://zod.dev/" target="_blank"><img alt="Zod" src="https://img.shields.io/badge/Zod-Validaci%C3%B3n-3E67B1" /></a>
+   <a href="https://react.dev/" target="_blank"><img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" /></a>
+   <a href="https://opensource.org/licenses/AGPL-3.0" target="_blank"><img alt="Open Source" src="https://img.shields.io/badge/Open%20Source-AGPL--3-00B200?logo=opensourceinitiative&logoColor=white" /></a>
+</p>
 
-- Gestión de alimentos, medicamentos, lugares, notas, recetas y otros ítems.
-- Persistencia local y sincronización en tiempo real con Firestore.
-- Autenticación de usuarios con Firebase Auth.
-- Edición y eliminación de elementos con confirmación y notificaciones (Sonner).
-- Interfaz responsiva y accesible.
-- Protección de rutas y manejo de sesiones.
+## 🟢 Proyecto Código Abierto / Open Source (AGPL-3)
 
-## Estructura del proyecto
+Este proyecto es Código Abierto bajo licencia AGPL-3. Puede usarlo, modificarlo y compartirlo respetando los términos de la licencia. Aceptamos issues y pull requests.
 
+- Lea: [`CONTRIBUTING.md`](./CONTRIBUTING.md) y [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
+- Lea los archivos en la carpeta [`documentacion`](./documentacion).
+- Licencia: [`LICENCE.txt`](./LICENCE.txt)
+
+## ✨ Características
+
+- Gestión de alimentos, medicamentos, lugares, notas y recetas.
+- Sincronización con Firestore y persistencia local (Zustand persist).
+- Autenticación con Firebase Auth (email/contraseña).
+- Notificaciones (Sonner) y UI responsiva.
+- PWA con Vite (instalable en escritorio/móvil).
+
+## 🧰 Stack
+
+- Frontend: React 19 + Vite 7 + Tailwind 4
+- Estado: Zustand 5 (con Immer)
+- Backend/DB: Firebase 12 (Auth + Firestore)
+- API IA: Función serverless en `api/openAI_RecipeService.js` (OpenAI)
+- Calidad: ESLint 9, Vitest 3 (jsdom)
+- Deploy: Vercel (vercel.json)
+
+## 🚀 Empezar en 3 pasos
+
+1. Clonar e instalar
+
+```bash
+git clone https://github.com/Ariel-GonzAguer/comidaEmergencia.git
+cd comidaEmergencia
+npm install
 ```
+
+2. Configurar variables de entorno
+
+Crear un archivo `.env` en la raíz con tus credenciales de Firebase (todas deben empezar con `VITE_`):
+
+```env
+VITE_FIREBASE_API_KEY=tu_api_key
+VITE_FIREBASE_AUTH_DOMAIN=tu_auth_domain
+VITE_FIREBASE_PROJECT_ID=tu_project_id
+VITE_FIREBASE_STORAGE_BUCKET=tu_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
+VITE_FIREBASE_APP_ID=tu_app_id
+
+# Firestore: documento y colección usados por el servicio
+VITE_FIREBASE_DOC=tu_documento
+VITE_FIREBASE_COLECCION=tu_coleccion
+```
+
+Para la IA (servicio de recetas) añade la clave solo en el entorno del servidor (local con Vercel o en Vercel Cloud):
+
+```env
+OPENAI_API_KEY=tu_clave_openai
+```
+
+3. Ejecutar en desarrollo
+
+```bash
+npm run dev
+```
+
+Opcional/Recomendado (para probar la API serverless localmente):
+
+```bash
+vercel dev
+```
+
+## 🧪 Tests y calidad
+
+- Ejecutar pruebas (Vitest):
+
+```bash
+npm run test
+```
+
+- Lint (ESLint):
+
+```bash
+npm run lint
+```
+
+## 🧭 Uso básico
+
+1. Inicia sesión (Firebase Auth). Si no tienes usuario, configúralo en tu proyecto de Firebase.
+2. Navega por las secciones: Comida, Medicamentos, Lugares, Notas y Recetas.
+3. Generador de Receta IA: ingresa ingredientes y envía; se hace POST a `/api/openAI_RecipeService` y se muestra la receta.
+4. Guarda y edita datos; se sincronizan con Firestore.
+
+## 🏗️ Estructura (resumen)
+
+```text
 comidaEmergencia/
-├── api/
-│   └── openAI_RecipeService.js
-├── documentacion/
-│   ├── clases.md
-│   └── ...
-├── public/
-│   └── OrangeCat_SVG.svg
+├── api/                      # Funciones serverless (OpenAI)
 ├── src/
-│   ├── App.jsx
-│   ├── index.css
-│   ├── main.jsx
-│   ├── clases/
-│   │   ├── AlimentoClass.js
-│   │   ├── Medicamento.js
-│   │   └── ...
-│   ├── componentes/
-│   │   ├── AgregarButton.jsx
-│   │   ├── AgregarModal.jsx
-│   │   └── ...
-│   ├── firebase/
-│   │   └── firebaseConfig.js
-│   ├── hooks/
-│   ├── layouts/
-│   │   └── BaseLayout.jsx
-│   ├── paginas/
-│   │   ├── Medicamentos.jsx
-│   │   ├── Comida.jsx
-│   │   ├── FAQs.jsx
-│   │   └── ...
-│   ├── scripts/
-│   │   └── estrategias/
-│   │       └── toastStrategy/
-│   │           ├── index.js
-│   │           ├── toastStrategiesObject.js
-│   │           └── validacion.js
-│   ├── servicios/
-│   │   └── firebaseService.js
-│   ├── stores/
-│   │   ├── useAuthStore.js
-│   │   └── useStore.js
-│   └── tests/
-│       ├──setupTests.js
-│       └── ...
-├── .gitignore
-├── CODE_OF_CONDUCT.md
-├── LICENCE.txt
-├── README.md
-├── eslint.config.js
-├── package.json
+│   ├── componentes/          # UI y navegación
+│   ├── paginas/              # Vistas
+│   ├── stores/               # Zustand (auth, estado)
+│   ├── servicios/            # Firebase/Firestore, Zod
+│   ├── firebase/             # Configuración Firebase
+│   └── tests/                # Vitest setup
+├── documentacion/            # Guías (OpenAI, Firebase, Vercel, etc.)
+├── vercel.json
 ├── vite.config.js
-└── index.html
+└── eslint.config.js
 ```
 
-- `src/componentes/`: Componentes de React para la UI y navegación.
-- `src/clases/`: Clases de dominio para alimentos, lugares, recetas, etc.
-- `src/paginas/`: Vistas principales de la app.
-- `src/stores/`: Stores de Zustand para el manejo de estado global y autenticación.
-- `src/servicios/`: Servicios para interacción con Firebase.
-- `src/scripts/estrategias/`: Estrategias..
-- `src/layouts/`: Componentes de layout y estructura general.
-- `src/firebase/`: Configuración de Firebase.
-- `public/`: Archivos estáticos.
-- `api/`: Servicios externos (por ejemplo, integración con OpenAI).
-- `documentacion/`: Documentos de referencia y ayuda.
+## ☁️ Despliegue en Vercel
 
-## Instalación y uso
+1. Importa el repo en Vercel y deploy automático, o usa CLI:
 
-1. Clone el repositorio y entre a la carpeta del proyecto.
-2. Instala las dependencias:
-   ```bash
-   npm install
-   ```
-3. Configure sus credenciales de Firebase en `/src/firebase/firebaseConfig.js`. La API KEY es recomendable declararla en un archivo .env
-4. Inicie la aplicación:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm i -g vercel
+vercel
+```
 
-## Atribución de assets
+2. En Vercel, define variables de entorno (Firebase y `OPENAI_API_KEY`).
+3. Para desarrollo local con API: `vercel dev`.
 
-- El gato animado mostrado durante el loading fue adquirido en [loading.io](https://loading.io/) bajo licencia comercial.
-- Su uso en este proyecto open source está permitido según los términos de la licencia vigente al momento de la compra.
-- Si reutiliza este asset, revise los términos de loading.io y adquiera su propia licencia si es necesario.
+Detalles en `documentacion/vercel.md`.
 
-## CONTRIBUYENTES
+## 🤝 Cómo contribuir
+
+**Primero:** Revisa `CONTRIBUTING.md` para lineamientos y `STYLE_GUIDE.md` para estilo de código.
+
+1. Fork ➜ rama (`feat/mi-mejora` o `fix/mi-bug`).
+2. Cambios con commits claros según la convención del proyecto.
+3. PR llenando la plantilla.
+4. Respeta el Código de Conducta.
+
+## Licencia y assets
+
+- Licencia principal: **AGPL-3** (`LICENCE.txt`).
+- Asset del gato animado: adquirido en [loading.io](https://loading.io/) con licencia comercial. Si lo reutiliza, adquiera su propia licencia.
+
+## Créditos
 
 - Ariel GonzaAgüero
 - Liany Var
 
-
 <div align="center">
-  <p>Hecho libre para todo el mundo 🌍</p>
-  <p>⭐ ¡Dele una estrella si le gusta el proyecto!</p>
-  <p> Proyecto open source bajo licencia AGPL-3 </p>
+   <p>Hecho libre para todo el mundo 🌍 — si le sirve, deje una ⭐</p>
 </div>
