@@ -13,7 +13,7 @@
 import { useRef } from "react";
 
 // clases
-import Alimento from "../clases/AlimentoClass.js";
+import Alimento from "../clases/alimentoClass.js";
 import Lugar from "../clases/LugarClass.js";
 import Nota from "../clases/NotaClass.js";
 import Receta from "../clases/RecetaClass.js";
