@@ -222,5 +222,80 @@ La diferencia principal entre "Código Libre" y "Código Abierto" radica en su e
 ---
 
 ## EXTRAS:
-- hablar sobre instrucciones para Copilot (.github/copilot-instructions.md)[https://copilot-instructions.md/]
+
+- hablar sobre instrucciones para Copilot (.github/copilot-instructions.md)[https://copilot-instructions.md/#main-content-es]
 - instalar mcp de GitHub y Context7 (https://code.visualstudio.com/mcp)
+
+### Model Context Protocol (MCP)
+
+Es un estándar abierto desarrollado por OpenAI para que diferentes aplicaciones, APIs o servicios puedan comunicarse con modelos de IA de forma estructurada.
+
+MCP permite que un modelo (como Chat GPT o GitHub Copilot) tenga acceso seguro y controlado a fuentes de datos externas o herramientas.
+
+La idea es que un modelo pueda:
+
+- Buscar información en tu sistema.
+- Ejecutar comandos.
+- Consultar bases de datos.
+- Usar APIs de terceros.
+
+Todo esto de forma segura, auditable y modular.
+
+Los dos MCP que vamos a instalar hoy son **Context7** y **MCP de GitHub**.
+
+### Context7
+
+Context7 es un MCP que permite a los modelos de IA acceder a Documentación de código actualizada para LLM y editores de código de IA.
+
+### MCP de GitHub
+
+El MCP de GitHub permite a los modelos interactuar con repositorios de código, realizar búsquedas y obtener información sobre problemas y solicitudes de extracción. Esto facilita la colaboración en proyectos de código abierto.
+
+## Instrucciones para GitHub Copilot
+
+### ¿Qué es `.github/copilot-instructions.md`?
+
+Es un archivo en **Markdown** que se coloca dentro de la carpeta `.github/` de su repositorio, en la raíz del proyecto.  
+En él puede escribir **instrucciones en lenguaje natural** para guiar a GitHub Copilot sobre:
+
+- Cómo escribir el código.
+- Convenciones de estilo y formato.
+- Herramientas y flujos de trabajo que usa.
+- Contexto específico del proyecto.
+
+Estas instrucciones **no se muestran al usuario final**, pero se añaden al prompt que recibe Copilot cada vez que lo usas.
+
+> Estas instrucciones son principalmente para uso en el Chat.
+
+---
+
+## 📄 Ejemplo básico de `copilot-instructions.md`
+
+```markdown
+# Instrucciones para Copilot
+
+**Idioma obligatorio:** Español (es-ES o es-LA).  
+Todos los mensajes de commit, comentarios de código, documentación y respuestas en el chat **deben** estar redactados completamente en español, salvo los nombres de variables o funciones.
+
+Cuando se genere un mensaje de commit:
+
+- Usar el modo imperativo en español.
+- Describir claramente el cambio realizado.
+- No usar frases en inglés.
+```
+### Escritura de instrucciones personalizadas efectivas
+Las instrucciones que agregue al archivo `.github/copilot-instructions.md` deben ser instrucciones breves e independientes que aporten contexto o información relevante para complementar las preguntas del chat de las personas usuarias.
+
+Es poco probable que los siguientes tipos de instrucciones funcionen correctamente y podrían causar problemas con otras áreas de Copilot:
+
+- Solicitudes para consultar recursos externos al formular una respuesta
+- Instrucciones para responder con un estilo específico
+- Solicitudes para responder siempre con cierto nivel de detalle
+
+
+Por lo tanto, es poco probable que las siguientes instrucciones tengan el resultado esperado:
+
+- Siempre siga los estilos de codificación definidos en styleguide.md en el repositorio my-org/my-repo al generar código.
+- Use @terminal al responder preguntas sobre Git.
+- Responda a todas las preguntas con un lenguaje informal y de estilo amigable.
+- Responda a todas las preguntas con menos de 1000 caracteres y palabras de no más de 12 caracteres.
