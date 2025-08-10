@@ -220,3 +220,7 @@ La diferencia principal entre "Código Libre" y "Código Abierto" radica en su e
 - Inspirar a que comiencen su propio camino en el open source.
 
 ---
+
+## EXTRAS:
+- hablar sobre instrucciones para Copilot (.github/copilot-instructions.md)[https://copilot-instructions.md/]
+- instalar mcp de GitHub y Context7 (https://code.visualstudio.com/mcp)
