@@ -13,12 +13,12 @@
 import { useRef } from "react";
 
 // clases
-import Alimento from "../clases/AlimentoClass.js";
-import Lugar from "../clases/LugarClass.js";
-import Nota from "../clases/NotaClass.js";
-import Receta from "../clases/RecetaClass.js";
-import Medicamento from "../clases/MedicamentoClass.js";
-import Otros from "../clases/OtrosItemClass.js";
+import Alimento from "../clases/alimentoClass.js";
+import Lugar from "../clases/lugarClass.js";
+import Nota from "../clases/notaClass.js";
+import Receta from "../clases/recetaClass.js";
+import Medicamento from "../clases/medicamentoClass.js";
+import Otros from "../clases/otrosItemClass.js";
 
 // esquemas validación zod
 import {
