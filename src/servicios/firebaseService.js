@@ -2,8 +2,8 @@
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
-const documento = "casa"; // nombre del documento en Firestore
-const coleccion = "emergenciaData"; // nombre de la colección en Firestore
+const documento = import.meta.env.VITE_FIREBASE_DOC; // nombre del documento en Firestore
+const coleccion = import.meta.env.VITE_FIREBASE_COLECCION; // nombre de la colección en Firestore
 
 // Array de claves válidas para los campos
 // agregar más claves según sea necesario

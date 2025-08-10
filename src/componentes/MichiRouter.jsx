@@ -1,7 +1,14 @@
+/**
+ * Componente MichiRouter
+ * Define las rutas principales de la aplicación usando el enrutador MichiRouter.
+ * Cada ruta puede estar protegida por el componente Protected.
+ * El layout principal es BaseLayout.
+ */
+
 // enrutador
 import { RouterProvider as MichiProvider } from "@arielgonzaguer/michi-router";
 
-// componentes
+// componentes de páginas
 import Login from "../paginas/Login.jsx";
 import Home from "../paginas/Home.jsx";
 import Comida from "../paginas/Comida.jsx";
@@ -15,12 +22,14 @@ import Otros from "../paginas/Otros.jsx";
 // protector de rutas
 import Protected from "../componentes/Protected.jsx";
 
-// layout
+// layout principal
 import BaseLayout from "../layouts/BaseLayout.jsx";
 
-// rutas
+// Definición de rutas de la app
 const rutas = [
+  // Ruta de login
   { path: "/", component: <Login /> },
+  // Rutas protegidas
   {
     path: "/home",
     component: (
@@ -87,6 +96,11 @@ const rutas = [
   },
 ];
 
+/**
+ * Componente principal del enrutador.
+ * Renderiza las rutas definidas y el layout.
+ * Si la ruta no existe, muestra "Página no encontrada".
+ */
 export default function MichiRouter() {
   return (
     <MichiProvider routes={rutas} layout={BaseLayout}>

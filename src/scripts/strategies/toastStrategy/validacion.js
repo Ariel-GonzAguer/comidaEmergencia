@@ -1,3 +1,23 @@
+/**
+ * Función validarEstrategia
+ * Valida el tipo y el payload para mostrar notificaciones (toast) en la aplicación.
+ * Permite controlar los tipos de notificación y los datos requeridos para cada caso.
+ *
+ * Tipos válidos:
+ * - success: notificación de éxito
+ * - error: notificación de error
+ * - eliminar: notificación para eliminar un elemento (requiere key e id)
+ * - default: notificación genérica
+ *
+ * Reglas de validación:
+ * - El payload debe ser un objeto.
+ * - El tipo debe estar en la lista de tipos válidos.
+ * - Para 'eliminar', el payload debe incluir 'key' y 'id', y la key debe ser válida.
+ *
+ * @param {string} tipo - Tipo de notificación a mostrar.
+ * @param {Object} payload - Datos asociados a la notificación.
+ * @returns {true|undefined} Retorna true si la validación es exitosa, undefined si hay error.
+ */
 // data
 import { keysArray } from '../../../servicios/firebaseService'
 

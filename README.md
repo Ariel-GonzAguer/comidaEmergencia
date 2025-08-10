@@ -93,11 +93,16 @@ comidaEmergencia/
    npm run dev
    ```
 
+## Atribución de assets
+
+- El gato animado mostrado durante el loading fue adquirido en [loading.io](https://loading.io/) bajo licencia comercial.
+- Su uso en este proyecto open source está permitido según los términos de la licencia vigente al momento de la compra.
+- Si reutiliza este asset, revise los términos de loading.io y adquiera su propia licencia si es necesario.
+
 ## CONTRIBUYENTES
 
 - Ariel GonzaAgüero
 - Liany Var
-- 
 
 
 <div align="center">

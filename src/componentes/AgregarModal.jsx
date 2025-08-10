@@ -1,3 +1,14 @@
+/**
+ * Componente ModalAgregar
+ * Muestra un modal para agregar un nuevo elemento (alimento, lugar, nota, receta, medicamento, otros).
+ * Valida los datos con Zod y utiliza las clases correspondientes para instanciar el elemento.
+ * Muestra mensajes de error y éxito mediante el sistema de notificaciones (toast).
+ *
+ * Props:
+ * - tipo: string que indica el tipo de elemento a agregar
+ * - closeModal: función para cerrar el modal
+ */
+
 // hooks
 import { useRef } from "react";
 
@@ -8,6 +19,8 @@ import Nota from "../clases/NotaClass.js";
 import Receta from "../clases/RecetaClass.js";
 import Medicamento from "../clases/MedicamentoClass.js";
 import Otros from "../clases/OtrosItemClass.js";
+
+// esquemas validación zod
 import {
   alimentoSchema,
   lugarSchema,
@@ -29,7 +42,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const store = useStore();
   const { agregarElemento, lugares } = useStore();
 
-  // refs
+  // refs para los campos del formulario
   const nombreRef = useRef();
   const ingredientesRecetaRef = useRef();
   const instruccionesRecetaRef = useRef();
@@ -41,32 +54,27 @@ export default function ModalAgregar({ tipo, closeModal }) {
   const tipoRef = useRef();
   const lugarRef = useRef();
 
-  // validar tipo para desarrollo
+  // Validar tipo para desarrollo
   if (!Object.keys(store).includes(tipo)) {
     console.error(
-      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(
-        ", "
-      )}.`
+      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(", ")}.`
     );
     return null;
   }
 
   /**
-   * Maneja la lógica para agregar diferentes tipos de elementos (alimentos, lugares, notas, recetas, medicamentos, otros) al store.
-   * - Previene duplicados.
-   * - Valida los datos usando esquemas Zod específicos para cada tipo.
-   * - Muestra mensajes de error claros usando los mensajes generados por Zod.
-   * - Muestra mensajes de éxito mediante el sistema de notificaciones (toast).
-   * - Limpia el formulario al finalizar.
-   *
+   * Maneja la lógica para agregar diferentes tipos de elementos al store.
+   * Valida los datos usando esquemas Zod específicos para cada tipo.
+   * Muestra mensajes de error claros usando los mensajes generados por Zod.
+   * Muestra mensajes de éxito mediante el sistema de notificaciones (toast).
+   * Limpia el formulario al finalizar.
    * @param {React.FormEvent} e - El evento de envío del formulario.
-   * @param {string} tipo - El tipo de elemento a agregar. Puede ser "alimentos", "lugares", "notas", "recetas", "medicamentos" u "otros".
-   * @description
-   * Utiliza los esquemas Zod para validar los datos antes de crear el elemento. Si la validación falla, muestra los mensajes de error específicos en el toast. Si la validación es exitosa, agrega el elemento al store y muestra un mensaje de éxito.
+   * @param {string} tipo - El tipo de elemento a agregar.
    */
   function handleAgregar(e, tipo) {
     e.preventDefault();
 
+    // Prevenir duplicados
     if (store[tipo][nombreRef.current.value]) {
       mostrarToastStrategy("default", {
         mensaje: `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`,
@@ -76,6 +84,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
     try {
       let validacion;
+      // Lógica para cada tipo de elemento
       if (tipo === "alimentos") {
         // Prevenir si no hay lugares disponibles
         const lugaresArray = Object.keys(lugares);
@@ -122,7 +131,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
           validacion.data.ubicacion
         );
         agregarElemento(nuevoAlimento, tipo);
-        console.log("Nuevo alimento agregado:", nuevoAlimento);
         closeModal();
       } else if (tipo === "lugares") {
         const data = { nombre: nombreRef.current.value };
@@ -137,7 +145,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
         }
         const nuevoLugar = Lugar.crearLugar(validacion.data.nombre);
         agregarElemento(nuevoLugar, tipo);
-        console.log("Nuevo lugar agregado:", nuevoLugar);
         closeModal();
       } else if (tipo === "notas") {
         const data = {
@@ -158,7 +165,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
           validacion.data.contenido
         );
         agregarElemento(nuevaNota, tipo);
-        console.log("Nueva nota agregada:", nuevaNota);
         closeModal();
       } else if (tipo === "recetas") {
         const data = {
@@ -183,7 +189,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
           validacion.data.instrucciones
         );
         agregarElemento(nuevaReceta, tipo);
-        console.log("Nueva receta agregada:", nuevaReceta);
         closeModal();
       } else if (tipo === "medicamentos") {
         const data = {
@@ -208,7 +213,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
           validacion.data.fechaVencimiento
         );
         agregarElemento(nuevoMedicamento, tipo);
-        console.log("Nuevo medicamento agregado:", nuevoMedicamento);
         closeModal();
       } else if (tipo === "otros") {
         const data = {
@@ -229,7 +233,6 @@ export default function ModalAgregar({ tipo, closeModal }) {
           validacion.data.uso
         );
         agregarElemento(nuevoOtro, tipo);
-        console.log("Nuevo otro item agregado:", nuevoOtro);
         closeModal();
       } else {
         console.error(`Tipo "${tipo}" no válido.`);
@@ -246,6 +249,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
     }
   }
 
+  // Renderiza el modal y el formulario según el tipo
   return (
     <dialog
       key={tipo}
@@ -269,6 +273,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           ref={nombreRef}
         />
 
+        {/* Renderiza campos específicos según el tipo de elemento */}
         {tipo === "alimentos" && (
           <>
             <label htmlFor="tipo">Tipo</label>
@@ -388,12 +393,14 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
+        {/* Botón para agregar el elemento */}
         <button
           type="submit"
           className="bg-light-secundary text-background font-bold py-2 px-4 rounded hover:bg-atencion transition-all duration-300 cursor-pointer"
         >
           Agregar
         </button>
+        {/* Botón para cancelar y cerrar el modal */}
         <button
           type="button"
           id="cancelar-agregar-button"

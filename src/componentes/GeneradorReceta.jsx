@@ -1,3 +1,9 @@
+/**
+ * Componente GeneradorRecetas
+ * Permite al usuario generar una receta usando IA a partir de ingredientes ingresados.
+ * Muestra un formulario para ingresar ingredientes y renderiza el resultado usando RecetaIA.
+ */
+
 // hooks
 import { useRef, useState } from "react";
 
@@ -8,6 +14,7 @@ import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 import RecetaIA from "./RecetaIA.jsx";
 
 export default function GeneradorRecetas() {
+  // Estado para la receta generada
   const [receta, setReceta] = useState({
     nombre: "",
     ingredientes: [],
@@ -15,16 +22,26 @@ export default function GeneradorRecetas() {
     instrucciones: "",
   });
 
+  // Estado para mostrar loading
   const [loading, setLoading] = useState(false);
 
+  // Estado para mostrar/ocultar el formulario
   const [openForm, setOpenForm] = useState(false);
 
+  // Referencia al textarea de ingredientes
   const inputRef = useRef("");
 
+  /**
+   * Alterna la visibilidad del formulario de ingredientes.
+   */
   function handleOpenForm() {
     setOpenForm(!openForm);
   }
 
+  /**
+   * Envía los ingredientes a la API de IA y procesa la receta generada.
+   * @param {React.FormEvent} e
+   */
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
@@ -47,6 +64,7 @@ export default function GeneradorRecetas() {
         }),
       });
       const data = await result.json();
+      // Parsea la respuesta de la IA y actualiza el estado de receta
       let recetaGenerada = JSON.parse(data.output.replace(/'/g, '"'));
       setReceta({
         nombre: recetaGenerada.nombre || "",
@@ -75,8 +93,10 @@ export default function GeneradorRecetas() {
     }
   }
 
+  // Renderiza el botón, formulario y resultado de la receta
   return (
     <>
+      {/* Botón para mostrar el formulario de generación de receta */}
       <button
         onClick={handleOpenForm}
         className="bg-light-primary text-background font-bold py-2 px-4 rounded cursor-pointer hover:bg-light-secundary mt-8 mb-4"
@@ -84,6 +104,7 @@ export default function GeneradorRecetas() {
         Generador de Recetas con IA
       </button>
 
+      {/* Formulario para ingresar ingredientes */}
       {openForm && (
         <form
           className="flex flex-col justify-center items-center mt-4 mb-4"
@@ -110,6 +131,7 @@ export default function GeneradorRecetas() {
           </button>
         </form>
       )}
+      {/* Componente para mostrar la receta generada */}
       <RecetaIA
         nombre={receta.nombre}
         ingredientes={receta.ingredientes}

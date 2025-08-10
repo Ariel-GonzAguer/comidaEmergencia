@@ -1,3 +1,17 @@
+/**
+ * Componente RecetaIA
+ * Muestra la receta generada por IA y permite guardarla o eliminarla.
+ * Valida los datos con Zod y utiliza la clase RecetaClass para instanciar la receta.
+ * Muestra un loader mientras se genera la receta.
+ *
+ * Props:
+ * - nombre: nombre de la receta
+ * - ingredientes: lista de ingredientes
+ * - calorias: cantidad de calorías
+ * - instrucciones: pasos para preparar la receta
+ * - loadingState: estado de carga
+ */
+
 // hooks
 import { useState } from "react";
 
@@ -20,12 +34,13 @@ export default function RecetaIA({
   instrucciones,
   loadingState,
 }) {
+  // Estado para saber si la receta fue guardada
   const [guardada, setGuardada] = useState(false);
 
   // store
   const { agregarElemento } = useStore();
 
-  // Actualizar receta cada vez que cambian las props
+  // Construye el objeto receta a partir de las props
   const receta = {
     nombre: nombre || "",
     ingredientes: ingredientes || [],
@@ -33,6 +48,10 @@ export default function RecetaIA({
     instrucciones: instrucciones || "",
   };
 
+  /**
+   * Guarda la receta en el store y en la base de datos.
+   * Valida los datos con Zod y usa RecetaClass para instanciar.
+   */
   async function handleGuardarReceta() {
     try {
       const resultadoValidacion = await recetaSchema.parseAsync(receta);
@@ -53,14 +72,19 @@ export default function RecetaIA({
     }
   }
 
+  /**
+   * Elimina la receta actual y recarga la página.
+   */
   function handleEliminarReceta() {
     window.location.reload();
   }
 
+  // Renderiza loader, receta o nada según el estado
   return (
     <section>
       {loadingState ? (
         <>
+          {/* Loader mientras se genera la receta */}
           <p>Hay un gato creando su receta...</p>
           <img src="/OrangeCat_SVG.svg" alt="Cargando..." />
         </>
@@ -80,6 +104,7 @@ export default function RecetaIA({
               <strong>Instrucciones:</strong> {receta.instrucciones}
             </p>
             <div className="flex justify-between mt-4">
+              {/* Botón para guardar receta */}
               <button
                 type="button"
                 onClick={handleGuardarReceta}
@@ -87,6 +112,7 @@ export default function RecetaIA({
               >
                 Guardar receta
               </button>
+              {/* Botón para eliminar receta, solo si no está guardada */}
               {!guardada && (
                 <button
                   type="button"

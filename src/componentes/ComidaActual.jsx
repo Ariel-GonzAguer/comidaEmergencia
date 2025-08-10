@@ -1,3 +1,9 @@
+/**
+ * Componente ComidaActual
+ * Muestra la tabla de alimentos actuales, permite editar, eliminar y ordenar por diferentes campos.
+ * Utiliza el store para acceder y actualizar los alimentos y lugares.
+ */
+
 // hooks
 import { useState } from "react";
 
@@ -8,32 +14,23 @@ import useStore from "../stores/useStore";
 import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
 
 export default function ComidaActual() {
-  // estados
+  // Estado para saber qué alimento se está editando
   const [editando, setEditando] = useState(null);
+  // Estado para el formulario de edición
   const [form, setForm] = useState({});
-  const [orden, setOrden] = useState("nombre"); // Estado para la ordenación
+  // Estado para el tipo de ordenación
+  const [orden, setOrden] = useState("nombre");
 
-  // store
+  // Obtiene alimentos, lugares y función para actualizar del store
   const { alimentos, lugares, actualizarElemento } = useStore();
 
-  // clase para elementos de la tabla
+  // Clases para estilos de la tabla
   const classTrEditando = "border border-white px-2 py-1 text-black";
   const classTh = "border px-2 py-1";
 
-  // manejar editar
   /**
    * Maneja la edición de un alimento estableciendo el estado de edición y llenando el formulario con los datos del alimento.
-   *
    * @param {Object} alimento - El alimento a editar.
-   * @param {number|string} alimento.id - El identificador único del alimento.
-   * @param {string} alimento.nombre - El nombre del alimento.
-   * @param {number} alimento.cantidad - La cantidad del alimento.
-   * @param {string} alimento.fechaVencimiento - La fecha de vencimiento del alimento.
-   * @param {number} alimento.calorias - Las calorías del alimento.
-   * @param {string} alimento.tipo - El tipo/categoría del alimento.
-   * @param {Object} [alimento.ubicacion] - El objeto de ubicación del alimento.
-   * @param {number|string} [alimento.ubicacion.id] - El identificador único de la ubicación.
-   * @param {string} [alimento.ubicacion.nombre] - El nombre de la ubicación.
    */
   function handleEditar(alimento) {
     setEditando(alimento.id);
@@ -49,13 +46,9 @@ export default function ComidaActual() {
     });
   }
 
-  // manejar cambios en el formulario
   /**
    * Maneja los cambios en los campos del formulario.
-   * - Si el campo cambiado es "ubicacion", actualiza el estado del formulario con el objeto de ubicación seleccionado (id y nombre) desde el array `lugares`.
-   * - Para otros campos, actualiza el estado del formulario con el nuevo valor para el campo correspondiente.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - El evento de cambio generado por el campo de entrada.
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e
    */
   function handleChange(e) {
     if (e.target.name === "ubicacion") {
@@ -71,19 +64,9 @@ export default function ComidaActual() {
     }
   }
 
-  // manejar guardar cambios
   /**
    * Actualiza un alimento existente con los valores del formulario.
-   *
-   * @async
-   * @function handleGuardar
    * @param {string|number} id - El identificador único del alimento a actualizar.
-   * @returns {Promise<void>} Se resuelve cuando la actualización está completa.
-   *
-   * @description
-   * Fusiona los valores actuales del formulario en el alimento especificado, asegurando que
-   * 'cantidad' y 'calorias' se almacenen como números. Después de actualizar, restablece
-   * el estado de edición y muestra una notificación de éxito.
    */
   async function handleGuardar(id) {
     await actualizarElemento("alimentos", id, {
@@ -96,16 +79,18 @@ export default function ComidaActual() {
     mostrarToastStrategy("success", { mensaje: "Alimento actualizado" });
   }
 
-  // manejar cancelar edición
   /**
    * Cancela la acción de edición actual restableciendo el estado de edición a null.
-   * Normalmente se usa para salir del modo de edición sin guardar cambios.
    */
   function handleCancelar() {
     setEditando(null);
   }
 
-  // Función para ordenar alimentos
+  /**
+   * Ordena los alimentos según el campo seleccionado.
+   * @param {Object} alimentosObj - Objeto de alimentos.
+   * @returns {Array} Array de alimentos ordenados.
+   */
   function ordenarAlimentos(alimentosObj) {
     const alimentosArr = Object.entries(alimentosObj);
     switch (orden) {
@@ -129,6 +114,7 @@ export default function ComidaActual() {
     }
   }
 
+  // Renderiza la tabla de alimentos y el formulario de edición
   return (
     <section className="flex flex-col items-center justify-center w-[98%] m-[0_auto] mt-4">
       <h2>Comida Actual</h2>
@@ -161,7 +147,7 @@ export default function ComidaActual() {
           <tbody>
             {ordenarAlimentos(alimentos).map(([id, alimento]) => (
               <tr key={id}>
-                {/* ...modo editar y mostrar datos igual que antes... */}
+                {/* Renderiza modo edición o modo visual según el estado */}
                 {editando === id ? (
                   <>
                     <td className={classTrEditando}>

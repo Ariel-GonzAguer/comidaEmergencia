@@ -1,3 +1,12 @@
+/**
+ * Componente AgregarButton
+ * Muestra un botón para agregar un nuevo elemento del tipo indicado.
+ * Al hacer clic, abre un modal para ingresar los datos del nuevo elemento.
+ *
+ * Props:
+ * - tipo: string que indica el tipo de elemento a agregar (ej: "alimento", "nota", etc.)
+ */
+
 // hooks
 import { useState } from "react";
 
@@ -8,16 +17,21 @@ export default function AgregarButton({ tipo }) {
   // Estado para manejar la visibilidad del modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Función para abrir el modal
+  /**
+   * Abre el modal de agregar elemento.
+   */
   function openModal() {
     setIsModalOpen(true);
   }
 
-  // Función para cerrar el modal
+  /**
+   * Cierra el modal de agregar elemento.
+   */
   function closeModal() {
     setIsModalOpen(false);
   }
 
+  // Renderiza el botón y el modal si corresponde
   return (
     <>
       <button
@@ -27,6 +41,7 @@ export default function AgregarButton({ tipo }) {
       >
         Agregar {tipo}
       </button>
+      {/* Modal para agregar el elemento */}
       {isModalOpen && <AgregarModal tipo={tipo} closeModal={closeModal} />}
     </>
   );
