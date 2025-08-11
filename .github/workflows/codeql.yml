@@ -1,5 +1,11 @@
 name: "CodeQL Advanced"
 
+permissions:
+  actions: read
+  contents: read
+  packages: read
+  security-events: write
+
 on:
   push:
     branches: ["main"]
@@ -8,11 +14,6 @@ on:
   schedule:
     - cron: "17 13 * * 3"
 
-permissions:
-  actions: read
-  contents: read
-  packages: read
-  security-events: write
 
 jobs:
   analyze:
