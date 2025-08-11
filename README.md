@@ -140,12 +140,12 @@ Detalles en `documentacion/vercel.md`.
 
 ## 🤝 Cómo contribuir
 
-**Primero:** Revisa `CONTRIBUTING.md` para lineamientos y `STYLE_GUIDE.md` para estilo de código.
+**Primero:** Revise `CONTRIBUTING.md` para lineamientos y `STYLE_GUIDE.md` para estilo de código.
 
 1. Fork ➜ rama (`feat/mi-mejora` o `fix/mi-bug`).
 2. Cambios con commits claros según la convención del proyecto.
 3. PR llenando la plantilla.
-4. Respeta el Código de Conducta.
+4. Respete el Código de Conducta.
 
 ## Licencia y assets
 
