@@ -52,6 +52,8 @@ class Receta {
   getCalorias() {
     return this.calorias;
   }
+
+  // con este método estático se puede crear una nueva receta sin usar `new`
   static crearReceta(nombre, ingredientes, calorias, instrucciones) {
     return new Receta(nombre, ingredientes, calorias, instrucciones);
   }

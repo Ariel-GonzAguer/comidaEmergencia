@@ -20,7 +20,7 @@
 // componentes
 import AgregarButton from "../componentes/AgregarButton";
 import GeneradorRecetas from "../componentes/GeneradorReceta";
-import CalculadoraCalorias from "../componentes/CalculadoraCalorías";
+import CalculadoraCalorias from "../componentes/CalculadoraCalorias";
 
 // error-bundary
 import { ErrorBoundary } from "react-error-boundary";
