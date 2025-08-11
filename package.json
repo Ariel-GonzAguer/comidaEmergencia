@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "prettierCheck": "npx prettier --check .",
+    "prettierFix": "npx prettier --write ."
   },
   "dependencies": {
     "@arielgonzaguer/michi-router": "^1.3.0",

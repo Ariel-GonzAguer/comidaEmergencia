@@ -1,0 +1,29 @@
+name: Prettier Fix
+
+permissions:
+  actions: read
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - versionAstro
+
+jobs:
+  prettier-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Ejecutar Prettier Fix
+        run: npm run prettierFix
+      - name: Mostrar mensaje si se corrige el formato
+        if: success()
+        run: |
+          echo "✅ El formato de código ha sido corregido automáticamente con Prettier."
+          echo "Revisa los cambios y haz commit si es necesario."
+          echo "Documentación: https://prettier.io/docs/en/cli.html"
