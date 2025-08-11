@@ -1,0 +1,32 @@
+name: Test
+
+permissions:
+  actions: read
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+      - versionAstro
+  pull_request:
+    branches:
+      - main
+      - versionAstro
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Ejecutar pruebas
+        run: npm run test
+      - name: Mostrar mensaje personalizado si fallan las pruebas
+        if: failure()
+        run: |
+          echo "❌ Las pruebas automáticas han fallado."
+          echo "Por favor revisa los errores y corrígelos antes de continuar."
+          echo "Documentación: https://vitest.dev/guide/cli.html"

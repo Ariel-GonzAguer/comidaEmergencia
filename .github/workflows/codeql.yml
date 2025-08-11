@@ -8,12 +8,15 @@ permissions:
 
 on:
   push:
-    branches: ["main"]
+    branches:
+     - main
+     - versionAstro
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
+      - versionAstro
   schedule:
     - cron: "17 13 * * 3"
-
 
 jobs:
   analyze:
@@ -39,17 +42,15 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
 
-      - if: matrix.build-mode == 'manual'
-        shell: bash
-        run: |
-          echo 'If you are using a "manual" build mode for one or more of the' \
-            'languages you are analyzing, replace this with the commands to build' \
-            'your code, for example:'
-          echo '  make bootstrap'
-          echo '  make release'
-          exit 1
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{matrix.language}}"
+      - name: Mostrar mensaje personalizado si falla CodeQL
+        if: failure()
+        run: |
+          echo "❌ La verificación de seguridad con CodeQL ha fallado."
+          echo "Por favor revisa los resultados del análisis en la pestaña 'Security' de GitHub."
+          echo "Corrige las vulnerabilidades detectadas antes de continuar."
+          echo "Documentación: https://docs.github.com/es/code-security/code-scanning/automatically-scanning-code-for-vulnerabilities-and-errors-with-codeql"

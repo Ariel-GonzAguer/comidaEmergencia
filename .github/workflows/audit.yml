@@ -1,0 +1,39 @@
+name: Auditoría de dependencias
+
+permissions:
+  actions: read
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+      - versionAstro
+  pull_request:
+    branches:
+      - main
+      - versionAstro
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Ejecutar auditoría de seguridad y mostrar ayuda si falla
+        run: |
+          npm audit --audit-level=moderate || {
+            echo "❌ Se detectaron vulnerabilidades en las dependencias.";
+            echo "Por favor, revise el reporte de npm audit en el log de este workflow.";
+            echo "Para corregir los problemas, ejecute en su entorno local:";
+            echo "  npm audit";
+            echo "y siga las recomendaciones para actualizar, eliminar o modificar las dependencias afectadas.";
+            echo "Si necesita ayuda, consulte la documentación oficial de npm o abra un issue en el repositorio.";
+            exit 1;
+          }
