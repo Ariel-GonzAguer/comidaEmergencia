@@ -18,19 +18,19 @@
  * @returns {JSX.Element} Página de inicio de sesión
  */
 // hooks
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
 // firebase - autenticación
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
 
 // enrutado
-import { useNavigate } from "@arielgonzaguer/michi-router";
+import { useNavigate } from '@arielgonzaguer/michi-router';
 
 // store de autenticación
-import useAuthStore from "../stores/useAuthStore";
+import useAuthStore from '../stores/useAuthStore';
 // store de comida
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 
 export default function Login() {
   // refs y estados del formulario
@@ -64,17 +64,15 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       setUser(email);
       getFirebaseData();
-      console.log(
-        `"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`
-      );
+      console.log(`"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`);
       setLoading(false);
       // redirigir a la página de inicio
-      navigate("/home");
+      navigate('/home');
     } catch (error) {
       setLoading(false);
       // manejar errores de autenticación
       setError(error.message);
-      alert("Error al iniciar sesión: " + error.message);
+      alert('Error al iniciar sesión: ' + error.message);
       console.log(error.message);
     }
   }
@@ -91,14 +89,7 @@ export default function Login() {
         <label className="text-text" htmlFor="email">
           Email:
         </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="mb-6"
-          ref={emailRef}
-          required
-        />
+        <input type="email" id="email" name="email" className="mb-6" ref={emailRef} required />
 
         <label className="text-text" htmlFor="password">
           Contraseña:

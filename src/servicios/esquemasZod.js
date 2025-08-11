@@ -3,7 +3,7 @@
  * Cada esquema define las reglas de validación para los datos que se reciben y almacenan.
  * Incluye función utilitaria para extraer mensajes de error de Zod.
  */
-import { z } from "zod";
+import { z } from 'zod';
 
 /**
  * Esquema para validar alimentos.
@@ -15,15 +15,15 @@ import { z } from "zod";
  * - ubicacion: objeto con id y nombre
  */
 export const alimentoSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio"),
-  tipo: z.string().min(1, "El tipo es obligatorio"),
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
+  tipo: z.string().min(1, 'El tipo es obligatorio'),
   calorias: z.preprocess(val => Number(val), z.number().int().nonnegative()),
   cantidad: z.preprocess(val => Number(val), z.number().nonnegative()),
-  fechaVencimiento: z.string().min(1, "La fecha de vencimiento es obligatoria"),
+  fechaVencimiento: z.string().min(1, 'La fecha de vencimiento es obligatoria'),
   ubicacion: z.object({
     id: z.string().min(1),
-    nombre: z.string().min(1)
-  })
+    nombre: z.string().min(1),
+  }),
 });
 
 /**
@@ -31,7 +31,7 @@ export const alimentoSchema = z.object({
  * - nombre: string obligatorio
  */
 export const lugarSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio")
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
 });
 
 /**
@@ -40,8 +40,8 @@ export const lugarSchema = z.object({
  * - contenido: string obligatorio
  */
 export const notaSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio"),
-  contenido: z.string().min(1, "El contenido es obligatorio")
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
+  contenido: z.string().min(1, 'El contenido es obligatorio'),
 });
 
 /**
@@ -52,16 +52,16 @@ export const notaSchema = z.object({
  * - instrucciones: string o array de strings (al menos una)
  */
 export const recetaSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio"),
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
   ingredientes: z.union([
-    z.string().min(1, "Los ingredientes son obligatorios"),
-    z.array(z.string().min(1)).min(1, "Debe haber al menos un ingrediente")
+    z.string().min(1, 'Los ingredientes son obligatorios'),
+    z.array(z.string().min(1)).min(1, 'Debe haber al menos un ingrediente'),
   ]),
   calorias: z.preprocess(val => Number(val), z.number().int().nonnegative()),
   instrucciones: z.union([
-    z.string().min(1, "Las instrucciones son obligatorias"),
-    z.array(z.string().min(1)).min(1, "Debe haber al menos una instrucción")
-  ])
+    z.string().min(1, 'Las instrucciones son obligatorias'),
+    z.array(z.string().min(1)).min(1, 'Debe haber al menos una instrucción'),
+  ]),
 });
 
 /**
@@ -72,10 +72,10 @@ export const recetaSchema = z.object({
  * - fechaVencimiento: string obligatorio
  */
 export const medicamentoSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio"),
-  uso: z.string().min(1, "El uso es obligatorio"),
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
+  uso: z.string().min(1, 'El uso es obligatorio'),
   cantidad: z.preprocess(val => Number(val), z.number().nonnegative()),
-  fechaVencimiento: z.string().min(1, "La fecha de vencimiento es obligatoria")
+  fechaVencimiento: z.string().min(1, 'La fecha de vencimiento es obligatoria'),
 });
 
 /**
@@ -84,8 +84,8 @@ export const medicamentoSchema = z.object({
  * - uso: string obligatorio
  */
 export const otrosSchema = z.object({
-  nombre: z.string().min(1, "El nombre es obligatorio"),
-  uso: z.string().min(1, "El uso es obligatorio")
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
+  uso: z.string().min(1, 'El uso es obligatorio'),
 });
 
 /**
@@ -94,12 +94,8 @@ export const otrosSchema = z.object({
  * @returns {string[]} Array de mensajes de error legibles para mostrar al usuario.
  */
 export function obtenerMensajesErrorZod(errorFormat) {
-  if (!errorFormat || typeof errorFormat !== "object") return ["Error de validación desconocido"];
+  if (!errorFormat || typeof errorFormat !== 'object') return ['Error de validación desconocido'];
   return Object.values(errorFormat)
-    .flatMap((campo) =>
-      typeof campo === "object" && campo?._errors
-        ? campo._errors
-        : []
-    )
-    .filter((msg) => msg);
+    .flatMap(campo => (typeof campo === 'object' && campo?._errors ? campo._errors : []))
+    .filter(msg => msg);
 }

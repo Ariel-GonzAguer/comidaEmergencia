@@ -1,9 +1,9 @@
 ---
 name: 🐛 Reporte de Bug
 about: Crear un reporte para ayudarnos a mejorar
-title: "[BUG] [ASTRO | MAIN] "
+title: '[BUG] [ASTRO | MAIN] '
 labels: bug
-assignees: ""
+assignees: ''
 ---
 
 <!-- Agregue en el Título/Title para que rama es el BUG: ASTRO | MAIN. La rama MAIN es React -->

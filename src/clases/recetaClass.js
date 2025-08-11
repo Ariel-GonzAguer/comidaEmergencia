@@ -1,15 +1,15 @@
 /**
  * Clase que representa una receta culinaria.
- * 
+ *
  * @class
  * @classdesc Permite crear y manipular recetas con nombre, ingredientes, calorías e instrucciones.
- * 
+ *
  * @property {string} nombre - Nombre de la receta.
  * @property {Object} ingredientes - Ingredientes de la receta, representados como un objeto.
  * @property {number} calorias - Cantidad de calorías de la receta.
  * @property {string} instrucciones - Instrucciones para preparar la receta.
  * @property {string} id - Identificador único de la receta.
- * 
+ *
  * @method getNombre Obtiene el nombre de la receta.
  * @method getIngredientes Obtiene los ingredientes de la receta.
  * @method getInstrucciones Obtiene las instrucciones de la receta.
@@ -64,7 +64,7 @@ class Receta {
       ingredientes: this.ingredientes,
       calorias: this.calorias,
       instrucciones: this.instrucciones,
-      id: this.id
+      id: this.id,
     };
   }
 }

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useNavigate } from "@arielgonzaguer/michi-router";
-import useAuthStore from "../stores/useAuthStore";
+import { useEffect } from 'react';
+import { useNavigate } from '@arielgonzaguer/michi-router';
+import useAuthStore from '../stores/useAuthStore';
 
 /**
  * Hook para saber si el auth está cargando (puedes ajustar según tu store)
@@ -27,7 +27,7 @@ export default function Protected({ children }) {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      navigate("/");
+      navigate('/');
     }
   }, [user, isLoading, navigate]);
 

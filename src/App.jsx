@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { auth } from "./firebase/firebaseConfig";
-import useAuthStore from "./stores/useAuthStore";
-import MichiRouter from "./componentes/MichiRouter";
-import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from 'react';
+import { auth } from './firebase/firebaseConfig';
+import useAuthStore from './stores/useAuthStore';
+import MichiRouter from './componentes/MichiRouter';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function App() {
   const { setUser, user } = useAuthStore();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async currentUser => {
       if (!currentUser) {
         setUser(null);
       } else {

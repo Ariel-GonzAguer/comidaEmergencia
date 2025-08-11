@@ -1,7 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/forms";
 @plugin "@midudev/tailwind-animations";
-
 
 @theme {
   --color-text: white;

@@ -8,13 +8,13 @@ describe('Medicamento', () => {
   beforeAll(() => {
     Object.defineProperty(global, 'crypto', {
       configurable: true,
-      value: { randomUUID: vi.fn(() => 'mock-uuid') }
+      value: { randomUUID: vi.fn(() => 'mock-uuid') },
     });
   });
   afterAll(() => {
     Object.defineProperty(global, 'crypto', {
       configurable: true,
-      value: originalCrypto
+      value: originalCrypto,
     });
   });
 

@@ -1,6 +1,6 @@
 // firestore
-import { getDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase/firebaseConfig";
+import { getDoc, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig';
 
 const documento = import.meta.env.VITE_FIREBASE_DOC; // nombre del documento en Firestore
 const coleccion = import.meta.env.VITE_FIREBASE_COLECCION; // nombre de la colección en Firestore
@@ -17,7 +17,7 @@ export const keysArray = ['alimentos', 'lugares', 'notas', 'recetas', 'medicamen
  */
 function validarKey(key) {
   if (!keysArray.includes(key)) {
-    console.error("key invalida. Debe ser una de las siguientes:", keysArray.join(", "));
+    console.error('key invalida. Debe ser una de las siguientes:', keysArray.join(', '));
     return null;
   }
   return true;
@@ -39,11 +39,11 @@ export async function getData() {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      console.error("No such document!");
+      console.error('No such document!');
       return null;
     }
   } catch (error) {
-    console.error("Error getting document:", error);
+    console.error('Error getting document:', error);
     return null;
   }
 }
@@ -65,25 +65,25 @@ export async function agregarElementoFB(elemento, key) {
     const docRef = doc(db, coleccion, documento);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      console.error("Ese documento no existe!");
+      console.error('Ese documento no existe!');
       return null;
     }
     const data = docSnap.data();
     if (!data[key] || typeof data[key] !== 'object') {
-      console.error("Ese campo no existe o no es un objeto válido");
+      console.error('Ese campo no existe o no es un objeto válido');
       return null;
     }
     const keyActualizada = {
       ...data[key],
-      [elemento.id]: { ...elemento }
+      [elemento.id]: { ...elemento },
     };
     await updateDoc(docRef, {
-      [key]: keyActualizada
+      [key]: keyActualizada,
     });
-    console.log("Documento actualizado con éxito");
+    console.log('Documento actualizado con éxito');
     return keyActualizada;
   } catch (error) {
-    console.error("Error actualizando documento:", error);
+    console.error('Error actualizando documento:', error);
     throw error;
   }
 }
@@ -105,7 +105,7 @@ export async function eliminarElementoFB(key, id) {
     const docRef = doc(db, coleccion, documento);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      console.error("Ese documento no existe!");
+      console.error('Ese documento no existe!');
       return null;
     }
     const data = docSnap.data();
@@ -116,29 +116,29 @@ export async function eliminarElementoFB(key, id) {
       // Filtrar alimentos que NO pertenezcan al lugar eliminado
       const alimentosOriginal = data.alimentos || {};
       const alimentosActualizada = Object.fromEntries(
-        Object.entries(alimentosOriginal).filter(([, alimento]) => (
-          !(alimento.ubicacion && alimento.ubicacion.id === id)
-        ))
+        Object.entries(alimentosOriginal).filter(
+          ([, alimento]) => !(alimento.ubicacion && alimento.ubicacion.id === id)
+        )
       );
       await updateDoc(docRef, {
         lugares: lugaresActualizada,
         alimentos: alimentosActualizada,
       });
-      console.log("Documento actualizado: lugar y alimentos eliminados con éxito");
+      console.log('Documento actualizado: lugar y alimentos eliminados con éxito');
       return { lugares: lugaresActualizada, alimentos: alimentosActualizada };
     }
     // Eliminar elemento genérico de otro campo
     if (!data[key] || typeof data[key] !== 'object') {
-      console.error("Ese campo no existe o no es un objeto válido");
+      console.error('Ese campo no existe o no es un objeto válido');
       return null;
     }
     const keyActualizada = { ...data[key] };
     delete keyActualizada[id];
     await updateDoc(docRef, { [key]: keyActualizada });
-    console.log("Documento actualizado con éxito");
+    console.log('Documento actualizado con éxito');
     return keyActualizada;
   } catch (error) {
-    console.error("Error actualizando documento:", error);
+    console.error('Error actualizando documento:', error);
     throw error;
   }
 }
@@ -161,25 +161,25 @@ export async function actualizarElementoFB(key, id, nuevoElemento) {
     const docRef = doc(db, coleccion, documento);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      console.error("Ese documento no existe");
+      console.error('Ese documento no existe');
       return null;
     }
     const data = docSnap.data();
     if (!data[key] || typeof data[key] !== 'object') {
-      console.error("Ese campo no existe o no es un objeto válido");
+      console.error('Ese campo no existe o no es un objeto válido');
       return null;
     }
     const keyActualizada = {
       ...data[key],
-      [id]: { ...nuevoElemento }
+      [id]: { ...nuevoElemento },
     };
     await updateDoc(docRef, {
-      [key]: keyActualizada
+      [key]: keyActualizada,
     });
-    console.log("Documento actualizado con éxito");
+    console.log('Documento actualizado con éxito');
     return keyActualizada;
   } catch (error) {
-    console.error("Error actualizando documento:", error);
+    console.error('Error actualizando documento:', error);
     throw error;
   }
 }

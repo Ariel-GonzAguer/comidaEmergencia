@@ -90,13 +90,13 @@ La diferencia principal entre "Código Libre" y "Código Abierto" radica en su e
 
 ### 3.3. Comparativa rápida
 
-| Licencia   | Uso comercial | Código cerrado permitido | Obliga a abrir cambios |
-| ---------- | ------------- | ------------------------ | ---------------------- |
-| MIT        | ✔             | ✔                        | ✘                      |
-| Apache 2.0 | ✔             | ✔                        | ✘                      |
-| GPLv3      | ✔             | ✘                        | ✔                      |
-| AGPLv3     | ✔             | ✘                        | ✔ (incluye uso en web) |
-| MPL 2.0    | ✔             | Parcial                  | Parcial                |
+| Licencia   | Uso comercial | Código cerrado permitido | Obliga a abrir cambios  |
+| ---------- | ------------- | ------------------------ | ----------------------- |
+| MIT        | ✔            | ✔                       | ✘                       |
+| Apache 2.0 | ✔            | ✔                       | ✘                       |
+| GPLv3      | ✔            | ✘                        | ✔                      |
+| AGPLv3     | ✔            | ✘                        | ✔ (incluye uso en web) |
+| MPL 2.0    | ✔            | Parcial                  | Parcial                 |
 
 ---
 
@@ -283,7 +283,9 @@ Cuando se genere un mensaje de commit:
 - Describir claramente el cambio realizado.
 - No usar frases en inglés.
 ```
+
 ### Escritura de instrucciones personalizadas efectivas
+
 Las instrucciones que agregue al archivo `.github/copilot-instructions.md` deben ser instrucciones breves e independientes que aporten contexto o información relevante para complementar las preguntas del chat de las personas usuarias.
 
 Es poco probable que los siguientes tipos de instrucciones funcionen correctamente y podrían causar problemas con otras áreas de Copilot:
@@ -291,7 +293,6 @@ Es poco probable que los siguientes tipos de instrucciones funcionen correctamen
 - Solicitudes para consultar recursos externos al formular una respuesta
 - Instrucciones para responder con un estilo específico
 - Solicitudes para responder siempre con cierto nivel de detalle
-
 
 Por lo tanto, es poco probable que las siguientes instrucciones tengan el resultado esperado:
 

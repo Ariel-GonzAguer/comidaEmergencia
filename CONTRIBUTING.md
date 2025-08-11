@@ -15,6 +15,7 @@ Siga estos pasos para colaborar de manera efectiva y ordenada.
 
 - En su cuenta, haga clic en el botón **Code** y copie la URL.
 - Abra su terminal y ejecute:
+
 ```bash
   git clone https://github.com/{su-usuario}/comidaEmergencia.git
   cd comidaEmergencia
@@ -23,6 +24,7 @@ Siga estos pasos para colaborar de manera efectiva y ordenada.
 ### 3. Cree una rama para su cambio
 
 - Es recomendable crear una rama específica para cada mejora o corrección:
+
 ```bash
   git checkout -b nombre-de-su-rama
 ```
@@ -58,13 +60,15 @@ vercel dev
 ### 7. Haga commit y push
 
 - Añada sus cambios y escriba un mensaje de commit claro:
+
 ```bash
   git add .
   git commit -m "Descripción clara de su cambio"
   git push origin nombre-de-su-rama
 ```
-  > [!TIP]
-  > Si usa la interfaz de VS Code para hacer el commit en la rama main, escriba `ccm` y presione `ctrl` + `barra de espacio`, esto generará una plantilla con la convención de commit.
+
+> [!TIP]
+> Si usa la interfaz de VS Code para hacer el commit en la rama main, escriba `ccm` y presione `ctrl` + `barra de espacio`, esto generará una plantilla con la convención de commit.
 
 ### 8. Abra un Pull Request
 

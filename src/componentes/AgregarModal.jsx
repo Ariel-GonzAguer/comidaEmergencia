@@ -10,15 +10,15 @@
  */
 
 // hooks
-import { useRef } from "react";
+import { useRef } from 'react';
 
 // clases
-import Alimento from "../clases/AlimentoClass.js";
-import Lugar from "../clases/LugarClass.js";
-import Nota from "../clases/NotaClass.js";
-import Receta from "../clases/RecetaClass.js";
-import Medicamento from "../clases/MedicamentoClass.js";
-import Otros from "../clases/OtrosItemClass.js";
+import Alimento from '../clases/AlimentoClass.js';
+import Lugar from '../clases/LugarClass.js';
+import Nota from '../clases/NotaClass.js';
+import Receta from '../clases/RecetaClass.js';
+import Medicamento from '../clases/MedicamentoClass.js';
+import Otros from '../clases/OtrosItemClass.js';
 
 // esquemas validación zod
 import {
@@ -29,13 +29,13 @@ import {
   medicamentoSchema,
   otrosSchema,
   obtenerMensajesErrorZod,
-} from "../servicios/esquemasZod";
+} from '../servicios/esquemasZod';
 
 // store
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+import mostrarToastStrategy from '../scripts/strategies/toastStrategy';
 
 export default function ModalAgregar({ tipo, closeModal }) {
   // store
@@ -56,9 +56,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
   // Validar tipo para desarrollo
   if (!Object.keys(store).includes(tipo)) {
-    console.error(
-      `Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(", ")}.`
-    );
+    console.error(`Tipo "${tipo}" no válido. Debe ser uno de: ${Object.keys(store).join(', ')}.`);
     return null;
   }
 
@@ -76,7 +74,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
 
     // Prevenir duplicados
     if (store[tipo][nombreRef.current.value]) {
-      mostrarToastStrategy("default", {
+      mostrarToastStrategy('default', {
         mensaje: `El elemento ${nombreRef.current.value} ya existe en ${tipo}. Agregue algún diferenciador para evitar confusiones con las fechas de vencimiento o cantidades.`,
       });
       return;
@@ -85,20 +83,20 @@ export default function ModalAgregar({ tipo, closeModal }) {
     try {
       let validacion;
       // Lógica para cada tipo de elemento
-      if (tipo === "alimentos") {
+      if (tipo === 'alimentos') {
         // Prevenir si no hay lugares disponibles
         const lugaresArray = Object.keys(lugares);
         if (lugaresArray.length === 0) {
-          mostrarToastStrategy("error", {
-            mensaje: "No hay lugares disponibles. Agrega un lugar primero.",
+          mostrarToastStrategy('error', {
+            mensaje: 'No hay lugares disponibles. Agrega un lugar primero.',
           });
           return;
         }
         // Buscar el objeto lugar correspondiente por id
         const lugarSeleccionado = lugares[lugarRef.current.value];
         if (!lugarSeleccionado) {
-          mostrarToastStrategy("error", {
-            mensaje: "Selecciona una ubicación válida.",
+          mostrarToastStrategy('error', {
+            mensaje: 'Selecciona una ubicación válida.',
           });
           return;
         }
@@ -115,10 +113,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
         };
         validacion = alimentoSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
@@ -132,41 +129,36 @@ export default function ModalAgregar({ tipo, closeModal }) {
         );
         agregarElemento(nuevoAlimento, tipo);
         closeModal();
-      } else if (tipo === "lugares") {
+      } else if (tipo === 'lugares') {
         const data = { nombre: nombreRef.current.value };
         validacion = lugarSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
         const nuevoLugar = Lugar.crearLugar(validacion.data.nombre);
         agregarElemento(nuevoLugar, tipo);
         closeModal();
-      } else if (tipo === "notas") {
+      } else if (tipo === 'notas') {
         const data = {
           nombre: nombreRef.current.value,
           contenido: contenidoNotaRef.current.value,
         };
         validacion = notaSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
-        const nuevaNota = Nota.crearNota(
-          validacion.data.nombre,
-          validacion.data.contenido
-        );
+        const nuevaNota = Nota.crearNota(validacion.data.nombre, validacion.data.contenido);
         agregarElemento(nuevaNota, tipo);
         closeModal();
-      } else if (tipo === "recetas") {
+      } else if (tipo === 'recetas') {
         const data = {
           nombre: nombreRef.current.value,
           ingredientes: ingredientesRecetaRef.current.value,
@@ -175,10 +167,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
         };
         validacion = recetaSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
@@ -190,7 +181,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
         );
         agregarElemento(nuevaReceta, tipo);
         closeModal();
-      } else if (tipo === "medicamentos") {
+      } else if (tipo === 'medicamentos') {
         const data = {
           nombre: nombreRef.current.value,
           uso: usoRef.current.value,
@@ -199,10 +190,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
         };
         validacion = medicamentoSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
@@ -214,34 +204,30 @@ export default function ModalAgregar({ tipo, closeModal }) {
         );
         agregarElemento(nuevoMedicamento, tipo);
         closeModal();
-      } else if (tipo === "otros") {
+      } else if (tipo === 'otros') {
         const data = {
           nombre: nombreRef.current.value,
           uso: usoRef.current.value,
         };
         validacion = otrosSchema.safeParse(data);
         if (!validacion.success) {
-          mostrarToastStrategy("error", {
+          mostrarToastStrategy('error', {
             mensaje:
-              "Datos inválidos: " +
-              obtenerMensajesErrorZod(validacion.error.format()).join(", "),
+              'Datos inválidos: ' + obtenerMensajesErrorZod(validacion.error.format()).join(', '),
           });
           return;
         }
-        const nuevoOtro = Otros.crearOtrosItem(
-          validacion.data.nombre,
-          validacion.data.uso
-        );
+        const nuevoOtro = Otros.crearOtrosItem(validacion.data.nombre, validacion.data.uso);
         agregarElemento(nuevoOtro, tipo);
         closeModal();
       } else {
         console.error(`Tipo "${tipo}" no válido.`);
         return;
       }
-      mostrarToastStrategy("success", { mensaje: "Elemento agregado" });
+      mostrarToastStrategy('success', { mensaje: 'Elemento agregado' });
     } catch (error) {
-      console.error("Error al agregar elemento:", error);
-      mostrarToastStrategy("error", { mensaje: "Error al agregar elemento" });
+      console.error('Error al agregar elemento:', error);
+      mostrarToastStrategy('error', { mensaje: 'Error al agregar elemento' });
       return;
     } finally {
       // Limpiar los campos del formulario
@@ -259,7 +245,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
     >
       <h2>Agregar {tipo}</h2>
       <form
-        onSubmit={(e) => handleAgregar(e, tipo)}
+        onSubmit={e => handleAgregar(e, tipo)}
         className="flex flex-col gap-2 w-2xs border-4 border-gray-300 p-4 rounded-lg"
       >
         {/* Campos del formulario según el tipo */}
@@ -274,7 +260,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
         />
 
         {/* Renderiza campos específicos según el tipo de elemento */}
-        {tipo === "alimentos" && (
+        {tipo === 'alimentos' && (
           <>
             <label htmlFor="tipo">Tipo</label>
             <input
@@ -289,7 +275,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
               name="lugar"
               id="lugar"
               ref={lugarRef}
-              defaultValue={Object.keys(lugares)[0] || ""}
+              defaultValue={Object.keys(lugares)[0] || ''}
               disabled={Object.keys(lugares).length === 0}
               className="text-background"
             >
@@ -300,14 +286,12 @@ export default function ModalAgregar({ tipo, closeModal }) {
               ))}
             </select>
             {Object.keys(lugares).length === 0 && (
-              <p className="text-red-500 text-xs">
-                Agrega un lugar antes de agregar alimentos.
-              </p>
+              <p className="text-red-500 text-xs">Agrega un lugar antes de agregar alimentos.</p>
             )}
           </>
         )}
 
-        {(tipo === "alimentos" || tipo === "medicamentos") && (
+        {(tipo === 'alimentos' || tipo === 'medicamentos') && (
           <>
             <label htmlFor="cantidad">Cantidad</label>
             <input
@@ -320,7 +304,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "alimentos" || tipo === "recetas") && (
+        {(tipo === 'alimentos' || tipo === 'recetas') && (
           <>
             <label htmlFor="calorias-receta">Calorías</label>
             <input
@@ -333,7 +317,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {tipo === "notas" && (
+        {tipo === 'notas' && (
           <>
             <label htmlFor="contenido-nota">Contenido de la nota</label>
             <textarea
@@ -345,7 +329,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {tipo === "recetas" && (
+        {tipo === 'recetas' && (
           <>
             <label htmlFor="ingredientes-receta">Ingredientes</label>
             <input
@@ -366,11 +350,9 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "medicamentos" || tipo === "alimentos") && (
+        {(tipo === 'medicamentos' || tipo === 'alimentos') && (
           <>
-            <label htmlFor="fecha-vencimiento-medicamento">
-              Fecha de vencimiento
-            </label>
+            <label htmlFor="fecha-vencimiento-medicamento">Fecha de vencimiento</label>
             <input
               type="date"
               id="fecha-vencimiento-medicamento"
@@ -381,7 +363,7 @@ export default function ModalAgregar({ tipo, closeModal }) {
           </>
         )}
 
-        {(tipo === "otros" || tipo === "medicamentos") && (
+        {(tipo === 'otros' || tipo === 'medicamentos') && (
           <>
             <label htmlFor="descripcion-otros">Uso</label>
             <textarea

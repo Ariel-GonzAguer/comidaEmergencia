@@ -5,21 +5,21 @@
  */
 
 // hooks
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+import mostrarToastStrategy from '../scripts/strategies/toastStrategy';
 
 // componentes
-import RecetaIA from "./RecetaIA.jsx";
+import RecetaIA from './RecetaIA.jsx';
 
 export default function GeneradorRecetas() {
   // Estado para la receta generada
   const [receta, setReceta] = useState({
-    nombre: "",
+    nombre: '',
     ingredientes: [],
-    calorias: "",
-    instrucciones: "",
+    calorias: '',
+    instrucciones: '',
   });
 
   // Estado para mostrar loading
@@ -29,7 +29,7 @@ export default function GeneradorRecetas() {
   const [openForm, setOpenForm] = useState(false);
 
   // Referencia al textarea de ingredientes
-  const inputRef = useRef("");
+  const inputRef = useRef('');
 
   /**
    * Alterna la visibilidad del formulario de ingredientes.
@@ -46,50 +46,49 @@ export default function GeneradorRecetas() {
     e.preventDefault();
     setLoading(true);
     setReceta({
-      nombre: "",
+      nombre: '',
       ingredientes: [],
-      calorias: "",
-      instrucciones: "",
-      id: "",
+      calorias: '',
+      instrucciones: '',
+      id: '',
     });
     try {
       setOpenForm(false);
       const result = await fetch(`/api/openAI_RecipeService`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          input: inputRef.current.value.split(","),
+          input: inputRef.current.value.split(','),
         }),
       });
       const data = await result.json();
       // Parsea la respuesta de la IA y actualiza el estado de receta
       let recetaGenerada = JSON.parse(data.output.replace(/'/g, '"'));
       setReceta({
-        nombre: recetaGenerada.nombre || "",
-        ingredientes: [recetaGenerada.ingredientes.join(", ")],
-        calorias: recetaGenerada.calorias || "",
-        instrucciones: recetaGenerada.instrucciones || "",
+        nombre: recetaGenerada.nombre || '',
+        ingredientes: [recetaGenerada.ingredientes.join(', ')],
+        calorias: recetaGenerada.calorias || '',
+        instrucciones: recetaGenerada.instrucciones || '',
         id: recetaGenerada.id,
       });
       setLoading(false); // Desactivar loading tras procesar correctamente
     } catch (err) {
-      console.error("Error al parsear la receta generada:", err);
-      mostrarToastStrategy("error", {
-        mensaje:
-          "No se pudo parsear la receta generada. Mostrando texto original.",
+      console.error('Error al parsear la receta generada:', err);
+      mostrarToastStrategy('error', {
+        mensaje: 'No se pudo parsear la receta generada. Mostrando texto original.',
       });
       setReceta({
-        nombre: "Receta generada (texto)",
+        nombre: 'Receta generada (texto)',
         ingredientes: [],
-        calorias: "",
-        instrucciones: "",
-        id: "",
+        calorias: '',
+        instrucciones: '',
+        id: '',
       });
       setLoading(false);
     } finally {
-      inputRef.current.value = ""; // Limpiar el input después de enviar
+      inputRef.current.value = ''; // Limpiar el input después de enviar
     }
   }
 
@@ -111,14 +110,14 @@ export default function GeneradorRecetas() {
           onSubmit={handleSubmit}
         >
           <p>
-            Escriba los ingredientes con los que quiere que la IA genere la
-            receta. Separe cada ingrediente con una coma.
+            Escriba los ingredientes con los que quiere que la IA genere la receta. Separe cada
+            ingrediente con una coma.
           </p>
           <label htmlFor="ingredientes">
             <textarea
               id="ingredientes"
               placeholder="Ingredientes"
-              defaultValue={receta.ingredientes.join(",")}
+              defaultValue={receta.ingredientes.join(',')}
               ref={inputRef}
               className="resize-none h-32 w-82 text-background"
             />

@@ -1,39 +1,39 @@
-import { create } from "zustand";
-import { immer } from "zustand/middleware/immer";
-import { persist } from "zustand/middleware";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
+import { persist } from 'zustand/middleware';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
 
 const useAuthStore = create()(
   persist(
-    immer((set) => ({
+    immer(set => ({
       user: {
         email: null,
       },
 
-      setUser: (user) =>
-        set((state) => {
+      setUser: user =>
+        set(state => {
           state.user = user;
         }),
-        
+
       logOut: async () => {
         try {
           localStorage.clear();
-          set((state) => {
+          set(state => {
             state.user = null;
           });
 
           await signOut(auth);
         } catch (error) {
-          console.error("Error al cerrar sesión:", error);
+          console.error('Error al cerrar sesión:', error);
           throw error; // Propagamos el error para manejarlo en el componente
         }
       },
     })),
     {
-      name: "useAuthStore", // Nombre del local storage
+      name: 'useAuthStore', // Nombre del local storage
       version: 1, // versión del esquema de almacenamiento
-      partialize: (state) => ({
+      partialize: state => ({
         // solo persistir los estados que queremos
         user: state.user,
       }),

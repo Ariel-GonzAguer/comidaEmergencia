@@ -6,32 +6,32 @@
  */
 
 // enrutador
-import { RouterProvider as MichiProvider } from "@arielgonzaguer/michi-router";
+import { RouterProvider as MichiProvider } from '@arielgonzaguer/michi-router';
 
 // componentes de páginas
-import Login from "../paginas/Login.jsx";
-import Home from "../paginas/Home.jsx";
-import Comida from "../paginas/Comida.jsx";
-import Recetas from "../paginas/Recetas.jsx";
-import FAQs from "../paginas/FAQs.jsx";
-import Notas from "../paginas/Notas.jsx";
-import Lugares from "../paginas/Lugares.jsx";
-import Medicamentos from "../paginas/Medicamentos.jsx";
-import Otros from "../paginas/Otros.jsx";
+import Login from '../paginas/Login.jsx';
+import Home from '../paginas/Home.jsx';
+import Comida from '../paginas/Comida.jsx';
+import Recetas from '../paginas/Recetas.jsx';
+import FAQs from '../paginas/FAQs.jsx';
+import Notas from '../paginas/Notas.jsx';
+import Lugares from '../paginas/Lugares.jsx';
+import Medicamentos from '../paginas/Medicamentos.jsx';
+import Otros from '../paginas/Otros.jsx';
 
 // protector de rutas
-import Protected from "../componentes/Protected.jsx";
+import Protected from '../componentes/Protected.jsx';
 
 // layout principal
-import BaseLayout from "../layouts/BaseLayout.jsx";
+import BaseLayout from '../layouts/BaseLayout.jsx';
 
 // Definición de rutas de la app
 const rutas = [
   // Ruta de login
-  { path: "/", component: <Login /> },
+  { path: '/', component: <Login /> },
   // Rutas protegidas
   {
-    path: "/home",
+    path: '/home',
     component: (
       <Protected>
         <Home />
@@ -39,7 +39,7 @@ const rutas = [
     ),
   },
   {
-    path: "/comida",
+    path: '/comida',
     component: (
       <Protected>
         <Comida />
@@ -47,7 +47,7 @@ const rutas = [
     ),
   },
   {
-    path: "/recetas",
+    path: '/recetas',
     component: (
       <Protected>
         <Recetas />
@@ -55,7 +55,7 @@ const rutas = [
     ),
   },
   {
-    path: "/notas",
+    path: '/notas',
     component: (
       <Protected>
         <Notas />
@@ -63,7 +63,7 @@ const rutas = [
     ),
   },
   {
-    path: "/lugares",
+    path: '/lugares',
     component: (
       <Protected>
         <Lugares />
@@ -71,7 +71,7 @@ const rutas = [
     ),
   },
   {
-    path: "/medicamentos",
+    path: '/medicamentos',
     component: (
       <Protected>
         <Medicamentos />
@@ -79,7 +79,7 @@ const rutas = [
     ),
   },
   {
-    path: "/otros",
+    path: '/otros',
     component: (
       <Protected>
         <Otros />
@@ -87,7 +87,7 @@ const rutas = [
     ),
   },
   {
-    path: "/faqs",
+    path: '/faqs',
     component: (
       <Protected>
         <FAQs />

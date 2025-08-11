@@ -3,8 +3,8 @@
  * Muestra el pie de página con botón para actualizar datos desde Firebase y botón de logout.
  */
 
-import LogOutButton from "../componentes/LogOutButton";
-import useStore from "../stores/useStore";
+import LogOutButton from '../componentes/LogOutButton';
+import useStore from '../stores/useStore';
 
 export default function Footer() {
   // Obtiene la función para refrescar los datos desde Firebase
@@ -15,7 +15,7 @@ export default function Footer() {
    */
   function handleActualizar() {
     getFirebaseData();
-    alert("Datos actualizados desde Firebase");
+    alert('Datos actualizados desde Firebase');
   }
 
   // Renderiza el pie de página con los botones
@@ -25,10 +25,7 @@ export default function Footer() {
       <LogOutButton currentPath={window.location.pathname} />
 
       {/* Botón para actualizar datos desde Firebase */}
-      <button
-        onClick={handleActualizar}
-        className="bg-blue-500 text-white p-2 rounded"
-      >
+      <button onClick={handleActualizar} className="bg-blue-500 text-white p-2 rounded">
         Actualizar
       </button>
     </footer>

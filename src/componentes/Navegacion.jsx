@@ -6,8 +6,8 @@
  * @component
  * @returns {JSX.Element|null} El elemento de la barra de navegación, o null si el usuario no está autenticado o está en la ruta raíz.
  */
-import { useState } from "react";
-import useAuthStore from "../stores/useAuthStore";
+import { useState } from 'react';
+import useAuthStore from '../stores/useAuthStore';
 
 export default function Navegacion() {
   // Estado para saber qué enlace está siendo hovered
@@ -15,21 +15,21 @@ export default function Navegacion() {
 
   // Lista de enlaces de navegación
   const links = [
-    { href: "/home", label: "Inicio" },
-    { href: "/comida", label: "Comida" },
-    { href: "/recetas", label: "Recetas" },
-    { href: "/faqs", label: "FAQs" },
-    { href: "/notas", label: "Notas" },
-    { href: "/lugares", label: "Lugares" },
-    { href: "/medicamentos", label: "Medicamentos" },
-    { href: "/otros", label: "Otros" },
+    { href: '/home', label: 'Inicio' },
+    { href: '/comida', label: 'Comida' },
+    { href: '/recetas', label: 'Recetas' },
+    { href: '/faqs', label: 'FAQs' },
+    { href: '/notas', label: 'Notas' },
+    { href: '/lugares', label: 'Lugares' },
+    { href: '/medicamentos', label: 'Medicamentos' },
+    { href: '/otros', label: 'Otros' },
   ];
 
   // Obtiene el usuario autenticado del store
   const { user } = useAuthStore();
 
   // Si no hay usuario o está en la página principal, no mostrar la barra
-  if (!user || window.location.pathname === "/") {
+  if (!user || window.location.pathname === '/') {
     return null;
   }
 
@@ -46,12 +46,13 @@ export default function Navegacion() {
             // Aplica estilos según el estado hovered
             className={`
               mx-2 my-2
-              ${hovered === null
-                ? "hover:text-atencion-secundary hover:font-bold transition-colors duration-200 hover:no-underline"
-                : hovered === idx
-                ? "text-atencion-secundary font-bold transition-colors duration-200"
-                : "opacity-50 transition-opacity duration-200"}`
-            }
+              ${
+                hovered === null
+                  ? 'hover:text-atencion-secundary hover:font-bold transition-colors duration-200 hover:no-underline'
+                  : hovered === idx
+                    ? 'text-atencion-secundary font-bold transition-colors duration-200'
+                    : 'opacity-50 transition-opacity duration-200'
+              }`}
           >
             {/* Enlace de navegación */}
             <a href={link.href}>{link.label}</a>

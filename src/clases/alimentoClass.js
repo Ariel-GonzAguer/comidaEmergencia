@@ -1,6 +1,6 @@
 /**
  * Clase que representa un alimento con información relevante para su gestión.
- * 
+ *
  * @class
  * @property {string} nombre - Nombre del alimento.
  * @property {string} tipo - Tipo o categoría del alimento.
@@ -9,7 +9,7 @@
  * @property {string} fechaVencimiento - Fecha de vencimiento en formato local (es-ES).
  * @property {string} ubicacion - Ubicación donde se almacena el alimento.
  * @property {string} id - Identificador único del alimento.
- * 
+ *
  * @method getNombre Obtiene el nombre del alimento.
  * @method getTipo Obtiene el tipo del alimento.
  * @method getFechaVencimiento Obtiene la fecha de vencimiento del alimento.
@@ -37,7 +37,7 @@ class Alimento {
     this.fechaVencimiento = new Date(fechaVencimiento).toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
     this.id = `${this.nombre}-${crypto.randomUUID()}`;
   }
@@ -71,7 +71,6 @@ class Alimento {
   static crearAlimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion) {
     return new Alimento(nombre, tipo, calorias, cantidad, fechaVencimiento, ubicacion);
   }
-
 }
 
 export default Alimento;

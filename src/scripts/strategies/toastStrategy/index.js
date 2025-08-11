@@ -1,6 +1,5 @@
-import toastStrategiesObject from "./toastStrategiesObject";
-import validarEstrategia from "./validacion";
-
+import toastStrategiesObject from './toastStrategiesObject';
+import validarEstrategia from './validacion';
 
 /**
  * Muestra una notificación tipo "toast" utilizando la estrategia correspondiente según el tipo especificado.
@@ -16,6 +15,5 @@ function mostrarToastStrategy(tipo, payload) {
   const estrategia = toastStrategiesObject[tipo] || toastStrategiesObject.default;
   estrategia(payload);
 }
-
 
 export default mostrarToastStrategy;

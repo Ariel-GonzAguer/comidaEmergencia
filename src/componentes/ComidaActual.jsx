@@ -5,13 +5,13 @@
  */
 
 // hooks
-import { useState } from "react";
+import { useState } from 'react';
 
 // store
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+import mostrarToastStrategy from '../scripts/strategies/toastStrategy';
 
 export default function ComidaActual() {
   // Estado para saber qué alimento se está editando
@@ -19,14 +19,14 @@ export default function ComidaActual() {
   // Estado para el formulario de edición
   const [form, setForm] = useState({});
   // Estado para el tipo de ordenación
-  const [orden, setOrden] = useState("nombre");
+  const [orden, setOrden] = useState('nombre');
 
   // Obtiene alimentos, lugares y función para actualizar del store
   const { alimentos, lugares, actualizarElemento } = useStore();
 
   // Clases para estilos de la tabla
-  const classTrEditando = "border border-white px-2 py-1 text-black";
-  const classTh = "border px-2 py-1";
+  const classTrEditando = 'border border-white px-2 py-1 text-black';
+  const classTh = 'border px-2 py-1';
 
   /**
    * Maneja la edición de un alimento estableciendo el estado de edición y llenando el formulario con los datos del alimento.
@@ -51,13 +51,11 @@ export default function ComidaActual() {
    * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e
    */
   function handleChange(e) {
-    if (e.target.name === "ubicacion") {
+    if (e.target.name === 'ubicacion') {
       const lugarObj = lugares[e.target.value];
       setForm({
         ...form,
-        ubicacion: lugarObj
-          ? { id: lugarObj.id, nombre: lugarObj.nombre }
-          : null,
+        ubicacion: lugarObj ? { id: lugarObj.id, nombre: lugarObj.nombre } : null,
       });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -69,14 +67,14 @@ export default function ComidaActual() {
    * @param {string|number} id - El identificador único del alimento a actualizar.
    */
   async function handleGuardar(id) {
-    await actualizarElemento("alimentos", id, {
+    await actualizarElemento('alimentos', id, {
       ...alimentos[id],
       ...form,
       cantidad: Number(form.cantidad),
       calorias: Number(form.calorias),
     });
     setEditando(null);
-    mostrarToastStrategy("success", { mensaje: "Alimento actualizado" });
+    mostrarToastStrategy('success', { mensaje: 'Alimento actualizado' });
   }
 
   /**
@@ -94,20 +92,19 @@ export default function ComidaActual() {
   function ordenarAlimentos(alimentosObj) {
     const alimentosArr = Object.entries(alimentosObj);
     switch (orden) {
-      case "nombre":
+      case 'nombre':
         return alimentosArr.sort(([, a], [, b]) =>
-          a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+          a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
         );
-      case "tipo":
+      case 'tipo':
         return alimentosArr.sort(([, a], [, b]) =>
-          a.tipo.localeCompare(b.tipo, "es", { sensitivity: "base" })
+          a.tipo.localeCompare(b.tipo, 'es', { sensitivity: 'base' })
         );
-      case "fechaVencimiento":
+      case 'fechaVencimiento':
         return alimentosArr.sort(
-          ([, a], [, b]) =>
-            new Date(b.fechaVencimiento) - new Date(a.fechaVencimiento)
+          ([, a], [, b]) => new Date(b.fechaVencimiento) - new Date(a.fechaVencimiento)
         );
-      case "calorias":
+      case 'calorias':
         return alimentosArr.sort(([, a], [, b]) => b.calorias - a.calorias);
       default:
         return alimentosArr;
@@ -124,7 +121,7 @@ export default function ComidaActual() {
         <select
           id="ordenar-comida"
           value={orden}
-          onChange={(e) => setOrden(e.target.value)}
+          onChange={e => setOrden(e.target.value)}
           className="border px-2 py-1 rounded text-background w-60"
         >
           <option value="nombre">Nombre (A-Z)</option>
@@ -137,7 +134,15 @@ export default function ComidaActual() {
         <table className="min-w-[600px] border border-gray-300 text-center m-[0_auto]">
           <thead>
             <tr>
-              {["Nombre","Cantidad","Fecha de vencimiento","Calorías","Tipo","Ubicación","Acciones",].map((header) => (
+              {[
+                'Nombre',
+                'Cantidad',
+                'Fecha de vencimiento',
+                'Calorías',
+                'Tipo',
+                'Ubicación',
+                'Acciones',
+              ].map(header => (
                 <th key={header} title={header} className={classTh}>
                   {header}
                 </th>
@@ -196,7 +201,7 @@ export default function ComidaActual() {
                       <select
                         name="ubicacion"
                         className="w-24"
-                        value={form.ubicacion?.id || ""}
+                        value={form.ubicacion?.id || ''}
                         onChange={handleChange}
                       >
                         {Object.entries(lugares).map(([id, lugar]) => (
@@ -233,8 +238,8 @@ export default function ComidaActual() {
                       <button
                         className="bg-error text-white px-2 py-1 rounded cursor-pointer border-2 border-error hover:border-warning"
                         onClick={() =>
-                          mostrarToastStrategy("eliminar", {
-                            key: "alimentos",
+                          mostrarToastStrategy('eliminar', {
+                            key: 'alimentos',
                             id: alimento.id,
                           })
                         }

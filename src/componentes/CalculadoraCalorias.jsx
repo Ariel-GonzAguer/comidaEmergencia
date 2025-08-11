@@ -2,7 +2,7 @@
  * Componente para calcular cuántos días alcanza la comida según calorías disponibles, cantidad de personas y requerimiento diario.
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 
 /**
  * Calcula cuántos días alcanza la comida disponible.
@@ -35,7 +35,7 @@ export default function CalculadoraCalorias({ totalCalorias }) {
    * Maneja el envío del formulario y calcula los días.
    * @param {React.FormEvent} e
    */
-  const manejarSubmit = (e) => {
+  const manejarSubmit = e => {
     e.preventDefault();
     const resultado = calcularDias(
       totalCalorias,
@@ -94,13 +94,12 @@ export default function CalculadoraCalorias({ totalCalorias }) {
         personasRef.current.value > 0 &&
         (dias < 1 ? null : (
           <p>
-            Con {personasRef.current.value} personas consumiendo {caloriasPorDiaRef.current.value} calorías por día, la comida alcanzaría para <strong>{dias.toFixed(2)}</strong> días.
+            Con {personasRef.current.value} personas consumiendo {caloriasPorDiaRef.current.value}{' '}
+            calorías por día, la comida alcanzaría para <strong>{dias.toFixed(2)}</strong> días.
           </p>
         ))}
       {caloriasPorDiaRef.current.value > 0 && personasRef.current.value > 0 && dias < 1 && (
-        <p className="text-error font-bold">
-          No hay suficiente comida para un día.
-        </p>
+        <p className="text-error font-bold">No hay suficiente comida para un día.</p>
       )}
     </section>
   );

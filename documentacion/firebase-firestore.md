@@ -5,10 +5,12 @@ Esta aplicación utiliza Firebase y Firestore para el almacenamiento y gestión 
 ## Pasos para configurar Firebase y Firestore
 
 1. **Crear un proyecto en Firebase:**
+
    - Accede a https://console.firebase.google.com/
    - Crea un nuevo proyecto y agrega una aplicación web.
 
 2. **Obtener las credenciales de configuración:**
+
    - En la sección de configuración del proyecto, busca el bloque de configuración para web.
    - Copia los siguientes valores:
      - `apiKey`
@@ -32,6 +34,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=tu_messaging_sender_id
 VITE_FIREBASE_APP_ID=tu_app_id
 VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id # Opcional
 ```
+
 > [!NOTE]
 > Todas las variables deben comenzar con `VITE_` para que Vite las exponga correctamente en el frontend.
 
@@ -40,10 +43,12 @@ VITE_FIREBASE_MEASUREMENT_ID=tu_measurement_id # Opcional
    - Reinicia el servidor de desarrollo si realizaste cambios en el `.env`.
 
 ## Recomendaciones de seguridad
+
 - **No compartas el archivo `.env` ni sus valores en repositorios públicos.**
 - Agrega `.env` a tu `.gitignore` para evitar que se suba a GitHub.
 
 ## Recursos útiles
+
 - [Documentación oficial de Firebase](https://firebase.google.com/docs/web/setup)
 - [Documentación de Firestore](https://firebase.google.com/docs/firestore)
 

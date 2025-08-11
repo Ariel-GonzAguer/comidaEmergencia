@@ -8,13 +8,13 @@ describe('Alimento Class', () => {
   beforeAll(() => {
     Object.defineProperty(global, 'crypto', {
       configurable: true,
-      value: { randomUUID: vi.fn(() => 'mock-uuid') }
+      value: { randomUUID: vi.fn(() => 'mock-uuid') },
     });
   });
   afterAll(() => {
     Object.defineProperty(global, 'crypto', {
       configurable: true,
-      value: originalCrypto
+      value: originalCrypto,
     });
   });
 
@@ -28,14 +28,7 @@ describe('Alimento Class', () => {
   let alimento;
 
   it('debería crear una instancia válida con campos correctos', () => {
-    alimento = Alimento.crearAlimento(
-      nombre,
-      tipo,
-      calorias,
-      cantidad,
-      fechaInput,
-      ubicacion
-    );
+    alimento = Alimento.crearAlimento(nombre, tipo, calorias, cantidad, fechaInput, ubicacion);
 
     // Verificar propiedades básicas
     expect(alimento).toBeInstanceOf(Alimento);

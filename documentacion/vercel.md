@@ -20,17 +20,17 @@ Esta guía explica cómo desplegar y usar el proyecto ComidaEmergencia en Vercel
 ## 3. Despliegue manual con Vercel CLI
 
 1. Instala Vercel CLI si no lo tienes:
-	```bash
-	npm install -g vercel
-	```
+   ```bash
+   npm install -g vercel
+   ```
 2. Inicia sesión en Vercel:
-	```bash
-	vercel login
-	```
+   ```bash
+   vercel login
+   ```
 3. Desde la raíz del proyecto, ejecuta:
-	```bash
-	vercel
-	```
+   ```bash
+   vercel
+   ```
 4. Sigue las instrucciones para vincular el proyecto y desplegar.
 
 ## 4. Desarrollo local con Vercel
@@ -68,4 +68,5 @@ Las variables de entorno (por ejemplo, para Firebase y OpenAI) se deben agregar 
 - [Guía de despliegue con Vite](https://vitejs.dev/guide/static-deploy.html)
 
 ---
+
 _Última actualización: 09/08/2025_

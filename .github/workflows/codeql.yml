@@ -1,4 +1,4 @@
-name: "CodeQL Advanced"
+name: 'CodeQL Advanced'
 
 permissions:
   actions: read
@@ -9,14 +9,14 @@ permissions:
 on:
   push:
     branches:
-     - main
-     - versionAstro
+      - main
+      - versionAstro
   pull_request:
     branches:
       - main
       - versionAstro
   schedule:
-    - cron: "17 13 * * 3"
+    - cron: '17 13 * * 3'
 
 jobs:
   analyze:
@@ -42,11 +42,10 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
 
-
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: '/language:${{matrix.language}}'
       - name: Mostrar mensaje personalizado si falla CodeQL
         if: failure()
         run: |

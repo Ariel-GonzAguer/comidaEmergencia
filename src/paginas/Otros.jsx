@@ -1,5 +1,5 @@
 // store
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 export default function Otros() {
   // store
   const { otros } = useStore();

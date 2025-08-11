@@ -3,8 +3,8 @@
  * Muestra un botón para cerrar sesión, excepto en la página principal.
  */
 
-import { logOut } from "../firebase/firebaseConfig";
-import { useNavigate } from "@arielgonzaguer/michi-router";
+import { logOut } from '../firebase/firebaseConfig';
+import { useNavigate } from '@arielgonzaguer/michi-router';
 
 /**
  * Botón para cerrar sesión del usuario.
@@ -15,7 +15,7 @@ export default function LogOutButton(currentPath) {
   const navigate = useNavigate();
 
   // No mostrar el botón en la página principal
-  if (currentPath === "/") {
+  if (currentPath === '/') {
     return null;
   }
 
@@ -28,21 +28,21 @@ export default function LogOutButton(currentPath) {
   async function handleLogOut() {
     try {
       await logOut();
-      console.log("Sesión cerrada exitosamente");
-      navigate("/");
+      console.log('Sesión cerrada exitosamente');
+      navigate('/');
     } catch {
-      alert(
-        `Parece que hubo un error al cerrar sesión.`
-      );
+      alert(`Parece que hubo un error al cerrar sesión.`);
     }
   }
 
   // Renderiza el botón de logout
   return (
-    <button onClick={handleLogOut}
+    <button
+      onClick={handleLogOut}
       className="border-2 border-black bg-error px-2 text-background font-bold
        hover:bg-warning hover:text-black
-       transition-all duration-300 ease-in-out cursor-pointer">
+       transition-all duration-300 ease-in-out cursor-pointer"
+    >
       Cerrar Sesión
     </button>
   );

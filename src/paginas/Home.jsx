@@ -18,22 +18,21 @@
  * @returns {JSX.Element} Página principal con dashboard y utilidades
  */
 // componentes
-import AgregarButton from "../componentes/AgregarButton";
-import GeneradorRecetas from "../componentes/GeneradorReceta";
-import CalculadoraCalorias from "../componentes/CalculadoraCalorias";
+import AgregarButton from '../componentes/AgregarButton';
+import GeneradorRecetas from '../componentes/GeneradorReceta';
+import CalculadoraCalorias from '../componentes/CalculadoraCalorias';
 
 // error-bundary
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary } from 'react-error-boundary';
 
 // data
-import { keysArray } from "../servicios/firebaseService";
+import { keysArray } from '../servicios/firebaseService';
 
 // store
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 
 export default function Home() {
-  const { alimentos, medicamentos, lugares, otros, notas, recetas } =
-    useStore();
+  const { alimentos, medicamentos, lugares, otros, notas, recetas } = useStore();
 
   /**
    * Calcula la suma total de calorías de todos los alimentos.
@@ -52,12 +51,12 @@ export default function Home() {
       <ErrorBoundary
         fallback={<div>Something went wrong</div>}
         onError={(error, info) => {
-          console.error("ErrorBoundary caught an error:", error, info);
+          console.error('ErrorBoundary caught an error:', error, info);
         }}
       >
         {/* Botones para agregar cada tipo de elemento */}
         <section className="flex items-center justify-center w-full mt-4 flex-wrap m-[0_auto]">
-          {keysArray.map((key) => {
+          {keysArray.map(key => {
             return <AgregarButton key={key} tipo={key} />;
           })}
         </section>
@@ -68,48 +67,34 @@ export default function Home() {
         <section className="flex items-center justify-between max-w-9/10 gap-10 mt-4 flex-wrap m-[0_auto]">
           <p>
             <strong>Alimentos totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(alimentos).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(alimentos).length}</span>
           </p>
           <p>
             <strong>Medicamentos totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(medicamentos).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(medicamentos).length}</span>
           </p>
           <p>
             <strong>Lugares totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(lugares).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(lugares).length}</span>
           </p>
           <p>
             <strong>Otros totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(otros).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(otros).length}</span>
           </p>
           <p>
             <strong>Notas totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(notas).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(notas).length}</span>
           </p>
           <p>
             <strong>Recetas totales:</strong>
-            <span className="text-atencion-secundary">
-              {Object.entries(recetas).length}
-            </span>
+            <span className="text-atencion-secundary">{Object.entries(recetas).length}</span>
           </p>
         </section>
         {/* Calorías totales y calculadora */}
         <section>
           <h3>
             <strong>Calorías totales: </strong>
-            <span className="text-atencion-secundary">
-              {getTotalCalorias()}
-            </span>
+            <span className="text-atencion-secundary">{getTotalCalorias()}</span>
           </h3>
         </section>
         <CalculadoraCalorias totalCalorias={getTotalCalorias()} />

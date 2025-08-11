@@ -8,10 +8,10 @@
  */
 
 // hooks
-import { useState } from "react";
+import { useState } from 'react';
 
 // componentes
-import AgregarModal from "./AgregarModal";
+import AgregarModal from './AgregarModal';
 
 export default function AgregarButton({ tipo }) {
   // Estado para manejar la visibilidad del modal

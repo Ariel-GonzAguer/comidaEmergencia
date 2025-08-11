@@ -64,12 +64,12 @@ const toastStrategiesObject = {
                 resolve(useStore.getState().eliminarElemento(key, id));
                 reject('Error al eliminar el elemento');
               }, 2000);
-            })
+            });
             toast.promise(resultPromise, {
               loading: 'Eliminando...',
               success: 'Elemento eliminado correctamente',
               error: 'Error al eliminar el elemento',
-            })
+            });
           } catch (error) {
             toast.error('Error al eliminar el elemento');
             console.error('Error al eliminar el elemento:', error);

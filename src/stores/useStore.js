@@ -2,7 +2,12 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
-import { getData, agregarElementoFB, eliminarElementoFB, actualizarElementoFB } from '../servicios/firebaseService';
+import {
+  getData,
+  agregarElementoFB,
+  eliminarElementoFB,
+  actualizarElementoFB,
+} from '../servicios/firebaseService';
 
 /**
  * Store de Zustand para gestionar datos de alimentos y suministros de emergencia, con persistencia e integración de immer.
@@ -25,9 +30,10 @@ import { getData, agregarElementoFB, eliminarElementoFB, actualizarElementoFB } 
  * const alimentos = useStore(state => state.alimentos);
  * await useStore.getState().agregarElemento(nuevoAlimento, 'alimentos');
  */
-const useStore = create()( //change the name of the store
+const useStore = create()(
+  //change the name of the store
   persist(
-    immer((set) => ({
+    immer(set => ({
       // Estados
       alimentos: {},
       medicamentos: {},
@@ -41,7 +47,7 @@ const useStore = create()( //change the name of the store
         try {
           const data = await getData();
           if (data) {
-            set((state) => {
+            set(state => {
               state.alimentos = data.alimentos || {};
               state.medicamentos = data.medicamentos || {};
               state.lugares = data.lugares || {};
@@ -61,35 +67,42 @@ const useStore = create()( //change the name of the store
           const data = await agregarElementoFB(elemento, key);
           if (data) {
             // 1. Actualizar estado local: key
-            set((state) => {
+            set(state => {
               state[key] = { ...state[key], [elemento.id]: elemento };
             });
             // 2. Si es un alimento, actualizar estado local del lugar
             let lugarActualizado;
-            if (key === "alimentos" && elemento.ubicacion && elemento.ubicacion.id) {
+            if (key === 'alimentos' && elemento.ubicacion && elemento.ubicacion.id) {
               const lugarId = elemento.ubicacion.id;
               const storeState = useStore.getState();
               const lugarActual = storeState.lugares[lugarId];
               if (lugarActual) {
-                set((state) => {
+                set(state => {
                   if (!state.lugares[lugarId].alimentos) state.lugares[lugarId].alimentos = {};
                   state.lugares[lugarId].alimentos[elemento.id] = elemento;
                 });
                 // Serializar todos los alimentos a objetos planos
                 const alimentosPlanos = {};
-                const alimentosOriginales = { ...(lugarActual.alimentos || {}), [elemento.id]: elemento };
+                const alimentosOriginales = {
+                  ...(lugarActual.alimentos || {}),
+                  [elemento.id]: elemento,
+                };
                 Object.entries(alimentosOriginales).forEach(([id, alimento]) => {
                   alimentosPlanos[id] = JSON.parse(JSON.stringify(alimento));
                 });
                 lugarActualizado = {
                   ...lugarActual,
-                  alimentos: alimentosPlanos
+                  alimentos: alimentosPlanos,
                 };
               }
             }
             // 3. Actualizar en Firestore el lugar si hubo actualización local
             if (lugarActualizado) {
-              await actualizarElementoFB("lugares", lugarActualizado.id, JSON.parse(JSON.stringify(lugarActualizado)));
+              await actualizarElementoFB(
+                'lugares',
+                lugarActualizado.id,
+                JSON.parse(JSON.stringify(lugarActualizado))
+              );
             }
           }
         } catch (error) {
@@ -102,8 +115,8 @@ const useStore = create()( //change the name of the store
           const data = await eliminarElementoFB(key, id);
           if (data) {
             // Si se eliminó un lugar
-            if (key === "lugares" && data.lugares && data.alimentos) {
-              set((state) => {
+            if (key === 'lugares' && data.lugares && data.alimentos) {
+              set(state => {
                 state.lugares = data.lugares;
                 state.alimentos = data.alimentos;
               });
@@ -111,17 +124,17 @@ const useStore = create()( //change the name of the store
             }
             // Para cualquier otro key, actualizar estado directamente si viene data[key]
             if (data[key]) {
-              set((state) => {
+              set(state => {
                 state[key] = data[key];
               });
               return data;
             }
             // Fallback: eliminar elemento del estado local
-            set((state) => {
+            set(state => {
               delete state[key][id];
             });
             // Si es un alimento, manejar eliminación en lugar
-            if (key === "alimentos") {
+            if (key === 'alimentos') {
               const storeState = useStore.getState();
               let lugarIdEncontrado = null;
               for (const [lugarId, lugar] of Object.entries(storeState.lugares)) {
@@ -131,7 +144,7 @@ const useStore = create()( //change the name of the store
                 }
               }
               if (lugarIdEncontrado) {
-                set((state) => {
+                set(state => {
                   delete state.lugares[lugarIdEncontrado].alimentos[id];
                 });
                 const lugarActual = useStore.getState().lugares[lugarIdEncontrado];
@@ -140,7 +153,11 @@ const useStore = create()( //change the name of the store
                   alimentosPlanos[aid] = JSON.parse(JSON.stringify(alimento));
                 });
                 const lugarActualizado = { ...lugarActual, alimentos: alimentosPlanos };
-                await actualizarElementoFB("lugares", lugarActualizado.id, JSON.parse(JSON.stringify(lugarActualizado)));
+                await actualizarElementoFB(
+                  'lugares',
+                  lugarActualizado.id,
+                  JSON.parse(JSON.stringify(lugarActualizado))
+                );
               }
               return data;
             }
@@ -156,12 +173,12 @@ const useStore = create()( //change the name of the store
         try {
           const data = await actualizarElementoFB(key, id, nuevoElemento);
           if (data) {
-            set((state) => {
+            set(state => {
               const nuevoEstado = { ...state[key], [id]: nuevoElemento };
               state[key] = nuevoEstado;
             });
             // Si es un alimento y cambia de ubicación, moverlo entre lugares
-            if (key === "alimentos" && nuevoElemento.ubicacion && nuevoElemento.ubicacion.id) {
+            if (key === 'alimentos' && nuevoElemento.ubicacion && nuevoElemento.ubicacion.id) {
               const storeState = useStore.getState();
               // Buscar el lugar anterior
               let lugarAnteriorId = null;
@@ -175,7 +192,7 @@ const useStore = create()( //change the name of the store
               // Si cambió de lugar
               if (lugarAnteriorId && lugarAnteriorId !== lugarNuevoId) {
                 // Eliminar del lugar anterior
-                set((state) => {
+                set(state => {
                   if (state.lugares[lugarAnteriorId].alimentos) {
                     delete state.lugares[lugarAnteriorId].alimentos[id];
                   }
@@ -188,12 +205,17 @@ const useStore = create()( //change the name of the store
                 });
                 const lugarAnteriorActualizado = {
                   ...lugarAnterior,
-                  alimentos: alimentosPlanosAnt
+                  alimentos: alimentosPlanosAnt,
                 };
-                await actualizarElementoFB("lugares", lugarAnteriorActualizado.id, JSON.parse(JSON.stringify(lugarAnteriorActualizado)));
+                await actualizarElementoFB(
+                  'lugares',
+                  lugarAnteriorActualizado.id,
+                  JSON.parse(JSON.stringify(lugarAnteriorActualizado))
+                );
                 // Agregar al nuevo lugar
-                set((state) => {
-                  if (!state.lugares[lugarNuevoId].alimentos) state.lugares[lugarNuevoId].alimentos = {};
+                set(state => {
+                  if (!state.lugares[lugarNuevoId].alimentos)
+                    state.lugares[lugarNuevoId].alimentos = {};
                   state.lugares[lugarNuevoId].alimentos[id] = nuevoElemento;
                 });
                 // Serializar y actualizar lugar nuevo en Firestore
@@ -204,12 +226,16 @@ const useStore = create()( //change the name of the store
                 });
                 const lugarNuevoActualizado = {
                   ...lugarNuevo,
-                  alimentos: alimentosPlanosNuevo
+                  alimentos: alimentosPlanosNuevo,
                 };
-                await actualizarElementoFB("lugares", lugarNuevoActualizado.id, JSON.parse(JSON.stringify(lugarNuevoActualizado)));
+                await actualizarElementoFB(
+                  'lugares',
+                  lugarNuevoActualizado.id,
+                  JSON.parse(JSON.stringify(lugarNuevoActualizado))
+                );
               } else if (lugarAnteriorId && lugarAnteriorId === lugarNuevoId) {
                 // Solo actualizar el alimento en el mismo lugar
-                set((state) => {
+                set(state => {
                   state.lugares[lugarNuevoId].alimentos[id] = nuevoElemento;
                 });
                 const lugarNuevo = useStore.getState().lugares[lugarNuevoId];
@@ -219,9 +245,13 @@ const useStore = create()( //change the name of the store
                 });
                 const lugarNuevoActualizado = {
                   ...lugarNuevo,
-                  alimentos: alimentosPlanosNuevo
+                  alimentos: alimentosPlanosNuevo,
                 };
-                await actualizarElementoFB("lugares", lugarNuevoActualizado.id, JSON.parse(JSON.stringify(lugarNuevoActualizado)));
+                await actualizarElementoFB(
+                  'lugares',
+                  lugarNuevoActualizado.id,
+                  JSON.parse(JSON.stringify(lugarNuevoActualizado))
+                );
               }
             }
             return data;
@@ -234,7 +264,7 @@ const useStore = create()( //change the name of the store
     {
       name: 'useStore', // Nombre de la clave en el local storage
       version: 1, // versión del esquema de almacenamiento
-      partialize: (state) => ({
+      partialize: state => ({
         alimentos: state.alimentos,
         medicamentos: state.medicamentos,
         lugares: state.lugares,

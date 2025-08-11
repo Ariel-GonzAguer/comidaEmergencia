@@ -4,8 +4,8 @@
     "body": [
       "${1|feat,fix,docs,style,refactor,test,chore|}(${2:área}): ${3:descripción corta}",
       "",
-      "${4:Descripción más detallada (opcional).}"
+      "${4:Descripción más detallada (opcional).}",
     ],
-    "description": "Mensaje de commit estándar según la guía de estilo"
-  }
+    "description": "Mensaje de commit estándar según la guía de estilo",
+  },
 }

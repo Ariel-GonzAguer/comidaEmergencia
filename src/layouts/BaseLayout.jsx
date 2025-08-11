@@ -1,6 +1,6 @@
-import { Toaster } from "sonner";
-import Footer from "../componentes/Footer";
-import Navegacion from "../componentes/Navegacion";
+import { Toaster } from 'sonner';
+import Footer from '../componentes/Footer';
+import Navegacion from '../componentes/Navegacion';
 
 /**
  * Componente BaseLayout

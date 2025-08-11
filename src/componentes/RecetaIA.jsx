@@ -13,27 +13,21 @@
  */
 
 // hooks
-import { useState } from "react";
+import { useState } from 'react';
 
 // store
-import useStore from "../stores/useStore";
+import useStore from '../stores/useStore';
 
 // clases
-import RecetaClass from "../clases/RecetaClass.js";
+import RecetaClass from '../clases/RecetaClass.js';
 
 // estrategia de toast
-import mostrarToastStrategy from "../scripts/strategies/toastStrategy";
+import mostrarToastStrategy from '../scripts/strategies/toastStrategy';
 
 // validación - zod
-import { recetaSchema } from "../servicios/esquemasZod";
+import { recetaSchema } from '../servicios/esquemasZod';
 
-export default function RecetaIA({
-  nombre,
-  ingredientes,
-  calorias,
-  instrucciones,
-  loadingState,
-}) {
+export default function RecetaIA({ nombre, ingredientes, calorias, instrucciones, loadingState }) {
   // Estado para saber si la receta fue guardada
   const [guardada, setGuardada] = useState(false);
 
@@ -42,10 +36,10 @@ export default function RecetaIA({
 
   // Construye el objeto receta a partir de las props
   const receta = {
-    nombre: nombre || "",
+    nombre: nombre || '',
     ingredientes: ingredientes || [],
-    calorias: calorias || "",
-    instrucciones: instrucciones || "",
+    calorias: calorias || '',
+    instrucciones: instrucciones || '',
   };
 
   /**
@@ -57,18 +51,18 @@ export default function RecetaIA({
       const resultadoValidacion = await recetaSchema.parseAsync(receta);
       const recetaInstancia = RecetaClass.crearReceta(
         resultadoValidacion.nombre,
-        resultadoValidacion.ingredientes.join(", "),
+        resultadoValidacion.ingredientes.join(', '),
         resultadoValidacion.calorias,
         resultadoValidacion.instrucciones
       );
-      agregarElemento(recetaInstancia.getReceta(), "recetas");
+      agregarElemento(recetaInstancia.getReceta(), 'recetas');
       setGuardada(true);
-      mostrarToastStrategy("success", { mensaje: "Receta guardada con éxito" });
+      mostrarToastStrategy('success', { mensaje: 'Receta guardada con éxito' });
       setInterval(() => {
         window.location.reload();
       }, 2000);
     } catch {
-      mostrarToastStrategy("error", { mensaje: "Error al guardar la receta" });
+      mostrarToastStrategy('error', { mensaje: 'Error al guardar la receta' });
     }
   }
 
@@ -95,7 +89,7 @@ export default function RecetaIA({
               {receta.nombre}
             </summary>
             <p>
-              <strong>Ingredientes:</strong> {receta.ingredientes.join(", ")}
+              <strong>Ingredientes:</strong> {receta.ingredientes.join(', ')}
             </p>
             <p>
               <strong>Calorías por porción:</strong> {receta.calorias} kcal
