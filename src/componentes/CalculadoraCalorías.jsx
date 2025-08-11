@@ -2,7 +2,7 @@
  * Componente para calcular cuántos días alcanza la comida según calorías disponibles, cantidad de personas y requerimiento diario.
  */
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 /**
  * Calcula cuántos días alcanza la comida disponible.
@@ -24,10 +24,10 @@ function calcularDias(totalCalorias, personas, caloriasPorDia) {
  * @returns {JSX.Element}
  */
 export default function CalculadoraCalorias({ totalCalorias }) {
-  // Estado para cantidad de personas
-  const [personas, setPersonas] = useState(1);
-  // Estado para calorías requeridas por día por persona
-  const [caloriasPorDia, setCaloriasPorDia] = useState(2000);
+  // ref para cantidad de personas
+  const personasRef = useRef(0);
+  // ref para calorías por día por persona
+  const caloriasPorDiaRef = useRef(2000);
   // Estado para resultado de días
   const [dias, setDias] = useState(0);
 
@@ -37,7 +37,11 @@ export default function CalculadoraCalorias({ totalCalorias }) {
    */
   const manejarSubmit = (e) => {
     e.preventDefault();
-    const resultado = calcularDias(totalCalorias, personas, caloriasPorDia);
+    const resultado = calcularDias(
+      totalCalorias,
+      personasRef.current.value,
+      caloriasPorDiaRef.current.value
+    );
     setDias(resultado);
   };
 
@@ -57,12 +61,8 @@ export default function CalculadoraCalorias({ totalCalorias }) {
           <input
             type="number"
             min="1"
-            value={personas === 0 ? "" : personas}
-            onChange={(e) => {
-              // Elimina ceros a la izquierda y actualiza el estado
-              const val = e.target.value.replace(/^0+(?=\d)/, "");
-              setPersonas(val === "" ? 0 : Number(val));
-            }}
+            defaultValue={1}
+            ref={personasRef}
             className="text-background"
             required
           />
@@ -74,30 +74,33 @@ export default function CalculadoraCalorias({ totalCalorias }) {
           <input
             type="number"
             min="1"
-            value={caloriasPorDia === 0 ? "" : caloriasPorDia}
-            onChange={(e) => {
-              // Elimina ceros a la izquierda y actualiza el estado
-              const val = e.target.value.replace(/^0+(?=\d)/, "");
-              setCaloriasPorDia(val === "" ? 0 : Number(val));
-            }}
+            defaultValue={2000}
+            ref={caloriasPorDiaRef}
             className="text-background"
             required
           />
         </label>
         <br />
         {/* Botón para calcular */}
-        <button type="submit" className="bg-atencion-secundary text-background font-bold hover:bg-atencion p-2 rounded cursor-pointer">Calcular</button>
+        <button
+          type="submit"
+          className="bg-atencion-secundary text-background font-bold hover:bg-atencion p-2 rounded cursor-pointer"
+        >
+          Calcular
+        </button>
       </form>
       {/* Resultado: muestra días en decimales o mensaje si no alcanza */}
-      {caloriasPorDia > 0 && personas > 0 && (
-        dias < 1 ? (
-          <p className="text-error font-bold">No hay suficiente comida para un día.</p>
-        ) : (
+      {caloriasPorDiaRef.current.value > 0 &&
+        personasRef.current.value > 0 &&
+        (dias < 1 ? null : (
           <p>
-            Con {personas} personas consumiendo {caloriasPorDia} calorías por día,
-            la comida alcanzaría para <strong>{dias.toFixed(2)}</strong> días.
+            Con {personasRef.current.value} personas consumiendo {caloriasPorDiaRef.current.value} calorías por día, la comida alcanzaría para <strong>{dias.toFixed(2)}</strong> días.
           </p>
-        )
+        ))}
+      {caloriasPorDiaRef.current.value > 0 && personasRef.current.value > 0 && dias < 1 && (
+        <p className="text-error font-bold">
+          No hay suficiente comida para un día.
+        </p>
       )}
     </section>
   );

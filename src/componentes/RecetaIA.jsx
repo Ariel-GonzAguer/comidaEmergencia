@@ -66,7 +66,7 @@ export default function RecetaIA({
       mostrarToastStrategy("success", { mensaje: "Receta guardada con éxito" });
       setInterval(() => {
         window.location.reload();
-      }, 3000);
+      }, 2000);
     } catch {
       mostrarToastStrategy("error", { mensaje: "Error al guardar la receta" });
     }
@@ -98,7 +98,7 @@ export default function RecetaIA({
               <strong>Ingredientes:</strong> {receta.ingredientes.join(", ")}
             </p>
             <p>
-              <strong>Calorías:</strong> {receta.calorias}
+              <strong>Calorías por porción:</strong> {receta.calorias} kcal
             </p>
             <p>
               <strong>Instrucciones:</strong> {receta.instrucciones}

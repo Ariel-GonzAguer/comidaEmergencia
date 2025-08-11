@@ -1,17 +1,17 @@
 ---
 name: 💡 Solicitud de Feature
 about: Sugerir una idea para este proyecto
-title: "[FEATURE] [ASTRO | REACT] "
+title: "[FEATURE] [ASTRO | MAIN] "
 labels: enhancement
 assignees: ""
 ---
 
-<!-- Agregue en el Título/Title para que rama es el BUG: ASTRO | REACT. La rama `main` es React -->
+<!-- Agregue en el Título/Title para que rama es el BUG: ASTRO | MAIN. La rama MAIN es React -->
 
 ## 💡 Describa su solicitud de feature/funcionalidad detalladamente. ¿Cuál es la mejora que quisiera agregar?
 
 <!-- Ej:
-Agregar [...]. -->
+Agregar [...] para [...]. -->
 
 ## 🎯 ¿Cómo mejoraría su feature/funcionalidad el uso de este proyecto?
 

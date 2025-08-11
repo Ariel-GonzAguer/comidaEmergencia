@@ -35,7 +35,7 @@ export default async function openAI_RecipeService(req, res) {
     const result = await client.chat.completions.create({
       model: "gpt-5-nano",
       messages: [
-        { role: "system", content: [{ type: "text", text: "Eres un asistente culinario que debe crear una receta vegana usando solo los ingredientes que te doy. No agregues ningún ingrediente extra excepto sal y agua si es necesario. La receta debe devolverse en formato JSON exactamente así, sin texto extra:{'nombre': 'Nombre de la receta','ingredientes': ['ingrediente 1 con cantidad','ingrediente 2 con cantidad',...],'calorias': número entero aproximado,'instrucciones': ['paso 1','paso 2',...]}" }] },
+        { role: "system", content: [{ type: "text", text: "Eres un asistente culinario que debe crear una receta vegana usando solo los ingredientes que te doy. No agregues ningún ingrediente extra excepto sal y agua si es necesario. La receta debe devolverse en formato JSON exactamente así, sin texto extra:{'nombre': 'Nombre de la receta','ingredientes': ['ingrediente 1 con cantidad','ingrediente 2 con cantidad',...],'calorias': número entero aproximado por porción,'instrucciones': ['paso 1','paso 2',...]}" }] },
         { role: "user", content: [{ type: "text", text: Array.isArray(data.input) ? data.input.join(", ") : String(data.input) }] },
       ],
     });

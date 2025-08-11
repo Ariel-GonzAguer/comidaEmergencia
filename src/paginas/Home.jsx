@@ -65,32 +65,51 @@ export default function Home() {
         <GeneradorRecetas />
 
         {/* Estadísticas de totales por tipo */}
-        <section className="flex items-center justify-between max-w-9/10 gap-4 mt-4 flex-wrap m-[0_auto]">
+        <section className="flex items-center justify-between max-w-9/10 gap-10 mt-4 flex-wrap m-[0_auto]">
           <p>
-            <strong>Alimentos</strong> totales:{" "}
-            {Object.entries(alimentos).length}
+            <strong>Alimentos totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(alimentos).length}
+            </span>
           </p>
           <p>
-            <strong>Medicamentos</strong> totales:{" "}
-            {Object.entries(medicamentos).length}
+            <strong>Medicamentos totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(medicamentos).length}
+            </span>
           </p>
           <p>
-            <strong>Lugares</strong> totales: {Object.entries(lugares).length}
+            <strong>Lugares totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(lugares).length}
+            </span>
           </p>
           <p>
-            <strong>Otros</strong> totales: {Object.entries(otros).length}
+            <strong>Otros totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(otros).length}
+            </span>
           </p>
           <p>
-            <strong>Notas</strong> totales: {Object.entries(notas).length}
+            <strong>Notas totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(notas).length}
+            </span>
           </p>
           <p>
-            <strong>Recetas</strong> totales: {Object.entries(recetas).length}
+            <strong>Recetas totales:</strong>
+            <span className="text-atencion-secundary">
+              {Object.entries(recetas).length}
+            </span>
           </p>
         </section>
         {/* Calorías totales y calculadora */}
         <section>
           <h3>
-            <strong>Calorías</strong> totales: {getTotalCalorias()}
+            <strong>Calorías totales: </strong>
+            <span className="text-atencion-secundary">
+              {getTotalCalorias()}
+            </span>
           </h3>
         </section>
         <CalculadoraCalorias totalCalorias={getTotalCalorias()} />
