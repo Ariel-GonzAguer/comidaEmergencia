@@ -159,7 +159,6 @@ Detalles en `documentacion/vercel.md`.
 ## Licencia y assets
 
 - Licencia principal: **AGPL-3** (`LICENCE.txt`).
-- Asset del gato animado: adquirido en [loading.io](https://loading.io/) con licencia comercial. Si lo reutiliza, adquiera su propia licencia.
 
 ## Créditos
 
