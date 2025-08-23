@@ -110,7 +110,7 @@ export default function Login() {
         </button>
       </form>
       {/* Loader animado mientras se procesa el login */}
-      {loading && <img src="/OrangeCat_SVG.svg" alt="Cargando..." />}
+      {loading && <img src="/Blocks_loading.io.svg" alt="Cargando..." />}
     </section>
   );
 }
