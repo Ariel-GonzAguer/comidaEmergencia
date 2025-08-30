@@ -217,7 +217,6 @@ La diferencia principal entre "Código Libre" y "Código Abierto" radica en su e
 
 - Espacio para resolver dudas.
 - Conversar sobre experiencias previas.
-- Inspirar a que comiencen su propio camino en el open source.
 
 ---
 

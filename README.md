@@ -15,6 +15,9 @@ Aplicación Web de Código Abierto / Open Source para gestionar alimentos, medic
    <a href="https://opensource.org/licenses/AGPL-3.0" target="_blank"><img alt="Open Source" src="https://img.shields.io/badge/Open%20Source-AGPL--3-00B200?logo=opensourceinitiative&logoColor=white" /></a>
 </p>
 
+<!-- Para demostración de PR -->
+ → → → ELIMINAR ESTA LÍNEA DEL README 🔧
+
  ## 🎯 Objetivos del proyecto
 
 - Facilitar la gestión y organización de recursos esenciales en situaciones de emergencia (alimentos, medicamentos, notas, recetas y otros ítems).
