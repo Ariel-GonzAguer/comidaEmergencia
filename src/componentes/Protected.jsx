@@ -3,36 +3,30 @@ import { useNavigate } from '@arielgonzaguer/michi-router';
 import useAuthStore from '../stores/useAuthStore';
 
 /**
- * Hook para saber si el auth está cargando (puedes ajustar según tu store)
- */
-function useAuthStatus() {
-  const { user, isLoading } = useAuthStore();
-  // Si tu store no tiene isLoading, puedes deducirlo de user === undefined
-  // return { user, isLoading: user === undefined };
-  return { user, isLoading: typeof isLoading === 'boolean' ? isLoading : user === undefined };
-}
-
-/**
  * Un componente que restringe el acceso a sus hijos según el estado de autenticación del usuario.
  *
  * Si el usuario no está autenticado, redirige a la página de landing ("/").
  * De lo contrario, renderiza sus hijos.
  *
- * @param children - Los nodos React a renderizar si el usuario está autenticado.
- * @returns Los hijos si está autenticado, de lo contrario null.
+ * @param {Object} props - Props del componente
+ * @param {React.ReactNode} props.children - Los nodos React a renderizar si el usuario está autenticado.
+ * @returns {JSX.Element|null} Los hijos si está autenticado, de lo contrario loader.
  */
 export default function Protected({ children }) {
   const navigate = useNavigate();
-  const { user, isLoading } = useAuthStatus();
+  
+  // Leemos el estado directamente desde el store
+  const { user, isLoading } = useAuthStore();
 
   useEffect(() => {
+    // Redirigir solo cuando haya terminado de cargar y el usuario NO esté autenticado
     if (!isLoading && !user) {
       navigate('/');
     }
-  }, [user, isLoading, navigate]);
+  }, [isLoading, user, navigate]);
 
   if (isLoading) {
-    // Puedes personalizar el loader
+    // Loader personalizable mientras está cargando
     return <div className="w-full h-screen flex items-center justify-center">Cargando...</div>;
   }
 

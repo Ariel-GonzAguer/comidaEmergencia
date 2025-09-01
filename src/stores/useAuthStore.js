@@ -7,24 +7,38 @@ import { auth } from '../firebase/firebaseConfig';
 const useAuthStore = create()(
   persist(
     immer(set => ({
-      user: {
-        email: null,
-      },
+      user: undefined, // Cambiado de null a undefined
+      isLoading: false, // Nuevo estado agregado
 
       setUser: user =>
         set(state => {
           state.user = user;
+          state.isLoading = false; // Cuando se establece el usuario, ya no está cargando
+        }),
+
+      setLoading: isLoading =>
+        set(state => {
+          state.isLoading = isLoading;
         }),
 
       logOut: async () => {
         try {
-          localStorage.clear();
           set(state => {
-            state.user = null;
+            state.isLoading = true;
+          });
+
+          localStorage.clear();
+          
+          set(state => {
+            state.user = undefined; // Cambiado de null a undefined
+            state.isLoading = false;
           });
 
           await signOut(auth);
         } catch (error) {
+          set(state => {
+            state.isLoading = false;
+          });
           console.error('Error al cerrar sesión:', error);
           throw error; // Propagamos el error para manejarlo en el componente
         }
@@ -36,6 +50,7 @@ const useAuthStore = create()(
       partialize: state => ({
         // solo persistir los estados que queremos
         user: state.user,
+        // No persistir isLoading, siempre debe empezar en false
       }),
     }
   )
