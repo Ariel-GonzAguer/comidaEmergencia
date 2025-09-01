@@ -37,13 +37,12 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   // hook de navegación
   const navigate = useNavigate();
 
-  // store de autenticación
-  const { setUser } = useAuthStore();
+  // store de autenticación - usando isLoading del store en lugar de estado local
+  const { setUser, setLoading, isLoading } = useAuthStore();
 
   // store de comida
   const { getFirebaseData } = useStore();
@@ -62,10 +61,10 @@ export default function Login() {
       setLoading(true);
       setError(null);
       await signInWithEmailAndPassword(auth, email, password);
-      setUser(email);
+      setUser({ email }); // Cambio: pasar objeto en lugar de string directo
       getFirebaseData();
       console.log(`"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`);
-      setLoading(false);
+      // setLoading(false); // No necesario: setUser ya pone isLoading en false
       // redirigir a la página de inicio
       navigate('/home');
     } catch (error) {
@@ -101,6 +100,7 @@ export default function Login() {
           className="mb-6"
           ref={passwordRef}
           required
+          autoComplete="current-password"
         />
         <button
           className="border-2 border-light-secundary p-4 text-text font-bold cursor-pointer hover:bg-light-secundary hover:border-background hover:text-background transition-colors duration-200"
@@ -110,7 +110,7 @@ export default function Login() {
         </button>
       </form>
       {/* Loader animado mientras se procesa el login */}
-      {loading && <img src="/Blocks_loading.io.svg" alt="Cargando..." />}
+      {isLoading && <img src="/Blocks_loading.io.svg" alt="Cargando..." />}
     </section>
   );
 }
