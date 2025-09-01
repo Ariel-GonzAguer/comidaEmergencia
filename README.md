@@ -22,6 +22,7 @@ Agradecemos a todas las personas que han colaborado en el proyecto 🙌
 - [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer) — Propietario / Mantenedor  
 - [@lianyvar](https://github.com/lianyvar) — Colaboradora  
 - [@mvlsqz](https://github.com/mvlsqz) — Colaborador  
+- [@nadir-ammisaid](https://github.com/nadir-ammisaid) — Colaborador  
 - [@astrobot-houston](https://github.com/astrobot-houston) — Bot (automatización)
 
  ## 🎯 Objetivos del proyecto
