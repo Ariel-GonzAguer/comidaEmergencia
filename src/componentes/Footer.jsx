@@ -25,7 +25,7 @@ export default function Footer() {
       <LogOutButton currentPath={window.location.pathname} />
 
       {/* Botón para actualizar datos desde Firebase */}
-      <button onClick={handleActualizar} className="bg-blue-500 text-white p-2 rounded">
+      <button onClick={handleActualizar} className="bg-warning text-background px-2 py-1 rounded cursor-pointer border-2 border-warning hover:border-error font-bold">
         Actualizar
       </button>
     </footer>
