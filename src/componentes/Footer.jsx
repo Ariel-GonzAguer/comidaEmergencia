@@ -1,6 +1,7 @@
 /**
  * Componente Footer
- * Muestra el pie de página con botón para actualizar datos desde Firebase y botón de logout.
+ * Muestra el pie de página con botón para actualizar datos desde Firebase, botón de logout,
+ * enlace al repositorio e información de licencia.
  */
 
 import LogOutButton from '../componentes/LogOutButton';
@@ -23,6 +24,24 @@ export default function Footer() {
     <footer className="border-t-2 border-light-primary text-text flex items-center justify-between p-1 w-full">
       {/* Botón para cerrar sesión */}
       <LogOutButton currentPath={window.location.pathname} />
+
+      {/* Sección central con enlace al repositorio e información de licencia */}
+      <div className="flex flex-col items-center text-xs">
+        {/* <div className="flex flex-col items-center text-xs text-text opacity-80"> */}
+
+        <a 
+          href="https://github.com/Ariel-GonzAguer/comidaEmergencia" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-light-primary hover:text-atencion-secundary transition-colors duration-200"
+        >
+          Ver en GitHub
+        </a>
+        <span className="text-light-secundary mt-1">
+          {/* <span className="text-text opacity-60 mt-1"> */}
+          Licencia AGPL-3.0
+        </span>
+      </div>
 
       {/* Botón para actualizar datos desde Firebase */}
       <button onClick={handleActualizar} className="bg-warning text-background px-2 py-1 rounded cursor-pointer border-2 border-warning hover:border-error font-bold">
