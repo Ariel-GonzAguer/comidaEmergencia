@@ -3,14 +3,12 @@ import { useNavigate } from '@arielgonzaguer/michi-router';
 import useAuthStore from '../stores/useAuthStore';
 
 /**
- * Hook para saber si el auth está cargando (puedes ajustar según tu store)
+ * Hook/estado de autenticación
+ * --------------------------------
+ * Si tu store expone `isLoading`, úsalo.
+ * Si no, podemos inferir el estado de carga con `user === undefined`.
+ * (No creamos un hook separado para evitar complejidad innecesaria.)
  */
-function useAuthStatus() {
-  const { user, isLoading } = useAuthStore();
-  // Si tu store no tiene isLoading, puedes deducirlo de user === undefined
-  // return { user, isLoading: user === undefined };
-  return { user, isLoading: typeof isLoading === 'boolean' ? isLoading : user === undefined };
-}
 
 /**
  * Un componente que restringe el acceso a sus hijos según el estado de autenticación del usuario.
@@ -23,13 +21,19 @@ function useAuthStatus() {
  */
 export default function Protected({ children }) {
   const navigate = useNavigate();
-  const { user, isLoading } = useAuthStatus();
+
+  // Leemos el estado desde el store
+  const { user, isLoading: storeIsLoading } = useAuthStore();
+
+  // Determinamos si está cargando: priorizamos `storeIsLoading` si existe; si no, inferimos por `user === undefined`
+  const isLoading = typeof storeIsLoading === 'boolean' ? storeIsLoading : user === undefined;
 
   useEffect(() => {
+    // Redirigir solo cuando haya terminado de cargar y el usuario NO esté autenticado
     if (!isLoading && !user) {
       navigate('/');
     }
-  }, [user, isLoading, navigate]);
+  }, [isLoading, user, navigate]);
 
   if (isLoading) {
     // Puedes personalizar el loader
