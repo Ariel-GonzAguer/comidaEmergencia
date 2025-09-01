@@ -15,6 +15,15 @@ Aplicación Web de Código Abierto / Open Source para gestionar alimentos, medic
    <a href="https://opensource.org/licenses/AGPL-3.0" target="_blank"><img alt="Open Source" src="https://img.shields.io/badge/Open%20Source-AGPL--3-00B200?logo=opensourceinitiative&logoColor=white" /></a>
 </p>
 
+## 👥 Colaboradores
+
+Agradecemos a todas las personas que han colaborado en el proyecto 🙌
+
+- [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer) — Propietario / Mantenedor  
+- [@lianyvar](https://github.com/lianyvar) — Colaboradora  
+- [@mvlsqz](https://github.com/mvlsqz) — Colaborador  
+- [@nadir-ammisaid](https://github.com/nadir-ammisaid) — Colaborador  
+- [@astrobot-houston](https://github.com/astrobot-houston) — Bot (automatización)
 
  ## 🎯 Objetivos del proyecto
 
@@ -159,11 +168,6 @@ Detalles en `documentacion/vercel.md`.
 ## Licencia y assets
 
 - Licencia principal: **AGPL-3** (`LICENCE.txt`).
-
-## Créditos
-
-- Ariel GonzaAgüero
-- Liany Var
 
 <div align="center">
    <p>Hecho libre para todo el mundo 🌍 — si le sirve, deje una ⭐</p>
