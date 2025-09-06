@@ -16,21 +16,41 @@ dotenv.config();
  * @returns {Promise<void>} Responde con un objeto JSON que contiene la receta generada o un mensaje de error.
  */
 export default async function openAI_RecipeService(req, res) {
+  // Leer body manualmente (entorno serverless)
+  let body = '';
   try {
-    // Log: inicio de función
-    // console.log("[openAI_RecipeService] Inicio");
+    for await (const chunk of req) body += chunk;
+  } catch (e) {
+    return res.status(400).json({ error: 'Error leyendo el cuerpo de la petición' });
+  }
 
-    // Leer el body manualmente (Vercel serverless)
-    let body = '';
-    for await (const chunk of req) {
-      body += chunk;
+  if (!body || !body.trim()) {
+    return res.status(400).json({ error: 'Cuerpo vacío' });
+  }
+
+  let data;
+  try {
+    data = JSON.parse(body);
+  } catch (e) {
+    // Error de parseo esperado en pruebas: devolver 400 para diferenciar de errores internos
+    if (process.env.NODE_ENV !== 'test') {
+      console.warn('[openAI_RecipeService] JSON inválido recibido');
     }
-    // console.log("[openAI_RecipeService] Body recibido:", body);
-    const data = JSON.parse(body);
-    // console.log("[openAI_RecipeService] Data parseada:", data);
+    return res.status(400).json({ error: 'JSON inválido en el cuerpo de la petición' });
+  }
 
+  // Validación mínima del payload
+  if (data == null || typeof data !== 'object') {
+    return res.status(400).json({ error: 'Payload debe ser un objeto JSON' });
+  }
+
+  const input = data.input;
+  if (typeof input !== 'string' && !Array.isArray(input)) {
+    return res.status(400).json({ error: 'El campo "input" debe ser string o array' });
+  }
+
+  try {
     const client = new OpenAI();
-    // console.log("[openAI_RecipeService] Cliente OpenAI creado");
     const result = await client.chat.completions.create({
       model: 'gpt-5-nano',
       messages: [
@@ -39,28 +59,29 @@ export default async function openAI_RecipeService(req, res) {
           content: [
             {
               type: 'text',
-              text: "Eres un asistente culinario que debe crear una receta vegana usando solo los ingredientes que te doy. No agregues ningún ingrediente extra excepto sal y agua si es necesario. La receta debe devolverse en formato JSON exactamente así, sin texto extra:{'nombre': 'Nombre de la receta','ingredientes': ['ingrediente 1 con cantidad','ingrediente 2 con cantidad',...],'calorias': número entero aproximado por porción,'instrucciones': ['paso 1','paso 2',...]}",
-            },
-          ],
+              text: 'Eres un asistente culinario que debe crear una receta vegana usando SOLO los ingredientes que te doy (puedes añadir agua y sal si es imprescindible). RESPONDE ÚNICAMENTE con JSON VÁLIDO (sin explicaciones, sin markdown, sin texto antes o después, sin comillas simples). Formato EXACTO de ejemplo: {"nombre":"Nombre de la receta","ingredientes":["ingrediente 1 con cantidad","ingrediente 2 con cantidad"],"calorias":123,"instrucciones":["paso 1","paso 2"]}. Asegúrate de: 1) usar comillas dobles en claves y strings 2) calorias número entero 3) instrucciones array de strings 4) ingredientes array de strings con cantidades. NO devuelvas nada más.'
+            }
+          ]
         },
         {
           role: 'user',
           content: [
             {
               type: 'text',
-              text: Array.isArray(data.input) ? data.input.join(', ') : String(data.input),
-            },
-          ],
-        },
-      ],
+              text: Array.isArray(input) ? input.join(', ') : String(input)
+            }
+          ]
+        }
+      ]
     });
-    // console.log("[openAI_RecipeService] Receta generada:", result.choices[0].message.content);
-    res.status(200).json({
-      status: 200,
-      output: result.choices[0].message.content,
-    });
+
+    const output = result?.choices?.[0]?.message?.content || '';
+    // Respuesta uniforme
+    return res.status(200).json({ status: 200, output });
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.message });
+    if (process.env.NODE_ENV !== 'test') {
+      console.error('[openAI_RecipeService] Error interno:', error);
+    }
+    return res.status(500).json({ error: 'Error interno generando la receta' });
   }
 }

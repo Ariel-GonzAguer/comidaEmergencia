@@ -104,7 +104,7 @@ describe('openAI_RecipeService', () => {
 
     await openAI_RecipeService(req, res);
 
-    expect(res.statusCode).toBe(500);
+    expect(res.statusCode).toBe(400);
     expect(res.jsonData).toHaveProperty('error');
     expect(typeof res.jsonData.error).toBe('string');
   });
