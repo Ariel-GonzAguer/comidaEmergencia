@@ -26,8 +26,7 @@ export default function Footer() {
       <LogOutButton currentPath={window.location.pathname} />
 
       {/* Sección central con enlace al repositorio e información de licencia */}
-      <div className="flex flex-col items-center text-xs">
-        {/* <div className="flex flex-col items-center text-xs text-text opacity-80"> */}
+      <div className="flex flex-col items-center text-base">
 
         <a 
           href="https://github.com/Ariel-GonzAguer/comidaEmergencia" 
@@ -38,7 +37,6 @@ export default function Footer() {
           Ver en GitHub
         </a>
         <span className="text-light-secundary mt-1">
-          {/* <span className="text-text opacity-60 mt-1"> */}
           Licencia AGPL-3.0
         </span>
       </div>
