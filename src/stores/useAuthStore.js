@@ -7,8 +7,8 @@ import { auth } from '../firebase/firebaseConfig';
 const useAuthStore = create()(
   persist(
     immer(set => ({
-      user: undefined, // Cambiado de null a undefined
-      isLoading: false, // Nuevo estado agregado
+      user: undefined,
+      isLoading: false,
 
       setUser: user =>
         set(state => {
@@ -30,7 +30,7 @@ const useAuthStore = create()(
           localStorage.clear();
           
           set(state => {
-            state.user = undefined; // Cambiado de null a undefined
+            state.user = undefined;
             state.isLoading = false;
           });
 

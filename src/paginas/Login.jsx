@@ -41,7 +41,7 @@ export default function Login() {
   // hook de navegación
   const navigate = useNavigate();
 
-  // store de autenticación - usando isLoading del store en lugar de estado local
+  // store de autenticación
   const { setUser, setLoading, isLoading } = useAuthStore();
 
   // store de comida
@@ -64,7 +64,6 @@ export default function Login() {
       setUser({ email }); // Cambio: pasar objeto en lugar de string directo
       getFirebaseData();
       console.log(`"Inicio de sesión exitoso" - ${email} - Data de FB obtenida`);
-      // setLoading(false); // No necesario: setUser ya pone isLoading en false
       // redirigir a la página de inicio
       navigate('/home');
     } catch (error) {

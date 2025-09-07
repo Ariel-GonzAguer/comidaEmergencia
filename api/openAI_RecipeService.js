@@ -21,7 +21,7 @@ export default async function openAI_RecipeService(req, res) {
   try {
     for await (const chunk of req) body += chunk;
   } catch (e) {
-    return res.status(400).json({ error: 'Error leyendo el cuerpo de la petición' });
+    return res.status(400).json({ error: `Error leyendo el cuerpo de la petición, ${e}` });
   }
 
   if (!body || !body.trim()) {
@@ -31,12 +31,8 @@ export default async function openAI_RecipeService(req, res) {
   let data;
   try {
     data = JSON.parse(body);
-  } catch (e) {
-    // Error de parseo esperado en pruebas: devolver 400 para diferenciar de errores internos
-    if (process.env.NODE_ENV !== 'test') {
-      console.warn('[openAI_RecipeService] JSON inválido recibido');
-    }
-    return res.status(400).json({ error: 'JSON inválido en el cuerpo de la petición' });
+  } catch (error) {
+    return res.status(400).json({ error: `JSON inválido en el cuerpo de la petición, ${error.message}` });
   }
 
   // Validación mínima del payload
@@ -76,12 +72,8 @@ export default async function openAI_RecipeService(req, res) {
     });
 
     const output = result?.choices?.[0]?.message?.content || '';
-    // Respuesta uniforme
     return res.status(200).json({ status: 200, output });
   } catch (error) {
-    if (process.env.NODE_ENV !== 'test') {
-      console.error('[openAI_RecipeService] Error interno:', error);
-    }
-    return res.status(500).json({ error: 'Error interno generando la receta' });
+    return res.status(500).json({ error: `Error interno generando la receta, ${error.message}` });
   }
 }
