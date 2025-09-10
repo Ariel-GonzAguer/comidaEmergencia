@@ -39,14 +39,23 @@ export default function Medicamentos() {
 
   /**
    * Actualiza un medicamento existente con los valores del formulario.
+   * Se valida que la cantidad sea un número positivo mayor que 0
+   * antes de guardar para evitar valores inválidos.
    * @param {string} id - El identificador único del medicamento a actualizar.
    */
   async function handleGuardar(id) {
+    const cantidad = Number(form.cantidad);
+
+    if (isNaN(cantidad) || cantidad <= 0) {
+      mostrarToastStrategy('error', { mensaje: 'La cantidad debe ser un número mayor a 0' });
+      return;
+    }
+
     await actualizarElemento('medicamentos', id, {
       ...medicamentos[id],
       nombre: form.nombre,
       uso: form.uso,
-      cantidad: Number(form.cantidad),
+      cantidad,
       fechaVencimiento: form.fechaVencimiento,
     });
     setEditando(null);
@@ -104,6 +113,7 @@ export default function Medicamentos() {
                     name="cantidad"
                     value={form.cantidad}
                     onChange={handleChange}
+                    min="1" // 🔒 evita valores negativos o 0 desde la UI
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-background"
                   />
                 </div>
