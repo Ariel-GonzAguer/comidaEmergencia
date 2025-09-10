@@ -20,7 +20,7 @@ export function showToast(message, isError = false) {
   toast.style.transform = "translateX(0)";
 
   setTimeout(() => {
-    toast.style.transform = "translateX(100%)";
+    toast.style.transform = "translateX(calc(100% + 2rem))";
   }, 3000);
 }
 
