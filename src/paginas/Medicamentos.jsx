@@ -21,11 +21,11 @@ export default function Medicamentos() {
    */
   function handleEditar(item) {
     setEditando(item.id);
-    setForm({ 
+    setForm({
       nombre: item.nombre,
       uso: item.uso,
       cantidad: item.cantidad,
-      fechaVencimiento: item.fechaVencimiento
+      fechaVencimiento: item.fechaVencimiento,
     });
   }
 
@@ -150,9 +150,15 @@ export default function Medicamentos() {
               // Modo visualización
               <div>
                 <h3 className="text-2xl font-bold mb-2">{item.nombre}</h3>
-                <p className="mb-2"><strong>Descripción:</strong> {item.uso}</p>
-                <p className="mb-2"><strong>Cantidad:</strong> {item.cantidad}</p>
-                <p className="mb-4"><strong>Fecha de vencimiento:</strong> {item.fechaVencimiento}</p>
+                <p className="mb-2">
+                  <strong>Descripción:</strong> {item.uso}
+                </p>
+                <p className="mb-2">
+                  <strong>Cantidad:</strong> {item.cantidad}
+                </p>
+                <p className="mb-4">
+                  <strong>Fecha de vencimiento:</strong> {item.fechaVencimiento}
+                </p>
                 <div className="flex gap-2 justify-center">
                   <button
                     onClick={() => handleEditar(item)}
