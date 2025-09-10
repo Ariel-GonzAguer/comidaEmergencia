@@ -18,10 +18,10 @@ describe('Receta Class', () => {
     });
   });
 
-  const nombre = 'Paella Valenciana';
-  const ingredientes = { arroz: '400g', pollo: '500g', verduras: '200g' };
-  const calorias = 450;
-  const instrucciones = 'Sofreír el pollo, añadir arroz, verduras y caldo. Cocinar 20 minutos.';
+  const nombre = 'Paella Vegana';
+  const ingredientes = { arroz: '400g', garbanzos: '200g', verduras: '200g' };
+  const calorias = 420;
+  const instrucciones = 'Sofreír las verduras, añadir arroz, garbanzos y caldo vegetal. Cocinar 20 minutos.';
 
   let receta;
 
