@@ -19,13 +19,20 @@ Aplicación Web de Código Abierto / Open Source para gestionar alimentos, medic
 
 Agradecemos a todas las personas que han colaborado en el proyecto 🙌
 
-- [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer) — Propietario / Mantenedor  
-- [@lianyvar](https://github.com/lianyvar) — Colaboradora  
-- [@mvlsqz](https://github.com/mvlsqz) — Colaborador  
-- [@nadir-ammisaid](https://github.com/nadir-ammisaid) — Colaborador  
+- [@Ariel-GonzAguer](https://github.com/Ariel-GonzAguer) — Propietario / Mantenedor
+- [@lianyvar](https://github.com/lianyvar) — Colaboradora
+- [@mvlsqz](https://github.com/mvlsqz) — Colaborador
+- [@nadir-ammisaid](https://github.com/nadir-ammisaid) — Colaborador
 - [@astrobot-houston](https://github.com/astrobot-houston) — Bot (automatización)
 
- ## 🎯 Objetivos del proyecto
+---
+
+> [!IMPORTANT]
+> La rama Astro será eliminada definitivamente el 13/09/2025. Si desea continuar con la versión Astro, puede clonar el repo y mantenerla por su cuenta.
+
+---
+
+## 🎯 Objetivos del proyecto
 
 - Facilitar la gestión y organización de recursos esenciales en situaciones de emergencia (alimentos, medicamentos, notas, recetas y otros ítems).
 - Permitir el acceso y la colaboración de cualquier persona, comunidad o institución, promoviendo el software libre y abierto.

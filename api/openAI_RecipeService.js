@@ -32,7 +32,9 @@ export default async function openAI_RecipeService(req, res) {
   try {
     data = JSON.parse(body);
   } catch (error) {
-    return res.status(400).json({ error: `JSON inválido en el cuerpo de la petición, ${error.message}` });
+    return res
+      .status(400)
+      .json({ error: `JSON inválido en el cuerpo de la petición, ${error.message}` });
   }
 
   // Validación mínima del payload
@@ -55,20 +57,20 @@ export default async function openAI_RecipeService(req, res) {
           content: [
             {
               type: 'text',
-              text: 'Eres un asistente culinario que debe crear una receta vegana usando SOLO los ingredientes que te doy (puedes añadir agua y sal si es imprescindible). RESPONDE ÚNICAMENTE con JSON VÁLIDO (sin explicaciones, sin markdown, sin texto antes o después, sin comillas simples). Formato EXACTO de ejemplo: {"nombre":"Nombre de la receta","ingredientes":["ingrediente 1 con cantidad","ingrediente 2 con cantidad"],"calorias":123,"instrucciones":["paso 1","paso 2"]}. Asegúrate de: 1) usar comillas dobles en claves y strings 2) calorias número entero 3) instrucciones array de strings 4) ingredientes array de strings con cantidades. NO devuelvas nada más.'
-            }
-          ]
+              text: 'Eres un asistente culinario que debe crear una receta vegana usando SOLO los ingredientes que te doy (puedes añadir agua y sal si es imprescindible). RESPONDE ÚNICAMENTE con JSON VÁLIDO (sin explicaciones, sin markdown, sin texto antes o después, sin comillas simples). Formato EXACTO de ejemplo: {"nombre":"Nombre de la receta","ingredientes":["ingrediente 1 con cantidad","ingrediente 2 con cantidad"],"calorias":123,"instrucciones":["paso 1","paso 2"]}. Asegúrate de: 1) usar comillas dobles en claves y strings 2) calorias número entero 3) instrucciones array de strings 4) ingredientes array de strings con cantidades. NO devuelvas nada más.',
+            },
+          ],
         },
         {
           role: 'user',
           content: [
             {
               type: 'text',
-              text: Array.isArray(input) ? input.join(', ') : String(input)
-            }
-          ]
-        }
-      ]
+              text: Array.isArray(input) ? input.join(', ') : String(input),
+            },
+          ],
+        },
+      ],
     });
 
     const output = result?.choices?.[0]?.message?.content || '';

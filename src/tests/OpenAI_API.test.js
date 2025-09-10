@@ -7,7 +7,7 @@ vi.mock('openai', () => {
     default: class {
       chat = {
         completions: {
-          create: vi.fn().mockImplementation(async (options) => {
+          create: vi.fn().mockImplementation(async options => {
             // Extraer el texto del mensaje del usuario
             let userMessage = options?.messages?.find(m => m.role === 'user');
             let ingredientes = [];
@@ -15,7 +15,10 @@ vi.mock('openai', () => {
               // El servicio envía el input como array con un objeto {type, text}
               let texto = userMessage.content.find(c => c.type === 'text')?.text || '';
               // Separar ingredientes por coma y agregar cantidad
-              ingredientes = texto.split(',').map(i => i.trim() + ' 100g').filter(i => i.trim() !== '100g');
+              ingredientes = texto
+                .split(',')
+                .map(i => i.trim() + ' 100g')
+                .filter(i => i.trim() !== '100g');
               ingredientes.push('sal al gusto', 'agua 10ml');
             } else {
               ingredientes = ['lechuga 100g', 'tomate 50g', 'sal al gusto', 'agua 10ml'];
@@ -28,16 +31,16 @@ vi.mock('openai', () => {
                       nombre: 'Ensalada personalizada',
                       ingredientes,
                       calorias: 120,
-                      instrucciones: ['Lavar los ingredientes', 'Mezclar en un bol', 'Servir']
-                    })
-                  }
-                }
-              ]
+                      instrucciones: ['Lavar los ingredientes', 'Mezclar en un bol', 'Servir'],
+                    }),
+                  },
+                },
+              ],
             };
-          })
-        }
-      }
-    }
+          }),
+        },
+      };
+    },
   };
 });
 
@@ -51,7 +54,7 @@ function createMockReq(bodyObj) {
         sent = true;
         yield bodyStr;
       }
-    }
+    },
   };
 }
 
@@ -66,7 +69,7 @@ function createMockRes() {
     json(data) {
       this.jsonData = data;
       return this;
-    }
+    },
   };
 }
 
@@ -97,8 +100,8 @@ describe('openAI_RecipeService', () => {
     // Simula un body inválido
     const req = {
       [Symbol.asyncIterator]: function* () {
-        yield "{ input: [lechuga, tomate] "; // JSON inválido
-      }
+        yield '{ input: [lechuga, tomate] '; // JSON inválido
+      },
     };
     const res = createMockRes();
 

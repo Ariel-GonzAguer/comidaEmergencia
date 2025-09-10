@@ -21,7 +21,8 @@ describe('Receta Class', () => {
   const nombre = 'Paella Vegana';
   const ingredientes = { arroz: '400g', garbanzos: '200g', verduras: '200g' };
   const calorias = 420;
-  const instrucciones = 'Sofreír las verduras, añadir arroz, garbanzos y caldo vegetal. Cocinar 20 minutos.';
+  const instrucciones =
+    'Sofreír las verduras, añadir arroz, garbanzos y caldo vegetal. Cocinar 20 minutos.';
 
   let receta;
 

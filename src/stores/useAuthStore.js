@@ -28,7 +28,7 @@ const useAuthStore = create()(
           });
 
           localStorage.clear();
-          
+
           set(state => {
             state.user = undefined;
             state.isLoading = false;

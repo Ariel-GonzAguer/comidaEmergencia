@@ -27,22 +27,22 @@ export default function Footer() {
 
       {/* Sección central con enlace al repositorio e información de licencia */}
       <div className="flex flex-col items-center text-base">
-
-        <a 
-          href="https://github.com/Ariel-GonzAguer/comidaEmergencia" 
-          target="_blank" 
+        <a
+          href="https://github.com/Ariel-GonzAguer/comidaEmergencia"
+          target="_blank"
           rel="noopener noreferrer"
           className="text-light-primary hover:text-atencion-secundary transition-colors duration-200"
         >
           Ver en GitHub
         </a>
-        <span className="text-light-secundary mt-1">
-          Licencia AGPL-3.0
-        </span>
+        <span className="text-light-secundary mt-1">Licencia AGPL-3.0</span>
       </div>
 
       {/* Botón para actualizar datos desde Firebase */}
-      <button onClick={handleActualizar} className="bg-warning text-background px-2 py-1 rounded cursor-pointer border-2 border-warning hover:border-error font-bold">
+      <button
+        onClick={handleActualizar}
+        className="bg-warning text-background px-2 py-1 rounded cursor-pointer border-2 border-warning hover:border-error font-bold"
+      >
         Actualizar
       </button>
     </footer>

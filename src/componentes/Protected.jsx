@@ -14,7 +14,7 @@ import useAuthStore from '../stores/useAuthStore';
  */
 export default function Protected({ children }) {
   const navigate = useNavigate();
-  
+
   // Leemos el estado directamente desde el store
   const { user, isLoading } = useAuthStore();
 

@@ -19,7 +19,8 @@ describe('Nota Class', () => {
   });
 
   const nombre = 'Lista de Emergencia';
-  const contenido = 'Verificar botiquín de primeros auxilios, revisar fechas de vencimiento de medicamentos, contactar proveedores.';
+  const contenido =
+    'Verificar botiquín de primeros auxilios, revisar fechas de vencimiento de medicamentos, contactar proveedores.';
 
   let nota;
 
@@ -81,7 +82,8 @@ describe('Nota Class', () => {
 
   it('debería manejar contenido largo y caracteres especiales', () => {
     const nombreEspecial = 'Protocolo de Emergencia #1';
-    const contenidoLargo = 'Este es un contenido muy largo que incluye múltiples líneas y caracteres especiales como: áéíóú, ñ, ¿?, ¡!, @#$%^&*()';
+    const contenidoLargo =
+      'Este es un contenido muy largo que incluye múltiples líneas y caracteres especiales como: áéíóú, ñ, ¿?, ¡!, @#$%^&*()';
     const notaEspecial = Nota.crearNota(nombreEspecial, contenidoLargo);
 
     expect(notaEspecial.nombre).toBe(nombreEspecial);

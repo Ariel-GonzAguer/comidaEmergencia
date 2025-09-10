@@ -21,9 +21,9 @@ export default function Otros() {
    */
   function handleEditar(item) {
     setEditando(item.id);
-    setForm({ 
+    setForm({
       nombre: item.nombre,
-      uso: item.uso 
+      uso: item.uso,
     });
   }
 
