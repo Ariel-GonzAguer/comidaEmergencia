@@ -50,7 +50,8 @@ npm install
 ```
 
 - Verifique que su cambio funciona y no rompe nada existente.
-- No olvide ejecutar `npm run lint` para verificar el **estilo** del código.
+- No olvide ejecutar `npm run lint` para verificar el estilo del código.
+- No olvide ejecutar `npm run prettierCheck` (y `npm run prettierFix` de ser necesario) para verificar el formato del código.
 - No olvide ejecutar `npm run test` para verificar que las pruebas pasen.
 - No olvide ejecutar `npm run prettierCheck` y `npm run prettierFix` para verificar y corregir el **formato** del código.
 - Si el proyecto está desplegado en Vercel(recomendado), ejecute:

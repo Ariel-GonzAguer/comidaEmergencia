@@ -126,10 +126,10 @@ npm run lint
 
 ## 🧭 Uso básico
 
-1. Inicia sesión (Firebase Auth). Si no tienes usuario, configúralo en tu proyecto de Firebase.
-2. Navega por las secciones: Comida, Medicamentos, Lugares, Notas y Recetas.
-3. Generador de Receta IA: ingresa ingredientes y envía; se hace POST a `/api/openAI_RecipeService` y se muestra la receta.
-4. Guarda y edita datos; se sincronizan con Firestore.
+1. Inicie sesión (Firebase Auth). Si no tiene usuario, configúrelo en su proyecto de Firebase.
+2. Navegue por las secciones: Comida, Medicamentos, Lugares, Notas y Recetas.
+3. Generador de Receta IA: ingrese ingredientes y envíe; se hace POST a `/api/openAI_RecipeService` y se muestra la receta.
+4. Guarde y edite datos; se sincronizan con Firestore.
 
 ## 🏗️ Estructura (resumen)
 
@@ -158,7 +158,7 @@ npm i -g vercel
 vercel
 ```
 
-2. En Vercel, define variables de entorno (Firebase y `OPENAI_API_KEY`).
+2. En Vercel, defina variables de entorno (Firebase y `OPENAI_API_KEY`).
 3. Para desarrollo local con API: `vercel dev`.
 
 Detalles en `documentacion/vercel.md`.
