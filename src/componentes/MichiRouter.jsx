@@ -6,7 +6,7 @@
  */
 
 // enrutador
-import { RouterProvider as MichiProvider } from '@arielgonzaguer/michi-router';
+import { RouterProvider as MichiProvider, Protected } from '@arielgonzaguer/michi-router';
 
 // componentes de páginas
 import Login from '../paginas/Login.jsx';
@@ -20,81 +20,13 @@ import Medicamentos from '../paginas/Medicamentos.jsx';
 import Otros from '../paginas/Otros.jsx';
 
 // protector de rutas
-import Protected from '../componentes/Protected.jsx';
+// import Protected from '../componentes/Protected.jsx';
 
 // layout principal
 import BaseLayout from '../layouts/BaseLayout.jsx';
 
-// Definición de rutas de la app
-const rutas = [
-  // Ruta de login
-  { path: '/', component: <Login /> },
-  // Rutas protegidas
-  {
-    path: '/home',
-    component: (
-      <Protected>
-        <Home />
-      </Protected>
-    ),
-  },
-  {
-    path: '/comida',
-    component: (
-      <Protected>
-        <Comida />
-      </Protected>
-    ),
-  },
-  {
-    path: '/recetas',
-    component: (
-      <Protected>
-        <Recetas />
-      </Protected>
-    ),
-  },
-  {
-    path: '/notas',
-    component: (
-      <Protected>
-        <Notas />
-      </Protected>
-    ),
-  },
-  {
-    path: '/lugares',
-    component: (
-      <Protected>
-        <Lugares />
-      </Protected>
-    ),
-  },
-  {
-    path: '/medicamentos',
-    component: (
-      <Protected>
-        <Medicamentos />
-      </Protected>
-    ),
-  },
-  {
-    path: '/otros',
-    component: (
-      <Protected>
-        <Otros />
-      </Protected>
-    ),
-  },
-  {
-    path: '/faqs',
-    component: (
-      <Protected>
-        <FAQs />
-      </Protected>
-    ),
-  },
-];
+// store de autenticación
+import useAuthStore from '../stores/useAuthStore.js';
 
 /**
  * Componente principal del enrutador.
@@ -102,6 +34,87 @@ const rutas = [
  * Si la ruta no existe, muestra "Página no encontrada".
  */
 export default function MichiRouter() {
+  // objeto de configuración para Protected
+  const configObject = {
+    states: useAuthStore(),
+    redirectionPath: '/',
+    loadingComponent: (
+      <div className="w-full h-screen flex items-center justify-center">Cargando...</div>
+    ),
+    // defaultMessage: false,
+  };
+
+  // Definición de rutas de la app
+  const rutas = [
+    // Ruta de login
+    { path: '/', component: <Login /> },
+    // Rutas protegidas
+    {
+      path: '/home',
+      component: (
+        <Protected configObject={configObject}>
+          <Home />
+        </Protected>
+      ),
+    },
+    {
+      path: '/comida',
+      component: (
+        <Protected configObject={configObject}>
+          <Comida />
+        </Protected>
+      ),
+    },
+    {
+      path: '/recetas',
+      component: (
+        <Protected configObject={configObject}>
+          <Recetas />
+        </Protected>
+      ),
+    },
+    {
+      path: '/notas',
+      component: (
+        <Protected configObject={configObject}>
+          <Notas />
+        </Protected>
+      ),
+    },
+    {
+      path: '/lugares',
+      component: (
+        <Protected configObject={configObject}>
+          <Lugares />
+        </Protected>
+      ),
+    },
+    {
+      path: '/medicamentos',
+      component: (
+        <Protected configObject={configObject}>
+          <Medicamentos />
+        </Protected>
+      ),
+    },
+    {
+      path: '/otros',
+      component: (
+        <Protected configObject={configObject}>
+          <Otros />
+        </Protected>
+      ),
+    },
+    {
+      path: '/faqs',
+      component: (
+        <Protected configObject={configObject}>
+          <FAQs />
+        </Protected>
+      ),
+    },
+  ];
+
   return (
     <MichiProvider routes={rutas} layout={BaseLayout}>
       <span>Página no encontrada</span>

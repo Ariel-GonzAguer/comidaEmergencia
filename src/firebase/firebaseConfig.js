@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth, signOut } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
@@ -13,8 +13,8 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
+// Inicializar Firebase de forma segura (evita múltiples inicializaciones)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 // Inicializar Auth
 const auth = getAuth(app);
