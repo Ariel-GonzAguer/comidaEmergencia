@@ -172,7 +172,13 @@ Detalles en `documentacion/vercel.md`.
 3. PR llenando la plantilla.
 4. Respete el Código de Conducta.
 
-## Licencia y assets
+## 📝 Changelog y Versionado
+
+Este proyecto mantiene un historial de cambios detallado siguiendo el estándar [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/):
+
+- **[CHANGELOG.md](./CHANGELOG.md)**: Historial completo de versiones y cambios
+
+## Licencia
 
 - Licencia principal: **AGPL-3** (`LICENCE.txt`).
 
