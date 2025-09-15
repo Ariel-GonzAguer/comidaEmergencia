@@ -4,6 +4,12 @@ Revisar (Guía para el Changelog)[guiaChangelog.md]
 
 ## [0.3.0] - 13/9/2025
 
+### cambiado
+- @arielgonzaguer/michi-router de 2.0.1 a 2.1.1
+  - mejoras en seguridad 
+
+## [0.3.0] - 13/9/2025
+
 ### agregado
 
 - guía para el changelog
