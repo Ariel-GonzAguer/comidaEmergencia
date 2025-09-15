@@ -20,7 +20,6 @@ import Medicamentos from '../paginas/Medicamentos.jsx';
 import Otros from '../paginas/Otros.jsx';
 
 // protector de rutas
-// import Protected from '../componentes/Protected.jsx';
 
 // layout principal
 import BaseLayout from '../layouts/BaseLayout.jsx';
@@ -41,7 +40,7 @@ export default function MichiRouter() {
     loadingComponent: (
       <div className="w-full h-screen flex items-center justify-center">Cargando...</div>
     ),
-    // defaultMessage: false,
+    defaultMessage: false,
   };
 
   // Definición de rutas de la app
