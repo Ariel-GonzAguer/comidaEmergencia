@@ -12,7 +12,7 @@
   --edge:      #2a2a2a;
   --edge-hi:   #3a3a3a;
   --ink:       #d4d0c8;
-  --ink-dim:   #555550;
+  --ink-dim:   #F1EEE8FF;
   --ink-mid:   #888880;
   --ink-hi:    #e8e4d8;
   --accent:    #c8a96e;
@@ -42,7 +42,6 @@ html, body {
 .sym-star { background:#4a3800; color:#c8a030; }
 .sym-r    { background:#1a3a5c; color:#60a0d8; }
 .sym-ps   { background:#3a2a50; color:#9a70d0; }
-.sym-gy   { background:#1e3a28; color:#50b870; }
 .sym-ne   { background:#2a1a0a; color:#c07850; }
 
 /* ---- Color de fechas ---- */

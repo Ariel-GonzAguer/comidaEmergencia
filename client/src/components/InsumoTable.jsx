@@ -13,7 +13,6 @@ const SIMBOLO_CLASS = {
   '*': 'sym sym-star',
   R:   'sym sym-r',
   PS:  'sym sym-ps',
-  GY:  'sym sym-gy',
 }
 
 /**

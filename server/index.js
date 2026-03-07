@@ -24,6 +24,9 @@ const PORT = 3001
 /** @constant {string} Ruta absoluta al archivo de base de datos JSON */
 const DB_PATH = path.join(__dirname, '..', 'db.json')
 
+/** @constant {string} Ruta absoluta al markdown de inventario */
+const MD_PATH = path.join(__dirname, '..', 'insumos-emergencia.md')
+
 app.use(cors())
 app.use(express.json())
 
@@ -49,6 +52,69 @@ function readDB() {
  */
 function writeDB(data) {
   fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8')
+}
+
+/**
+ * Regenera `insumos-emergencia.md` a partir de la lista actual de insumos.
+ * Mantiene la misma estructura del archivo original: tabla de Alimentos y
+ * sección de Productos no alimenticios (categoría "higiene").
+ *
+ * @param {Array<Object>} insumos - Lista completa de insumos del inventario.
+ */
+function writeMD(insumos) {
+  const fmtVenc = v => {
+    if (!v) return '--'
+    if (v === 'no vence') return 'no vence'
+    const [y, m] = v.split('-')
+    return y && m ? `${Number(m)}/${y}` : v
+  }
+
+  const fmtNum = n => (n != null ? String(n) : '--')
+
+  const fmtCant = item => {
+    const partes = [item.cantidad, item.unidad].filter(Boolean)
+    return partes.length ? partes.join(' ') : '--'
+  }
+
+  const fmtNombre = item => {
+    const sims = item.simbolos?.length
+      ? ' ' + item.simbolos.map(s => `\`${s}\``).join(' ')
+      : ''
+    return item.nombre + sims
+  }
+
+  const alimentos  = insumos.filter(i => i.categoria !== 'higiene')
+  const noAlimentos = insumos.filter(i => i.categoria === 'higiene')
+
+  const filaAlimento = i =>
+    `| ${fmtNombre(i)} | ${fmtCant(i)} | ${fmtVenc(i.vencimiento)} | ${fmtNum(i.calorias)} | ${fmtNum(i.proteina)} | ${i.notas || '--'} |`
+
+  const tablaRef = `## Referencias
+
+| Símbolo           | Significado                        |
+| ----------------- | ---------------------------------- |
+| \`V\`               | Ya vencido (fecha anterior a 2026) |
+| \`*\`               | Vence este año (durante el 2026)   |
+| \`R\`               | Reponer                            |
+| \`PS\`              | Pronto a sacar (Reponer inferido)  |
+| _(sin asterisco)_ | Vence en 2027 o posterior          |`
+
+  const tablaAlim = `## Alimentos
+
+| Producto | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
+| -------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
+${alimentos.map(filaAlimento).join('\n')}`
+
+  const tablaHig = noAlimentos.length
+    ? `## Productos no alimenticios
+
+| Producto | Cantidad |
+| -------- | -------- |
+${noAlimentos.map(i => `| ${i.nombre} | ${fmtCant(i)} |`).join('\n')}\n`
+    : ''
+
+  const md = `# Inventario General de Alimentos y Productos\n\n${tablaRef}\n\n---\n\n${tablaAlim}\n\n---\n\n${tablaHig}`
+  fs.writeFileSync(MD_PATH, md, 'utf-8')
 }
 
 // ---------- INSUMOS ----------
@@ -145,6 +211,7 @@ app.post('/api/insumos', (req, res) => {
 
     db.insumos.push(nuevo)
     writeDB(db)
+    writeMD(db.insumos)
     res.status(201).json(nuevo)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -180,6 +247,7 @@ app.put('/api/insumos/:id', (req, res) => {
 
     db.insumos[idx] = actualizado
     writeDB(db)
+    writeMD(db.insumos)
     res.json(actualizado)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -203,6 +271,7 @@ app.delete('/api/insumos/:id', (req, res) => {
 
     const eliminado = db.insumos.splice(idx, 1)[0]
     writeDB(db)
+    writeMD(db.insumos)
     res.json({ ok: true, eliminado })
   } catch (err) {
     res.status(500).json({ error: err.message })
