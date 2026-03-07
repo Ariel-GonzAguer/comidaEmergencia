@@ -1,14 +1,27 @@
 /**
- * migrate-emergencia.mjs
- * Añade el campo `esEmergencia` a todos los items de db.json.
- * - IDs que empiezan con "11111111-0002" → esEmergencia: false
- * - Todos los demás                      → esEmergencia: true  (si no tienen el campo ya)
+ * @file Script de migración que asigna el campo `esEmergencia` a todos los
+ * insumos existentes en `db.json`.
+ *
+ * Lógica de asignación:
+ * - IDs que comienzan con `"11111111-0002"` → `esEmergencia: false` (no-emergencia).
+ * - Todos los demás → `esEmergencia: true`.
+ *
+ * Es idempotente: puede ejecutarse múltiples veces sin efectos secundarios.
+ *
+ * @example
+ * // Ejecutar desde la raíz del proyecto:
+ * node scripts/migrate-emergencia.mjs
+ *
+ * @module scripts/migrate-emergencia
  */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+/** @constant {string} Directorio del script actual */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+/** @constant {string} Ruta absoluta a la base de datos JSON */
 const DB_PATH = path.join(__dirname, '..', 'db.json')
 
 const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'))
