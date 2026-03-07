@@ -23,7 +23,7 @@
 | Paprika `PS`                     | --                      | --          | --                          | --                       | -----                     |
 | Barra chocolate Trappa           | 75g                     | pendiente   | 514                         | 10                       | -----                     |
 | Sal blanca                       | 1 kg                    | no vence    | --                          | --                       | -----                     |
-| Tofu firme `R`                   | 4x paquete              | --          | --                          | --                       | -----                     |
+| Tofu firme caja `R`              | 4x paquete              | --          | --                          | --                       | -----                     |
 | Aceitunas verdes `R`             | 75g                     | --          | --                          | --                       | -----                     |
 | Lata garbanzos                   | 130g                    | 12/2026     | 95                          | 4.7                      | -----                     |
 | Nuez moscada molida `PS`         | 10g                     | --          | --                          | --                       | -----                     |
@@ -78,6 +78,8 @@
 | Gomitas arcoíris                 | 4x 170g                 | 9/2027      | 395                         | 2g                       | --                        |
 | Fresas deshidratadas             | 500g                    | 9/2026      | 325                         | 1g                       | --                        |
 | Lata Hongos rebanados            | 200g                    | 9/2028      | 70                          | 2g                       | ----                      |
+| Margarina jalapeño               | 5x barra                | 11/2026     | 100                         | 0g                       | ----                      |
+| "Empanaditas asiáticas"          | 250g                    | 4/2027      | 150                         | 3g                       | ----                      |
 
 ---
 
