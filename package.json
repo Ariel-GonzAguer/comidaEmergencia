@@ -1,0 +1,23 @@
+{
+  "name": "inventario-emergencia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "node server/index.js",
+    "client": "pnpm --filter inventario-emergencia-client run dev",
+    "dev": "concurrently \"pnpm run server\" \"pnpm run client\""
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.2.1",
+    "concurrently": "8.2.2",
+    "vite": "5.1.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}

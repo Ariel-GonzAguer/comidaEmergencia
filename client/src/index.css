@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Variables globales + utilidades que Tailwind no cubre
+   ========================================================= */
+
+:root {
+  --bg:        #0d0d0d;
+  --bg1:       #141414;
+  --bg2:       #1c1c1c;
+  --bg3:       #242424;
+  --edge:      #2a2a2a;
+  --edge-hi:   #3a3a3a;
+  --ink:       #d4d0c8;
+  --ink-dim:   #555550;
+  --ink-mid:   #888880;
+  --ink-hi:    #e8e4d8;
+  --accent:    #c8a96e;
+  --accent-d:  #7a6540;
+  --danger:    #8b2020;
+  --danger-hi: #b83030;
+  --ok:        #2a5c3a;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 100dvh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--edge-hi); border-radius: 0; }
+
+/* ---- Badges de simbolo ---- */
+.sym      { display:inline-block; font-size:9px; font-weight:600; padding:1px 5px; border-radius:1px; margin-right:3px; letter-spacing:0.05em; }
+.sym-v    { background:#5c1f1f; color:#e06060; }
+.sym-star { background:#4a3800; color:#c8a030; }
+.sym-r    { background:#1a3a5c; color:#60a0d8; }
+.sym-ps   { background:#3a2a50; color:#9a70d0; }
+.sym-gy   { background:#1e3a28; color:#50b870; }
+.sym-ne   { background:#2a1a0a; color:#c07850; }
+
+/* ---- Color de fechas ---- */
+.fecha-ok        { color: var(--ink-mid); }
+.fecha-este-anio { color: #c8a030; }
+.fecha-pronto    { color: #d08040; font-weight: 500; }
+.fecha-vencida   { color: #e06060; text-decoration: line-through; }
+
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
