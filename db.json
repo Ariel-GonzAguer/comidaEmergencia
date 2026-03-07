@@ -1,0 +1,1031 @@
+{
+  "categorias": [
+    "alimentos",
+    "especias",
+    "bebidas",
+    "higiene",
+    "otros"
+  ],
+  "simbolos": [
+    {
+      "codigo": "V",
+      "descripcion": "Ya vencido (fecha anterior a 2026)"
+    },
+    {
+      "codigo": "*",
+      "descripcion": "Vence este año (durante el 2026)"
+    },
+    {
+      "codigo": "R",
+      "descripcion": "Reponer"
+    },
+    {
+      "codigo": "PS",
+      "descripcion": "Pronto a sacar (Reponer inferido)"
+    },
+    {
+      "codigo": "GY",
+      "descripcion": "Gastar ya"
+    }
+  ],
+  "insumos": [
+    {
+      "id": "11111111-0001-0001-0001-000000000001",
+      "nombre": "Ramen Roland",
+      "cantidad": "85",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-06",
+      "calorias": 400,
+      "proteina": 7,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T22:55:01.085Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000002",
+      "nombre": "Ramen MAMA",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000003",
+      "nombre": "Salsa de soya sabor Hongos",
+      "cantidad": "4x 500",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "2026-05",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000004",
+      "nombre": "Ajo granulado",
+      "cantidad": "50",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "2026-10",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000005",
+      "nombre": "Paprika",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "especias",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "PS"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000006",
+      "nombre": "Barra chocolate Trappa",
+      "cantidad": "75",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": 514,
+      "proteina": 10,
+      "notas": "pendiente revisar vencimiento",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000007",
+      "nombre": "Sal blanca",
+      "cantidad": "1",
+      "unidad": "kg",
+      "categoria": "especias",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000008",
+      "nombre": "Tofu firme caja",
+      "cantidad": "4x paquete",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000009",
+      "nombre": "Aceitunas verdes (emergencia)",
+      "cantidad": "75",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000010",
+      "nombre": "Lata garbanzos",
+      "cantidad": "130",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-12",
+      "calorias": 95,
+      "proteina": 4.7,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000011",
+      "nombre": "Nuez moscada molida",
+      "cantidad": "10",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "PS"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000012",
+      "nombre": "Salsa Chunky",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000013",
+      "nombre": "Salsa de tomate con hongos",
+      "cantidad": "680",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-02",
+      "calorias": 60,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000014",
+      "nombre": "Sirope de chocolate",
+      "cantidad": "680",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-12",
+      "calorias": 100,
+      "proteina": 0,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000015",
+      "nombre": "Mantequilla de maní",
+      "cantidad": "1",
+      "unidad": "kg",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": 205,
+      "proteina": 8,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000016",
+      "nombre": "Mermelada frutos del bosque",
+      "cantidad": "330",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2028-09",
+      "calorias": 163,
+      "proteina": 0.3,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000017",
+      "nombre": "Coctel de frutas en almíbar",
+      "cantidad": "480",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-04",
+      "calorias": 101,
+      "proteina": 0.6,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000018",
+      "nombre": "Frijoles molidos",
+      "cantidad": "800",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-11",
+      "calorias": 120,
+      "proteina": 4,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000019",
+      "nombre": "Ensalada mediterránea",
+      "cantidad": "180",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-08",
+      "calorias": 38,
+      "proteina": 1.3,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000020",
+      "nombre": "Lentejas cocidas",
+      "cantidad": "425",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-08",
+      "calorias": 103,
+      "proteina": 6,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000021",
+      "nombre": "Lata relleno de manzana",
+      "cantidad": "595",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-04",
+      "calorias": 100,
+      "proteina": 0,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000022",
+      "nombre": "Lata frijoles blancos",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000023",
+      "nombre": "Lata Hongos enteros",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "PS"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000024",
+      "nombre": "Lata Espageti palmito",
+      "cantidad": "2x 220",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-09",
+      "calorias": 15,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000025",
+      "nombre": "Salsa de tomate Marinara",
+      "cantidad": "652",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-11",
+      "calorias": 60,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000026",
+      "nombre": "Salsa de tomate Tradicional",
+      "cantidad": "652",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-05",
+      "calorias": 60,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [
+        "PS"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000027",
+      "nombre": "Puré de papa",
+      "cantidad": "1x paquete",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "2027-03",
+      "calorias": 70,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000028",
+      "nombre": "Malta molida",
+      "cantidad": "100",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T22:55:56.677Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000029",
+      "nombre": "Lata jalapeño en escabeche",
+      "cantidad": "100",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-11",
+      "calorias": 3,
+      "proteina": 0.2,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000030",
+      "nombre": "Lata Palmito en trozos (220g)",
+      "cantidad": "220",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-07",
+      "calorias": 10,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000031",
+      "nombre": "Lata Palmito en trozos (2x 220g)",
+      "cantidad": "2x 220",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2028-05",
+      "calorias": 10,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000032",
+      "nombre": "Lata SoyaPac bife",
+      "cantidad": "350",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-10",
+      "calorias": 170,
+      "proteina": 29,
+      "notas": "",
+      "simbolos": [
+        "PS",
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000033",
+      "nombre": "Cardamomo en polvo",
+      "cantidad": "6",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000034",
+      "nombre": "Paquete fresco de té limón",
+      "cantidad": "7x paquetes",
+      "unidad": "",
+      "categoria": "bebidas",
+      "vencimiento": "2027-06",
+      "calorias": null,
+      "proteina": null,
+      "notas": "Agregar 15 paquetes",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000035",
+      "nombre": "Paquete fresco de melón",
+      "cantidad": "5x paquetes",
+      "unidad": "",
+      "categoria": "bebidas",
+      "vencimiento": "2027-06",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000036",
+      "nombre": "Paquete fresco de té frambuesa",
+      "cantidad": "6x paquetes",
+      "unidad": "",
+      "categoria": "bebidas",
+      "vencimiento": "2027-06",
+      "calorias": null,
+      "proteina": null,
+      "notas": "Agregar 15 paquetes",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000037",
+      "nombre": "Paquete fresco mango",
+      "cantidad": "2x paquetes",
+      "unidad": "",
+      "categoria": "bebidas",
+      "vencimiento": "2027-08",
+      "calorias": null,
+      "proteina": null,
+      "notas": "Agregar 5 paquetes",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000038",
+      "nombre": "Ramen DUDOMI",
+      "cantidad": "2x paquete",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "2026-10",
+      "calorias": 47,
+      "proteina": 0.5,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000039",
+      "nombre": "Maní tostado sin sal",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-10",
+      "calorias": 544,
+      "proteina": 23,
+      "notas": "",
+      "simbolos": [
+        "PS",
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000040",
+      "nombre": "Azúcar blanca",
+      "cantidad": "1",
+      "unidad": "kg",
+      "categoria": "alimentos",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000041",
+      "nombre": "Lata Leche de coco BUENA (em.)",
+      "cantidad": "2x 400",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "2027-10",
+      "calorias": 400,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000042",
+      "nombre": "Lata frijoles rojos",
+      "cantidad": "370",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2028-03",
+      "calorias": 101,
+      "proteina": 5,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000043",
+      "nombre": "Tapa dulce en polvo (em.)",
+      "cantidad": "450",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-12",
+      "calorias": 25,
+      "proteina": 0,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000044",
+      "nombre": "Caja de Couscous (em.)",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": 220,
+      "proteina": 8,
+      "notas": "Vencida, pero se mantiene",
+      "simbolos": [
+        "V"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000045",
+      "nombre": "Ajinomoto",
+      "cantidad": "150",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "2029-02",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000046",
+      "nombre": "Barquillos oreo",
+      "cantidad": "",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000047",
+      "nombre": "Botella Guaro",
+      "cantidad": "2x 1",
+      "unidad": "litro",
+      "categoria": "bebidas",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "Reponer 1",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000048",
+      "nombre": "Lentejas secas (em.)",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": 353,
+      "proteina": 21,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000049",
+      "nombre": "Lata Leche de coco (em.)",
+      "cantidad": "400",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "2027-09",
+      "calorias": 400,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000050",
+      "nombre": "Sal Rosada Pakistán",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000051",
+      "nombre": "Pimienta negra molida (em.)",
+      "cantidad": "28",
+      "unidad": "g",
+      "categoria": "especias",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000052",
+      "nombre": "Soya texturizada (em.)",
+      "cantidad": "3x 250",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-12",
+      "calorias": 300,
+      "proteina": 50,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000053",
+      "nombre": "Harina de maíz",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [
+        "R"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000054",
+      "nombre": "Caja leche de soya (em.)",
+      "cantidad": "3x 1",
+      "unidad": "litro",
+      "categoria": "bebidas",
+      "vencimiento": "2026-09",
+      "calorias": 62,
+      "proteina": 3,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000055",
+      "nombre": "Pasta de tomate",
+      "cantidad": "2x 250",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-03",
+      "calorias": 26,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000056",
+      "nombre": "Frijoles rojos secos",
+      "cantidad": "6",
+      "unidad": "kg",
+      "categoria": "alimentos",
+      "vencimiento": "no vence",
+      "calorias": 313,
+      "proteina": 20,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000057",
+      "nombre": "Arroz blanco (em.)",
+      "cantidad": "8",
+      "unidad": "kg",
+      "categoria": "alimentos",
+      "vencimiento": "no vence",
+      "calorias": 150,
+      "proteina": 3,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000058",
+      "nombre": "Aceite de soya y girasol",
+      "cantidad": "5",
+      "unidad": "litros",
+      "categoria": "alimentos",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": 0,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000059",
+      "nombre": "Gluten seco",
+      "cantidad": "1",
+      "unidad": "kg",
+      "categoria": "alimentos",
+      "vencimiento": "2027-09",
+      "calorias": 370,
+      "proteina": 75,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000060",
+      "nombre": "Gomitas arcoíris",
+      "cantidad": "4x 170",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-09",
+      "calorias": 395,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000061",
+      "nombre": "Fresas deshidratadas",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2026-09",
+      "calorias": 325,
+      "proteina": 1,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000062",
+      "nombre": "Lata Hongos rebanados",
+      "cantidad": "200",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2028-09",
+      "calorias": 70,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000063",
+      "nombre": "Margarina jalapeño (em.)",
+      "cantidad": "5x barra",
+      "unidad": "",
+      "categoria": "alimentos",
+      "vencimiento": "2026-11",
+      "calorias": 100,
+      "proteina": 0,
+      "notas": "",
+      "simbolos": [
+        "*"
+      ],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000064",
+      "nombre": "Empanaditas asiáticas",
+      "cantidad": "250",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "2027-04",
+      "calorias": 150,
+      "proteina": 3,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000065",
+      "nombre": "Aplicadores de madera",
+      "cantidad": "100",
+      "unidad": "piezas",
+      "categoria": "higiene",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000066",
+      "nombre": "Rasuradoras",
+      "cantidad": "5",
+      "unidad": "unidades",
+      "categoria": "higiene",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "11111111-0001-0001-0001-000000000067",
+      "nombre": "Tissues",
+      "cantidad": "6",
+      "unidad": "unidades",
+      "categoria": "higiene",
+      "vencimiento": "no vence",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-07T00:00:00.000Z",
+      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    }
+  ]
+}
