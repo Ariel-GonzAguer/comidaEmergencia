@@ -22,10 +22,6 @@
     {
       "codigo": "PS",
       "descripcion": "Pronto a sacar (Reponer inferido)"
-    },
-    {
-      "codigo": "GY",
-      "descripcion": "Gastar ya"
     }
   ],
   "insumos": [

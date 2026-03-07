@@ -85,11 +85,11 @@ Es un archivo JSON plano con tres colecciones:
   "insumos": [ /* array de items */ ],
   "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros"],
   "simbolos": [
-    { "codigo": "V",  "descripcion": "Vegetariano" },
-    { "codigo": "*",  "descripcion": "Esencial" },
-    { "codigo": "R",  "descripcion": "Requiere cocción" },
-    { "codigo": "PS", "descripcion": "Para sopa" },
-    { "codigo": "GY", "descripcion": "Gluten-friendly" }
+    { "codigo": "V",  "descripcion": "Vencido" },
+    { "codigo": "*",  "descripcion": "Vence este año" },
+    { "codigo": "R",  "descripcion": "Reponer" },
+    { "codigo": "PS", "descripcion": "Pronto  sacar" },
+
   ]
 }
 ```
