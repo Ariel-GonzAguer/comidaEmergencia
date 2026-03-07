@@ -26,7 +26,7 @@ html, body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.5;
   min-height: 100dvh;
 }
@@ -37,7 +37,7 @@ html, body {
 ::-webkit-scrollbar-thumb { background: var(--edge-hi); border-radius: 0; }
 
 /* ---- Badges de simbolo ---- */
-.sym      { display:inline-block; font-size:9px; font-weight:600; padding:1px 5px; border-radius:1px; margin-right:3px; letter-spacing:0.05em; }
+.sym      { display:inline-block; font-size: 12px; font-weight:600; padding:1px 5px; border-radius:1px; margin-right:3px; letter-spacing:0.05em; }
 .sym-v    { background:#5c1f1f; color:#e06060; }
 .sym-star { background:#4a3800; color:#c8a030; }
 .sym-r    { background:#1a3a5c; color:#60a0d8; }
@@ -53,3 +53,19 @@ html, body {
 
 @keyframes spin    { to { transform: rotate(360deg); } }
 @keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+/* WCAG 2.4.7 — anillo de foco visible por teclado */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* WCAG 1.4.12 / 2.3.3 — reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

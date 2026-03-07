@@ -1,3 +1,12 @@
+/**
+ * @file Componente raíz de la aplicación de inventario de emergencia.
+ *
+ * Orquesta el estado de la UI (modal, confirmación de eliminación, toast)
+ * y conecta los componentes de presentación con el hook {@link useInsumos}.
+ *
+ * @module App
+ */
+
 import { useState, useCallback } from 'react'
 import Header from './components/Header.jsx'
 import FilterBar from './components/FilterBar.jsx'
@@ -7,6 +16,16 @@ import DeleteConfirm from './components/DeleteConfirm.jsx'
 import Toast from './components/Toast.jsx'
 import { useInsumos } from './hooks/useInsumos.js'
 
+/**
+ * Componente raíz que renderiza la interfaz completa del inventario.
+ *
+ * Administra tres piezas de estado UI:
+ * - `modal`         – controla la apertura del formulario de crear/editar.
+ * - `confirmDelete` – controla el diálogo de confirmación de eliminación.
+ * - `toast`         – notificaciones efímeras de éxito/error.
+ *
+ * @returns {JSX.Element}
+ */
 export default function App() {
   const {
     insumos,
@@ -25,11 +44,24 @@ export default function App() {
   const [confirmDelete, setConfirmDelete] = useState(null)  // null | insumo
   const [toast, setToast] = useState(null)
 
+  /**
+   * Muestra una notificación toast que desaparece automáticamente tras 3 segundos.
+   *
+   * @param {string} msg            - Texto a mostrar.
+   * @param {'ok'|'error'} [tipo='ok'] - Estilo visual del toast.
+   */
   const showToast = useCallback((msg, tipo = 'ok') => {
     setToast({ msg, tipo })
     setTimeout(() => setToast(null), 3000)
   }, [])
 
+  /**
+   * Handler para guardar un insumo (crear o editar según el modo del modal).
+   * Cierra el modal tras éxito y muestra un toast.
+   *
+   * @async
+   * @param {Object} datos - Campos del formulario del insumo.
+   */
   async function handleGuardar(datos) {
     try {
       if (modal.modo === 'crear') {
@@ -45,6 +77,12 @@ export default function App() {
     }
   }
 
+  /**
+   * Handler para confirmar la eliminación de un insumo.
+   * Cierra el diálogo tras éxito y muestra un toast.
+   *
+   * @async
+   */
   async function handleEliminar() {
     try {
       await eliminarInsumo(confirmDelete.id)
@@ -65,7 +103,8 @@ export default function App() {
         categorias={categorias}
       />
 
-      {error && <p className="px-6 py-2 text-[#e06060] text-[12px]">Error: {error}</p>}
+      <main id="contenido-principal">
+      {error && <p role="alert" className="px-6 py-2 text-[#e06060] text-[14px]">Error: {error}</p>}
 
       <InsumoTable
         insumos={insumos}
@@ -74,6 +113,7 @@ export default function App() {
         onEditar={(insumo) => setModal({ modo: 'editar', insumo })}
         onEliminar={(insumo) => setConfirmDelete(insumo)}
       />
+      </main>
 
       {modal && (
         <InsumoModal
