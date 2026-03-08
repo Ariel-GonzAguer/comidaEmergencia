@@ -47,8 +47,8 @@ html, body {
 
 /* ---- Color de fechas ---- */
 .fecha-ok        { color: var(--color-ink-mid); }
-.fecha-este-anio { color: var(--color-accent); }
-.fecha-pronto    { color: var(--color-accent-d); font-weight: 500; }
+.fecha-este-anio { color: yellow; }
+.fecha-pronto    { color: orange ; font-weight: 500; }
 .fecha-vencida   { color: var(--color-danger); text-decoration: line-through; }
 
 @keyframes spin    { to { transform: rotate(360deg); } }
