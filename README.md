@@ -1,17 +1,18 @@
-# Inventario de Emergencia
+# Comida Emergencia Mini
 
-Aplicación web local para gestionar insumos de emergencia (alimentos, agua, medicamentos, etc.). Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` dentro del mismo repositorio.
+Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicación Web de Código Abierto / Open Source para gestionar recursos en emergencias.
+(Ahora) Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` (y un archivo markdown) dentro del mismo repositorio.
 
 ## Stack tecnológico
 
-| Capa      | Tecnología                  | Versión  |
-|-----------|-----------------------------|----------|
-| Frontend  | React + JSX                 | 18.2     |
-| Estilos   | Tailwind CSS (plugin Vite)  | 4.2      |
-| Bundler   | Vite                        | 5.1      |
-| Backend   | Express                     | 4.18     |
-| Runtime   | Node.js                     | ≥ 18     |
-| Gestor    | pnpm                        | ≥ 8      |
+| Capa     | Tecnología                 | Versión |
+| -------- | -------------------------- | ------- |
+| Frontend | React + JSX                | 18.2.0  |
+| Estilos  | Tailwind CSS (plugin Vite) | 4.2.1   |
+| Bundler  | Vite                       | 5.4.21  |
+| Backend  | Express                    | 4.22.1  |
+| Runtime  | Node.js                    | 22.17.1 |
+| Gestor   | pnpm                       | 10.30.3 |
 
 ---
 
@@ -38,9 +39,9 @@ Aplicación web local para gestionar insumos de emergencia (alimentos, agua, med
 │   │   └── hooks/
 │   │       └── useInsumos.js   ← Hook CRUD – toda la lógica de peticiones
 │   └── public/
-├── scripts/
-│   └── migrate-emergencia.mjs  ← Migración del campo esEmergencia
 ├── package.json                ← Scripts dev / server / client
+├── insumos-emergencia.md         ← Exportación markdown de insumos de emergencia
+├── INSTRUCCIONES.md                 ← Instrucciones para que agente de IA cree la BBDD a partir del markdown `insumos-emergencia.md`
 └── README.md
 ```
 
@@ -59,20 +60,20 @@ cd client && pnpm install && cd ..
 pnpm dev
 ```
 
-| Servicio  | URL                        |
-|-----------|----------------------------|
-| Frontend  | http://localhost:5173       |
-| API REST  | http://localhost:3001/api   |
+| Servicio | URL                       |
+| -------- | ------------------------- |
+| Frontend | http://localhost:5173     |
+| API REST | http://localhost:3001/api |
 
 ### Scripts disponibles
 
-| Script        | Comando          | Descripción                          |
-|---------------|------------------|--------------------------------------|
-| `dev`         | `pnpm dev`       | Levanta Express + Vite concurrently  |
-| `server`      | `pnpm server`    | Solo el servidor Express (port 3001) |
-| `client`      | `pnpm client`    | Solo el dev server de Vite (port 5173) |
-| `build`       | `cd client && pnpm build` | Build de producción del frontend |
-| `preview`     | `cd client && pnpm preview` | Preview del build de producción |
+| Script    | Comando                     | Descripción                            |
+| --------- | --------------------------- | -------------------------------------- |
+| `dev`     | `pnpm dev`                  | Levanta Express + Vite concurrently    |
+| `server`  | `pnpm server`               | Solo el servidor Express (port 3001)   |
+| `client`  | `pnpm client`               | Solo el dev server de Vite (port 5173) |
+| `build`   | `cd client && pnpm build`   | Build de producción del frontend       |
+| `preview` | `cd client && pnpm preview` | Preview del build de producción        |
 
 ---
 
@@ -98,23 +99,20 @@ Es un archivo JSON plano con tres colecciones:
 
 ### Estructura de un insumo
 
-| Campo          | Tipo               | Descripción |
-|----------------|--------------------|-------------|
-| `id`           | string (UUID)      | Identificador único generado automáticamente |
-| `nombre`       | string             | Nombre del producto (**obligatorio**) |
-| `cantidad`     | string             | Ej: `"2x 500"`, `"1"` |
-| `unidad`       | string             | Ej: `"g"`, `"ml"`, `"kg"` |
-| `categoria`    | string             | Una de las categorías definidas en `db.json` |
-| `vencimiento`  | string             | Formato `"AAAA-MM"` o `"no vence"` |
-| `calorias`     | number \| null     | kcal por porción |
-| `proteina`     | number \| null     | Gramos de proteína por porción |
-| `notas`        | string             | Observaciones libres |
-| `simbolos`     | string[]           | Array de códigos: `["V", "*"]` |
-| `esEmergencia` | boolean            | `true` = insumo de emergencia, `false` = no-emergencia |
-| `creadoEn`     | ISO 8601 string    | Fecha de creación (auto) |
-| `actualizadoEn`| ISO 8601 string    | Última modificación (auto) |
-
-Los items con `esEmergencia: false` muestran el badge **NO-EMG** en la tabla.
+| Campo           | Tipo            | Descripción                                            |
+| --------------- | --------------- | ------------------------------------------------------ |
+| `id`            | string (UUID)   | Identificador único generado automáticamente           |
+| `nombre`        | string          | Nombre del producto (**obligatorio**)                  |
+| `cantidad`      | string          | Ej: `"2x 500"`, `"1"`                                  |
+| `unidad`        | string          | Ej: `"g"`, `"ml"`, `"kg"`                              |
+| `categoria`     | string          | Una de las categorías definidas en `db.json`           |
+| `vencimiento`   | string          | Formato `"AAAA-MM"` o `"no vence"`                     |
+| `calorias`      | number \| null  | kcal por porción                                       |
+| `proteina`      | number \| null  | Gramos de proteína por porción                         |
+| `notas`         | string          | Observaciones libres                                   |
+| `simbolos`      | string[]        | Array de códigos: `["V", "*"]`                         |
+| `creadoEn`      | ISO 8601 string | Fecha de creación (auto)                               |
+| `actualizadoEn` | ISO 8601 string | Última modificación (auto)                             |
 
 ---
 
@@ -124,20 +122,20 @@ Los items con `esEmergencia: false` muestran el badge **NO-EMG** en la tabla.
 
 ### Insumos
 
-| Método | Ruta                  | Descripción                      | Query params             |
-|--------|-----------------------|----------------------------------|--------------------------|
-| GET    | `/api/insumos`        | Lista todos los insumos          | `?texto=` `?categoria=`  |
-| GET    | `/api/insumos/:id`    | Obtiene un insumo por UUID       | —                        |
-| POST   | `/api/insumos`        | Crea un nuevo insumo             | —                        |
-| PUT    | `/api/insumos/:id`    | Actualiza parcialmente un insumo | —                        |
-| DELETE | `/api/insumos/:id`    | Elimina un insumo                | —                        |
+| Método | Ruta               | Descripción                      | Query params            |
+| ------ | ------------------ | -------------------------------- | ----------------------- |
+| GET    | `/api/insumos`     | Lista todos los insumos          | `?texto=` `?categoria=` |
+| GET    | `/api/insumos/:id` | Obtiene un insumo por UUID       | —                       |
+| POST   | `/api/insumos`     | Crea un nuevo insumo             | —                       |
+| PUT    | `/api/insumos/:id` | Actualiza parcialmente un insumo | —                       |
+| DELETE | `/api/insumos/:id` | Elimina un insumo                | —                       |
 
 ### Catálogos
 
-| Método | Ruta                  | Descripción                        |
-|--------|-----------------------|------------------------------------|
-| GET    | `/api/categorias`     | Lista las categorías disponibles   |
-| GET    | `/api/simbolos`       | Lista los símbolos disponibles     |
+| Método | Ruta              | Descripción                      |
+| ------ | ----------------- | -------------------------------- |
+| GET    | `/api/categorias` | Lista las categorías disponibles |
+| GET    | `/api/simbolos`   | Lista los símbolos disponibles   |
 
 ### Ejemplos de uso con cURL
 
@@ -181,33 +179,33 @@ hooks/useInsumos.js              ← Hook CRUD centralizado
 
 Centraliza *toda* la comunicación con la API. Expone:
 
-| Propiedad / Método   | Tipo                            | Descripción                          |
-|-----------------------|---------------------------------|--------------------------------------|
-| `insumos`             | `Insumo[]`                      | Lista de insumos (reactiva a filtros)|
-| `categorias`          | `string[]`                      | Categorías cargadas desde la API     |
-| `simbolos`            | `Simbolo[]`                     | Símbolos cargados desde la API       |
-| `loading`             | `boolean`                       | Indicador de carga                   |
-| `error`               | `string \| null`                | Último mensaje de error              |
-| `filtros` / `setFiltros` | `Filtros`                    | Filtros activos (categoría + texto)  |
-| `crearInsumo(datos)`  | `(Object) => Promise<void>`     | Crea un insumo y recarga la lista    |
-| `actualizarInsumo(id, datos)` | `(string, Object) => Promise<void>` | Actualiza y recarga       |
-| `eliminarInsumo(id)`  | `(string) => Promise<void>`     | Elimina y recarga                    |
+| Propiedad / Método            | Tipo                                | Descripción                           |
+| ----------------------------- | ----------------------------------- | ------------------------------------- |
+| `insumos`                     | `Insumo[]`                          | Lista de insumos (reactiva a filtros) |
+| `categorias`                  | `string[]`                          | Categorías cargadas desde la API      |
+| `simbolos`                    | `Simbolo[]`                         | Símbolos cargados desde la API        |
+| `loading`                     | `boolean`                           | Indicador de carga                    |
+| `error`                       | `string \| null`                    | Último mensaje de error               |
+| `filtros` / `setFiltros`      | `Filtros`                           | Filtros activos (categoría + texto)   |
+| `crearInsumo(datos)`          | `(Object) => Promise<void>`         | Crea un insumo y recarga la lista     |
+| `actualizarInsumo(id, datos)` | `(string, Object) => Promise<void>` | Actualiza y recarga                   |
+| `eliminarInsumo(id)`          | `(string) => Promise<void>`         | Elimina y recarga                     |
 
 ### Atajos de teclado
 
-| Tecla   | Contexto     | Acción                               |
-|---------|--------------|--------------------------------------|
-| `/`     | Global       | Enfoca el campo de búsqueda          |
-| `Escape`| Modal abierto | Cierra el modal activo              |
+| Tecla    | Contexto      | Acción                      |
+| -------- | ------------- | --------------------------- |
+| `/`      | Global        | Enfoca el campo de búsqueda |
+| `Escape` | Modal abierto | Cierra el modal activo      |
 
 ### Colores de vencimiento
 
-| Color              | Clase CSS        | Condición                     |
-|--------------------|------------------|-------------------------------|
-| Gris               | `fecha-ok`       | Vence en > 12 meses           |
-| Amarillo           | `fecha-este-anio`| Vence dentro de 12 meses      |
-| Naranja            | `fecha-pronto`   | Vence en ≤ 3 meses            |
-| Rojo + tachado     | `fecha-vencida`  | Ya venció                     |
+| Color          | Clase CSS         | Condición                |
+| -------------- | ----------------- | ------------------------ |
+| Gris           | `fecha-ok`        | Vence en > 12 meses      |
+| Amarillo       | `fecha-este-anio` | Vence dentro de 12 meses |
+| Naranja        | `fecha-pronto`    | Vence en ≤ 3 meses       |
+| Rojo + tachado | `fecha-vencida`   | Ya venció                |
 
 ---
 
@@ -259,9 +257,9 @@ Script idempotente que asigna `esEmergencia: true/false` a todos los items exist
 node scripts/migrate-emergencia.mjs
 ```
 
-| Prefijo del ID         | Resultado              |
-|------------------------|------------------------|
-| `11111111-0002...`     | `esEmergencia: false`  |
-| Cualquier otro         | `esEmergencia: true`   |
+| Prefijo del ID     | Resultado             |
+| ------------------ | --------------------- |
+| `11111111-0002...` | `esEmergencia: false` |
+| Cualquier otro     | `esEmergencia: true`  |
 
 Es seguro ejecutarlo múltiples veces — solo modifica items cuyo valor difiere del esperado.
