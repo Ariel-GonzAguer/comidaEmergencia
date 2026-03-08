@@ -2,9 +2,9 @@
 
 [![StandWithPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg)](https://techforpalestine.org/learn-more)
 ![Static Badge](https://img.shields.io/badge/100%25_Offline-brightgreen)
-![Static Badge](https://img.shields.io/badge/MI_T+_Commons_Clause-red)
+![Static Badge](https://img.shields.io/badge/MIT+CommonsClause-red?label=Licencia)
 
-Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicaccon licencia `MIT + CommonsClause`urce para gestionar recursos en emergencias.
+Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicación licencia `MIT + CommonsClause` para gestionar recursos en emergencias.
 (Ahora) Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` (y un archivo markdown) dentro del mismo repositorio.
 
 ## Stack tecnológico
@@ -30,10 +30,11 @@ El proyecto cuenta con una suite completa de pruebas unitarias y de integración
 
 ```bash
 # Ejecutar pruebas del cliente 
-cd client && pnpm tes
+cd client && pnpm test
 
 # Ejecutar pruebas del servidor 
 pnpm test
+```
 
 ---
 
@@ -87,7 +88,7 @@ pnpm dev
 | Frontend | http://localhost:5173     |
 | API REST | http://localhost:3001/api |
 
-### Scripts disponibles
+### Scripts disponibles en raíz
 
 | Script    | Comando                     | Descripción                            |
 | --------- | --------------------------- | -------------------------------------- |
@@ -101,7 +102,7 @@ pnpm dev
 
 ## La base de datos: `db.json`
 
-Es un archivo JSON plano con tres colecciones:
+Es un archivo JSON plano con tres colecciones, todas extensibles:
 
 ```jsonc
 {
@@ -226,7 +227,7 @@ Centraliza _toda_ la comunicación con la API. Expone:
 | Color          | Clase CSS        | Condición                |
 | -------------- | ---------------- | ------------------------ |
 | Gris           | `fecha-ok`       | Vence en > 12 meses      |
-| Amarillo       | `fecha-este-año` | Vence dentro de 12 meses |
+| Amarillo       | `fecha-este-anio` | Vence dentro de 12 meses |
 | Naranja        | `fecha-pronto`   | Vence en ≤ 3 meses       |
 | Rojo + tachado | `fecha-vencida`  | Ya venció                |
 
@@ -290,16 +291,16 @@ No elimine la condición `if (process.env.NODE_ENV !== 'test')` en `server/index
 
 ## Personas que han colaboradoen el proyecto:
 
-@Ariel-GonzAguer — Propietario / Mantenedor
-@lianyvar — Colaboradora
-@mvlsqz — Colaborador
-@nadir-ammisaid — Colaborador
+- @Ariel-GonzAguer — Propietario / Mantenedor
+- @lianyvar — Colaboradora
+- @mvlsqz — Colaborador
+- @nadir-ammisaid — Colaborador
 
 ---
 
 ## Objetivos del proyecto
 
 - Facilitar la gestión y organización de recursos esenciales en situaciones de emergencia.
-- Permitir el acceso y la colaboración de cualquier persona, comunidad o institución, promoviendo el software libre y abierto.
+- Permitir el acceso y la colaboración de cualquier persona, comunidad o institución.
 - Ofrecer una interfaz totalmente funcional sin internet, garantizando su utilidad en contextos de crisis donde la conectividad puede ser limitada o inexistente.
 - Fomentar la participación y mejora continua por parte de la comunidad.
