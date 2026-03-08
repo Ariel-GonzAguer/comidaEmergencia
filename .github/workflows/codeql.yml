@@ -10,11 +10,11 @@ on:
   push:
     branches:
       - main
-      - versionAstro
+      - mini
   pull_request:
     branches:
       - main
-      - versionAstro
+      - mini
   schedule:
     - cron: '17 13 * * 3'
 

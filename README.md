@@ -4,7 +4,7 @@
 ![Static Badge](https://img.shields.io/badge/100%25_Offline-brightgreen)
 ![Static Badge](https://img.shields.io/badge/MI_T+_Commons_Clause-red)
 
-Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicación Web de Código Abierto / Open Source para gestionar recursos en emergencias.
+Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicaccon licencia `MIT + CommonsClause`urce para gestionar recursos en emergencias.
 (Ahora) Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` (y un archivo markdown) dentro del mismo repositorio.
 
 ## Stack tecnológico
@@ -17,6 +17,23 @@ Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una
 | Backend  | Express                    | 4.22.1  |
 | Runtime  | Node.js                    | 22.17.1 |
 | Gestor   | pnpm                       | 10.30.3 |
+| Pruebas  | Vitest + Supertest         | 2.1.9   |
+
+---
+
+## Pruebas (Testing)
+
+El proyecto cuenta con una suite completa de pruebas unitarias y de integración para garantizar la estabilidad de los datos y la interfaz.
+
+- **Frontend:** Vitest + React Testing Library (Pruebas de componentes y hooks).
+- **Backend:** Vitest + Supertest (Pruebas de la API REST con mocks de `fs`).
+
+```bash
+# Ejecutar pruebas del cliente 
+cd client && pnpm tes
+
+# Ejecutar pruebas del servidor 
+pnpm test
 
 ---
 
@@ -250,21 +267,33 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 
 ### Agregar campos al formulario
 
-1. Agregar el campo al objeto `VACIO` en `InsumoModal.jsx`
-2. Añadir el campo al `useEffect` que carga `insumoInicial`
-3. Agregar el input en el JSX del formulario
-4. Actualizar el array `campos` en el handler `PUT` de `server/index.js`
-5. Agregar el valor por defecto en el handler `POST` de `server/index.js`
+1. Agregar el campo al objeto `VACIO` en `InsumoModal.jsx`.
+2. Añadir el campo al `useEffect` que carga `insumoInicial`.
+3. Agregar el input en el JSX del formulario.
+4. Actualizar el array `campos` en el handler `PUT` de `server/index.js`.
+5. Agregar el valor por defecto en el handler `POST` de `server/index.js`.
+
+--- 
+
+### Automatización (Actions)
+
+Se han configurado flujos de GitHub Actions para mantener la calidad del código en cada Pull Request a `main` y `mini`:
+- **Test:** Ejecución obligatoria de la suite completa de pruebas.
+- **Lint:** Validación de reglas de código con ESLint.
+- **Audit:** Auditoría de seguridad de dependencias (`pnpm audit`).
+- **Prettier:** Verificación de formato automático.
+
+**Nota importante para desarrolladores del servidor:**
+No elimine la condición `if (process.env.NODE_ENV !== 'test')` en `server/index.js`, ya que es necesaria para que la suite de pruebas pueda importar la aplicación sin bloquear el puerto real.
 
 ---
 
-## Personas que han colaborado en el proyecto:
+## Personas que han colaboradoen el proyecto:
 
 @Ariel-GonzAguer — Propietario / Mantenedor
 @lianyvar — Colaboradora
 @mvlsqz — Colaborador
 @nadir-ammisaid — Colaborador
-@astrobot-houston — Bot (automatización)
 
 ---
 
@@ -274,13 +303,3 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 - Permitir el acceso y la colaboración de cualquier persona, comunidad o institución, promoviendo el software libre y abierto.
 - Ofrecer una interfaz totalmente funcional sin internet, garantizando su utilidad en contextos de crisis donde la conectividad puede ser limitada o inexistente.
 - Fomentar la participación y mejora continua por parte de la comunidad.
-
----
-
-## Proyecto Código Abierto / Open Source (AGPL-3)
-
-Este proyecto es Código Abierto bajo licencia AGPL-3. Puede usarlo, modificarlo y compartirlo respetando los términos de la licencia. Aceptamos issues y pull requests.
-
-- Lea: CONTRIBUTING.md y CODE_OF_CONDUCT.md
-- Lea los archivos en /documentación.
-- Licencia: LICENCE.txt

@@ -94,7 +94,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-dvh max-w-[1600px] mx-auto">
+    <div className="flex flex-col min-h-dvh max-w-400 mx-auto">
       <Header onNuevo={() => setModal({ modo: 'crear' })} total={insumos.length} />
 
       <FilterBar filtros={filtros} setFiltros={setFiltros} categorias={categorias} />
