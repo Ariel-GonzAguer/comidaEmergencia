@@ -315,5 +315,5 @@ app.get('/api/simbolos', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`\n  Servidor de inventario corriendo en http://localhost:${PORT}\n`)
+  console.log(`\n  Servidor de Comida Emergencia Mini corriendo en http://localhost:${PORT}\n`)
 })

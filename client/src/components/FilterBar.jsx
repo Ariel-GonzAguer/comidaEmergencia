@@ -32,29 +32,32 @@ export default function FilterBar({ filtros, setFiltros, categorias }) {
   }, [])
 
   return (
-    <div className="px-6 py-3 flex flex-col gap-2.5 border-b border-[var(--edge)] bg-[var(--bg1)]">
-      {/* label .sr-only: visible para SR, oculto visualmente (WCAG 1.3.1) */}
-      <label htmlFor="buscar-insumo" className="sr-only">Buscar insumo</label>
-      <input
-        ref={inputRef}
-        id="buscar-insumo"
-        type="text"
-        placeholder="Buscar insumo... [/]"
-        value={filtros.texto}
-        onChange={e => setFiltros(f => ({ ...f, texto: e.target.value }))}
-        className="font-mono text-[14px] bg-[var(--bg3)] border border-[var(--edge)] text-[var(--ink)] px-3 py-[7px] rounded-sm outline-none w-full max-w-[480px] transition-colors placeholder:text-[var(--ink-dim)] focus:border-[var(--accent-d)]"
-      />
-      <div className="flex flex-wrap gap-1.5">
+    <div role="toolbar" aria-label="Filtros de inventario" className="px-6 py-3 flex flex-col gap-2.5 border-b border-edge bg-bg1">
+      <search>
+        <label htmlFor="buscar-insumo" className="sr-only">Buscar insumo</label>
+        <span id="buscar-hint" className="sr-only">Presiona / para enfocar este campo</span>
+        <input
+          ref={inputRef}
+          id="buscar-insumo"
+          type="text"
+          placeholder="Buscar insumo... [/]"
+          value={filtros.texto}
+          onChange={e => setFiltros(f => ({ ...f, texto: e.target.value }))}
+          aria-describedby="buscar-hint"
+          className="font-mono text-lg bg-bg3 border border-ink/50 text-ink px-3 py-1.75 rounded-sm outline-none w-full max-w-120 transition-colors placeholder:text-ink-dim focus:border-accent-d"
+        />
+      </search>
+      <div role="group" aria-label="Filtrar por categoría" className="flex flex-wrap gap-1.5">
         {['todas', ...categorias].map(cat => (
           <button
             key={cat}
             type="button"
             onClick={() => setFiltros(f => ({ ...f, categoria: cat }))}
             aria-pressed={filtros.categoria === cat}
-            className={`font-mono text-[14px] tracking-[0.1em] px-2.5 py-[3px] border rounded-sm uppercase cursor-pointer transition-colors ${
+            className={`font-mono text-[14px] tracking-widest px-2.5 py-0.75 border rounded-sm uppercase cursor-pointer transition-colors ${
               filtros.categoria === cat
-                ? 'bg-[var(--bg3)] border-[var(--accent-d)] text-[var(--accent)]'
-                : 'border-[var(--edge)] text-[var(--ink-mid)] hover:border-[var(--edge-hi)] hover:text-[var(--ink)]'
+                ? 'bg-bg3 border-accent-d text-accent'
+                : 'border-edge text-ink-mid hover:border-edge-hi hover:text-ink'
             }`}
           >
             {cat}
