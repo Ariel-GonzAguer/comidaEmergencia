@@ -1,5 +1,9 @@
 # Comida Emergencia Mini
 
+[![StandWithPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg)](https://techforpalestine.org/learn-more)
+![Static Badge](https://img.shields.io/badge/100%25_Offline-brightgreen)
+![Static Badge](https://img.shields.io/badge/MI_T+_Commons_Clause-red)
+
 Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicación Web de Código Abierto / Open Source para gestionar recursos en emergencias.
 (Ahora) Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` (y un archivo markdown) dentro del mismo repositorio.
 
@@ -40,6 +44,7 @@ Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una
 │   │       └── useInsumos.js   ← Hook CRUD – toda la lógica de peticiones
 │   └── public/
 ├── package.json                ← Scripts dev / server / client
+├── documentación/                 ← Documentos extra para entender el proyecto
 ├── insumos-emergencia.md         ← Exportación markdown de insumos de emergencia
 ├── INSTRUCCIONES.md                 ← Instrucciones para que agente de IA cree la BBDD a partir del markdown `insumos-emergencia.md`
 └── README.md
@@ -83,15 +88,16 @@ Es un archivo JSON plano con tres colecciones:
 
 ```jsonc
 {
-  "insumos": [ /* array de items */ ],
+  "insumos": [
+    /* array de items */
+  ],
   "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros"],
   "simbolos": [
-    { "codigo": "V",  "descripcion": "Vencido" },
-    { "codigo": "*",  "descripcion": "Vence este año" },
-    { "codigo": "R",  "descripcion": "Reponer" },
+    { "codigo": "V", "descripcion": "Vencido" },
+    { "codigo": "*", "descripcion": "Vence este año" },
+    { "codigo": "R", "descripcion": "Reponer" },
     { "codigo": "PS", "descripcion": "Pronto  sacar" },
-
-  ]
+  ],
 }
 ```
 
@@ -106,7 +112,7 @@ Es un archivo JSON plano con tres colecciones:
 | `cantidad`      | string          | Ej: `"2x 500"`, `"1"`                        |
 | `unidad`        | string          | Ej: `"g"`, `"ml"`, `"kg"`                    |
 | `categoria`     | string          | Una de las categorías definidas en `db.json` |
-| `vencimiento`   | string          | Formato `"AAAA-MM"` o `"no vence"`           |
+| `vencimiento`   | string          | Formato `"MM-AAAA"` o `"no vence"`           |
 | `calorias`      | number \| null  | kcal por porción                             |
 | `proteina`      | number \| null  | Gramos de proteína por porción               |
 | `notas`         | string          | Observaciones libres                         |
@@ -177,7 +183,7 @@ hooks/useInsumos.js              ← Hook CRUD centralizado
 
 ### Hook `useInsumos`
 
-Centraliza *toda* la comunicación con la API. Expone:
+Centraliza _toda_ la comunicación con la API. Expone:
 
 | Propiedad / Método            | Tipo                                | Descripción                           |
 | ----------------------------- | ----------------------------------- | ------------------------------------- |
@@ -230,7 +236,10 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 2. Añadir la clase CSS correspondiente en `client/src/index.css`:
 
    ```css
-   .sym-ab { background: #1a2a40; color: #60a0e0; }
+   .sym-ab {
+     background: #1a2a40;
+     color: #60a0e0;
+   }
    ```
 
 3. Registrar la clase en el mapa `SIMBOLO_CLASS` de `InsumoTable.jsx`:
@@ -249,17 +258,29 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 
 ---
 
-## Migración: `scripts/migrate-emergencia.mjs`
+## Personas que han colaborado en el proyecto:
 
-Script idempotente que asigna `esEmergencia: true/false` a todos los items existentes según el prefijo de su ID:
+@Ariel-GonzAguer — Propietario / Mantenedor
+@lianyvar — Colaboradora
+@mvlsqz — Colaborador
+@nadir-ammisaid — Colaborador
+@astrobot-houston — Bot (automatización)
 
-```bash
-node scripts/migrate-emergencia.mjs
-```
+---
 
-| Prefijo del ID     | Resultado             |
-| ------------------ | --------------------- |
-| `11111111-0002...` | `esEmergencia: false` |
-| Cualquier otro     | `esEmergencia: true`  |
+## Objetivos del proyecto
 
-Es seguro ejecutarlo múltiples veces — solo modifica items cuyo valor difiere del esperado.
+- Facilitar la gestión y organización de recursos esenciales en situaciones de emergencia.
+- Permitir el acceso y la colaboración de cualquier persona, comunidad o institución, promoviendo el software libre y abierto.
+- Ofrecer una interfaz totalmente funcional sin internet, garantizando su utilidad en contextos de crisis donde la conectividad puede ser limitada o inexistente.
+- Fomentar la participación y mejora continua por parte de la comunidad.
+
+---
+
+## Proyecto Código Abierto / Open Source (AGPL-3)
+
+Este proyecto es Código Abierto bajo licencia AGPL-3. Puede usarlo, modificarlo y compartirlo respetando los términos de la licencia. Aceptamos issues y pull requests.
+
+- Lea: CONTRIBUTING.md y CODE_OF_CONDUCT.md
+- Lea los archivos en /documentación.
+- Licencia: LICENCE.txt

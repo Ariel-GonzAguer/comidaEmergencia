@@ -1,11 +1,5 @@
 {
-  "categorias": [
-    "alimentos",
-    "especias",
-    "bebidas",
-    "higiene",
-    "otros"
-  ],
+  "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros"],
   "simbolos": [
     {
       "codigo": "V",
@@ -31,13 +25,11 @@
       "cantidad": "85",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-06",
+      "vencimiento": "06-2026",
       "calorias": 400,
       "proteina": 7,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T22:55:01.085Z"
     },
@@ -51,9 +43,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -63,13 +53,11 @@
       "cantidad": "4x 500",
       "unidad": "ml",
       "categoria": "alimentos",
-      "vencimiento": "2026-05",
+      "vencimiento": "05-2026",
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -79,13 +67,11 @@
       "cantidad": "50",
       "unidad": "g",
       "categoria": "especias",
-      "vencimiento": "2026-10",
+      "vencimiento": "10-2026",
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -99,9 +85,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -143,9 +127,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -159,9 +141,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -171,13 +151,11 @@
       "cantidad": "130",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-12",
+      "vencimiento": "12-2026",
       "calorias": 95,
       "proteina": 4.7,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -191,9 +169,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -207,9 +183,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -219,7 +193,7 @@
       "cantidad": "680",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-02",
+      "vencimiento": "02-2027",
       "calorias": 60,
       "proteina": 2,
       "notas": "",
@@ -233,13 +207,11 @@
       "cantidad": "680",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-12",
+      "vencimiento": "12-2026",
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -253,9 +225,7 @@
       "calorias": 205,
       "proteina": 8,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -265,7 +235,7 @@
       "cantidad": "330",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2028-09",
+      "vencimiento": "09-2028",
       "calorias": 163,
       "proteina": 0.3,
       "notas": "",
@@ -279,7 +249,7 @@
       "cantidad": "480",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-04",
+      "vencimiento": "04-2027",
       "calorias": 101,
       "proteina": 0.6,
       "notas": "",
@@ -293,7 +263,7 @@
       "cantidad": "800",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-11",
+      "vencimiento": "11-2027",
       "calorias": 120,
       "proteina": 4,
       "notas": "",
@@ -307,7 +277,7 @@
       "cantidad": "180",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-08",
+      "vencimiento": "08-2027",
       "calorias": 38,
       "proteina": 1.3,
       "notas": "",
@@ -321,7 +291,7 @@
       "cantidad": "425",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-08",
+      "vencimiento": "08-2027",
       "calorias": 103,
       "proteina": 6,
       "notas": "",
@@ -335,7 +305,7 @@
       "cantidad": "595",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-04",
+      "vencimiento": "04-2027",
       "calorias": 100,
       "proteina": 0,
       "notas": "",
@@ -353,9 +323,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -369,9 +337,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -381,13 +347,11 @@
       "cantidad": "2x 220",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-09",
+      "vencimiento": "09-2026",
       "calorias": 15,
       "proteina": 1,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -397,13 +361,11 @@
       "cantidad": "652",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-11",
+      "vencimiento": "11-2026",
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -413,13 +375,11 @@
       "cantidad": "652",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-05",
+      "vencimiento": "05-2026",
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -429,7 +389,7 @@
       "cantidad": "1x paquete",
       "unidad": "",
       "categoria": "alimentos",
-      "vencimiento": "2027-03",
+      "vencimiento": "03-2027",
       "calorias": 70,
       "proteina": 2,
       "notas": "",
@@ -457,7 +417,7 @@
       "cantidad": "100",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-11",
+      "vencimiento": "11-2027",
       "calorias": 3,
       "proteina": 0.2,
       "notas": "",
@@ -471,7 +431,7 @@
       "cantidad": "220",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-07",
+      "vencimiento": "07-2027",
       "calorias": 10,
       "proteina": 1,
       "notas": "",
@@ -485,7 +445,7 @@
       "cantidad": "2x 220",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2028-05",
+      "vencimiento": "05-2028",
       "calorias": 10,
       "proteina": 1,
       "notas": "",
@@ -499,14 +459,11 @@
       "cantidad": "350",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-10",
+      "vencimiento": "10-2026",
       "calorias": 170,
       "proteina": 29,
       "notas": "",
-      "simbolos": [
-        "PS",
-        "*"
-      ],
+      "simbolos": ["PS", "*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -530,7 +487,7 @@
       "cantidad": "7x paquetes",
       "unidad": "",
       "categoria": "bebidas",
-      "vencimiento": "2027-06",
+      "vencimiento": "06-2027",
       "calorias": null,
       "proteina": null,
       "notas": "Agregar 15 paquetes",
@@ -544,7 +501,7 @@
       "cantidad": "5x paquetes",
       "unidad": "",
       "categoria": "bebidas",
-      "vencimiento": "2027-06",
+      "vencimiento": "06-2027",
       "calorias": null,
       "proteina": null,
       "notas": "",
@@ -558,7 +515,7 @@
       "cantidad": "6x paquetes",
       "unidad": "",
       "categoria": "bebidas",
-      "vencimiento": "2027-06",
+      "vencimiento": "06-2027",
       "calorias": null,
       "proteina": null,
       "notas": "Agregar 15 paquetes",
@@ -572,7 +529,7 @@
       "cantidad": "2x paquetes",
       "unidad": "",
       "categoria": "bebidas",
-      "vencimiento": "2027-08",
+      "vencimiento": "08-2027",
       "calorias": null,
       "proteina": null,
       "notas": "Agregar 5 paquetes",
@@ -586,13 +543,11 @@
       "cantidad": "2x paquete",
       "unidad": "",
       "categoria": "alimentos",
-      "vencimiento": "2026-10",
+      "vencimiento": "10-2026",
       "calorias": 47,
       "proteina": 0.5,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -602,14 +557,11 @@
       "cantidad": "500",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-10",
+      "vencimiento": "10-2026",
       "calorias": 544,
       "proteina": 23,
       "notas": "",
-      "simbolos": [
-        "PS",
-        "*"
-      ],
+      "simbolos": ["PS", "*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -633,7 +585,7 @@
       "cantidad": "2x 400",
       "unidad": "ml",
       "categoria": "alimentos",
-      "vencimiento": "2027-10",
+      "vencimiento": "10-2027",
       "calorias": 400,
       "proteina": 1,
       "notas": "",
@@ -647,7 +599,7 @@
       "cantidad": "370",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2028-03",
+      "vencimiento": "03-2028",
       "calorias": 101,
       "proteina": 5,
       "notas": "",
@@ -661,13 +613,11 @@
       "cantidad": "450",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-12",
+      "vencimiento": "12-2026",
       "calorias": 25,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -681,9 +631,7 @@
       "calorias": 220,
       "proteina": 8,
       "notas": "Vencida, pero se mantiene",
-      "simbolos": [
-        "V"
-      ],
+      "simbolos": ["V"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -693,7 +641,7 @@
       "cantidad": "150",
       "unidad": "g",
       "categoria": "especias",
-      "vencimiento": "2029-02",
+      "vencimiento": "02-2029",
       "calorias": null,
       "proteina": null,
       "notas": "",
@@ -711,9 +659,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -727,9 +673,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "Reponer 1",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -753,7 +697,7 @@
       "cantidad": "400",
       "unidad": "ml",
       "categoria": "alimentos",
-      "vencimiento": "2027-09",
+      "vencimiento": "09-2027",
       "calorias": 400,
       "proteina": 1,
       "notas": "",
@@ -795,13 +739,11 @@
       "cantidad": "3x 250",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-12",
+      "vencimiento": "12-2026",
       "calorias": 300,
       "proteina": 50,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -815,9 +757,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -827,13 +767,11 @@
       "cantidad": "3x 1",
       "unidad": "litro",
       "categoria": "bebidas",
-      "vencimiento": "2026-09",
+      "vencimiento": "09-2026",
       "calorias": 62,
       "proteina": 3,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -843,7 +781,7 @@
       "cantidad": "2x 250",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-03",
+      "vencimiento": "03-2027",
       "calorias": 26,
       "proteina": 1,
       "notas": "",
@@ -899,7 +837,7 @@
       "cantidad": "1",
       "unidad": "kg",
       "categoria": "alimentos",
-      "vencimiento": "2027-09",
+      "vencimiento": "09-2027",
       "calorias": 370,
       "proteina": 75,
       "notas": "",
@@ -913,7 +851,7 @@
       "cantidad": "4x 170",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-09",
+      "vencimiento": "09-2027",
       "calorias": 395,
       "proteina": 2,
       "notas": "",
@@ -927,13 +865,11 @@
       "cantidad": "500",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2026-09",
+      "vencimiento": "09-2026",
       "calorias": 325,
       "proteina": 1,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -943,7 +879,7 @@
       "cantidad": "200",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2028-09",
+      "vencimiento": "09-2028",
       "calorias": 70,
       "proteina": 2,
       "notas": "",
@@ -957,13 +893,11 @@
       "cantidad": "5x barra",
       "unidad": "",
       "categoria": "alimentos",
-      "vencimiento": "2026-11",
+      "vencimiento": "11-2026",
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -973,7 +907,7 @@
       "cantidad": "250",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "2027-04",
+      "vencimiento": "04-2027",
       "calorias": 150,
       "proteina": 3,
       "notas": "",
@@ -1022,6 +956,20 @@
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "3dff5fb4-8266-40a4-b4be-9a0ec1a8802e",
+      "nombre": "Pan cuadrado",
+      "cantidad": "500",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "05-2026",
+      "calorias": 200,
+      "proteina": 2,
+      "notas": "",
+      "simbolos": ["*"],
+      "creadoEn": "2026-03-08T20:49:28.468Z",
+      "actualizadoEn": "2026-03-08T20:55:10.332Z"
     }
   ]
 }

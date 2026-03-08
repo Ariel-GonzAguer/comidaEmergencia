@@ -8,10 +8,10 @@
  * @module hooks/useInsumos
  */
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 
 /** @constant {string} Prefijo base de la API (relativo, usa el proxy de Vite) */
-const API = '/api'
+const API = '/api';
 
 /**
  * @typedef {Object} Filtros
@@ -32,7 +32,7 @@ const API = '/api'
  * @property {string}        cantidad     - Cantidad textual (ej: "2x 500").
  * @property {string}        unidad       - Unidad de medida.
  * @property {string}        categoria    - Categoría del insumo.
- * @property {string}        vencimiento  - "AAAA-MM" o "no vence".
+ * @property {string}        vencimiento  - "MM-AAAA" o "no vence".
  * @property {number|null}   calorias     - kcal por porción.
  * @property {number|null}   proteina     - Gramos de proteína.
  * @property {string}        notas        - Observaciones libres.
@@ -66,12 +66,12 @@ const API = '/api'
  * await crearInsumo({ nombre: 'Arroz blanco', categoria: 'alimentos' });
  */
 export function useInsumos() {
-  const [insumos, setInsumos] = useState([])
-  const [categorias, setCategorias] = useState([])
-  const [simbolos, setSimbolos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [filtros, setFiltros] = useState({ categoria: 'todas', texto: '' })
+  const [insumos, setInsumos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [simbolos, setSimbolos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filtros, setFiltros] = useState({ categoria: 'todas', texto: '' });
 
   /**
    * Obtiene la lista de insumos desde la API aplicando los filtros activos.
@@ -81,35 +81,36 @@ export function useInsumos() {
    * @function
    */
   const fetchInsumos = useCallback(async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
     try {
-      const params = new URLSearchParams()
-      if (filtros.categoria && filtros.categoria !== 'todas') params.set('categoria', filtros.categoria)
-      if (filtros.texto) params.set('texto', filtros.texto)
-      const res = await fetch(`${API}/insumos?${params}`)
-      if (!res.ok) throw new Error(await res.text())
-      setInsumos(await res.json())
+      const params = new URLSearchParams();
+      if (filtros.categoria && filtros.categoria !== 'todas')
+        params.set('categoria', filtros.categoria);
+      if (filtros.texto) params.set('texto', filtros.texto);
+      const res = await fetch(`${API}/insumos?${params}`);
+      if (!res.ok) throw new Error(await res.text());
+      setInsumos(await res.json());
     } catch (e) {
-      setError(e.message)
+      setError(e.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [filtros])
+  }, [filtros]);
 
   useEffect(() => {
-    fetchInsumos()
-  }, [fetchInsumos])
+    fetchInsumos();
+  }, [fetchInsumos]);
 
   useEffect(() => {
     Promise.all([
       fetch(`${API}/categorias`).then(r => r.json()),
       fetch(`${API}/simbolos`).then(r => r.json()),
     ]).then(([cats, syms]) => {
-      setCategorias(cats)
-      setSimbolos(syms)
-    })
-  }, [])
+      setCategorias(cats);
+      setSimbolos(syms);
+    });
+  }, []);
 
   /**
    * Crea un nuevo insumo enviando los datos al servidor y recarga la lista.
@@ -123,12 +124,12 @@ export function useInsumos() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos),
-    })
+    });
     if (!res.ok) {
-      const err = await res.json()
-      throw new Error(err.error || 'Error al crear')
+      const err = await res.json();
+      throw new Error(err.error || 'Error al crear');
     }
-    await fetchInsumos()
+    await fetchInsumos();
   }
 
   /**
@@ -144,12 +145,12 @@ export function useInsumos() {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos),
-    })
+    });
     if (!res.ok) {
-      const err = await res.json()
-      throw new Error(err.error || 'Error al actualizar')
+      const err = await res.json();
+      throw new Error(err.error || 'Error al actualizar');
     }
-    await fetchInsumos()
+    await fetchInsumos();
   }
 
   /**
@@ -160,12 +161,12 @@ export function useInsumos() {
    * @throws {Error} Si el insumo no existe o el servidor devuelve error.
    */
   async function eliminarInsumo(id) {
-    const res = await fetch(`${API}/insumos/${id}`, { method: 'DELETE' })
+    const res = await fetch(`${API}/insumos/${id}`, { method: 'DELETE' });
     if (!res.ok) {
-      const err = await res.json()
-      throw new Error(err.error || 'Error al eliminar')
+      const err = await res.json();
+      throw new Error(err.error || 'Error al eliminar');
     }
-    await fetchInsumos()
+    await fetchInsumos();
   }
 
   return {
@@ -179,5 +180,5 @@ export function useInsumos() {
     crearInsumo,
     actualizarInsumo,
     eliminarInsumo,
-  }
+  };
 }

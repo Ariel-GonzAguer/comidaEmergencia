@@ -1,29 +1,29 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* =========================================================
    Variables globales 
    ========================================================= */
 
 @theme {
-  --color-bg:        #0d0d0d;
-  --color-bg1:       #141414;
-  --color-bg2:       #1c1c1c;
-  --color-bg3:       #242424;
-  --color-edge:      #2a2a2a;
-  --color-edge-hi:   #3a3a3a;
-  --color-ink:       #d4d0c8;
-  --color-ink-dim:   #F1EEE8FF;
-  --color-ink-mid:   #888880;
-  --color-ink-hi:    #e8e4d8;
-  --color-accent:    #c8a96e;
-  --color-accent-d:  #7a6540;
-  --color-danger:    #8b2020;
+  --color-bg: #0d0d0d;
+  --color-bg1: #141414;
+  --color-bg2: #1c1c1c;
+  --color-bg3: #242424;
+  --color-edge: #2a2a2a;
+  --color-edge-hi: #3a3a3a;
+  --color-ink: #d4d0c8;
+  --color-ink-dim: #f1eee8ff;
+  --color-ink-mid: #888880;
+  --color-ink-hi: #e8e4d8;
+  --color-accent: #c8a96e;
+  --color-accent-d: #7a6540;
+  --color-danger: #8b2020;
   --color-danger-hi: #b83030;
-  --color-ok:        #2a5c3a;
-
+  --color-ok: #2a5c3a;
 }
 
-html, body {
+html,
+body {
   background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
@@ -33,36 +33,93 @@ html, body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-edge-hi); border-radius: 0; }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-edge-hi);
+  border-radius: 0;
+}
 
 /* ---- Badges de simbolo ---- */
-.sym      { display:inline-block; font-size: 12px; font-weight:600; padding:1px 5px; border-radius:1px; margin-right:3px; letter-spacing:0.05em; }
-.sym-v    { background:#5c1f1f; color:#e06060; }
-.sym-star { background:#4a3800; color:#c8a030; }
-.sym-r    { background:#1a3a5c; color:#60a0d8; }
-.sym-ps   { background:#3a2a50; color:#9a70d0; }
-.sym-ne   { background:#2a1a0a; color:#c07850; }
+.sym {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 1px;
+  margin-right: 3px;
+  letter-spacing: 0.05em;
+}
+.sym-v {
+  background: #5c1f1f;
+  color: #e06060;
+}
+.sym-star {
+  background: #4a3800;
+  color: #c8a030;
+}
+.sym-r {
+  background: #1a3a5c;
+  color: #60a0d8;
+}
+.sym-ps {
+  background: #3a2a50;
+  color: #9a70d0;
+}
+.sym-ne {
+  background: #2a1a0a;
+  color: #c07850;
+}
 
 /* ---- Color de fechas ---- */
-.fecha-ok        { color: var(--color-ink-mid); }
-.fecha-este-anio { color: yellow; }
-.fecha-pronto    { color: orange ; font-weight: 500; }
-.fecha-vencida   { color: var(--color-danger); text-decoration: line-through; }
+.fecha-ok {
+  color: var(--color-ink-mid);
+}
+.fecha-este-anio {
+  color: yellow;
+}
+.fecha-pronto {
+  color: orange;
+  font-weight: 500;
+}
+.fecha-vencida {
+  color: var(--color-danger);
+  text-decoration: line-through;
+}
 
-@keyframes spin    { to { transform: rotate(360deg); } }
-@keyframes slideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* WCAG 2.4.7 — anillo de foco visible por teclado */
-:focus-visible, :focus {
+:focus-visible,
+:focus {
   outline: 4px solid var(--color-accent);
   outline-offset: 2px;
-} 
+}
 
 /* WCAG 1.4.12 / 2.3.3 — reducir animaciones si el usuario lo prefiere */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

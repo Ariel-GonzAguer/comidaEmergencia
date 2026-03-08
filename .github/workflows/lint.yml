@@ -1,0 +1,38 @@
+name: Lint
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+    branches:
+      - main
+      - versionAstro
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Instalar dependencias
+        run: pnpm install
+
+      - name: Ejecutar ESLint y mostrar ayuda si falla
+        run: |
+          pnpm lint || {
+            echo "✕ Se detectaron errores de estilo o calidad en el código.";
+            echo "Por favor, revise el reporte de ESLint en el log de este workflow.";
+            echo "Para corregir los problemas, ejecute en su entorno local:";
+            echo "  pnpm lint";
+            echo "y siga las recomendaciones para corregir los errores y advertencias.";
+            echo "Si necesita ayuda, consulte la documentación oficial de ESLint o abra un issue en el repositorio.";
+            exit 1;
+          }
