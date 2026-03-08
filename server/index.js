@@ -62,21 +62,21 @@ function writeDB(data) {
  * @param {Array<Object>} insumos - Lista completa de insumos del inventario.
  */
 function writeMD(insumos) {
-  const fmtVenc = v => {
+  const formatoVencimiento = v => {
     if (!v) return '--';
     if (v === 'no vence') return 'no vence';
     const [m, y] = v.split('-');
     return m && y ? `${Number(m)}/${y}` : v;
   };
 
-  const fmtNum = n => (n != null ? String(n) : '--');
+  const formatoNumero = n => (n != null ? String(n) : '--');
 
-  const fmtCant = item => {
+  const formatoCantidad = item => {
     const partes = [item.cantidad, item.unidad].filter(Boolean);
     return partes.length ? partes.join(' ') : '--';
   };
 
-  const fmtNombre = item => {
+  const formatoNombre = item => {
     const sims = item.simbolos?.length ? ' ' + item.simbolos.map(s => `\`${s}\``).join(' ') : '';
     return item.nombre + sims;
   };
@@ -85,7 +85,7 @@ function writeMD(insumos) {
   const noAlimentos = insumos.filter(i => i.categoria === 'higiene');
 
   const filaAlimento = i =>
-    `| ${fmtNombre(i)} | ${fmtCant(i)} | ${fmtVenc(i.vencimiento)} | ${fmtNum(i.calorias)} | ${fmtNum(i.proteina)} | ${i.notas || '--'} |`;
+    `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(i.vencimiento)} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
 
   const tablaRef = `## Referencias
 
@@ -99,16 +99,16 @@ function writeMD(insumos) {
 
   const tablaAlim = `## Alimentos
 
-| Producto | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
-| -------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
+| Producto | Categoría | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
+| -------- | --------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
 ${alimentos.map(filaAlimento).join('\n')}`;
 
   const tablaHig = noAlimentos.length
     ? `## Productos no alimenticios
 
-| Producto | Cantidad |
-| -------- | -------- |
-${noAlimentos.map(i => `| ${i.nombre} | ${fmtCant(i)} |`).join('\n')}\n`
+| Producto | Categoría | Cantidad |
+| -------- | --------- | -------- |
+${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${fmtCant(i)} |`).join('\n')}\n`
     : '';
 
   const md = `# Inventario General de Alimentos y Productos\n\n${tablaRef}\n\n---\n\n${tablaAlim}\n\n---\n\n${tablaHig}`;
