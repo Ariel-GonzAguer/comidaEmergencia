@@ -1,0 +1,55 @@
+name: 'CodeQL Advanced'
+
+permissions:
+  actions: read
+  contents: read
+  packages: read
+  security-events: write
+
+on:
+  push:
+    branches:
+      - main
+      - versionAstro
+  pull_request:
+    branches:
+      - main
+      - versionAstro
+  schedule:
+    - cron: '17 13 * * 3'
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: actions
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{matrix.language}}'
+      - name: Mostrar mensaje personalizado si falla CodeQL
+        if: failure()
+        run: |
+          echo "La verificación de seguridad con CodeQL ha fallado."
+          echo "Por favor revisa los resultados del análisis en la pestaña 'Security' de GitHub."
+          echo "Corrige las vulnerabilidades detectadas antes de continuar."
+          echo "Documentación: https://docs.github.com/es/code-security/code-scanning/automatically-scanning-code-for-vulnerabilities-and-errors-with-codeql"

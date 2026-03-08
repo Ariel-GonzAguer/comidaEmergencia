@@ -12,17 +12,18 @@ El archivo `insumos-emergencia.md` contiene:
 
 ### 1. **Tabla de Símbolos** (Referencias)
 
-| Símbolo | Significado |
-|---------|------------|
-| `V` | Ya vencido |
-| `*` | Vence este año (2026) |
-| `R` | Reponer |
-| `PS` | Pronto a sacar (inferido) |
+| Símbolo   | Significado               |
+| --------- | ------------------------- |
+| `V`       | Ya vencido                |
+| `*`       | Vence este año (2026)     |
+| `R`       | Reponer                   |
+| `PS`      | Pronto a sacar (inferido) |
 | _(vacío)_ | Vence en 2027 o posterior |
 
 ### 2. **Tabla de Alimentos** (Inventario)
 
 Columnas:
+
 - **Producto**: Nombre del insumo (puede contener símbolos entre backticks: `R`, `*`, `V`, `PS`)
 - **Cantidad / Presentación**: Formato (ej: "850g", "4x 500ml", "--" si vacío)
 - **Vencimiento**: Fecha en formato "M/AAAA" (ej: "6/2026"), "no vence", o "--" si vacío
@@ -33,6 +34,7 @@ Columnas:
 ### 3. **Tabla de Productos No Alimenticios**
 
 Columnas:
+
 - **Producto**: Nombre
 - **Cantidad**: Descripción de cantidad
 
@@ -74,16 +76,18 @@ Columnas:
 ### **(A) Símbolo de Producto → Array `simbolos`**
 
 Si el nombre contiene backticks con símbolo(s):
-- `Producto nombre \`R\`` → `simbolos: ["R"]`
-- `Producto \`PS\`` → `simbolos: ["PS"]`
-- `Producto \`*\`` → `simbolos: ["*"]`
-- `Producto \`V\`` → `simbolos: ["V"]`
+
+- `Producto nombre \`R\``→`simbolos: ["R"]`
+- `Producto \`PS\``→`simbolos: ["PS"]`
+- `Producto \`_\``→`simbolos: ["_"]`
+- `Producto \`V\``→`simbolos: ["V"]`
 
 **Nota**: Un producto puede tener múltiples símbolos (aunque raro).
 
-### **(B) Vencimiento → Formato "AAAA-MM"**
+### **(B) Vencimiento → Formato "MM-AAAA"**
 
 Entrada formatos posibles:
+
 - **"M/AAAA"** (ej: "6/2026") → Convertir a **"2026-06"**
 - **"MM/AAAA"** (ej: "12/2026") → **"2026-12"**
 - **"no vence"** → Mantener como **"no vence"**
@@ -91,6 +95,7 @@ Entrada formatos posibles:
 - **"pendiente"** → Convertir a **""** (vacío)
 
 **Algoritmo**:
+
 ```
 si valor === "no vence" → "no vence"
 si valor === "--" o vacío → ""
@@ -100,6 +105,7 @@ si contiene "/" → split por "/" → [mes, año] → año + "-" + mes.padStart(
 ### **(C) Cantidad y Unidad**
 
 Separar cantidad de unidad:
+
 - **"850g"** → cantidad: "850", unidad: "g"
 - **"4x 500ml"** → cantidad: "4x 500", unidad: "ml"
 - **"1 kg"** → cantidad: "1", unidad: "kg"
@@ -192,14 +198,16 @@ Separar cantidad de unidad:
 ## Validaciones
 
 ✅ **Validar**:
+
 1. Todos los ID son únicos y secuenciales
-2. Vencimientos en formato "AAAA-MM" o "no vence" o vacío
+2. Vencimientos en formato "MM-AAAA" o "no vence" o vacío
 3. Calorías y proteína son números o `null`
-4. Símbolos solo contienen códigos válidos: "V", "*", "R", "PS"
+4. Símbolos solo contienen códigos válidos: "V", "\*", "R", "PS"
 5. Categoría es "alimentos" o "no-alimenticios"
 6. Campo "nombre" NO contiene backticks (fueron extraídos a "simbolos")
 
 ⚠️ **Notas especiales**:
+
 - Si un vencimiento es inválido o no parseable → dejar vacío ""
 - Si un valor numérico no se puede convertir → usar `null`
 - Limpiar espacios en blanco al inicio/final de strings
@@ -209,11 +217,13 @@ Separar cantidad de unidad:
 ## Ejemplo de Transformación Paso a Paso
 
 ### Fila original:
+
 ```
 | Ramen MAMA `R` | -- | -- | -- | -- | ----- |
 ```
 
 ### Procesamiento:
+
 1. **Nombre**: "Ramen MAMA `R`"
    - Extraer símbolo: "R"
    - Nombre limpio: "Ramen MAMA"
@@ -227,6 +237,7 @@ Separar cantidad de unidad:
 5. **Calorías/Proteína**: "--" → `null`
 
 ### JSON resultado:
+
 ```json
 {
   "id": 2,
@@ -250,7 +261,7 @@ Separar cantidad de unidad:
 - [ ] Parsear tabla "Productos no alimenticios" del MD
 - [ ] Para cada fila:
   - [ ] Extraer nombre y símbolos (remover backticks)
-  - [ ] Convertir vencimiento al formato "AAAA-MM"
+  - [ ] Convertir vencimiento al formato "MM-AAAA"
   - [ ] Separar cantidad y unidad
   - [ ] Convertir calorías/proteína a números o `null`
   - [ ] Asignar categoría
@@ -270,6 +281,7 @@ node scripts/migrate-emergencia.mjs
 ```
 
 **Output esperado**:
+
 ```
 ✓ Migración completada
 ✓ 67 alimentos cargados

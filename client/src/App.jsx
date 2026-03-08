@@ -7,14 +7,14 @@
  * @module App
  */
 
-import { useState, useCallback } from 'react'
-import Header from './components/Header.jsx'
-import FilterBar from './components/FilterBar.jsx'
-import InsumoTable from './components/InsumoTable.jsx'
-import InsumoModal from './components/InsumoModal.jsx'
-import DeleteConfirm from './components/DeleteConfirm.jsx'
-import Toast from './components/Toast.jsx'
-import { useInsumos } from './hooks/useInsumos.js'
+import { useState, useCallback } from 'react';
+import Header from './components/Header.jsx';
+import FilterBar from './components/FilterBar.jsx';
+import InsumoTable from './components/InsumoTable.jsx';
+import InsumoModal from './components/InsumoModal.jsx';
+import DeleteConfirm from './components/DeleteConfirm.jsx';
+import Toast from './components/Toast.jsx';
+import { useInsumos } from './hooks/useInsumos.js';
 
 /**
  * Componente raíz que renderiza la interfaz completa del inventario.
@@ -38,11 +38,11 @@ export default function App() {
     crearInsumo,
     actualizarInsumo,
     eliminarInsumo,
-  } = useInsumos()
+  } = useInsumos();
 
-  const [modal, setModal] = useState(null)       // null | { modo: 'crear'|'editar', insumo? }
-  const [confirmDelete, setConfirmDelete] = useState(null)  // null | insumo
-  const [toast, setToast] = useState(null)
+  const [modal, setModal] = useState(null); // null | { modo: 'crear'|'editar', insumo? }
+  const [confirmDelete, setConfirmDelete] = useState(null); // null | insumo
+  const [toast, setToast] = useState(null);
 
   /**
    * Muestra una notificación toast que desaparece automáticamente tras 3 segundos.
@@ -51,9 +51,9 @@ export default function App() {
    * @param {'ok'|'error'} [tipo='ok'] - Estilo visual del toast.
    */
   const showToast = useCallback((msg, tipo = 'ok') => {
-    setToast({ msg, tipo })
-    setTimeout(() => setToast(null), 3000)
-  }, [])
+    setToast({ msg, tipo });
+    setTimeout(() => setToast(null), 3000);
+  }, []);
 
   /**
    * Handler para guardar un insumo (crear o editar según el modo del modal).
@@ -65,15 +65,15 @@ export default function App() {
   async function handleGuardar(datos) {
     try {
       if (modal.modo === 'crear') {
-        await crearInsumo(datos)
-        showToast('Insumo creado')
+        await crearInsumo(datos);
+        showToast('Insumo creado');
       } else {
-        await actualizarInsumo(modal.insumo.id, datos)
-        showToast('Insumo actualizado')
+        await actualizarInsumo(modal.insumo.id, datos);
+        showToast('Insumo actualizado');
       }
-      setModal(null)
+      setModal(null);
     } catch (e) {
-      showToast(e.message, 'error')
+      showToast(e.message, 'error');
     }
   }
 
@@ -85,11 +85,11 @@ export default function App() {
    */
   async function handleEliminar() {
     try {
-      await eliminarInsumo(confirmDelete.id)
-      showToast('Insumo eliminado')
-      setConfirmDelete(null)
+      await eliminarInsumo(confirmDelete.id);
+      showToast('Insumo eliminado');
+      setConfirmDelete(null);
     } catch (e) {
-      showToast(e.message, 'error')
+      showToast(e.message, 'error');
     }
   }
 
@@ -97,22 +97,22 @@ export default function App() {
     <div className="flex flex-col min-h-dvh max-w-[1600px] mx-auto">
       <Header onNuevo={() => setModal({ modo: 'crear' })} total={insumos.length} />
 
-      <FilterBar
-        filtros={filtros}
-        setFiltros={setFiltros}
-        categorias={categorias}
-      />
+      <FilterBar filtros={filtros} setFiltros={setFiltros} categorias={categorias} />
 
       <main id="contenido-principal">
-      {error && <p role="alert" className="px-6 py-2 text-[#e06060] text-[14px]">Error: {error}</p>}
+        {error && (
+          <p role="alert" className="px-6 py-2 text-[#e06060] text-[14px]">
+            Error: {error}
+          </p>
+        )}
 
-      <InsumoTable
-        insumos={insumos}
-        loading={loading}
-        simbolosDef={simbolos}
-        onEditar={(insumo) => setModal({ modo: 'editar', insumo })}
-        onEliminar={(insumo) => setConfirmDelete(insumo)}
-      />
+        <InsumoTable
+          insumos={insumos}
+          loading={loading}
+          simbolosDef={simbolos}
+          onEditar={insumo => setModal({ modo: 'editar', insumo })}
+          onEliminar={insumo => setConfirmDelete(insumo)}
+        />
       </main>
 
       {modal && (
@@ -136,5 +136,5 @@ export default function App() {
 
       {toast && <Toast msg={toast.msg} tipo={toast.tipo} />}
     </div>
-  )
+  );
 }

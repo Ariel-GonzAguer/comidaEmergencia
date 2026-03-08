@@ -8,7 +8,7 @@
  * @returns {JSX.Element}
  */
 export default function Toast({ msg, tipo }) {
-  const isErr = tipo === 'error'
+  const isErr = tipo === 'error';
   return (
     <div
       role={isErr ? 'alert' : 'status'}
@@ -25,5 +25,5 @@ export default function Toast({ msg, tipo }) {
       <span aria-hidden="true">{isErr ? '✕' : '✓'}</span>
       <span>{msg}</span>
     </div>
-  )
+  );
 }

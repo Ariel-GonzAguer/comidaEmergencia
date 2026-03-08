@@ -3,7 +3,7 @@
  * @module components/FilterBar
  */
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react';
 
 /**
  * Barra de filtros con búsqueda de texto (atajo `/`) y selección de categoría.
@@ -18,24 +18,36 @@ import { useEffect, useRef } from 'react'
  * @returns {JSX.Element}
  */
 export default function FilterBar({ filtros, setFiltros, categorias }) {
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   useEffect(() => {
     function onKey(e) {
-      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        e.preventDefault()
-        inputRef.current?.focus()
+      if (
+        e.key === '/' &&
+        document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.tagName !== 'TEXTAREA'
+      ) {
+        e.preventDefault();
+        inputRef.current?.focus();
       }
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
-    <div role="toolbar" aria-label="Filtros de inventario" className="px-6 py-3 flex flex-col gap-2.5 border-b border-edge bg-bg1">
+    <div
+      role="toolbar"
+      aria-label="Filtros de inventario"
+      className="px-6 py-3 flex flex-col gap-2.5 border-b border-edge bg-bg1"
+    >
       <search>
-        <label htmlFor="buscar-insumo" className="sr-only">Buscar insumo</label>
-        <span id="buscar-hint" className="sr-only">Presiona / para enfocar este campo</span>
+        <label htmlFor="buscar-insumo" className="sr-only">
+          Buscar insumo
+        </label>
+        <span id="buscar-hint" className="sr-only">
+          Presiona / para enfocar este campo
+        </span>
         <input
           ref={inputRef}
           id="buscar-insumo"
@@ -65,5 +77,5 @@ export default function FilterBar({ filtros, setFiltros, categorias }) {
         ))}
       </div>
     </div>
-  )
+  );
 }

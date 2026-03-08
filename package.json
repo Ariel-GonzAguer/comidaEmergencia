@@ -6,7 +6,11 @@
   "scripts": {
     "server": "node server/index.js",
     "client": "pnpm --filter comida-emergencia-mini-cliente run dev",
-    "dev": "concurrently \"pnpm run server\" \"pnpm run client\""
+    "dev": "concurrently \"pnpm run server\" \"pnpm run client\"",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "prettierCheck": "prettier --check .",
+    "prettierFix": "prettier --write ."
   },
   "dependencies": {
     "cors": "2.8.5",
@@ -15,7 +19,10 @@
   "devDependencies": {
     "@vitejs/plugin-react": "4.2.1",
     "concurrently": "8.2.2",
-    "vite": "5.4.21"
+    "prettier": "3.8.1",
+    "supertest": "7.2.2",
+    "vite": "5.4.21",
+    "vitest": "^2.0.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
