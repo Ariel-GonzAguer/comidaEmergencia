@@ -10,7 +10,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-/** @constant {string} Prefijo base de la API (relativo, usa el proxy de Vite) */
+/** @constant {string} Prefijo base de la API (relativo, usa el proxy de Vite. Ver `vite.config.js`) */
 const API = '/api';
 
 /**
