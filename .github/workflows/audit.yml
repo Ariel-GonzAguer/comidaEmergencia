@@ -8,11 +8,11 @@ on:
   push:
     branches:
       - main
-      - versionAstro
+      - mini
   pull_request:
     branches:
       - main
-      - versionAstro
+      - mini
 
 jobs:
   audit:
