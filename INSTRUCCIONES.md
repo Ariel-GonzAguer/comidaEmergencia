@@ -30,13 +30,7 @@ Columnas:
 - **Calorías**: Número o "--"
 - **Proteína**: Número con unidad (ej: "7", "29g") o "--"
 - **Notas**: Observaciones adicionales
-
-### 3. **Tabla de Productos No Alimenticios**
-
-Columnas:
-
-- **Producto**: Nombre
-- **Cantidad**: Descripción de cantidad
+- **Categoría**: "Alimento", "Especia", etc.
 
 ---
 
@@ -88,8 +82,8 @@ Si el nombre contiene backticks con símbolo(s):
 
 Entrada formatos posibles:
 
-- **"M/AAAA"** (ej: "6/2026") → Convertir a **"2026-06"**
-- **"MM/AAAA"** (ej: "12/2026") → **"2026-12"**
+- **"M/AAAA"** (ej: "6/2026") → "06-2026"
+- **"MM/AAAA"** (ej: "04/2026") → "04-2026"
 - **"no vence"** → Mantener como **"no vence"**
 - **"--"** o vacío → Dejar como **string vacío ""**
 - **"pendiente"** → Convertir a **""** (vacío)
@@ -122,7 +116,6 @@ Separar cantidad de unidad:
 ### **(E) Categoría**
 
 - Si está en tabla "Alimentos" → **"alimentos"**
-- Si está en tabla "Productos no alimenticios" → **"no-alimenticios"**
 
 ### **(F) ID**
 
@@ -164,7 +157,7 @@ Separar cantidad de unidad:
       "nombre": "Aplicadores de madera",
       "cantidad": "100",
       "unidad": "piezas",
-      "categoria": "no-alimenticios",
+      "categoria": "higiene",
       "vencimiento": "",
       "calorias": null,
       "proteina": null,
@@ -203,10 +196,10 @@ Separar cantidad de unidad:
 2. Vencimientos en formato "MM-AAAA" o "no vence" o vacío
 3. Calorías y proteína son números o `null`
 4. Símbolos solo contienen códigos válidos: "V", "\*", "R", "PS"
-5. Categoría es "alimentos" o "no-alimenticios"
+5. Categoría es "alimentos", "bebidas", "higiene", etc. (según tabla)
 6. Campo "nombre" NO contiene backticks (fueron extraídos a "simbolos")
 
-⚠️ **Notas especiales**:
+⚠️ **Notas adicionales**:
 
 - Si un vencimiento es inválido o no parseable → dejar vacío ""
 - Si un valor numérico no se puede convertir → usar `null`
@@ -269,25 +262,6 @@ Separar cantidad de unidad:
 - [ ] Validar toda la estructura
 - [ ] Guardar en `db.json` con formato indentado
 - [ ] Verificar que la app pueda cargar y renderizar sin errores
-
----
-
-## Comando de Ejecución (Ejemplo)
-
-Si implementas un script Node.js:
-
-```bash
-node scripts/migrate-emergencia.mjs
-```
-
-**Output esperado**:
-
-```
-✓ Migración completada
-✓ 67 alimentos cargados
-✓ 3 productos no-alimenticios cargados
-✓ db.json generado con éxito
-```
 
 ---
 

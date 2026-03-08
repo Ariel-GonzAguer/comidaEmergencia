@@ -3,8 +3,8 @@
  * insumos y un botón para crear un nuevo insumo.
  *
  * @param {Object} props
- * @param {() => void} props.onNuevo - Callback al pulsar "+ agregar".
- * @param {number}     props.total   - Cantidad total de insumos mostrados.
+ * @param {() => void} props.onNuevo       - Callback al pulsar "+ agregar".
+ * @param {number}     props.total         - Cantidad total de insumos mostrados.
  * @returns {JSX.Element}
  */
 export default function Header({ onNuevo, total }) {
@@ -16,43 +16,46 @@ export default function Header({ onNuevo, total }) {
         </span>
         <div>
           <h1 className="font-mono text-3xl font-semibold tracking-widest text-orange-400 uppercase mb-4">
-            Comida Emergencia
+            Comida Emergencia Mini
           </h1>
-          <p
-            className="text-base text-ink-dim tracking-widest mt-px mb-4"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            Insumos totales: {total}
-          </p>
+          <div className="flex flex-col mb-4">
+            <p
+              className="text-base text-ink-dim tracking-widest mt-px"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              Insumos totales: {total}
+            </p>
+
+          </div>
           <dl className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-ink-dim">
             <div className="flex items-center gap-1">
               <dt>
-                <span className="sym-star">*</span>
+                <span className="sym-star p-1">*</span>
               </dt>
-              <dd>Vence este año (2026)</dd>
+              <dd>Vence este año (2026) |</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt>
-                <span className="sym-v">V</span>
+                <span className="sym-v p-1">V</span>
               </dt>
-              <dd>Ya vencido</dd>
+              <dd>Ya vencido |</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt>
-                <span className="sym-r">R</span>
+                <span className="sym-r p-1">R</span>
               </dt>
-              <dd>Reponer</dd>
+              <dd>Reponer |</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt>
-                <span className="sym-ps">PS</span>
+                <span className="sym-ps p-1">PS</span>
               </dt>
-              <dd>Pronto sacar (Reponer asumido)</dd>
+              <dd>Pronto sacar (Reponer asumido) |</dd>
             </div>
             <div className="flex items-center gap-1">
               <dt>
-                <span className="text-ink-mid">—</span>
+                <span className="text-ink-mid font-extrabold">—</span>
               </dt>
               <dd>Vence en 2027 o posterior</dd>
             </div>
