@@ -14,14 +14,15 @@ export default function Toast({ msg, tipo }) {
       role={isErr ? 'alert' : 'status'}
       aria-live={isErr ? 'assertive' : 'polite'}
       aria-atomic="true"
-      className={`fixed bottom-6 right-6 flex items-center gap-2 px-4 py-2.5 rounded-sm font-mono text-[14px] tracking-[0.06em] z-[200] border ${
+      aria-label={isErr ? 'Error' : 'Éxito'}
+      className={`fixed bottom-6 right-6 flex items-center gap-2 px-4 py-2.5 rounded-sm font-mono text-base tracking-[0.06em] z-200 border ${
         isErr
-          ? 'bg-[var(--danger)] border-[var(--danger-hi)] text-[#e06060]'
-          : 'bg-[var(--ok)] border-[#3a7a50] text-[#80d89a]'
+          ? 'bg-danger border-danger-hi text-[#e06060]'
+          : 'bg-ok border-[#3a7a50] text-[#80d89a]'
       }`}
       style={{ animation: 'slideIn 0.2s ease' }}
     >
-      <span>{isErr ? '✕' : '✓'}</span>
+      <span aria-hidden="true">{isErr ? '✕' : '✓'}</span>
       <span>{msg}</span>
     </div>
   )

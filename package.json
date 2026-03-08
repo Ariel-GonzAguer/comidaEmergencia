@@ -1,11 +1,11 @@
 {
-  "name": "inventario-emergencia",
+  "name": "comida-emergencia-mini",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "server": "node server/index.js",
-    "client": "pnpm --filter inventario-emergencia-client run dev",
+    "client": "pnpm --filter comida-emergencia-mini-cliente run dev",
     "dev": "concurrently \"pnpm run server\" \"pnpm run client\""
   },
   "dependencies": {
