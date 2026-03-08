@@ -99,20 +99,20 @@ Es un archivo JSON plano con tres colecciones:
 
 ### Estructura de un insumo
 
-| Campo           | Tipo            | Descripción                                            |
-| --------------- | --------------- | ------------------------------------------------------ |
-| `id`            | string (UUID)   | Identificador único generado automáticamente           |
-| `nombre`        | string          | Nombre del producto (**obligatorio**)                  |
-| `cantidad`      | string          | Ej: `"2x 500"`, `"1"`                                  |
-| `unidad`        | string          | Ej: `"g"`, `"ml"`, `"kg"`                              |
-| `categoria`     | string          | Una de las categorías definidas en `db.json`           |
-| `vencimiento`   | string          | Formato `"AAAA-MM"` o `"no vence"`                     |
-| `calorias`      | number \| null  | kcal por porción                                       |
-| `proteina`      | number \| null  | Gramos de proteína por porción                         |
-| `notas`         | string          | Observaciones libres                                   |
-| `simbolos`      | string[]        | Array de códigos: `["V", "*"]`                         |
-| `creadoEn`      | ISO 8601 string | Fecha de creación (auto)                               |
-| `actualizadoEn` | ISO 8601 string | Última modificación (auto)                             |
+| Campo           | Tipo            | Descripción                                  |
+| --------------- | --------------- | -------------------------------------------- |
+| `id`            | string (UUID)   | Identificador único generado automáticamente |
+| `nombre`        | string          | Nombre del producto (**obligatorio**)        |
+| `cantidad`      | string          | Ej: `"2x 500"`, `"1"`                        |
+| `unidad`        | string          | Ej: `"g"`, `"ml"`, `"kg"`                    |
+| `categoria`     | string          | Una de las categorías definidas en `db.json` |
+| `vencimiento`   | string          | Formato `"AAAA-MM"` o `"no vence"`           |
+| `calorias`      | number \| null  | kcal por porción                             |
+| `proteina`      | number \| null  | Gramos de proteína por porción               |
+| `notas`         | string          | Observaciones libres                         |
+| `simbolos`      | string[]        | Array de códigos: `["V", "*"]`               |
+| `creadoEn`      | ISO 8601 string | Fecha de creación (auto)                     |
+| `actualizadoEn` | ISO 8601 string | Última modificación (auto)                   |
 
 ---
 
@@ -200,12 +200,12 @@ Centraliza *toda* la comunicación con la API. Expone:
 
 ### Colores de vencimiento
 
-| Color          | Clase CSS         | Condición                |
-| -------------- | ----------------- | ------------------------ |
-| Gris           | `fecha-ok`        | Vence en > 12 meses      |
-| Amarillo       | `fecha-este-anio` | Vence dentro de 12 meses |
-| Naranja        | `fecha-pronto`    | Vence en ≤ 3 meses       |
-| Rojo + tachado | `fecha-vencida`   | Ya venció                |
+| Color          | Clase CSS        | Condición                |
+| -------------- | ---------------- | ------------------------ |
+| Gris           | `fecha-ok`       | Vence en > 12 meses      |
+| Amarillo       | `fecha-este-año` | Vence dentro de 12 meses |
+| Naranja        | `fecha-pronto`   | Vence en ≤ 3 meses       |
+| Rojo + tachado | `fecha-vencida`  | Ya venció                |
 
 ---
 
