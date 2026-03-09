@@ -33,27 +33,27 @@ export default function Header({ onNuevo, total }) {
               <dt>
                 <span className="sym-star p-1">*</span>
               </dt>
-              <dd>Vence este año (2026) |</dd>
+              <dd>Vence este año (2026)</dd>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pl-2 border-l border-edge">
               <dt>
                 <span className="sym-v p-1">V</span>
               </dt>
-              <dd>Ya vencido |</dd>
+              <dd>Ya vencido</dd>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pl-2 border-l border-edge">
               <dt>
                 <span className="sym-r p-1">R</span>
               </dt>
-              <dd>Reponer |</dd>
+              <dd>Reponer</dd>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pl-2 border-l border-edge">
               <dt>
                 <span className="sym-ps p-1">PS</span>
               </dt>
-              <dd>Pronto sacar (Reponer asumido) |</dd>
+              <dd>Pronto sacar (Reponer asumido)</dd>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pl-2 border-l border-edge">
               <dt>
                 <span className="text-ink-mid font-extrabold">—</span>
               </dt>
