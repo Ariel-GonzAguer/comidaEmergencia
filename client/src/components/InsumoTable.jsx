@@ -93,11 +93,12 @@ const TD = 'px-3.5 py-2 align-middle text-base';
  * @param {import('../hooks/useInsumos').Insumo[]} props.insumos     - Lista de insumos a renderizar.
  * @param {boolean}  props.loading      - Si está cargando datos.
  * @param {import('../hooks/useInsumos').Simbolo[]} props.simbolosDef - Definiciones de símbolos disponibles.
+ * @param {(insumo: Object) => void} props.onView     - Callback al pulsar ver detalles.
  * @param {(insumo: Object) => void} props.onEditar   - Callback al pulsar editar.
  * @param {(insumo: Object) => void} props.onEliminar - Callback al pulsar eliminar.
  * @returns {JSX.Element}
  */
-export default function InsumoTable({ insumos, loading, simbolosDef, onEditar, onEliminar }) {
+export default function InsumoTable({ insumos, loading, simbolosDef, onView, onEditar, onEliminar }) {
   // Mapeo de símbolo → descripción para aria-label en badges
   const simbolosMap = simbolosDef.reduce((acc, s) => ({ ...acc, [s.codigo]: s.descripcion }), {});
 
@@ -224,6 +225,14 @@ export default function InsumoTable({ insumos, loading, simbolosDef, onEditar, o
               </td>
               <td className={`${TD} whitespace-nowrap text-right`}>
                 {/* aria-label con nombre del insumo: imprescindible para SR (WCAG 2.1.1 / 4.1.2) */}
+                <button
+                  type="button"
+                  onClick={() => onView(item)}
+                  aria-label={`Ver detalles de ${item.nombre}`}
+                  className="text-ink-dim hover:text-ink text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-1 focus-visible:ring-offset-bg"
+                >
+                  <span aria-hidden="true">👁</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => onEditar(item)}
