@@ -59,9 +59,10 @@ describe('GET /api/insumos', () => {
     const res = await request(app).get('/api/insumos');
 
     expect(res.status).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body).toHaveLength(1);
-    expect(res.body[0].nombre).toBe('Arroz');
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.body.data).toHaveLength(1);
+    expect(res.body.data[0].nombre).toBe('Arroz');
   });
 
   it('filtra por categoría', async () => {
@@ -75,8 +76,9 @@ describe('GET /api/insumos', () => {
     const res = await request(app).get('/api/insumos?categoria=alimentos');
 
     expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(1);
-    expect(res.body[0].categoria).toBe('alimentos');
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toHaveLength(1);
+    expect(res.body.data[0].categoria).toBe('alimentos');
   });
 
   it('filtra por texto (nombre parcial, case-insensitive)', async () => {
@@ -90,15 +92,17 @@ describe('GET /api/insumos', () => {
     const res = await request(app).get('/api/insumos?texto=arr');
 
     expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(1);
-    expect(res.body[0].nombre).toBe('Arroz blanco');
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toHaveLength(1);
+    expect(res.body.data[0].nombre).toBe('Arroz blanco');
   });
 
   it('devuelve lista vacía si no hay coincidencias', async () => {
     const res = await request(app).get('/api/insumos?texto=zzz_inexistente');
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual([]);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toEqual([]);
   });
 });
 
@@ -110,14 +114,16 @@ describe('GET /api/insumos/:id', () => {
     const res = await request(app).get('/api/insumos/uuid-1');
 
     expect(res.status).toBe(200);
-    expect(res.body.id).toBe('uuid-1');
-    expect(res.body.nombre).toBe('Arroz');
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.id).toBe('uuid-1');
+    expect(res.body.data.nombre).toBe('Arroz');
   });
 
   it('devuelve 404 si el id no existe', async () => {
     const res = await request(app).get('/api/insumos/no-existe');
 
     expect(res.status).toBe(404);
+    expect(res.body.success).toBe(false);
     expect(res.body).toHaveProperty('error');
   });
 });
@@ -140,16 +146,17 @@ describe('POST /api/insumos', () => {
     const res = await request(app).post('/api/insumos').send(payload);
 
     expect(res.status).toBe(201);
-    expect(res.body.nombre).toBe('Fideo');
-    expect(res.body.id).toBeDefined();
-    expect(res.body.creadoEn).toBeDefined();
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.nombre).toBe('Fideo');
+    expect(res.body.data.id).toBeDefined();
+    expect(res.body.data.creadoEn).toBeDefined();
   });
 
   it('asigna "alimentos" como categoría por defecto', async () => {
     const res = await request(app).post('/api/insumos').send({ nombre: 'Sal' });
 
     expect(res.status).toBe(201);
-    expect(res.body.categoria).toBe('alimentos');
+    expect(res.body.data.categoria).toBe('alimentos');
   });
 
   it('devuelve 400 si falta el nombre', async () => {
@@ -172,7 +179,7 @@ describe('POST /api/insumos', () => {
       .send({ nombre: 'Atún', simbolos: ['V', '*'] });
 
     expect(res.status).toBe(201);
-    expect(res.body.simbolos).toEqual(['V', '*']);
+    expect(res.body.data.simbolos).toEqual(['V', '*']);
   });
 });
 
@@ -186,29 +193,31 @@ describe('PUT /api/insumos/:id', () => {
       .send({ nombre: 'Arroz integral', calorias: 180 });
 
     expect(res.status).toBe(200);
-    expect(res.body.nombre).toBe('Arroz integral');
-    expect(res.body.calorias).toBe(180);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.nombre).toBe('Arroz integral');
+    expect(res.body.data.calorias).toBe(180);
   });
 
   it('conserva los campos no enviados', async () => {
     const res = await request(app).put('/api/insumos/uuid-1').send({ nombre: 'Arroz integral' });
 
     expect(res.status).toBe(200);
-    expect(res.body.unidad).toBe('kg');
-    expect(res.body.categoria).toBe('alimentos');
+    expect(res.body.data.unidad).toBe('kg');
+    expect(res.body.data.categoria).toBe('alimentos');
   });
 
   it('actualiza actualizadoEn automáticamente', async () => {
     const res = await request(app).put('/api/insumos/uuid-1').send({ notas: 'Revisado' });
 
     expect(res.status).toBe(200);
-    expect(res.body.actualizadoEn).not.toBe('2026-01-01T00:00:00.000Z');
+    expect(res.body.data.actualizadoEn).not.toBe('2026-01-01T00:00:00.000Z');
   });
 
   it('devuelve 404 si el id no existe', async () => {
     const res = await request(app).put('/api/insumos/no-existe').send({ nombre: 'X' });
 
     expect(res.status).toBe(404);
+    expect(res.body.success).toBe(false);
     expect(res.body).toHaveProperty('error');
   });
 });
@@ -217,18 +226,19 @@ describe('PUT /api/insumos/:id', () => {
 describe('DELETE /api/insumos/:id', () => {
   beforeEach(() => mockDB());
 
-  it('elimina el insumo y devuelve ok: true', async () => {
+  it('elimina el insumo y devuelve success: true', async () => {
     const res = await request(app).delete('/api/insumos/uuid-1');
 
     expect(res.status).toBe(200);
-    expect(res.body.ok).toBe(true);
-    expect(res.body.eliminado.id).toBe('uuid-1');
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.id).toBe('uuid-1');
   });
 
   it('devuelve 404 si el id no existe', async () => {
     const res = await request(app).delete('/api/insumos/no-existe');
 
     expect(res.status).toBe(404);
+    expect(res.body.success).toBe(false);
     expect(res.body).toHaveProperty('error');
   });
 });
@@ -241,7 +251,8 @@ describe('GET /api/categorias', () => {
     const res = await request(app).get('/api/categorias');
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual(['alimentos', 'especias', 'higiene']);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toEqual(['alimentos', 'especias', 'higiene']);
   });
 });
 
@@ -253,8 +264,9 @@ describe('GET /api/simbolos', () => {
     const res = await request(app).get('/api/simbolos');
 
     expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(2);
-    expect(res.body[0]).toHaveProperty('codigo');
-    expect(res.body[0]).toHaveProperty('descripcion');
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toHaveLength(2);
+    expect(res.body.data[0]).toHaveProperty('codigo');
+    expect(res.body.data[0]).toHaveProperty('descripcion');
   });
 });

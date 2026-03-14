@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import DeleteConfirm from './DeleteConfirm';
+import DeleteConfirm from '../components/DeleteConfirm';
 
 describe('DeleteConfirm', () => {
   const mockConfirmar = vi.fn();

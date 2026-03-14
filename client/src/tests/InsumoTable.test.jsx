@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import InsumoTable from './InsumoTable';
+import InsumoTable from '../components/InsumoTable';
 
 describe('InsumoTable', () => {
   const mockEditar = vi.fn();

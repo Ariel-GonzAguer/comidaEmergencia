@@ -9,10 +9,10 @@
  * @constant {Record<string, string>}
  */
 const SIMBOLO_CLASS = {
-  V: 'sym sym-v',
-  '*': 'sym sym-star',
-  R: 'sym sym-r',
-  PS: 'sym sym-ps',
+  V: 'simbolo simbolo-v',
+  '*': 'simbolo simbolo-star',
+  R: 'simbolo simbolo-r',
+  PS: 'simbolo simbolo-ps',
 };
 
 /**
@@ -25,7 +25,7 @@ const SIMBOLO_CLASS = {
  */
 function SimboloBadge({ codigo, descripcion }) {
   return (
-    <span className={SIMBOLO_CLASS[codigo] ?? 'sym'} aria-label={descripcion}>
+    <span className={SIMBOLO_CLASS[codigo] ?? 'simbolo'} aria-label={descripcion}>
       {codigo}
     </span>
   );

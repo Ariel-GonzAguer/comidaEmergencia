@@ -13,12 +13,13 @@
 | _(vacío)_ | Vence en 2027 o posterior |
 
 ## Categorías
+
 - alimentos
 - especias
 - bebidas
 - higiene
 - otros
- 
+
 ## Alimentos
 
 | Producto                       | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas | Categoría |

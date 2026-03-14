@@ -95,10 +95,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-dvh max-w-400 mx-auto">
-      <Header
-        onNuevo={() => setModal({ modo: 'crear' })}
-        total={insumos.length}
-      />
+      <Header onNuevo={() => setModal({ modo: 'crear' })} total={insumos.length} />
 
       <FilterBar filtros={filtros} setFiltros={setFiltros} categorias={categorias} />
 
@@ -137,7 +134,7 @@ export default function App() {
         />
       )}
 
-      {toast && <Toast msg={toast.msg} tipo={toast.tipo} />}
+      {toast && <Toast mensaje={toast.mensaje} tipo={toast.tipo} />}
     </div>
   );
 }

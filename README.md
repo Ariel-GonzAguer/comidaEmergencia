@@ -9,15 +9,15 @@ Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una
 
 ## Stack tecnológico
 
-| Capa     | Tecnología                 | Versión |
-| -------- | -------------------------- | ------- |
-| Frontend | React + JSX                | 18.2.0  |
-| Estilos  | Tailwind CSS (plugin Vite) | 4.2.1   |
-| Bundler  | Vite                       | 5.4.21  |
-| Backend  | Express                    | 4.22.1  |
-| Runtime  | Node.js                    | 22.17.1 |
-| Gestor   | pnpm                       | 10.30.3 |
-| Pruebas  | Vitest + Supertest         | 2.1.9   |
+| Capa     | Tecnología         | Versión       |
+| -------- | ------------------ | ------------- |
+| Frontend | React              | 18.2.0        |
+| Estilos  | Tailwind CSS       | 4.2.1         |
+| Bundler  | Vite               | 5.4.21        |
+| Backend  | Express            | 4.22.1        |
+| Runtime  | Node.js            | 22.17.1       |
+| Gestor   | pnpm               | 10.30.3       |
+| Pruebas  | Vitest + Supertest | 2.0.0 + 7.2.2 |
 
 ---
 
@@ -29,10 +29,10 @@ El proyecto cuenta con una suite completa de pruebas unitarias y de integración
 - **Backend:** Vitest + Supertest (Pruebas de la API REST con mocks de `fs`).
 
 ```bash
-# Ejecutar pruebas del cliente 
+# Ejecutar pruebas del cliente
 cd client && pnpm test
 
-# Ejecutar pruebas del servidor 
+# Ejecutar pruebas del servidor
 pnpm test
 ```
 
@@ -224,12 +224,12 @@ Centraliza _toda_ la comunicación con la API. Expone:
 
 ### Colores de vencimiento
 
-| Color          | Clase CSS        | Condición                |
-| -------------- | ---------------- | ------------------------ |
-| Gris           | `fecha-ok`       | Vence en > 12 meses      |
+| Color          | Clase CSS         | Condición                |
+| -------------- | ----------------- | ------------------------ |
+| Gris           | `fecha-ok`        | Vence en > 12 meses      |
 | Amarillo       | `fecha-este-anio` | Vence dentro de 12 meses |
-| Naranja        | `fecha-pronto`   | Vence en ≤ 3 meses       |
-| Rojo + tachado | `fecha-vencida`  | Ya venció                |
+| Naranja        | `fecha-pronto`    | Vence en ≤ 3 meses       |
+| Rojo + tachado | `fecha-vencida`   | Ya venció                |
 
 ---
 
@@ -254,7 +254,7 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 2. Añadir la clase CSS correspondiente en `client/src/index.css`:
 
    ```css
-   .sym-ab {
+   .simbolo-ab {
      background: #1a2a40;
      color: #60a0e0;
    }
@@ -263,7 +263,7 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 3. Registrar la clase en el mapa `SIMBOLO_CLASS` de `InsumoTable.jsx`:
 
    ```js
-   AB: 'sym sym-ab',
+   AB: 'simbolo simbolo-ab',
    ```
 
 ### Agregar campos al formulario
@@ -274,11 +274,12 @@ Editar `db.json` directamente y añadir el string al array `categorias`:
 4. Actualizar el array `campos` en el handler `PUT` de `server/index.js`.
 5. Agregar el valor por defecto en el handler `POST` de `server/index.js`.
 
---- 
+---
 
 ### Automatización (Actions)
 
 Se han configurado flujos de GitHub Actions para mantener la calidad del código en cada Pull Request a `main` y `mini`:
+
 - **Test:** Ejecución obligatoria de la suite completa de pruebas.
 - **Lint:** Validación de reglas de código con ESLint.
 - **Audit:** Auditoría de seguridad de dependencias (`pnpm audit`).
