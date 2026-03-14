@@ -89,8 +89,12 @@ export function useInsumos() {
         params.set('categoria', filtros.categoria);
       if (filtros.texto) params.set('texto', filtros.texto);
       const res = await fetch(`${API}/insumos?${params}`);
-      if (!res.ok) throw new Error(await res.text());
-      setInsumos(await res.json());
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Error al obtener insumos');
+      }
+      const json = await res.json();
+      setInsumos(json.data);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -106,10 +110,12 @@ export function useInsumos() {
     Promise.all([
       fetch(`${API}/categorias`).then(r => r.json()),
       fetch(`${API}/simbolos`).then(r => r.json()),
-    ]).then(([cats, syms]) => {
-      setCategorias(cats);
-      setSimbolos(syms);
-    });
+    ])
+      .then(([categoriasRes, simbolosRes]) => {
+        if (categoriasRes.success) setCategorias(categoriasRes.data);
+        if (simbolosRes.success) setSimbolos(simbolosRes.data);
+      })
+      .catch(e => setError('Error al cargar datos iniciales: ' + e.message));
   }, []);
 
   /**
@@ -120,16 +126,21 @@ export function useInsumos() {
    * @throws {Error} Si el servidor responde con un error (ej: nombre vacío).
    */
   async function crearInsumo(datos) {
-    const res = await fetch(`${API}/insumos`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(datos),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Error al crear');
+    try {
+      const res = await fetch(`${API}/insumos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        throw new Error(json.error || 'Error al crear');
+      }
+      await fetchInsumos();
+    } catch (e) {
+      setError(e.message);
+      throw e;
     }
-    await fetchInsumos();
   }
 
   /**
@@ -141,16 +152,21 @@ export function useInsumos() {
    * @throws {Error} Si el insumo no existe o el servidor devuelve error.
    */
   async function actualizarInsumo(id, datos) {
-    const res = await fetch(`${API}/insumos/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(datos),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Error al actualizar');
+    try {
+      const res = await fetch(`${API}/insumos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        throw new Error(json.error || 'Error al actualizar');
+      }
+      await fetchInsumos();
+    } catch (e) {
+      setError(e.message);
+      throw e;
     }
-    await fetchInsumos();
   }
 
   /**
@@ -161,12 +177,17 @@ export function useInsumos() {
    * @throws {Error} Si el insumo no existe o el servidor devuelve error.
    */
   async function eliminarInsumo(id) {
-    const res = await fetch(`${API}/insumos/${id}`, { method: 'DELETE' });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Error al eliminar');
+    try {
+      const res = await fetch(`${API}/insumos/${id}`, { method: 'DELETE' });
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        throw new Error(json.error || 'Error al eliminar');
+      }
+      await fetchInsumos();
+    } catch (e) {
+      setError(e.message);
+      throw e;
     }
-    await fetchInsumos();
   }
 
   return {

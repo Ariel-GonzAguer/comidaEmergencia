@@ -108,7 +108,7 @@ ${alimentos.map(filaAlimento).join('\n')}`;
 
 | Producto | Categoría | Cantidad |
 | -------- | --------- | -------- |
-${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${fmtCant(i)} |`).join('\n')}\n`
+${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${formatoCantidad(i)} |`).join('\n')}\n`
     : '';
 
   const md = `# Inventario General de Alimentos y Productos\n\n${tablaRef}\n\n---\n\n${tablaAlim}\n\n---\n\n${tablaHig}`;
@@ -124,8 +124,8 @@ ${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${fmtCant(i)} |`).join(
  *
  * @queryParam {string} [categoria] - Filtra por categoría exacta. Usar "todas" o vacío para no filtrar.
  * @queryParam {string} [texto]     - Filtra por coincidencia parcial (case-insensitive) en el nombre.
- * @returns {Array<Object>} 200 – Array de insumos.
- * @returns {{ error: string }} 500 – Error interno.
+ * @returns {{ success: boolean, data: Array<Object> }} 200 – Objeto con éxito y array de insumos en `data`.
+ * @returns {{ success: boolean, error: string }} 500 – Error interno.
  */
 app.get('/api/insumos', (req, res) => {
   try {
@@ -140,9 +140,15 @@ app.get('/api/insumos', (req, res) => {
       const q = texto.toLowerCase();
       items = items.filter(i => i.nombre.toLowerCase().includes(q));
     }
-    res.json(items);
+    res.json({
+      success: true,
+      data: items,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -152,17 +158,27 @@ app.get('/api/insumos', (req, res) => {
  * Obtiene un insumo único por su UUID.
  *
  * @param {string} req.params.id - UUID del insumo.
- * @returns {Object} 200 – El insumo encontrado.
- * @returns {{ error: string }} 404 – No encontrado.
+ * @returns {{ success: boolean, data: Object }} 200 – Objeto con el insumo encontrado en `data`.
+ * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
 app.get('/api/insumos/:id', (req, res) => {
   try {
     const db = readDB();
     const item = db.insumos.find(i => i.id === req.params.id);
-    if (!item) return res.status(404).json({ error: 'No encontrado' });
-    res.json(item);
+    if (!item)
+      return res.status(404).json({
+        success: false,
+        error: 'No encontrado',
+      });
+    res.json({
+      success: true,
+      data: item,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -180,8 +196,8 @@ app.get('/api/insumos/:id', (req, res) => {
  * @body {number|null} [proteina]  - Gramos de proteína.
  * @body {string}   [notas]      - Observaciones libres.
  * @body {string[]} [simbolos]   - Códigos de símbolos (ej: ["V", "*"]).
- * @returns {Object} 201 – Insumo creado.
- * @returns {{ error: string }} 400 – Falta el nombre.
+ * @returns {{ success: boolean, data: Object }} 201 – Insumo creado en `data`.
+ * @returns {{ success: boolean, error: string }} 400 – Falta el nombre o datos inválidos.
  */
 app.post('/api/insumos', (req, res) => {
   try {
@@ -220,9 +236,15 @@ app.post('/api/insumos', (req, res) => {
     db.insumos.push(nuevo);
     writeDB(db);
     writeMD(db.insumos);
-    res.status(201).json(nuevo);
+    res.status(201).json({
+      success: true,
+      data: nuevo,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -234,14 +256,18 @@ app.post('/api/insumos', (req, res) => {
  *
  * @param {string} req.params.id - UUID del insumo a actualizar.
  * @body  {Object} campos        - Cualquier subconjunto de los campos del insumo.
- * @returns {Object} 200 – Insumo actualizado.
- * @returns {{ error: string }} 404 – No encontrado.
+ * @returns {{ success: boolean, data: Object }} 200 – Insumo actualizado en `data`.
+ * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
 app.put('/api/insumos/:id', (req, res) => {
   try {
     const db = readDB();
     const idx = db.insumos.findIndex(i => i.id === req.params.id);
-    if (idx === -1) return res.status(404).json({ error: 'No encontrado' });
+    if (idx === -1)
+      return res.status(404).json({
+        success: false,
+        error: 'No encontrado',
+      });
 
     const campos = [
       'nombre',
@@ -266,9 +292,15 @@ app.put('/api/insumos/:id', (req, res) => {
     db.insumos[idx] = actualizado;
     writeDB(db);
     writeMD(db.insumos);
-    res.json(actualizado);
+    res.json({
+      success: true,
+      data: actualizado,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -278,21 +310,31 @@ app.put('/api/insumos/:id', (req, res) => {
  * Elimina un insumo por su UUID.
  *
  * @param {string} req.params.id - UUID del insumo a eliminar.
- * @returns {{ ok: boolean, eliminado: Object }} 200 – Confirmación con el item eliminado.
- * @returns {{ error: string }} 404 – No encontrado.
+ * @returns {{ success: boolean, data: Object }} 200 – Confirmación con el item eliminado en `data`.
+ * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
 app.delete('/api/insumos/:id', (req, res) => {
   try {
     const db = readDB();
     const idx = db.insumos.findIndex(i => i.id === req.params.id);
-    if (idx === -1) return res.status(404).json({ error: 'No encontrado' });
+    if (idx === -1)
+      return res.status(404).json({
+        success: false,
+        error: 'No encontrado',
+      });
 
     const eliminado = db.insumos.splice(idx, 1)[0];
     writeDB(db);
     writeMD(db.insumos);
-    res.json({ ok: true, eliminado });
+    res.json({
+      success: true,
+      data: eliminado,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -303,14 +345,20 @@ app.delete('/api/insumos/:id', (req, res) => {
  *
  * Devuelve el array de categorías disponibles definidas en `db.json`.
  *
- * @returns {string[]} 200 – Lista de categorías.
+ * @returns {{ success: boolean, data: string[] }} 200 – Lista de categorías en `data`.
  */
 app.get('/api/categorias', (req, res) => {
   try {
     const db = readDB();
-    res.json(db.categorias);
+    res.json({
+      success: true,
+      data: db.categorias,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 
@@ -321,14 +369,20 @@ app.get('/api/categorias', (req, res) => {
  *
  * Devuelve los símbolos disponibles (código + descripción) definidos en `db.json`.
  *
- * @returns {Array<{codigo: string, descripcion: string}>} 200 – Lista de símbolos.
+ * @returns {{ success: boolean, data: Array<{codigo: string, descripcion: string}> }} 200 – Lista de símbolos en `data`.
  */
 app.get('/api/simbolos', (req, res) => {
   try {
     const db = readDB();
-    res.json(db.simbolos);
+    res.json({
+      success: true,
+      data: db.simbolos,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
   }
 });
 

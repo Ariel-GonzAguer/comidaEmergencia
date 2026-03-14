@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
-import { useInsumos } from './useInsumos';
+import { useInsumos } from '../hooks/useInsumos';
 
 describe('useInsumos', () => {
   const mockInsumosResponse = [
@@ -18,8 +18,14 @@ describe('useInsumos', () => {
     },
   ];
 
-  const mockCategoriasResponse = ['alimentos', 'especias'];
-  const mockSimbolosResponse = [{ codigo: 'V', descripcion: 'Ya vencido' }];
+  const mockCategoriasResponse = {
+    success: true,
+    data: ['alimentos', 'especias'],
+  };
+  const mockSimbolosResponse = {
+    success: true,
+    data: [{ codigo: 'V', descripcion: 'Ya vencido' }],
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -39,12 +45,18 @@ describe('useInsumos', () => {
       if (typeof url === 'string' && url.startsWith('/api/insumos')) {
         return {
           ok: true,
-          json: async () => mockInsumosResponse,
+          json: async () => ({
+            success: true,
+            data: mockInsumosResponse,
+          }),
         };
       }
       return {
         ok: true,
-        json: async () => [],
+        json: async () => ({
+          success: true,
+          data: [],
+        }),
       };
     });
   });
@@ -81,7 +93,7 @@ describe('useInsumos', () => {
       expect(result.current.categorias.length).toBeGreaterThan(0);
     });
 
-    expect(result.current.categorias).toEqual(mockCategoriasResponse);
+    expect(result.current.categorias).toEqual(mockCategoriasResponse.data);
   });
 
   it('debe cargar símbolos', async () => {
@@ -91,7 +103,7 @@ describe('useInsumos', () => {
       expect(result.current.simbolos.length).toBeGreaterThan(0);
     });
 
-    expect(result.current.simbolos).toEqual(mockSimbolosResponse);
+    expect(result.current.simbolos).toEqual(mockSimbolosResponse.data);
   });
 
   it('debe tener método crearInsumo', async () => {

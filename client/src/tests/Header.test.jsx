@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Header from './Header';
+import Header from '../components/Header';
 
 describe('Header', () => {
   it('debe renderizar el título "Comida Emergencia"', () => {

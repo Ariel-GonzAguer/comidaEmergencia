@@ -46,7 +46,7 @@ body {
 }
 
 /* ---- Badges de simbolo ---- */
-.sym {
+.simbolo {
   display: inline-block;
   font-size: 12px;
   font-weight: 600;
@@ -55,23 +55,23 @@ body {
   margin-right: 3px;
   letter-spacing: 0.05em;
 }
-.sym-v {
+.simbolo-v {
   background: #5c1f1f;
   color: #e06060;
 }
-.sym-star {
+.simbolo-star {
   background: #4a3800;
   color: #c8a030;
 }
-.sym-r {
+.simbolo-r {
   background: #1a3a5c;
   color: #60a0d8;
 }
-.sym-ps {
+.simbolo-ps {
   background: #3a2a50;
   color: #9a70d0;
 }
-.sym-ne {
+.simbolo-ne {
   background: #2a1a0a;
   color: #c07850;
 }

@@ -66,14 +66,14 @@ Todas las variables de color están definidas en `client/src/index.css` dentro d
 
 Los colores de los badges se definen en CSS global, **no en Tailwind**:
 
-| Clase CSS   | Código | Fondo     | Texto     |
-| ----------- | ------ | --------- | --------- |
-| `.sym-v`    | `V`    | `#5c1f1f` | `#e06060` |
-| `.sym-star` | `*`    | `#4a3800` | `#c8a030` |
-| `.sym-r`    | `R`    | `#1a3a5c` | `#60a0d8` |
-| `.sym-ps`   | `PS`   | `#3a2a50` | `#9a70d0` |
+| Clase CSS       | Código | Fondo     | Texto     |
+| --------------- | ------ | --------- | --------- |
+| `.simbolo-v`    | `V`    | `#5c1f1f` | `#e06060` |
+| `.simbolo-star` | `*`    | `#4a3800` | `#c8a030` |
+| `.simbolo-r`    | `R`    | `#1a3a5c` | `#60a0d8` |
+| `.simbolo-ps`   | `PS`   | `#3a2a50` | `#9a70d0` |
 
-Al agregar un símbolo nuevo: crear su clase `.sym-XX` en `index.css` y registrarla en el mapa `SIMBOLO_CLASS` de `InsumoTable.jsx`.
+Al agregar un símbolo nuevo: crear su clase `.simbolo-XX` en `index.css` y registrarla en el mapa `SIMBOLO_CLASS` de `InsumoTable.jsx`.
 
 ### Colores de vencimiento
 
@@ -184,8 +184,8 @@ const TD = 'px-3.5 py-2 align-middle text-base';
 
 // ✓ Constantes en UPPER_CASE para objetos de configuración
 const SIMBOLO_CLASS = {
-  V: 'sym sym-v',
-  '*': 'sym sym-star',
+  V: 'simbolo simbolo-v',
+  '*': 'simbolo simbolo-star',
 };
 
 // ✓ Objeto de estado vacío inicial
@@ -478,7 +478,7 @@ for (const campo of campos) {
 | Variables y funciones JS   | `camelCase`                                     | `fetchInsumos`, `simbolosMap` |
 | Componentes React          | `PascalCase`                                    | `InsumoModal`, `FilterBar`    |
 | Constantes de módulo       | `UPPER_SNAKE_CASE`                              | `SIMBOLO_CLASS`, `VACIO`      |
-| Clases CSS propias         | `kebab-case`                                    | `.sym-v`, `.fecha-pronto`     |
+| Clases CSS propias         | `kebab-case`                                    | `.simbolo-v`, `.fecha-pronto` |
 | Props de callbacks         | prefijo `on`                                    | `onGuardar`, `onCerrar`       |
 | Archivos de componentes    | `PascalCase.jsx`                                | `InsumoTable.jsx`             |
 | Archivos de hooks          | `use` + `camelCase`                             | `useInsumos.js`               |
@@ -512,7 +512,7 @@ tipo: descripción breve en imperativo
 ```
 feat: add focus trap to DeleteConfirm modal
 arreglo: correct date format conversion on form submit
-accesibilidad: add aria-label to symbol badges in InsumoTable
+accesibilidad: add aria-label to simbolobol badges in InsumoTable
 estilo: convert arbitrary values to Tailwind v4 scale
 docs: update README to remove deleted migration script
 tarea: add insumos-*.md to .gitignore
