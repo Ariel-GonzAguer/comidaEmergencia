@@ -56,6 +56,7 @@ const API = '/api';
  *   error:            string|null,
  *   filtros:          Filtros,
  *   setFiltros:       Function,
+ *   obtenerInsumo:    (id: string) => Promise<Insumo>,
  *   crearInsumo:      (datos: Object) => Promise<void>,
  *   actualizarInsumo: (id: string, datos: Object) => Promise<void>,
  *   eliminarInsumo:   (id: string) => Promise<void>,
@@ -117,6 +118,28 @@ export function useInsumos() {
       })
       .catch(e => setError('Error al cargar datos iniciales: ' + e.message));
   }, []);
+
+  /**
+   * Obtiene los detalles completos de un insumo por su ID.
+   *
+   * @async
+   * @param {string} id - UUID del insumo.
+   * @returns {Promise<Insumo>}
+   * @throws {Error} Si el insumo no existe o hay error de red.
+   */
+  async function obtenerInsumo(id) {
+    try {
+      const res = await fetch(`${API}/insumos/${id}`);
+      const json = await res.json();
+      if (!res.ok || !json.success) {
+        throw new Error(json.error || 'Error al obtener el insumo');
+      }
+      return json.data;
+    } catch (e) {
+      setError(e.message);
+      throw e;
+    }
+  }
 
   /**
    * Crea un nuevo insumo enviando los datos al servidor y recarga la lista.
@@ -198,6 +221,7 @@ export function useInsumos() {
     error,
     filtros,
     setFiltros,
+    obtenerInsumo,
     crearInsumo,
     actualizarInsumo,
     eliminarInsumo,

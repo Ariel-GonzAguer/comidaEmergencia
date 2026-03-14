@@ -12,6 +12,7 @@ import Header from './components/Header.jsx';
 import FilterBar from './components/FilterBar.jsx';
 import InsumoTable from './components/InsumoTable.jsx';
 import InsumoModal from './components/InsumoModal.jsx';
+import InsumoDetailsModal from './components/InsumoDetailsModal.jsx';
 import DeleteConfirm from './components/DeleteConfirm.jsx';
 import Toast from './components/Toast.jsx';
 import { useInsumos } from './hooks/useInsumos.js';
@@ -35,12 +36,14 @@ export default function App() {
     error,
     filtros,
     setFiltros,
+    obtenerInsumo,
     crearInsumo,
     actualizarInsumo,
     eliminarInsumo,
   } = useInsumos();
 
   const [modal, setModal] = useState(null); // null | { modo: 'crear'|'editar', insumo? }
+  const [viewInsumo, setViewInsumo] = useState(null); // null | insumo
   const [confirmDelete, setConfirmDelete] = useState(null); // null | insumo
   const [toast, setToast] = useState(null);
 
@@ -110,10 +113,20 @@ export default function App() {
           insumos={insumos}
           loading={loading}
           simbolosDef={simbolos}
+          onView={insumo => setViewInsumo(insumo)}
           onEditar={insumo => setModal({ modo: 'editar', insumo })}
           onEliminar={insumo => setConfirmDelete(insumo)}
         />
       </main>
+
+      {viewInsumo && (
+        <InsumoDetailsModal
+          insumo={viewInsumo}
+          simbolosDef={simbolos}
+          onFetchDetalle={obtenerInsumo}
+          onCerrar={() => setViewInsumo(null)}
+        />
+      )}
 
       {modal && (
         <InsumoModal

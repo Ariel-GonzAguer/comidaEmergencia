@@ -1,5 +1,12 @@
 {
-  "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros", "medicamentos"],
+  "categorias": [
+    "alimentos",
+    "especias",
+    "bebidas",
+    "higiene",
+    "otros",
+    "medicamentos"
+  ],
   "simbolos": [
     {
       "codigo": "V",
@@ -29,7 +36,9 @@
       "calorias": 400,
       "proteina": 7,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T22:55:01.085Z"
     },
@@ -43,7 +52,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -57,7 +68,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -71,7 +84,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -85,7 +100,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["PS"],
+      "simbolos": [
+        "PS"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -127,7 +144,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -141,7 +160,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -155,7 +176,9 @@
       "calorias": 95,
       "proteina": 4.7,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -169,23 +192,25 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["PS"],
+      "simbolos": [
+        "PS"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000012",
       "nombre": "Salsa Chunky",
-      "cantidad": "",
-      "unidad": "",
+      "cantidad": "400",
+      "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
+      "vencimiento": "01-2028",
+      "calorias": 25,
+      "proteina": 1,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T20:30:13.563Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000013",
@@ -211,7 +236,9 @@
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -221,13 +248,13 @@
       "cantidad": "1",
       "unidad": "kg",
       "categoria": "alimentos",
-      "vencimiento": "",
+      "vencimiento": "02-2027",
       "calorias": 205,
       "proteina": 8,
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T20:15:34.670Z"
+      "actualizadoEn": "2026-03-14T20:27:57.405Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000016",
@@ -323,7 +350,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -337,7 +366,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["PS"],
+      "simbolos": [
+        "PS"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -351,7 +382,9 @@
       "calorias": 15,
       "proteina": 1,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -365,7 +398,9 @@
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -379,7 +414,9 @@
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": ["PS"],
+      "simbolos": [
+        "PS"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -463,7 +500,10 @@
       "calorias": 170,
       "proteina": 29,
       "notas": "",
-      "simbolos": ["PS", "*"],
+      "simbolos": [
+        "PS",
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -547,7 +587,9 @@
       "calorias": 47,
       "proteina": 0.5,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -561,7 +603,10 @@
       "calorias": 544,
       "proteina": 23,
       "notas": "",
-      "simbolos": ["PS", "*"],
+      "simbolos": [
+        "PS",
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -617,7 +662,9 @@
       "calorias": 25,
       "proteina": 0,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -631,7 +678,9 @@
       "calorias": 220,
       "proteina": 8,
       "notas": "Vencida, pero se mantiene",
-      "simbolos": ["V"],
+      "simbolos": [
+        "V"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -659,7 +708,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -673,7 +724,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "Reponer 1",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -743,7 +796,9 @@
       "calorias": 300,
       "proteina": 50,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -757,7 +812,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": ["R"],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -771,7 +828,9 @@
       "calorias": 62,
       "proteina": 3,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -869,7 +928,9 @@
       "calorias": 325,
       "proteina": 1,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -897,7 +958,9 @@
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": ["*"],
+      "simbolos": [
+        "*"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -958,18 +1021,32 @@
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
-      "id": "e457c226-74e3-47cc-af3d-9b38f3e7433b",
-      "nombre": "pan cuadrado",
-      "cantidad": "800",
+      "id": "24985198-d4a6-449b-8f89-ae665690e9e4",
+      "nombre": "Pasta corbata",
+      "cantidad": "250",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "11-2026",
-      "calorias": 100,
-      "proteina": 3,
+      "vencimiento": "08-2027",
+      "calorias": 290,
+      "proteina": 10,
       "notas": "",
       "simbolos": [],
-      "creadoEn": "2026-03-08T23:17:22.433Z",
-      "actualizadoEn": "2026-03-08T23:17:22.433Z"
+      "creadoEn": "2026-03-14T20:28:46.610Z",
+      "actualizadoEn": "2026-03-14T20:28:46.610Z"
+    },
+    {
+      "id": "30889dc4-2fc9-4633-94eb-f02a0d9a5c0c",
+      "nombre": "Pasta plumitas",
+      "cantidad": "250",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "08-2027",
+      "calorias": 290,
+      "proteina": 10,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-03-14T20:29:33.014Z",
+      "actualizadoEn": "2026-03-14T20:29:33.014Z"
     }
   ]
 }
