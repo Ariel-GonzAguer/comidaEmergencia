@@ -2,6 +2,14 @@
 
 Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
+## [4.0.0] - 14/3/2026
+
+- Actualización de dependencias.
+- Mejoras del README.
+- Se reincorpora el comando `pnpm lint` para mantener la calidad del código.
+- Se agrega documentación para entender mejor el backend del proyecto.
+- Mejora en las respuestas del servidor Express, con objeto `{ success: boolean, data: any }` para estandarizar la comunicación entre frontend y backend.
+
 ## [3.0.0] - 8/3/2026
 
 Esta nueva versión es una reescritura completa del proyecto, con un nuevo enfoque en el minimalismo y la facilidad de uso. Ahora es completamente offline, con un backend local que maneja los datos a través de archivos JSON y Markdown.

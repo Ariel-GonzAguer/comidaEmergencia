@@ -50,8 +50,8 @@ pnpm install
 ```
 
 - Verifique que su cambio funciona y no rompe nada existente.
-- No olvide ejecutar `pnpm lint` para verificar el estilo del código.
-- No olvide ejecutar `pnpm test` **estando en `client/`** para verificar que las pruebas pasen.
+- No olvide ejecutar `pnpm lint` **en la raíz del proyecto** para verificar el estilo del código.
+- No olvide ejecutar `pnpm test` **tanto en `client/` como en `server/`** para verificar que las pruebas pasen.
 - No olvide ejecutar `pnpm prettierCheck` y `pnpm prettierFix` **en la raíz del proyecto** para verificar y corregir el **formato** del código.
 
 ### 7. Haga commit y push
@@ -60,7 +60,7 @@ pnpm install
 
 ```bash
   git add .
-  git commit -m "Descripción clara de su cambio"
+  git commit -m "feat:Descripción clara de su cambio"
   git push origin nombre-de-su-rama
 ```
 
@@ -119,8 +119,7 @@ pnpm install
 
 - Lea el `CODE_OF_CONDUCT.md` antes de contribuir.
 - Lea los archivos en la carpeta `documentacion/`.
-- Lea `documentacion/guia-de-estilo.md` antes de hacer PR.
-- Sea respetuoso y paciente en las discusiones.
+- Sea respetuosa/o y paciente en las discusiones.
 - Si tiene dudas, abra un issue o pregunte en el Pull Request.
 
 ---

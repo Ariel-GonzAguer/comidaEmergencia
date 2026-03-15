@@ -1,7 +1,7 @@
 {
   "name": "comida-emergencia-mini-cliente",
   "private": true,
-  "version": "0.0.0",
+  "version": "4.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 5173",
@@ -12,25 +12,23 @@
     "test:run": "vitest run"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.2.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
-    "@types/react": "18.2.56",
-    "@types/react-dom": "18.2.19",
-    "@vitejs/plugin-react": "4.2.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
     "jsdom": "28.1.0",
     "tailwindcss": "4.2.1",
-    "vite": "5.4.21",
-    "vitest": "4.0.18"
+    "vite": "8.0.0",
+    "vitest": "4.1.0"
   },
   "pnpm": {
-    "overrides": {
-      "esbuild": "0.25.0"
-    }
+    "overrides": {}
   }
 }

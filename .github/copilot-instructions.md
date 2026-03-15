@@ -8,3 +8,4 @@ Cuando se genere un mensaje de commit:
 - Usar el modo imperativo en español.
 - Describir claramente el cambio realizado.
 - No usar frases en inglés.
+- NO use emojies en ningún lugar. En su lugar use símbolos unicode simples como: ✓, ▼, ↑, ↓, ✗.

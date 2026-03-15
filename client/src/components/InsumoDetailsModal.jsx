@@ -29,10 +29,10 @@ function SimboloBadge({ codigo, descripcion }) {
 
 /**
  * Formatea una fecha ISO a un formato legible en español.
- * @param {string} isoString 
+ * @param {string} isoString
  * @returns {string}
  */
-const formatFecha = (isoString) => {
+const formatFecha = isoString => {
   if (!isoString) return '—';
   try {
     return new Date(isoString).toLocaleString('es-ES', {
@@ -40,7 +40,7 @@ const formatFecha = (isoString) => {
       month: '2-digit',
       year: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   } catch {
     return isoString;
@@ -57,7 +57,12 @@ const formatFecha = (isoString) => {
  * @param {() => void} props.onCerrar - Callback para cerrar el modal.
  * @returns {JSX.Element}
  */
-export default function InsumoDetailsModal({ insumo: insumoBase, simbolosDef, onFetchDetalle, onCerrar }) {
+export default function InsumoDetailsModal({
+  insumo: insumoBase,
+  simbolosDef,
+  onFetchDetalle,
+  onCerrar,
+}) {
   const [insumo, setInsumo] = useState(insumoBase);
   const [loading, setLoading] = useState(true);
   const [errorStatus, setErrorStatus] = useState(null);
@@ -72,7 +77,7 @@ export default function InsumoDetailsModal({ insumo: insumoBase, simbolosDef, on
         setLoading(true);
         const completo = await onFetchDetalle(insumoBase.id);
         setInsumo(completo);
-      } catch (err) {
+      } catch {
         setErrorStatus('No se pudo cargar la información completa.');
       } finally {
         setLoading(false);
@@ -104,9 +109,7 @@ export default function InsumoDetailsModal({ insumo: insumoBase, simbolosDef, on
   // Focus trap básico
   const handleKeyDown = useCallback(e => {
     if (e.key !== 'Tab' || !dialogRef.current) return;
-    const focusable = dialogRef.current.querySelectorAll(
-      'button, [tabindex]:not([tabindex="-1"])'
-    );
+    const focusable = dialogRef.current.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
     if (!focusable.length) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -141,7 +144,10 @@ export default function InsumoDetailsModal({ insumo: insumoBase, simbolosDef, on
             <span className="text-base font-mono uppercase tracking-[0.2em] text-accent mb-1 block">
               Detalle del Insumo {loading && ' (Cargando...)'}
             </span>
-            <h2 id={titleId} className="text-2xl font-mono font-bold text-ink uppercase leading-tight">
+            <h2
+              id={titleId}
+              className="text-2xl font-mono font-bold text-ink uppercase leading-tight"
+            >
               {insumo.nombre}
             </h2>
           </div>
@@ -216,9 +222,7 @@ export default function InsumoDetailsModal({ insumo: insumoBase, simbolosDef, on
               <span className="text-base font-mono uppercase tracking-widest text-ink-dim">
                 Creado el
               </span>
-              <div className="text-base font-mono text-ink-mid">
-                {formatFecha(insumo.creadoEn)}
-              </div>
+              <div className="text-base font-mono text-ink-mid">{formatFecha(insumo.creadoEn)}</div>
             </div>
             <div className="flex flex-col gap-1">
               <span className="text-base font-mono uppercase tracking-widest text-ink-dim">

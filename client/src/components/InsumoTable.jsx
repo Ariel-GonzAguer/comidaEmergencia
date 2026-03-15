@@ -98,7 +98,14 @@ const TD = 'px-3.5 py-2 align-middle text-base';
  * @param {(insumo: Object) => void} props.onEliminar - Callback al pulsar eliminar.
  * @returns {JSX.Element}
  */
-export default function InsumoTable({ insumos, loading, simbolosDef, onView, onEditar, onEliminar }) {
+export default function InsumoTable({
+  insumos,
+  loading,
+  simbolosDef,
+  onView,
+  onEditar,
+  onEliminar,
+}) {
   // Mapeo de símbolo → descripción para aria-label en badges
   const simbolosMap = simbolosDef.reduce((acc, s) => ({ ...acc, [s.codigo]: s.descripcion }), {});
 
