@@ -1,12 +1,5 @@
 {
-  "categorias": [
-    "alimentos",
-    "especias",
-    "bebidas",
-    "higiene",
-    "otros",
-    "medicamentos"
-  ],
+  "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros", "medicamentos"],
   "simbolos": [
     {
       "codigo": "V",
@@ -34,13 +27,11 @@
       "categoria": "alimentos",
       "vencimiento": "06-2026",
       "calorias": 400,
-      "proteina": 7,
+      "proteina": 7.5,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": ["*"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T22:55:01.085Z"
+      "actualizadoEn": "2026-03-15T01:25:40.318Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000002",
@@ -52,9 +43,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -68,11 +57,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:00:29.253Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000004",
@@ -84,11 +71,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:00:36.571Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000005",
@@ -100,9 +85,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -144,15 +127,13 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000009",
-      "nombre": "Aceitunas verdes (emergencia)",
+      "nombre": "Aceitunas verdes",
       "cantidad": "75",
       "unidad": "g",
       "categoria": "alimentos",
@@ -160,11 +141,9 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:55.182Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000010",
@@ -176,11 +155,9 @@
       "calorias": 95,
       "proteina": 4.7,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:00:42.596Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000011",
@@ -192,9 +169,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -236,11 +211,9 @@
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:00:48.012Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000015",
@@ -350,9 +323,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -366,9 +337,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -382,11 +351,9 @@
       "calorias": 15,
       "proteina": 1,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:00:54.835Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000025",
@@ -398,11 +365,9 @@
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:01.310Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000026",
@@ -414,9 +379,7 @@
       "calorias": 60,
       "proteina": 2,
       "notas": "",
-      "simbolos": [
-        "PS"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -500,12 +463,9 @@
       "calorias": 170,
       "proteina": 29,
       "notas": "",
-      "simbolos": [
-        "PS",
-        "*"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:08.005Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000033",
@@ -587,11 +547,9 @@
       "calorias": 47,
       "proteina": 0.5,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:15.266Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000039",
@@ -603,12 +561,9 @@
       "calorias": 544,
       "proteina": 23,
       "notas": "",
-      "simbolos": [
-        "PS",
-        "*"
-      ],
+      "simbolos": ["PS"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:20.918Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000040",
@@ -626,7 +581,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000041",
-      "nombre": "Lata Leche de coco BUENA (em.)",
+      "nombre": "Lata Leche de coco BUENA",
       "cantidad": "2x 400",
       "unidad": "ml",
       "categoria": "alimentos",
@@ -636,7 +591,7 @@
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:02:05.414Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000042",
@@ -654,7 +609,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000043",
-      "nombre": "Tapa dulce en polvo (em.)",
+      "nombre": "Tapa dulce en polvo",
       "cantidad": "450",
       "unidad": "g",
       "categoria": "alimentos",
@@ -662,15 +617,13 @@
       "calorias": 25,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:01:46.832Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000044",
-      "nombre": "Caja de Couscous (em.)",
+      "nombre": "Caja de Couscous",
       "cantidad": "500",
       "unidad": "g",
       "categoria": "alimentos",
@@ -678,11 +631,9 @@
       "calorias": 220,
       "proteina": 8,
       "notas": "Vencida, pero se mantiene",
-      "simbolos": [
-        "V"
-      ],
+      "simbolos": ["V"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:02:13.638Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000045",
@@ -708,9 +659,7 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -724,15 +673,13 @@
       "calorias": null,
       "proteina": null,
       "notas": "Reponer 1",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000048",
-      "nombre": "Lentejas secas (em.)",
+      "nombre": "Lentejas secas ",
       "cantidad": "500",
       "unidad": "g",
       "categoria": "alimentos",
@@ -746,7 +693,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000049",
-      "nombre": "Lata Leche de coco (em.)",
+      "nombre": "Lata Leche de coco ",
       "cantidad": "400",
       "unidad": "ml",
       "categoria": "alimentos",
@@ -774,7 +721,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000051",
-      "nombre": "Pimienta negra molida (em.)",
+      "nombre": "Pimienta negra molida ",
       "cantidad": "28",
       "unidad": "g",
       "categoria": "especias",
@@ -788,7 +735,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000052",
-      "nombre": "Soya texturizada (em.)",
+      "nombre": "Soya texturizada ",
       "cantidad": "3x 250",
       "unidad": "g",
       "categoria": "alimentos",
@@ -796,11 +743,9 @@
       "calorias": 300,
       "proteina": 50,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:03:10.930Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000053",
@@ -812,15 +757,13 @@
       "calorias": null,
       "proteina": null,
       "notas": "",
-      "simbolos": [
-        "R"
-      ],
+      "simbolos": ["R"],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000054",
-      "nombre": "Caja leche de soya (em.)",
+      "nombre": "Caja leche de soya ",
       "cantidad": "3x 1",
       "unidad": "litro",
       "categoria": "bebidas",
@@ -828,11 +771,9 @@
       "calorias": 62,
       "proteina": 3,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:03:17.947Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000055",
@@ -864,7 +805,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000057",
-      "nombre": "Arroz blanco (em.)",
+      "nombre": "Arroz blanco ",
       "cantidad": "8",
       "unidad": "kg",
       "categoria": "alimentos",
@@ -928,11 +869,9 @@
       "calorias": 325,
       "proteina": 1,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:03:03.859Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000062",
@@ -950,7 +889,7 @@
     },
     {
       "id": "11111111-0001-0001-0001-000000000063",
-      "nombre": "Margarina jalapeño (em.)",
+      "nombre": "Margarina jalapeño ",
       "cantidad": "5x barra",
       "unidad": "",
       "categoria": "alimentos",
@@ -958,11 +897,9 @@
       "calorias": 100,
       "proteina": 0,
       "notas": "",
-      "simbolos": [
-        "*"
-      ],
+      "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-03-14T21:03:24.477Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000064",

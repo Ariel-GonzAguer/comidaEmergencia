@@ -18,6 +18,7 @@ Como personas miembro, colaboradoras y líderes de este proyecto, nos compromete
 - Insultos, comentarios despectivos o ataques personales.
 - Publicación de información privada de otras personas sin su consentimiento.
 - Cualquier otra conducta que pueda considerarse acoso o exclusión.
+- Sionismo, racismo, sexismo, homofobia, especismo, transfobia o cualquier otra forma de discriminación.
 
 ## Responsabilidades
 

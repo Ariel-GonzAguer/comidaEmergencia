@@ -190,7 +190,7 @@ Separar cantidad de unidad:
 
 ## Validaciones
 
-✅ **Validar**:
+✓ **Validar**:
 
 1. Todos los ID son únicos y secuenciales
 2. Vencimientos en formato "MM-AAAA" o "no vence" o vacío
@@ -199,7 +199,7 @@ Separar cantidad de unidad:
 5. Categoría es "alimentos", "bebidas", "higiene", etc. (según tabla)
 6. Campo "nombre" NO contiene backticks (fueron extraídos a "simbolos")
 
-⚠️ **Notas adicionales**:
+⚠ **Notas adicionales**:
 
 - Si un vencimiento es inválido o no parseable → dejar vacío ""
 - Si un valor numérico no se puede convertir → usar `null`

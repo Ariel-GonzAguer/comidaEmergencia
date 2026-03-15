@@ -4,20 +4,20 @@
 ![Static Badge](https://img.shields.io/badge/100%25_Offline-brightgreen)
 ![Static Badge](https://img.shields.io/badge/MIT+CommonsClause-red?label=Licencia)
 
-Comida Emergencia Mini es la tercera versión (3.0.0) de este proyecto, y es una aplicación licencia `MIT + CommonsClause` para gestionar recursos en emergencias.
+Comida Emergencia Mini es la más reciente versión de este proyecto, y es una aplicación con licencia `MIT + CommonsClause` para gestionar recursos en emergencias.
 (Ahora) Funciona **completamente offline**: el frontend corre en el navegador y el backend es un servidor Express local que lee y escribe un archivo `db.json` (y un archivo markdown) dentro del mismo repositorio.
 
 ## Stack tecnológico
 
 | Capa     | Tecnología         | Versión       |
 | -------- | ------------------ | ------------- |
-| Frontend | React              | 18.2.0        |
+| Frontend | React              | 19.2.4        |
 | Estilos  | Tailwind CSS       | 4.2.1         |
-| Bundler  | Vite               | 5.4.21        |
-| Backend  | Express            | 4.22.1        |
+| Bundler  | Vite               | 8.0.0         |
+| Backend  | Express            | 5.2.1         |
 | Runtime  | Node.js            | 22.17.1       |
 | Gestor   | pnpm               | 10.30.3       |
-| Pruebas  | Vitest + Supertest | 2.0.0 + 7.2.2 |
+| Pruebas  | Vitest + Supertest | 4.1.0 + 7.2.2 |
 
 ---
 
@@ -29,11 +29,11 @@ El proyecto cuenta con una suite completa de pruebas unitarias y de integración
 - **Backend:** Vitest + Supertest (Pruebas de la API REST con mocks de `fs`).
 
 ```bash
-# Ejecutar pruebas del cliente
-cd client && pnpm test
-
 # Ejecutar pruebas del servidor
 pnpm test
+
+# Ejecutar pruebas del cliente
+cd client && pnpm test
 ```
 
 ---
@@ -90,13 +90,14 @@ pnpm dev
 
 ### Scripts disponibles en raíz
 
-| Script    | Comando                     | Descripción                            |
-| --------- | --------------------------- | -------------------------------------- |
-| `dev`     | `pnpm dev`                  | Levanta Express + Vite concurrently    |
-| `server`  | `pnpm server`               | Solo el servidor Express (port 3001)   |
-| `client`  | `pnpm client`               | Solo el dev server de Vite (port 5173) |
-| `build`   | `cd client && pnpm build`   | Build de producción del frontend       |
-| `preview` | `cd client && pnpm preview` | Preview del build de producción        |
+| Script    | Comando                     | Descripción                                                  |
+| --------- | --------------------------- | ------------------------------------------------------------ |
+| `dev`     | `pnpm dev`                  | Levanta Express + Vite concurrently                          |
+| `server`  | `pnpm server`               | Solo el servidor Express (port 3001)                         |
+| `client`  | `pnpm client`               | Solo el dev server de Vite (port 5173)                       |
+| `build`   | `cd client && pnpm build`   | Build de producción del frontend                             |
+| `preview` | `cd client && pnpm preview` | Preview del build de producción                              |
+| `lint`    | `pnpm lint`                 | Ejecuta el linter para verificar el código (client + server) |
 
 ---
 
