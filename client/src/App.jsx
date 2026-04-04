@@ -147,7 +147,7 @@ export default function App() {
         />
       )}
 
-      {toast && <Toast mensaje={toast.mensaje} tipo={toast.tipo} />}
+      {toast && <Toast mensaje={toast.msg} tipo={toast.tipo} />}
     </div>
   );
 }

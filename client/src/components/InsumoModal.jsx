@@ -22,6 +22,78 @@ const VACIO = {
 };
 
 /**
+ * Valida que la fecha esté en un formato aceptado y sea válida.
+ * Acepta: "MM-AAAA", "M-AAAA", "MM/AAAA", "M/AAAA" o "no vence".
+ * Rechaza fechas vacías (se permiten como opcionales).
+ *
+ * @param {string} fecha - Valor a validar.
+ * @returns {{ válido: boolean, error?: string }}
+ */
+function validarFecha(fecha) {
+  if (!fecha || !fecha.trim()) return { válido: true }; // opcional
+  const trim = fecha.trim();
+  if (trim === 'no vence') return { válido: true };
+
+  const m = trim.match(/^(\d{1,2})[\/-](\d{4})$/);
+  if (!m) {
+    return {
+      válido: false,
+      error: 'Formato de fecha inválido. Use: M/AAAA o MM-AAAA (ej: 4/2027)',
+    };
+  }
+
+  const mes = parseInt(m[1], 10);
+  const año = parseInt(m[2], 10);
+
+  if (mes < 1 || mes > 12) {
+    return { válido: false, error: 'El mes debe estar entre 1 y 12' };
+  }
+  if (año < 2000 || año > 2100) {
+    return { válido: false, error: 'El año debe estar entre 2000 y 2100' };
+  }
+
+  return { válido: true };
+}
+
+/**
+ * Valida que las calorías sean un número positivo válido.
+ * Permite vacío (opcional).
+ *
+ * @param {string} valor - Valor a validar.
+ * @returns {{ válido: boolean, error?: string }}
+ */
+function validarCalorias(valor) {
+  if (!valor || !valor.trim()) return { válido: true }; // opcional
+  const num = Number(valor);
+  if (isNaN(num) || num < 0) {
+    return { válido: false, error: 'Calorías debe ser un número positivo' };
+  }
+  if (!Number.isInteger(num)) {
+    return { válido: false, error: 'Calorías debe ser un número entero' };
+  }
+  return { válido: true };
+}
+
+/**
+ * Valida que la proteína sea un número positivo válido (permite decimales).
+ * Permite vacío (opcional).
+ *
+ * @param {string} valor - Valor a validar.
+ * @returns {{ válido: boolean, error?: string }}
+ */
+function validarProteina(valor) {
+  if (!valor || !valor.trim()) return { válido: true }; // opcional
+  const num = Number(valor);
+  if (isNaN(num) || num < 0) {
+    return { válido: false, error: 'Proteína debe ser un número positivo' };
+  }
+  if (num > 200) {
+    return { válido: false, error: 'Proteína parece demasiado alta (máx: 200g)' };
+  }
+  return { válido: true };
+}
+
+/**
  * Normaliza la fecha ingresada al formato de almacenamiento "MM-AAAA".
  * Acepta separadores "-" o "/" y mes con 1 o 2 dígitos.
  * Ejemplos: "4/2027" → "04-2027", "04-2027" → "04-2027".
@@ -142,7 +214,7 @@ export default function InsumoModal({
   }
 
   /**
-   * Handler del formulario. Valida el nombre, convierte campos numéricos
+   * Handler del formulario. Valida los campos según reglas específicas
    * y delega en `onGuardar`.
    *
    * @async
@@ -151,10 +223,34 @@ export default function InsumoModal({
   async function handleSubmit(e) {
     e.preventDefault();
     setErr('');
+
+    // Validar nombre (obligatorio)
     if (!form.nombre.trim()) {
       setErr('El nombre es obligatorio');
       return;
     }
+
+    // Validar fecha
+    const validFecha = validarFecha(form.vencimiento);
+    if (!validFecha.válido) {
+      setErr(validFecha.error);
+      return;
+    }
+
+    // Validar calorías
+    const validCal = validarCalorias(form.calorias);
+    if (!validCal.válido) {
+      setErr(validCal.error);
+      return;
+    }
+
+    // Validar proteínas
+    const validProt = validarProteina(form.proteina);
+    if (!validProt.válido) {
+      setErr(validProt.error);
+      return;
+    }
+
     setSaving(true);
     try {
       await onGuardar({

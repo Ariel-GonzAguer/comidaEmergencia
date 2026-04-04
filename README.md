@@ -90,14 +90,16 @@ pnpm dev
 
 ### Scripts disponibles en raíz
 
-| Script    | Comando                     | Descripción                                                  |
-| --------- | --------------------------- | ------------------------------------------------------------ |
-| `dev`     | `pnpm dev`                  | Levanta Express + Vite concurrently                          |
-| `server`  | `pnpm server`               | Solo el servidor Express (port 3001)                         |
-| `client`  | `pnpm client`               | Solo el dev server de Vite (port 5173)                       |
-| `build`   | `cd client && pnpm build`   | Build de producción del frontend                             |
-| `preview` | `cd client && pnpm preview` | Preview del build de producción                              |
-| `lint`    | `pnpm lint`                 | Ejecuta el linter para verificar el código (client + server) |
+| Script          | Comando                                                | Descripción                                                      |
+| --------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `server`        | `node server/index.js`                                 | Inicia solo el servidor Express (puerto 3001)                    |
+| `client`        | `pnpm --filter comida-emergencia-mini-cliente run dev` | Inicia solo el dev server de Vite (puerto 5173)                  |
+| `dev`           | `concurrently "pnpm run server" "pnpm run client"`     | Levanta servidor Express + dev server Vite simultáneamente       |
+| `test`          | `vitest`                                               | Ejecuta pruebas en modo watch (cliente + servidor)               |
+| `test:run`      | `vitest run`                                           | Ejecuta pruebas una sola vez (modo CI)                           |
+| `prettierCheck` | `prettier --check .`                                   | Verifica formato de código sin modificar                         |
+| `prettierFix`   | `prettier --write .`                                   | Corrige el formato de código automáticamente                     |
+| `lint`          | `eslint . --ext .js,.jsx,.ts,.tsx`                     | Ejecuta linter para verificar reglas de código (client + server) |
 
 ---
 

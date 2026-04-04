@@ -2,6 +2,23 @@
 
 Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
+## [4.0.2] - 04/04/2026
+
+### Agregado
+
+- **Validación de formulario**: Se agregaron reglas estrictas para fecha según formatos aceptados, calorías (positivo entero) y proteínas (positivo decimal, máx 200g por porción) en `InsumoModal`.
+- **Robustez offline**: El servidor ahora utiliza `fs/promises` para operaciones asincrónicas y escritura atómica (vía archivo temporal y rename) para prevenir corrupción de datos.
+
+### Cambiado
+
+- **Interfaz accesible**: Se reemplazaron los iconos emoji (👁, ✎, ✕) en la tabla principal por etiquetas de texto claras ("ver", "editar", "eliminar").
+- **Licencia**: Se completó el archivo `LICENCE.txt` con el texto íntegro de la cláusula Commons Clause v1.0 para mayor claridad legal.
+- **Test asíncronos**: Se actualizaron los tests para usar `async/await` y asegurar que las operaciones de lectura/escritura de archivos se manejen correctamente.
+
+### Corregido
+
+- **Bug de Toast**: Se corrigió el mapeo de propiedades (`msg` vs `mensaje`) para que las notificaciones se muestren correctamente en la interfaz.
+
 ## [4.0.0] - 14/3/2026
 
 - Actualización de dependencias.
