@@ -1,15 +1,15 @@
 /**
  * @file Tests de integración para la API REST del inventario de emergencia.
  * Usa supertest para hacer peticiones HTTP reales contra la app Express,
- * y mockea fs para no tocar archivos reales en disco.
+ * y mockea fs/promises para no tocar archivos reales en disco.
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import request from 'supertest';
 
-// ── Mock del módulo fs antes de importar la app ────────────────────────────
-vi.mock('fs');
-import fs from 'fs';
+// ── Mock del módulo fs/promises antes de importar la app ────────────────────
+vi.mock('fs/promises');
+import fs from 'fs/promises';
 
 // ── Datos de prueba ────────────────────────────────────────────────────────
 const insumoBase = {
@@ -43,8 +43,9 @@ function mockDB(override = {}) {
     simbolos: [...dbBase.simbolos],
     ...override,
   };
-  fs.readFileSync.mockReturnValue(JSON.stringify(db));
-  fs.writeFileSync.mockImplementation(() => {});
+  fs.readFile.mockResolvedValue(JSON.stringify(db));
+  fs.writeFile.mockResolvedValue();
+  fs.rename.mockResolvedValue();
   return db;
 }
 

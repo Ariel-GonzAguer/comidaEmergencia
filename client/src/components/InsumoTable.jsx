@@ -236,25 +236,25 @@ export default function InsumoTable({
                   type="button"
                   onClick={() => onView(item)}
                   aria-label={`Ver detalles de ${item.nombre}`}
-                  className="text-ink-dim hover:text-ink text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-1 focus-visible:ring-offset-bg"
+                  className="text-ink-dim hover:text-ink text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-1 focus-visible:ring-offset-bg font-mono border-2 border-white p-2"
                 >
-                  <span aria-hidden="true">👁</span>
+                  ver
                 </button>
                 <button
                   type="button"
                   onClick={() => onEditar(item)}
                   aria-label={`Editar ${item.nombre}`}
-                  className="text-ink-dim hover:text-accent text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-bg"
+                  className="text-ink-dim hover:text-accent text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-bg font-mono border-2 border-white p-2"
                 >
-                  <span aria-hidden="true">✎</span>
+                  editar
                 </button>
                 <button
                   type="button"
                   onClick={() => onEliminar(item)}
                   aria-label={`Eliminar ${item.nombre}`}
-                  className="text-ink-dim hover:text-[#e06060] text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#e06060] focus-visible:ring-offset-1 focus-visible:ring-offset-bg"
+                  className="text-ink-dim hover:text-[#e06060] text-base px-1.5 py-0.5 rounded-sm cursor-pointer bg-transparent border-none transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#e06060] focus-visible:ring-offset-1 focus-visible:ring-offset-bg font-mono border-2 border-white p-2"
                 >
-                  <span aria-hidden="true">✕</span>
+                  eliminar
                 </button>
               </td>
             </tr>

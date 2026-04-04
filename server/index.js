@@ -1,6 +1,7 @@
 /**
  * @file Servidor Express para la API REST del inventario de emergencia.
  * Lee y escribe directamente en `db.json` (no usa base de datos).
+ * Utiliza fs.promises para operaciones asincrónicas y mejor robustez offline.
  * Puerto por defecto: 3001.
  *
  * @module server/index
@@ -8,7 +9,7 @@
 
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { randomUUID } from 'crypto';
@@ -33,25 +34,47 @@ app.use(express.json());
 // ---------- helpers ----------
 
 /**
- * Lee y parsea el archivo `db.json` de forma síncrona.
+ * Lee y parsea el archivo `db.json` de forma asincrónica.
  *
- * @returns {{ insumos: Array<Object>, categorias: string[], simbolos: Array<{codigo: string, descripcion: string}> }}
+ * @async
+ * @returns {Promise<{ insumos: Array<Object>, categorias: string[], simbolos: Array<{codigo: string, descripcion: string}> }>}
  *   Objeto con las tres colecciones de la base de datos.
- * @throws {SyntaxError} Si el JSON está malformado.
+ * @throws {Error} Si el archivo no existe o JSON está malformado.
  */
-function readDB() {
-  const raw = fs.readFileSync(DB_PATH, 'utf-8');
-  return JSON.parse(raw);
+async function readDB() {
+  try {
+    const raw = await fs.readFile(DB_PATH, 'utf-8');
+    return JSON.parse(raw);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      throw new Error('archivo db.json no encontrado');
+    }
+    throw new Error(`Error al leer db.json: ${err.message}`);
+  }
 }
 
 /**
- * Serializa y escribe el objeto de la base de datos en `db.json`.
+ * Serializa y escribe el objeto de la base de datos en `db.json` de forma segura.
+ * Escribe en un archivo temporal antes de renombrar, garantizando atomicidad.
  *
+ * @async
  * @param {{ insumos: Array<Object>, categorias: string[], simbolos: Array<Object> }} data
  *   Objeto completo de la base de datos a persistir.
+ * @throws {Error} Si hay error durante la escritura.
  */
-function writeDB(data) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
+async function writeDB(data) {
+  try {
+    const tempPath = DB_PATH + '.tmp';
+    const jsonString = JSON.stringify(data, null, 2);
+
+    // Escribir en archivo temporal
+    await fs.writeFile(tempPath, jsonString, 'utf-8');
+
+    // Renombrar de forma atómica (reemplaza el original)
+    await fs.rename(tempPath, DB_PATH);
+  } catch (err) {
+    throw new Error(`Error al escribir db.json: ${err.message}`);
+  }
 }
 
 /**
@@ -59,35 +82,38 @@ function writeDB(data) {
  * Mantiene la misma estructura del archivo original: tabla de Alimentos y
  * sección de Productos no alimenticios (categoría "higiene").
  *
+ * @async
  * @param {Array<Object>} insumos - Lista completa de insumos del inventario.
+ * @throws {Error} Si hay error durante la escritura del MD.
  */
-function writeMD(insumos) {
-  const formatoVencimiento = v => {
-    if (!v) return '--';
-    if (v === 'no vence') return 'no vence';
-    const [m, y] = v.split('-');
-    return m && y ? `${Number(m)}/${y}` : v;
-  };
+async function writeMD(insumos) {
+  try {
+    const formatoVencimiento = v => {
+      if (!v) return '--';
+      if (v === 'no vence') return 'no vence';
+      const [m, y] = v.split('-');
+      return m && y ? `${Number(m)}/${y}` : v;
+    };
 
-  const formatoNumero = n => (n != null ? String(n) : '--');
+    const formatoNumero = n => (n != null ? String(n) : '--');
 
-  const formatoCantidad = item => {
-    const partes = [item.cantidad, item.unidad].filter(Boolean);
-    return partes.length ? partes.join(' ') : '--';
-  };
+    const formatoCantidad = item => {
+      const partes = [item.cantidad, item.unidad].filter(Boolean);
+      return partes.length ? partes.join(' ') : '--';
+    };
 
-  const formatoNombre = item => {
-    const sims = item.simbolos?.length ? ' ' + item.simbolos.map(s => `\`${s}\``).join(' ') : '';
-    return item.nombre + sims;
-  };
+    const formatoNombre = item => {
+      const sims = item.simbolos?.length ? ' ' + item.simbolos.map(s => `\`${s}\``).join(' ') : '';
+      return item.nombre + sims;
+    };
 
-  const alimentos = insumos.filter(i => i.categoria !== 'higiene');
-  const noAlimentos = insumos.filter(i => i.categoria === 'higiene');
+    const alimentos = insumos.filter(i => i.categoria !== 'higiene');
+    const noAlimentos = insumos.filter(i => i.categoria === 'higiene');
 
-  const filaAlimento = i =>
-    `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(i.vencimiento)} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
+    const filaAlimento = i =>
+      `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(i.vencimiento)} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
 
-  const tablaRef = `## Referencias
+    const tablaRef = `## Referencias
 
 | Símbolo           | Significado                        |
 | ----------------- | ---------------------------------- |
@@ -97,22 +123,26 @@ function writeMD(insumos) {
 | \`PS\`              | Pronto a sacar (Reponer inferido)  |
 | _(sin asterisco)_ | Vence en 2027 o posterior          |`;
 
-  const tablaAlim = `## Alimentos
+    const tablaAlim = `## Alimentos
 
 | Producto | Categoría | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
 | -------- | --------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
 ${alimentos.map(filaAlimento).join('\n')}`;
 
-  const tablaHig = noAlimentos.length
-    ? `## Productos no alimenticios
+    const tablaHig = noAlimentos.length
+      ? `## Productos no alimenticios
 
 | Producto | Categoría | Cantidad |
 | -------- | --------- | -------- |
 ${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${formatoCantidad(i)} |`).join('\n')}\n`
-    : '';
+      : '';
 
-  const md = `# Inventario General de Alimentos y Productos\n\n${tablaRef}\n\n---\n\n${tablaAlim}\n\n---\n\n${tablaHig}`;
-  fs.writeFileSync(MD_PATH, md, 'utf-8');
+    const md = `# Inventario General de Alimentos y Productos\n\n${tablaRef}\n\n---\n\n${tablaAlim}\n\n---\n\n${tablaHig}`;
+    await fs.writeFile(MD_PATH, md, 'utf-8');
+  } catch (err) {
+    // No interrumpir la operación principal si falla la escritura del MD
+    console.error(`Advertencia: No se pudo actualizar ${MD_PATH}: ${err.message}`);
+  }
 }
 
 // ---------- INSUMOS ----------
@@ -123,23 +153,32 @@ ${noAlimentos.map(i => `| ${i.nombre} | ${i.categoria} | ${formatoCantidad(i)} |
  * Devuelve la lista de insumos, opcionalmente filtrada.
  *
  * @queryParam {string} [categoria] - Filtra por categoría exacta. Usar "todas" o vacío para no filtrar.
- * @queryParam {string} [texto]     - Filtra por coincidencia parcial (case-insensitive) en el nombre.
+ * @queryParam {string} [texto]     - Filtra por coincidencia parcial (case-insensitive) en nombre, notas, símbolos.
  * @returns {{ success: boolean, data: Array<Object> }} 200 – Objeto con éxito y array de insumos en `data`.
  * @returns {{ success: boolean, error: string }} 500 – Error interno.
  */
-app.get('/api/insumos', (req, res) => {
+app.get('/api/insumos', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     let items = db.insumos;
 
     const { categoria, texto } = req.query;
+
     if (categoria && categoria !== 'todas') {
       items = items.filter(i => i.categoria === categoria);
     }
+
     if (texto) {
       const q = texto.toLowerCase();
-      items = items.filter(i => i.nombre.toLowerCase().includes(q));
+      items = items.filter(i => {
+        // Buscar en nombre, notas y símbolos
+        const coincideNombre = i.nombre.toLowerCase().includes(q);
+        const coincideNotas = (i.notas || '').toLowerCase().includes(q);
+        const coincideSimbolo = (i.simbolos || []).some(s => s.toLowerCase().includes(q));
+        return coincideNombre || coincideNotas || coincideSimbolo;
+      });
     }
+
     res.json({
       success: true,
       data: items,
@@ -161,9 +200,9 @@ app.get('/api/insumos', (req, res) => {
  * @returns {{ success: boolean, data: Object }} 200 – Objeto con el insumo encontrado en `data`.
  * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
-app.get('/api/insumos/:id', (req, res) => {
+app.get('/api/insumos/:id', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     const item = db.insumos.find(i => i.id === req.params.id);
     if (!item)
       return res.status(404).json({
@@ -199,9 +238,9 @@ app.get('/api/insumos/:id', (req, res) => {
  * @returns {{ success: boolean, data: Object }} 201 – Insumo creado en `data`.
  * @returns {{ success: boolean, error: string }} 400 – Falta el nombre o datos inválidos.
  */
-app.post('/api/insumos', (req, res) => {
+app.post('/api/insumos', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     const {
       nombre,
       cantidad,
@@ -234,8 +273,9 @@ app.post('/api/insumos', (req, res) => {
     };
 
     db.insumos.push(nuevo);
-    writeDB(db);
-    writeMD(db.insumos);
+    await writeDB(db);
+    await writeMD(db.insumos);
+
     res.status(201).json({
       success: true,
       data: nuevo,
@@ -259,9 +299,9 @@ app.post('/api/insumos', (req, res) => {
  * @returns {{ success: boolean, data: Object }} 200 – Insumo actualizado en `data`.
  * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
-app.put('/api/insumos/:id', (req, res) => {
+app.put('/api/insumos/:id', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     const idx = db.insumos.findIndex(i => i.id === req.params.id);
     if (idx === -1)
       return res.status(404).json({
@@ -290,8 +330,9 @@ app.put('/api/insumos/:id', (req, res) => {
     actualizado.actualizadoEn = new Date().toISOString();
 
     db.insumos[idx] = actualizado;
-    writeDB(db);
-    writeMD(db.insumos);
+    await writeDB(db);
+    await writeMD(db.insumos);
+
     res.json({
       success: true,
       data: actualizado,
@@ -313,9 +354,9 @@ app.put('/api/insumos/:id', (req, res) => {
  * @returns {{ success: boolean, data: Object }} 200 – Confirmación con el item eliminado en `data`.
  * @returns {{ success: boolean, error: string }} 404 – No encontrado.
  */
-app.delete('/api/insumos/:id', (req, res) => {
+app.delete('/api/insumos/:id', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     const idx = db.insumos.findIndex(i => i.id === req.params.id);
     if (idx === -1)
       return res.status(404).json({
@@ -324,8 +365,9 @@ app.delete('/api/insumos/:id', (req, res) => {
       });
 
     const eliminado = db.insumos.splice(idx, 1)[0];
-    writeDB(db);
-    writeMD(db.insumos);
+    await writeDB(db);
+    await writeMD(db.insumos);
+
     res.json({
       success: true,
       data: eliminado,
@@ -347,9 +389,9 @@ app.delete('/api/insumos/:id', (req, res) => {
  *
  * @returns {{ success: boolean, data: string[] }} 200 – Lista de categorías en `data`.
  */
-app.get('/api/categorias', (req, res) => {
+app.get('/api/categorias', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     res.json({
       success: true,
       data: db.categorias,
@@ -371,9 +413,9 @@ app.get('/api/categorias', (req, res) => {
  *
  * @returns {{ success: boolean, data: Array<{codigo: string, descripcion: string}> }} 200 – Lista de símbolos en `data`.
  */
-app.get('/api/simbolos', (req, res) => {
+app.get('/api/simbolos', async (req, res) => {
   try {
-    const db = readDB();
+    const db = await readDB();
     res.json({
       success: true,
       data: db.simbolos,
