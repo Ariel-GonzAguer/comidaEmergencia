@@ -43,22 +43,6 @@
       "actualizadoEn": "2026-03-15T01:25:40.318Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000002",
-      "nombre": "Ramen MAMA",
-      "cantidad": "",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000003",
       "nombre": "Salsa de soya sabor Hongos",
       "cantidad": "4x 500",
@@ -129,22 +113,6 @@
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-04-03T17:04:35.977Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000009",
-      "nombre": "Aceitunas verdes",
-      "cantidad": "75",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:01:55.182Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000010",
@@ -313,22 +281,6 @@
       "proteina": 0,
       "notas": "",
       "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000022",
-      "nombre": "Lata frijoles blancos",
-      "cantidad": "",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
@@ -663,22 +615,6 @@
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000046",
-      "nombre": "Barquillos oreo",
-      "cantidad": "",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000047",
       "nombre": "Botella Guaro",
       "cantidad": "2x 1",
@@ -765,22 +701,6 @@
       "actualizadoEn": "2026-03-14T21:03:10.930Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000053",
-      "nombre": "Harina de maíz",
-      "cantidad": "500",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000054",
       "nombre": "Caja leche de soya ",
       "cantidad": "3x 1",
@@ -860,9 +780,11 @@
       "calorias": 370,
       "proteina": 75,
       "notas": "",
-      "simbolos": [],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-06-26T15:25:21.554Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000060",
@@ -1059,23 +981,6 @@
       "simbolos": [],
       "creadoEn": "2026-04-04T20:42:47.594Z",
       "actualizadoEn": "2026-04-04T20:42:47.594Z"
-    },
-    {
-      "id": "de58feb1-029e-4db6-b9f6-653fa751bd6f",
-      "nombre": "Atún",
-      "cantidad": "",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "V",
-        "*"
-      ],
-      "creadoEn": "2026-04-04T20:42:47.632Z",
-      "actualizadoEn": "2026-04-04T20:42:47.632Z"
     },
     {
       "id": "d54272c0-6881-431c-9dec-3199aa865a29",
