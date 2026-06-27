@@ -43,20 +43,6 @@
       "actualizadoEn": "2026-03-15T01:25:40.318Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000003",
-      "nombre": "Salsa de soya sabor Hongos",
-      "cantidad": "4x 500",
-      "unidad": "ml",
-      "categoria": "alimentos",
-      "vencimiento": "05-2026",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:00:29.253Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000004",
       "nombre": "Ajo granulado",
       "cantidad": "50",
@@ -281,22 +267,6 @@
       "proteina": 0,
       "notas": "",
       "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000023",
-      "nombre": "Lata Hongos enteros",
-      "cantidad": "",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [
-        "PS"
-      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
