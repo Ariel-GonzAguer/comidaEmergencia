@@ -22,6 +22,13 @@ jobs:
             const mesActual = hoy.getMonth() + 1;
             const anioActual = hoy.getFullYear();
 
+            let mesAnterior = mesActual - 1;
+            let anioAnterior = anioActual;
+            if (mesAnterior < 1) {
+              mesAnterior = 12;
+              anioAnterior--;
+            }
+
             let mesSiguiente = mesActual + 1;
             let anioSiguiente = anioActual;
             if (mesSiguiente > 12) {
@@ -33,6 +40,12 @@ jobs:
               '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
               'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
             ];
+
+            const vencieronMesPasado = db.insumos.filter(item => {
+              if (!item.vencimiento || item.vencimiento === 'no vence') return false;
+              const [mes, anio] = item.vencimiento.split('-').map(Number);
+              return mes === mesAnterior && anio === anioAnterior;
+            });
 
             const vencenMesActual = db.insumos.filter(item => {
               if (!item.vencimiento || item.vencimiento === 'no vence') return false;
@@ -46,9 +59,17 @@ jobs:
               return mes === mesSiguiente && anio === anioSiguiente;
             });
 
-            if (vencenMesActual.length === 0 && vencenProximoMes.length === 0) {
-              console.log('No hay insumos venciendo este mes ni el próximo.');
+            if (vencieronMesPasado.length === 0 && vencenMesActual.length === 0 && vencenProximoMes.length === 0) {
+              console.log('No hay insumos vencidos ni por vencer.');
               return;
+            }
+
+            let seccionPasado = '';
+            if (vencieronMesPasado.length > 0) {
+              const lista = vencieronMesPasado
+                .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — venció ${i.vencimiento}`)
+                .join('%0A');
+              seccionPasado = `*Vencidos (${nombresMeses[mesAnterior]} ${anioAnterior}):*%0A${lista}%0A%0A`;
             }
 
             let seccionActual = '';
@@ -56,7 +77,7 @@ jobs:
               const lista = vencenMesActual
                 .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — vence ${i.vencimiento}`)
                 .join('%0A');
-              seccionActual = `*Mes actual (${nombresMeses[mesActual]} ${anioActual}):*%0A${lista}%0A%0A`;
+              seccionActual = `*Vence este mes (${nombresMeses[mesActual]} ${anioActual}):*%0A${lista}%0A%0A`;
             }
 
             let seccionSiguiente = '';
@@ -67,8 +88,8 @@ jobs:
               seccionSiguiente = `*Próximo mes (${nombresMeses[mesSiguiente]} ${anioSiguiente}):*%0A${lista}`;
             }
 
-            const total = vencenMesActual.length + vencenProximoMes.length;
-            const mensaje = `*Aviso de vencimientos*%0A%0A${seccionActual}${seccionSiguiente}%0A%0ATotal: ${total} insumo(s).`;
+            const total = vencieronMesPasado.length + vencenMesActual.length + vencenProximoMes.length;
+            const mensaje = `*Aviso de vencimientos*%0A%0A${seccionPasado}${seccionActual}${seccionSiguiente}%0A%0ATotal: ${total} insumo(s).`;
 
             console.log(decodeURIComponent(mensaje));
 
