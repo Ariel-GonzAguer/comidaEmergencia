@@ -29,27 +29,46 @@ jobs:
               anioSiguiente++;
             }
 
+            const nombresMeses = [
+              '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+              'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+
+            const vencenMesActual = db.insumos.filter(item => {
+              if (!item.vencimiento || item.vencimiento === 'no vence') return false;
+              const [mes, anio] = item.vencimiento.split('-').map(Number);
+              return mes === mesActual && anio === anioActual;
+            });
+
             const vencenProximoMes = db.insumos.filter(item => {
               if (!item.vencimiento || item.vencimiento === 'no vence') return false;
               const [mes, anio] = item.vencimiento.split('-').map(Number);
               return mes === mesSiguiente && anio === anioSiguiente;
             });
 
-            const nombresMeses = [
-              '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-              'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-
-            if (vencenProximoMes.length === 0) {
-              console.log('No hay insumos venciendo el próximo mes.');
+            if (vencenMesActual.length === 0 && vencenProximoMes.length === 0) {
+              console.log('No hay insumos venciendo este mes ni el próximo.');
               return;
             }
 
-            const lista = vencenProximoMes
-              .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — vence ${i.vencimiento}`)
-              .join('%0A');
+            let seccionActual = '';
+            if (vencenMesActual.length > 0) {
+              const lista = vencenMesActual
+                .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — vence ${i.vencimiento}`)
+                .join('%0A');
+              seccionActual = `*Mes actual (${nombresMeses[mesActual]} ${anioActual}):*%0A${lista}%0A%0A`;
+            }
 
-            const mensaje = `*Aviso de vencimientos*%0A%0AEstos insumos vencen en ${nombresMeses[mesSiguiente]} ${anioSiguiente}:%0A%0A${lista}%0A%0ATotal: ${vencenProximoMes.length} insumo(s).`;
+            let seccionSiguiente = '';
+            if (vencenProximoMes.length > 0) {
+              const lista = vencenProximoMes
+                .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — vence ${i.vencimiento}`)
+                .join('%0A');
+              seccionSiguiente = `*Próximo mes (${nombresMeses[mesSiguiente]} ${anioSiguiente}):*%0A${lista}`;
+            }
+
+            const total = vencenMesActual.length + vencenProximoMes.length;
+            const mensaje = `*Aviso de vencimientos*%0A%0A${seccionActual}${seccionSiguiente}%0A%0ATotal: ${total} insumo(s).`;
 
             console.log(decodeURIComponent(mensaje));
 
