@@ -12,7 +12,7 @@
     "prettierCheck": "prettier --check .",
     "prettierFix": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "push:all": "git push privado main && git push public main:mini"
+    "push:all": "node scripts/push-all.mjs"
   },
   "dependencies": {
     "cors": "2.8.6",
