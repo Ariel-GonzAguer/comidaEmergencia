@@ -1,0 +1,59 @@
+name: Aviso de vencimientos
+
+on:
+  schedule:
+    - cron: "0 0 * * 6"
+  workflow_dispatch:
+
+jobs:
+  check-vencimientos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            const db = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+            const hoy = new Date();
+            const mesActual = hoy.getMonth() + 1;
+            const anioActual = hoy.getFullYear();
+
+            let mesSiguiente = mesActual + 1;
+            let anioSiguiente = anioActual;
+            if (mesSiguiente > 12) {
+              mesSiguiente = 1;
+              anioSiguiente++;
+            }
+
+            const vencenProximoMes = db.insumos.filter(item => {
+              if (!item.vencimiento || item.vencimiento === 'no vence') return false;
+              const [mes, anio] = item.vencimiento.split('-').map(Number);
+              return mes === mesSiguiente && anio === anioSiguiente;
+            });
+
+            const nombresMeses = [
+              '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+              'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+
+            if (vencenProximoMes.length === 0) {
+              console.log('No hay insumos venciendo el próximo mes.');
+              return;
+            }
+
+            const lista = vencenProximoMes
+              .map(i => `- ${i.nombre} (${i.cantidad} ${i.unidad}) — vence ${i.vencimiento}`)
+              .join('%0A');
+
+            const mensaje = `*Aviso de vencimientos*%0A%0AEstos insumos vencen en ${nombresMeses[mesSiguiente]} ${anioSiguiente}:%0A%0A${lista}%0A%0ATotal: ${vencenProximoMes.length} insumo(s).`;
+
+            console.log(decodeURIComponent(mensaje));
+
+            const url = `https://api.callmebot.com/whatsapp.php?phone=${process.env.PHONE_NUMBER}&text=${mensaje}&apikey=${process.env.API_KEY}`;
+
+            const res = await fetch(url);
+            const data = await res.text();
+            console.log('Respuesta CallMeBot:', data);
