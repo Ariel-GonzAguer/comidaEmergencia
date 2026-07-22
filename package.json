@@ -11,7 +11,8 @@
     "test:run": "vitest run",
     "prettierCheck": "prettier --check .",
     "prettierFix": "prettier --write .",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "push:all": "git push privado main && git push public main:mini"
   },
   "dependencies": {
     "cors": "2.8.6",
