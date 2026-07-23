@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - run: npm install nodemailer
+
       - uses: actions/github-script@v8
         with:
           script: |
@@ -93,8 +99,27 @@ jobs:
 
             console.log(decodeURIComponent(mensaje));
 
-            const url = `https://api.callmebot.com/whatsapp.php?phone=${process.env.PHONE_NUMBER}&text=${mensaje}&apikey=${process.env.API_KEY}`;
+            const nodemailer = require('nodemailer');
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+              }
+            });
 
-            const res = await fetch(url);
-            const data = await res.text();
-            console.log('Respuesta CallMeBot:', data);
+            const asunto = `Vencimientos - ${nombresMeses[mesActual]} ${anioActual}`;
+            const html = mensaje
+              .replace(/\*([^*]+)\*/g, '<b>$1</b>')
+              .replace(/%0A/g, '<br>')
+              .replace(/- /g, '&bull; ');
+
+            await transporter.sendMail({
+              from: process.env.EMAIL_USER,
+              to: 'ariegonzaguer@gmail.com',
+              subject: asunto,
+              text: decodeURIComponent(mensaje.replace(/%0A/g, '\n').replace(/\*([^*]+)\*/g, '$1')),
+              html
+            });
+
+            console.log('Correo enviado.');
