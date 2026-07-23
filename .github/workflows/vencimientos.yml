@@ -23,6 +23,9 @@ jobs:
       - run: pnpm add nodemailer
 
       - uses: actions/github-script@v8
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
         with:
           script: |
             const fs = require('fs');
