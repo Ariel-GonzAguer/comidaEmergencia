@@ -46,9 +46,6 @@ try {
   try {
     run('git commit -m "update db.json"');
     run('git push privado main');
-    // Se deshace el último commit para que db.json no permanezca
-    // en la historia del repositorio público.
-    run('git reset HEAD~1');
   } catch {
     // Si db.json no tiene cambios, no hay nada que push.
     console.log('Sin cambios en db.json');
