@@ -1021,6 +1021,20 @@
       "simbolos": [],
       "creadoEn": "2026-07-22T23:37:42.103Z",
       "actualizadoEn": "2026-07-22T23:37:42.103Z"
+    },
+    {
+      "id": "c3af44b7-9e20-4edb-89c0-0f7014861fb2",
+      "nombre": "Agua",
+      "cantidad": "600",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "04-2027",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-07-25T16:20:02.510Z",
+      "actualizadoEn": "2026-07-25T16:20:02.510Z"
     }
   ]
 }
