@@ -291,6 +291,37 @@ Se han configurado flujos de GitHub Actions para mantener la calidad del código
 **Nota importante para desarrolladores del servidor:**
 No elimine la condición `if (process.env.NODE_ENV !== 'test')` en `server/index.js`, ya que es necesaria para que la suite de pruebas pueda importar la aplicación sin bloquear el puerto real.
 
+### Alerta de vencimientos por correo (opcional)
+
+El proyecto incluye una GitHub Action **opcional** que envía un correo electrónico cada sábado con los insumos vencidos y próximos a vencer.
+
+> **Requisito:** Esta action solo funciona en el **repo privado** (`comida-emergencia-mini-privado`), porque necesita acceso a `db.json` que no se sube al repo público.
+
+**¿Qué hace?**
+
+Cada sábado a las 00:00 UTC (o al dispararla manualmente), lee `db.json` y envía un correo con tres secciones:
+
+| Sección | Qué muestra |
+| --- | --- |
+| Vencidos (mes pasado) | Insumos cuyo vencimiento fue el mes anterior |
+| Vence este mes | Insumos que vencen en el mes actual |
+| Próximo mes | Insumos que vencen en el mes siguiente |
+
+Si no hay ningún insumo en ninguna de las tres categorías, no envía correo.
+
+**Secrets necesarios** (configurar en Settings > Secrets del repo privado):
+
+| Secret | Descripción |
+| --- | --- |
+| `EMAIL_USER` | Correo Gmail remitente (ej: `miusuario@gmail.com`) |
+| `EMAIL_PASS` | Contraseña de aplicación de Gmail (no la contraseña normal) |
+
+Para generar la contraseña de aplicación: Gmail > Seguridad > Verificación en 2 pasos > Contraseñas de aplicaciones.
+
+**Disparar manualmente:**
+
+Ir a Actions > "Aviso de vencimientos" > Run workflow.
+
 ---
 
 ## Personas que han colaboradoen el proyecto:

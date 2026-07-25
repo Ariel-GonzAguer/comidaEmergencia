@@ -271,3 +271,61 @@ Separar cantidad de unidad:
 - Se puede ejecutar múltiples veces sin efectos secundarios
 - El archivo `db.json` resultante debe ser válido JSON (sin comentarios)
 - La aplicación React consume directamente este JSON vía API o import
+
+---
+
+## Action de Vencimientos (Opcional)
+
+### Requisitos
+
+- **Solo funciona en el repo privado** (`comida-emergencia-mini-privado`), ya que necesita leer `db.json` que no se sube al repo público.
+- La action está en `.github/workflows/vencimientos.yml`.
+- Usa `nodemailer` con Gmail para enviar correos.
+
+### Secrets requeridos
+
+Configurar en Settings > Secrets and variables > Actions del repo privado:
+
+| Secret | Valor |
+| --- | --- |
+| `EMAIL_USER` | Correo Gmail remitente |
+| `EMAIL_PASS` | Contraseña de aplicación de Gmail (no la contraseña normal) |
+
+### Qué hace
+
+1. Se ejecuta cada sábado a las 00:00 UTC (o manualmente).
+2. Lee `db.json` y calcula tres rangos de vencimiento:
+   - **Mes anterior**: insumos que vencieron el mes pasado.
+   - **Mes actual**: insumos que vencen este mes.
+   - **Próximo mes**: insumos que vencen el mes siguiente.
+3. Si hay al menos un insumo en cualquiera de los tres rangos, envía un correo con la lista agrupada por sección.
+4. Si no hay ninguno, no envía nada (no genera basura).
+
+### Formato del correo
+
+```
+Aviso de vencimientos
+
+Vencidos (Junio 2026):
+- Producto X (500 g) — venció 06-2026
+
+Vence este mes (Julio 2026):
+- Producto Y (1 kg) — vence 07-2026
+
+Próximo mes (Agosto 2026):
+- Producto Z (200 ml) — vence 08-2026
+
+Total: 3 insumo(s).
+```
+
+### Cómo disparar manualmente
+
+Ir a la pestaña **Actions** del repo privado > **Aviso de vencimientos** > **Run workflow**.
+
+### Cómo clonar el repo privado
+
+```bash
+git clone https://github.com/Ariel-GonzAguer/comida-emergencia-mini-privado.git
+```
+
+> **Nota:** Se requiere acceso al repo privado. Hablar con el maintainer.
