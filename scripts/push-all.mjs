@@ -35,7 +35,9 @@ try {
 
   // ── 2. Push al remote público (deploy) ──
   // Envía la rama main local al remote "public" bajo el nombre "mini".
-  run('git push public main:mini');
+  // Se usa --force porque el remote puede tener commits antiguos que
+  // ya no aplican (este script es la fuente de verdad del deploy).
+  run('git push --force public main:mini');
 
   // ── 3. Respaldar db.json en el remote privado ──
   // Se fuerza el add de db.json aunque esté en .gitignore,
