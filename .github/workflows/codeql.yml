@@ -20,6 +20,7 @@ on:
 
 jobs:
   analyze:
+    if: github.repository != 'Ariel-GonzAguer/comida-emergencia-mini-privado'
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
 
