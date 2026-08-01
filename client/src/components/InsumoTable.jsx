@@ -1,8 +1,10 @@
 /**
- * @file Tabla principal de insumos con badges de símbolo, colores de vencimiento
- * y acciones de editar/eliminar por fila.
+ * @file Tabla principal de insumos con badges de símbolo, colores de vencimiento,
+ * ordenamiento por vencimiento y acciones de editar/eliminar por fila.
  * @module components/InsumoTable
  */
+
+import { useState, useMemo } from 'react';
 
 /**
  * Mapa de código de símbolo → clases CSS para el badge.
@@ -76,6 +78,23 @@ function VencimientoCell({ valor }) {
   return <span className="text-ink-mid">{valor}</span>;
 }
 
+/**
+ * Convierte un valor de vencimiento a un número comparable para ordenamiento.
+ * - "no vence" → Infinity (siempre primero en descendente)
+ * - "MM-AAAA" → timestamp del primer día del mes
+ * - vacío/otro → -Infinity (siempre último)
+ *
+ * @param {string} valor - Valor del campo vencimiento.
+ * @returns {number}
+ */
+function vencimientoToNumber(valor) {
+  if (!valor) return -Infinity;
+  if (valor === 'no vence') return Infinity;
+  const [mes, anio] = valor.split('-').map(Number);
+  if (anio && mes) return new Date(anio, mes - 1, 1).getTime();
+  return -Infinity;
+}
+
 /** @constant {string} Clases Tailwind para celdas de encabezado */
 const TH =
   'font-mono text-base font-medium tracking-[0.12em] uppercase text-ink-mid px-3.5 py-[9px] text-left whitespace-nowrap';
@@ -106,8 +125,21 @@ export default function InsumoTable({
   onEditar,
   onEliminar,
 }) {
+  // Estado para el ordenamiento: null (sin ordenar), 'asc', 'desc'
+  const [sortOrder, setSortOrder] = useState('desc');
+
   // Mapeo de símbolo → descripción para aria-label en badges
   const simbolosMap = simbolosDef.reduce((acc, s) => ({ ...acc, [s.codigo]: s.descripcion }), {});
+
+  // Insumos ordenados por vencimiento
+  const sortedInsumos = useMemo(() => {
+    if (!sortOrder) return insumos;
+    return [...insumos].sort((a, b) => {
+      const aVal = vencimientoToNumber(a.vencimiento);
+      const bVal = vencimientoToNumber(b.vencimiento);
+      return sortOrder === 'desc' ? bVal - aVal : aVal - bVal;
+    });
+  }, [insumos, sortOrder]);
 
   if (loading) {
     return (
@@ -156,7 +188,17 @@ export default function InsumoTable({
               Categoría
             </th>
             <th scope="col" className={TH}>
-              Vencimiento
+              <button
+                type="button"
+                onClick={() => setSortOrder(prev => (prev === 'desc' ? 'asc' : 'desc'))}
+                className="inline-flex items-center gap-1 cursor-pointer bg-transparent border-none p-0 font-mono text-base font-medium tracking-[0.12em] uppercase text-ink-mid hover:text-ink transition-colors"
+                aria-label={`Ordenar por vencimiento ${sortOrder === 'desc' ? 'ascendente' : 'descendente'}`}
+              >
+                Vencimiento
+                <span className="text-xs" aria-hidden="true">
+                  {sortOrder === 'desc' ? '↓' : '↑'}
+                </span>
+              </button>
             </th>
             <th scope="col" className={TH}>
               kcal
@@ -176,7 +218,7 @@ export default function InsumoTable({
           </tr>
         </thead>
         <tbody>
-          {insumos.map(item => (
+          {sortedInsumos.map(item => (
             <tr key={item.id} className="border-b border-edge hover:bg-bg1 transition-colors">
               <th scope="row" className={`${TD} max-w-55 text-left font-normal`}>
                 <div className="text-ink-hi">{item.nombre}</div>
