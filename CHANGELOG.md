@@ -8,7 +8,7 @@ Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
 - **Ordenamiento por vencimiento**: Se agregó la funcionalidad de ordenar la tabla de insumos por la columna de vencimiento. Al hacer clic en el encabezado "Vencimiento", se alterna entre orden descendente (fechas más lejanas primero, por defecto) y ascendente (fechas más cercanas primero). Incluye indicador visual (flechas ↑↓) y soporte de accesibilidad (aria-label dinámico).
 
-## [4.0.2] - 04/04/2026
+## [4.0.3] - 01/08/2026
 
 ### Agregado
 
