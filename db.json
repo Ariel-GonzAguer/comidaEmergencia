@@ -271,20 +271,6 @@
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000024",
-      "nombre": "Lata Espageti palmito",
-      "cantidad": "2x 220",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "09-2026",
-      "calorias": 15,
-      "proteina": 1,
-      "notas": "",
-      "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:00:54.835Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000025",
       "nombre": "Salsa de tomate Marinara",
       "cantidad": "652",
@@ -780,9 +766,11 @@
       "calorias": 325,
       "proteina": 1,
       "notas": "",
-      "simbolos": [],
+      "simbolos": [
+        "R"
+      ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:03:03.859Z"
+      "actualizadoEn": "2026-08-02T17:22:45.235Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000062",
@@ -1035,6 +1023,34 @@
       "simbolos": [],
       "creadoEn": "2026-07-25T16:20:02.510Z",
       "actualizadoEn": "2026-07-25T16:20:02.510Z"
+    },
+    {
+      "id": "15b7a081-09c4-4c6b-8023-80ada345d854",
+      "nombre": "Frijoles blancos listos",
+      "cantidad": "400",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "03-2029",
+      "calorias": 140,
+      "proteina": 8.2,
+      "notas": "220g ya escurridos",
+      "simbolos": [],
+      "creadoEn": "2026-08-02T17:22:26.348Z",
+      "actualizadoEn": "2026-08-02T17:22:26.348Z"
+    },
+    {
+      "id": "c8b89e2b-bf6d-4a23-b6f3-a89b4d6632df",
+      "nombre": "cepillos de dientes",
+      "cantidad": "2",
+      "unidad": "ud",
+      "categoria": "higiene",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-06T22:05:18.375Z",
+      "actualizadoEn": "2026-08-06T22:05:18.375Z"
     }
   ]
 }
