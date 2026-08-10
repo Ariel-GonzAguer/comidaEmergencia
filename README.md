@@ -1,3 +1,5 @@
+
+
 # Comida Emergencia Mini
 
 [![StandWithPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg)](https://techforpalestine.org/learn-more)
@@ -12,12 +14,12 @@ Comida Emergencia Mini es la más reciente versión de este proyecto, y es una a
 | Capa     | Tecnología         | Versión       |
 | -------- | ------------------ | ------------- |
 | Frontend | React              | 19.2.4        |
-| Estilos  | Tailwind CSS       | 4.2.1         |
-| Bundler  | Vite               | 8.0.0         |
+| Estilos  | Tailwind CSS       | 4.2.2         |
+| Bundler  | Vite               | 8.1.2         |
 | Backend  | Express            | 5.2.1         |
 | Runtime  | Node.js            | 22.17.1       |
 | Gestor   | pnpm               | 10.30.3       |
-| Pruebas  | Vitest + Supertest | 4.1.0 + 7.2.2 |
+| Pruebas  | Vitest + Supertest | 4.1.2 + 7.2.2 |
 
 ---
 
