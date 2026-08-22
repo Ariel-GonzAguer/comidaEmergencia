@@ -67,7 +67,7 @@ export default function Header({ onNuevo, total }) {
         aria-label="Agregar nuevo insumo"
         className="font-mono text-xl px-3.5 py-1.5 border border-accent-d text-accent rounded-sm tracking-[0.06em] bg-transparent cursor-pointer transition-colors hover:bg-accent hover:text-bg hover:border-accent whitespace-nowrap"
       >
-        + agregar
+        + agregar <span className="text-[12px] opacity-60">[+]</span>
       </button>
     </header>
   );
