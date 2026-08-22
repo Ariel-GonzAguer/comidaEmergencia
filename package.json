@@ -1,6 +1,6 @@
 {
   "name": "comida-emergencia-mini-server",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -21,16 +21,16 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@vitejs/plugin-react": "6.0.1",
-    "concurrently": "9.2.1",
+    "@vitejs/plugin-react": "6.1.0",
+    "concurrently": "10.0.5",
     "eslint": "10.1.0",
     "eslint-plugin-react": "7.37.5",
-    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-vitest": "0.5.4",
-    "globals": "17.4.0",
-    "prettier": "3.8.1",
+    "globals": "17.11.0",
+    "prettier": "3.9.6",
     "supertest": "7.2.2",
-    "vite": "8.0.16",
-    "vitest": "4.1.2"
+    "vite": "8.2.2",
+    "vitest": "4.1.11"
   }
 }
