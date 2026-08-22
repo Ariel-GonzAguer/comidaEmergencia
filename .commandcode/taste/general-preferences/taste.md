@@ -1,4 +1,5 @@
 # General Preferences
+
 - Communicates in Spanish. Confidence: 0.9
 - Explicitly prefers the agent to ask clarifying questions before starting any work ("Si tiene alguna duda, pregunte antes de comenzar"). Confidence: 0.9
 - Works with React (JSX) projects using Tailwind CSS and pnpm. Confidence: 0.8

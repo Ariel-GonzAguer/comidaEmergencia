@@ -192,10 +192,11 @@ export function lineaInsumo(insumo) {
  */
 export function tabla(encabezados, filas) {
   const datos = [encabezados.map(negrita), ...filas.map(fila => fila.map(String))];
-  const anchos = encabezados.map((_, c) =>
-    Math.max(...datos.map(fila => (fila[c] || '').length))
-  );
+  const anchos = encabezados.map((_, c) => Math.max(...datos.map(fila => (fila[c] || '').length)));
   const linea = fila =>
-    fila.map((celda, c) => (celda || '').padEnd(anchos[c])).join('  ').trimEnd();
+    fila
+      .map((celda, c) => (celda || '').padEnd(anchos[c]))
+      .join('  ')
+      .trimEnd();
   return datos.map(linea).join('\n');
 }

@@ -109,9 +109,7 @@ Es un archivo JSON plano con tres colecciones, todas extensibles:
 
 ```jsonc
 {
-  "insumos": [
-    /* array de items */
-  ],
+  "insumos": [/* array de items */],
   "categorias": ["alimentos", "especias", "bebidas", "higiene", "otros"],
   "simbolos": [
     { "codigo": "V", "descripcion": "Vencido" },
@@ -301,19 +299,19 @@ El proyecto incluye una GitHub Action **opcional** que envía un correo electró
 
 Cada sábado a las 00:00 UTC (o al dispararla manualmente), lee `db.json` y envía un correo con tres secciones:
 
-| Sección | Qué muestra |
-| --- | --- |
+| Sección               | Qué muestra                                  |
+| --------------------- | -------------------------------------------- |
 | Vencidos (mes pasado) | Insumos cuyo vencimiento fue el mes anterior |
-| Vence este mes | Insumos que vencen en el mes actual |
-| Próximo mes | Insumos que vencen en el mes siguiente |
+| Vence este mes        | Insumos que vencen en el mes actual          |
+| Próximo mes           | Insumos que vencen en el mes siguiente       |
 
 Si no hay ningún insumo en ninguna de las tres categorías, no envía correo.
 
 **Secrets necesarios** (configurar en Settings > Secrets del repo privado):
 
-| Secret | Descripción |
-| --- | --- |
-| `EMAIL_USER` | Correo Gmail remitente (ej: `miusuario@gmail.com`) |
+| Secret       | Descripción                                                 |
+| ------------ | ----------------------------------------------------------- |
+| `EMAIL_USER` | Correo Gmail remitente (ej: `miusuario@gmail.com`)          |
 | `EMAIL_PASS` | Contraseña de aplicación de Gmail (no la contraseña normal) |
 
 Para generar la contraseña de aplicación: Gmail > Seguridad > Verificación en 2 pasos > Contraseñas de aplicaciones.

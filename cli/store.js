@@ -100,9 +100,7 @@ export async function escribirMD(db) {
         i.vencimiento
       )} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
 
-    const filasReferencia = simbolos
-      .map(s => `| \`${s.codigo}\` | ${s.descripcion} |`)
-      .join('\n');
+    const filasReferencia = simbolos.map(s => `| \`${s.codigo}\` | ${s.descripcion} |`).join('\n');
 
     const tablaRef = `## Referencias
 
@@ -160,12 +158,16 @@ export function validarFecha(valor) {
 
   const m = trim.match(/^(\d{1,2})[\/-](\d{4})$/);
   if (!m) {
-    return { valido: false, error: 'Formato de fecha inválido. Use: M/AAAA o MM-AAAA (ej: 4/2027)' };
+    return {
+      valido: false,
+      error: 'Formato de fecha inválido. Use: M/AAAA o MM-AAAA (ej: 4/2027)',
+    };
   }
   const mes = Number(m[1]);
   const anio = Number(m[2]);
   if (mes < 1 || mes > 12) return { valido: false, error: 'El mes debe estar entre 1 y 12' };
-  if (anio < 2000 || anio > 2100) return { valido: false, error: 'El año debe estar entre 2000 y 2100' };
+  if (anio < 2000 || anio > 2100)
+    return { valido: false, error: 'El año debe estar entre 2000 y 2100' };
   return { valido: true };
 }
 
@@ -198,7 +200,8 @@ export function normalizarFecha(valor) {
 export function validarCalorias(valor) {
   if (!valor || !valor.trim()) return { valido: true };
   const num = Number(valor);
-  if (Number.isNaN(num) || num < 0) return { valido: false, error: 'Calorías debe ser un número positivo' };
+  if (Number.isNaN(num) || num < 0)
+    return { valido: false, error: 'Calorías debe ser un número positivo' };
   if (!Number.isInteger(num)) return { valido: false, error: 'Calorías debe ser un número entero' };
   return { valido: true };
 }
@@ -212,7 +215,8 @@ export function validarCalorias(valor) {
 export function validarProteina(valor) {
   if (!valor || !valor.trim()) return { valido: true };
   const num = Number(valor);
-  if (Number.isNaN(num) || num < 0) return { valido: false, error: 'Proteína debe ser un número positivo' };
+  if (Number.isNaN(num) || num < 0)
+    return { valido: false, error: 'Proteína debe ser un número positivo' };
   if (num > 200) return { valido: false, error: 'Proteína parece demasiado alta (máx: 200g)' };
   return { valido: true };
 }

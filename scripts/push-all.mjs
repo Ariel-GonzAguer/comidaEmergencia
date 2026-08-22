@@ -21,7 +21,7 @@ import { execSync } from 'child_process';
  * Lanza excepción si el comando falla (exit code !== 0).
  * @param {string} cmd - Comando a ejecutar.
  */
-const run = (cmd) => execSync(cmd, { stdio: 'inherit' });
+const run = cmd => execSync(cmd, { stdio: 'inherit' });
 
 try {
   // ── 1. Preparar commit del código fuente ──

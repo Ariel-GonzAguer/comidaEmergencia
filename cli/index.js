@@ -126,7 +126,9 @@ function verDetalle(insumo, simbolosDef) {
   console.log(`  Vencimiento:   ${colorEstado(clave)(etiqueta)}`);
   console.log(`  Calorías:      ${insumo.calorias ?? '—'} kcal`);
   console.log(`  Proteína:      ${insumo.proteina ?? '—'} g`);
-  console.log(`  Símbolos:      ${insumo.simbolos?.length ? insumo.simbolos.map(s => `${s} (${mapaSimbolos[s] ?? '?'})`).join(', ') : '—'}`);
+  console.log(
+    `  Símbolos:      ${insumo.simbolos?.length ? insumo.simbolos.map(s => `${s} (${mapaSimbolos[s] ?? '?'})`).join(', ') : '—'}`
+  );
   console.log(`  Notas:         ${insumo.notas || '—'}`);
   console.log(`  Creado:        ${formatearFecha(insumo.creadoEn)}`);
   console.log(`  Actualizado:   ${formatearFecha(insumo.actualizadoEn)}`);
@@ -187,8 +189,15 @@ async function formularioInsumo(db, existente = null) {
 
   const notas = await prompt('Notas', { inicial: inicial('notas') });
 
-  const opcionesSimbolos = db.simbolos.map(s => ({ value: s.codigo, label: `${s.codigo} — ${s.descripcion}` }));
-  const simbolos = await multiselect('Símbolos (espacio para alternar)', opcionesSimbolos, existente?.simbolos ?? []);
+  const opcionesSimbolos = db.simbolos.map(s => ({
+    value: s.codigo,
+    label: `${s.codigo} — ${s.descripcion}`,
+  }));
+  const simbolos = await multiselect(
+    'Símbolos (espacio para alternar)',
+    opcionesSimbolos,
+    existente?.simbolos ?? []
+  );
 
   return {
     nombre: nombre.trim(),
@@ -243,7 +252,7 @@ async function menuCategorias(db) {
       }
       const ok = await confirmar(`¿Eliminar categoría "${elegida}"?`, false);
       if (!ok) continue;
-      await eliminarCategoria(db, elegida) ? exito('Categoría eliminada') : error('No existe');
+      (await eliminarCategoria(db, elegida)) ? exito('Categoría eliminada') : error('No existe');
       await pausa();
     }
   }
@@ -267,7 +276,11 @@ async function menuSimbolos(db) {
 
     if (opcion === 'listar') {
       console.log('');
-      const filas = db.simbolos.map(s => [s.codigo, s.descripcion, db.insumos.filter(i => i.simbolos?.includes(s.codigo)).length]);
+      const filas = db.simbolos.map(s => [
+        s.codigo,
+        s.descripcion,
+        db.insumos.filter(i => i.simbolos?.includes(s.codigo)).length,
+      ]);
       console.log(tabla(['Código', 'Descripción', 'Insumos'], filas));
       console.log('');
       await pausa();
@@ -280,7 +293,10 @@ async function menuSimbolos(db) {
       ok ? exito(`Símbolo "${codigo.trim()}" agregado`) : error('El código ya existe');
       await pausa();
     } else if (opcion === 'eliminar') {
-      const opciones = db.simbolos.map(s => ({ value: s.codigo, label: `${s.codigo} — ${s.descripcion}` }));
+      const opciones = db.simbolos.map(s => ({
+        value: s.codigo,
+        label: `${s.codigo} — ${s.descripcion}`,
+      }));
       const elegido = await select('Símbolo a eliminar', opciones);
       if (elegido === null) continue;
       const enUso = db.insumos.filter(i => i.simbolos?.includes(elegido)).length;
@@ -291,7 +307,7 @@ async function menuSimbolos(db) {
       }
       const ok = await confirmar(`¿Eliminar símbolo "${elegido}"?`, false);
       if (!ok) continue;
-      await eliminarSimbolo(db, elegido) ? exito('Símbolo eliminado') : error('No existe');
+      (await eliminarSimbolo(db, elegido)) ? exito('Símbolo eliminado') : error('No existe');
       await pausa();
     }
   }
@@ -323,7 +339,9 @@ function mostrarEstadisticas(db) {
   console.log(tabla(['Estado', 'Cantidad'], porEstado));
   console.log('');
 
-  const vencidos = db.insumos.filter(i => estadoVencimiento(i.vencimiento, hoy).clave === 'vencido');
+  const vencidos = db.insumos.filter(
+    i => estadoVencimiento(i.vencimiento, hoy).clave === 'vencido'
+  );
   if (vencidos.length) {
     console.log(negrita('Vencidos:'));
     vencidos.forEach(i => console.log(`  ${lineaInsumo(i)}`));
@@ -349,7 +367,11 @@ export async function main() {
       process.exit(1);
     }
 
-    console.log(gris(`  ${db.insumos.length} insumos · ${db.categorias.length} categorías · ${db.simbolos.length} símbolos`));
+    console.log(
+      gris(
+        `  ${db.insumos.length} insumos · ${db.categorias.length} categorías · ${db.simbolos.length} símbolos`
+      )
+    );
     console.log('');
 
     const opcion = await select('Menú principal', [

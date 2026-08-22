@@ -286,9 +286,9 @@ Separar cantidad de unidad:
 
 Configurar en Settings > Secrets and variables > Actions del repo privado:
 
-| Secret | Valor |
-| --- | --- |
-| `EMAIL_USER` | Correo Gmail remitente |
+| Secret       | Valor                                                       |
+| ------------ | ----------------------------------------------------------- |
+| `EMAIL_USER` | Correo Gmail remitente                                      |
 | `EMAIL_PASS` | Contraseña de aplicación de Gmail (no la contraseña normal) |
 
 ### Qué hace

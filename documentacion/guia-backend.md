@@ -174,9 +174,7 @@ curl http://localhost:3001/api/insumos/abc-123...
 ```json
 {
   "success": true,
-  "data": {
-    /* insumo completo */
-  }
+  "data": {/* insumo completo */}
 }
 ```
 
@@ -230,9 +228,7 @@ curl http://localhost:3001/api/insumos/abc-123...
 ```json
 {
   "success": true,
-  "data": {
-    /* insumo creado con id y timestamps */
-  }
+  "data": {/* insumo creado con id y timestamps */}
 }
 ```
 
@@ -275,9 +271,7 @@ curl http://localhost:3001/api/insumos/abc-123...
 ```json
 {
   "success": true,
-  "data": {
-    /* insumo actualizado */
-  }
+  "data": {/* insumo actualizado */}
 }
 ```
 
@@ -311,9 +305,7 @@ curl -X DELETE http://localhost:3001/api/insumos/abc-123...
 ```json
 {
   "success": true,
-  "data": {
-    /* insumo eliminado */
-  }
+  "data": {/* insumo eliminado */}
 }
 ```
 

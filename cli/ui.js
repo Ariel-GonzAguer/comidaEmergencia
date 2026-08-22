@@ -352,7 +352,10 @@ async function multiselectNumerado(titulo, opciones, iniciales) {
   console.log(gris('  (números separados por coma · Enter confirma)'));
   const respuesta = (await obtenerLinea()).trim();
   if (respuesta === '' || respuesta === '0') return [...seleccionados];
-  const nums = respuesta.split(',').map(Number).filter(n => n >= 1 && n <= opciones.length);
+  const nums = respuesta
+    .split(',')
+    .map(Number)
+    .filter(n => n >= 1 && n <= opciones.length);
   for (const n of nums) seleccionados.add(opciones[n - 1].value);
   if (nums.length) return [...seleccionados];
   return multiselectNumerado(titulo, opciones, iniciales);
