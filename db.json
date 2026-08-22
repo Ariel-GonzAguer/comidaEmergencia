@@ -27,36 +27,6 @@
   ],
   "insumos": [
     {
-      "id": "11111111-0001-0001-0001-000000000001",
-      "nombre": "Ramen Roland",
-      "cantidad": "85",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "06-2026",
-      "calorias": 400,
-      "proteina": 7.5,
-      "notas": "",
-      "simbolos": [
-        "*"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-15T01:25:40.318Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000004",
-      "nombre": "Ajo granulado",
-      "cantidad": "50",
-      "unidad": "g",
-      "categoria": "especias",
-      "vencimiento": "10-2026",
-      "calorias": null,
-      "proteina": null,
-      "notas": "",
-      "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:00:36.571Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000005",
       "nombre": "Paprika",
       "cantidad": "",
@@ -455,36 +425,6 @@
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000038",
-      "nombre": "Ramen DUDOMI",
-      "cantidad": "2x paquete",
-      "unidad": "",
-      "categoria": "alimentos",
-      "vencimiento": "10-2026",
-      "calorias": 47,
-      "proteina": 0.5,
-      "notas": "",
-      "simbolos": [],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:01:15.266Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000039",
-      "nombre": "Maní tostado sin sal",
-      "cantidad": "500",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "10-2026",
-      "calorias": 544,
-      "proteina": 23,
-      "notas": "",
-      "simbolos": [
-        "PS"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:01:20.918Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000040",
       "nombre": "Azúcar blanca",
       "cantidad": "1",
@@ -532,13 +472,13 @@
       "cantidad": "450",
       "unidad": "g",
       "categoria": "alimentos",
-      "vencimiento": "12-2026",
+      "vencimiento": "11-2026",
       "calorias": 25,
       "proteina": 0,
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:01:46.832Z"
+      "actualizadoEn": "2026-08-19T22:27:36.354Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000044",
@@ -579,12 +519,12 @@
       "vencimiento": "no vence",
       "calorias": null,
       "proteina": null,
-      "notas": "Reponer 1",
+      "notas": "Reponer 2",
       "simbolos": [
         "R"
       ],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-04-03T18:34:31.363Z"
+      "actualizadoEn": "2026-08-20T22:36:47.177Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000048",
@@ -645,7 +585,7 @@
     {
       "id": "11111111-0001-0001-0001-000000000052",
       "nombre": "Soya texturizada ",
-      "cantidad": "3x 250",
+      "cantidad": "4x 250",
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "12-2026",
@@ -654,7 +594,7 @@
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:03:10.930Z"
+      "actualizadoEn": "2026-08-20T22:38:57.823Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000054",
@@ -673,7 +613,7 @@
     {
       "id": "11111111-0001-0001-0001-000000000055",
       "nombre": "Pasta de tomate",
-      "cantidad": "2x 250",
+      "cantidad": "1x 250",
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "03-2027",
@@ -682,7 +622,7 @@
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-07T00:00:00.000Z"
+      "actualizadoEn": "2026-08-20T22:38:36.883Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000056",
@@ -745,7 +685,7 @@
     {
       "id": "11111111-0001-0001-0001-000000000060",
       "nombre": "Gomitas arcoíris",
-      "cantidad": "4x 170",
+      "cantidad": "3x 170",
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "09-2027",
@@ -754,23 +694,7 @@
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-05-01T17:40:36.434Z"
-    },
-    {
-      "id": "11111111-0001-0001-0001-000000000061",
-      "nombre": "Fresas deshidratadas",
-      "cantidad": "500",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "09-2026",
-      "calorias": 325,
-      "proteina": 1,
-      "notas": "",
-      "simbolos": [
-        "R"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-08-02T17:22:45.235Z"
+      "actualizadoEn": "2026-08-19T22:21:59.792Z"
     },
     {
       "id": "11111111-0001-0001-0001-000000000062",
@@ -913,20 +837,6 @@
       "actualizadoEn": "2026-04-04T20:07:40.835Z"
     },
     {
-      "id": "943535a2-81d1-4a4b-bcbc-b061a856c449",
-      "nombre": "Fideo",
-      "cantidad": "3",
-      "unidad": "kg",
-      "categoria": "alimentos",
-      "vencimiento": "12-2027",
-      "calorias": 120,
-      "proteina": 4,
-      "notas": "",
-      "simbolos": [],
-      "creadoEn": "2026-04-04T20:42:47.576Z",
-      "actualizadoEn": "2026-04-04T20:42:47.576Z"
-    },
-    {
       "id": "111a7aae-4c4f-4f87-9934-d57e34eb28af",
       "nombre": "Sal",
       "cantidad": "",
@@ -1051,6 +961,104 @@
       "simbolos": [],
       "creadoEn": "2026-08-06T22:05:18.375Z",
       "actualizadoEn": "2026-08-06T22:05:18.375Z"
+    },
+    {
+      "id": "ff3f8402-6cad-4fae-8767-14f6363e0710",
+      "nombre": "Jugo Welch",
+      "cantidad": "295",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "04-2027",
+      "calorias": 160,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-16T17:32:31.086Z",
+      "actualizadoEn": "2026-08-16T17:32:31.086Z"
+    },
+    {
+      "id": "069185de-ed06-4a1a-88ff-a042c49e01d9",
+      "nombre": "Aceite de oliva",
+      "cantidad": "2x 250",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "06-2028",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-16T17:33:02.001Z",
+      "actualizadoEn": "2026-08-16T17:33:02.001Z"
+    },
+    {
+      "id": "9a1d8305-ee9b-4bfe-9d5a-933174c0574e",
+      "nombre": "Panadol extra fuerte",
+      "cantidad": "16",
+      "unidad": "ud",
+      "categoria": "medicamentos",
+      "vencimiento": "07-2029",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-16T17:33:30.818Z",
+      "actualizadoEn": "2026-08-16T17:33:30.818Z"
+    },
+    {
+      "id": "55f75549-4657-4818-b5ff-61c1c4f49c4e",
+      "nombre": "Sopa instatánea Alotti Chimken",
+      "cantidad": "3x85",
+      "unidad": "g",
+      "categoria": "alimentos",
+      "vencimiento": "03-2027",
+      "calorias": 339,
+      "proteina": 8.4,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-19T22:25:15.652Z",
+      "actualizadoEn": "2026-08-19T22:25:15.652Z"
+    },
+    {
+      "id": "994c249d-a3d5-477a-931c-44b1ca960b92",
+      "nombre": "Sopa lenteja",
+      "cantidad": "250",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "09-2027",
+      "calorias": 66,
+      "proteina": 2.5,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-19T22:25:46.555Z",
+      "actualizadoEn": "2026-08-19T22:25:46.555Z"
+    },
+    {
+      "id": "4c6fd9a9-487f-47ab-9464-fff7b13acacb",
+      "nombre": "tapones de oído",
+      "cantidad": "2",
+      "unidad": "ud",
+      "categoria": "otros",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-20T22:23:32.988Z",
+      "actualizadoEn": "2026-08-20T22:23:32.988Z"
+    },
+    {
+      "id": "3bfedf08-a4ca-4793-ab47-6eb2c410c967",
+      "nombre": "Guaro Bamboo Apple Sour",
+      "cantidad": "125",
+      "unidad": "ml",
+      "categoria": "alimentos",
+      "vencimiento": "09-2027",
+      "calorias": null,
+      "proteina": null,
+      "notas": "botella pequeña",
+      "simbolos": [],
+      "creadoEn": "2026-08-22T18:04:06.139Z",
+      "actualizadoEn": "2026-08-22T18:04:06.139Z"
     }
   ]
 }

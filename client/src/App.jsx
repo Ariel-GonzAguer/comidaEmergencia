@@ -7,7 +7,7 @@
  * @module App
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Header from './components/Header.jsx';
 import FilterBar from './components/FilterBar.jsx';
 import InsumoTable from './components/InsumoTable.jsx';
@@ -46,6 +46,24 @@ export default function App() {
   const [viewInsumo, setViewInsumo] = useState(null); // null | insumo
   const [confirmDelete, setConfirmDelete] = useState(null); // null | insumo
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    function onKey(e) {
+      if (
+        e.key === '+' &&
+        !modal &&
+        !viewInsumo &&
+        !confirmDelete &&
+        document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.tagName !== 'TEXTAREA'
+      ) {
+        e.preventDefault();
+        setModal({ modo: 'crear' });
+      }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [modal, viewInsumo, confirmDelete]);
 
   /**
    * Muestra una notificación toast que desaparece automáticamente tras 3 segundos.
