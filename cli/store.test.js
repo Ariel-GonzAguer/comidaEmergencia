@@ -172,7 +172,10 @@ describe('crearInsumo', () => {
 describe('actualizarInsumo', () => {
   it('actualiza parcialmente y conserva el resto', async () => {
     const db = mockDB();
-    const actualizado = await actualizarInsumo(db, 'uuid-1', { nombre: 'Arroz integral', calorias: 180 });
+    const actualizado = await actualizarInsumo(db, 'uuid-1', {
+      nombre: 'Arroz integral',
+      calorias: 180,
+    });
 
     expect(actualizado.nombre).toBe('Arroz integral');
     expect(actualizado.calorias).toBe(180);
