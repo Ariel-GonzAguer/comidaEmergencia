@@ -9,14 +9,14 @@ Comida Emergencia Mini es la más reciente versión de este proyecto, y es una a
 
 ## Stack tecnológico
 
-| Capa     | Tecnología         | Versión       |
-| -------- | ------------------ | ------------- |
-| Frontend | React              | 19.2.4        |
-| Estilos  | Tailwind CSS       | 4.2.2         |
-| Bundler  | Vite               | 8.1.2         |
-| Backend  | Express            | 5.2.1         |
-| Runtime  | Node.js            | 22.17.1       |
-| Gestor   | pnpm               | 10.30.3       |
+| Capa     | Tecnología         | Versión        |
+| -------- | ------------------ | -------------- |
+| Frontend | React              | 19.2.4         |
+| Estilos  | Tailwind CSS       | 4.2.2          |
+| Bundler  | Vite               | 8.1.2          |
+| Backend  | Express            | 5.2.1          |
+| Runtime  | Node.js            | 22.17.1        |
+| Gestor   | pnpm               | 10.30.3        |
 | Pruebas  | Vitest + Supertest | 4.1.11 + 7.2.2 |
 
 ---
