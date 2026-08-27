@@ -50,30 +50,61 @@ jobs:
             const totalInsumos = db.insumos.length;
             const totalCats = Object.keys(categorias).length;
 
-            let md = `# Resumen de db.json — comida-emergencia-mini\n\n`;
-            md += `- **Fecha:** ${fecha}\n`;
-            md += `- **Branch:** ${branch}\n`;
-            md += `- **Commit:** ${commitMsg}\n`;
-            md += `- **Autor:** ${autor}\n`;
-            md += `- **Total:** ${totalInsumos} insumos en ${totalCats} categorías\n`;
-
+            let filas = '';
             for (const [cat, items] of Object.entries(categorias).sort()) {
-              md += `\n## ${cat.charAt(0).toUpperCase() + cat.slice(1)} (${items.length})\n\n`;
-              md += `| Nombre | Cantidad | Vencimiento | Calorías | Proteína | Símbolos | Notas |\n`;
-              md += `|--------|----------|-------------|----------|----------|----------|-------|\n`;
+              filas += `<tr><td colspan="7" style="background:#f0f0f0;font-weight:bold;padding:8px;text-transform:capitalize;">${cat} (${items.length})</td></tr>`;
               for (const i of items.sort((a, b) => a.nombre.localeCompare(b.nombre))) {
                 const sim = (i.simbolos || []).join(', ') || '-';
                 const venc = i.vencimiento || '-';
                 const cal = i.calorias ?? '-';
                 const prot = i.proteina ?? '-';
                 const notas = i.notas || '';
-                md += `| ${i.nombre} | ${i.cantidad || '-'} ${i.unidad || ''} | ${venc} | ${cal} | ${prot} | ${sim} | ${notas} |\n`;
+                filas += `<tr>
+                  <td style="padding:4px 8px;border:1px solid #ddd;">${i.nombre}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${i.cantidad || '-'} ${i.unidad || ''}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${venc}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${cal}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${prot}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${sim}</td>
+                  <td style="padding:4px 8px;border:1px solid #ddd;">${notas}</td>
+                </tr>`;
               }
             }
 
-            const mdPath = 'db-resumen.md';
-            fs.writeFileSync(mdPath, md, 'utf8');
-            console.log(md);
+            const html = `
+            <div style="font-family:Arial,sans-serif;max-width:900px;margin:0 auto;">
+              <h2 style="color:#333;">Resumen de db.json — comida-emergencia-mini</h2>
+              <p style="color:#666;">
+                <b>Fecha:</b> ${fecha}<br>
+                <b>Branch:</b> ${branch}<br>
+                <b>Commit:</b> ${commitMsg}<br>
+                <b>Autor:</b> ${autor}
+              </p>
+              <p style="color:#666;">
+                <b>Total:</b> ${totalInsumos} insumos en ${totalCats} categorías
+              </p>
+              <table style="border-collapse:collapse;width:100%;font-size:13px;">
+                <thead>
+                  <tr style="background:#333;color:#fff;">
+                    <th style="padding:6px 8px;border:1px solid #555;text-align:left;">Nombre</th>
+                    <th style="padding:6px 8px;border:1px solid #555;">Cantidad</th>
+                    <th style="padding:6px 8px;border:1px solid #555;">Vencimiento</th>
+                    <th style="padding:6px 8px;border:1px solid #555;">Calorias</th>
+                    <th style="padding:6px 8px;border:1px solid #555;">Proteina</th>
+                    <th style="padding:6px 8px;border:1px solid #555;">Simbolos</th>
+                    <th style="padding:6px 8px;border:1px solid #555;text-align:left;">Notas</th>
+                  </tr>
+                </thead>
+                <tbody>${filas}</tbody>
+              </table>
+              <p style="color:#999;font-size:11px;margin-top:16px;">
+                Generado automaticamente por GitHub Actions
+              </p>
+            </div>`;
+
+            const textoPlano = `Push a ${branch} por ${autor}\nCommit: ${commitMsg}\nFecha: ${fecha}\n\nTotal: ${totalInsumos} insumos en ${totalCats} categorias.`;
+
+            console.log(html);
 
             const nodemailer = require('nodemailer');
             const transporter = nodemailer.createTransport({
@@ -90,12 +121,8 @@ jobs:
               from: process.env.EMAIL_USER,
               to: 'ariegonzaguer@gmail.com',
               subject: asunto,
-              text: `Push a ${branch} por ${autor}\nCommit: ${commitMsg}\nFecha: ${fecha}\n\nTotal: ${totalInsumos} insumos en ${totalCats} categorías.\n\nAdjunto el resumen completo en db-resumen.md`,
-              attachments: [{
-                filename: 'db-resumen.md',
-                content: md,
-                contentType: 'text/markdown'
-              }]
+              text: textoPlano,
+              html
             });
 
-            console.log(`Correo enviado con ${totalInsumos} insumos (adjunto db-resumen.md).`);
+            console.log(`Correo enviado con ${totalInsumos} insumos.`);

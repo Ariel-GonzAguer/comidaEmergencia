@@ -322,15 +322,15 @@ Ir a Actions > "Aviso de vencimientos" > Run workflow.
 
 ### Resumen de inventario por correo en cada push
 
-El proyecto incluye una GitHub Action que envía un correo electrónico con un archivo adjunto `db-resumen.md` cada vez que se hace push a cualquier branch.
+El proyecto incluye una GitHub Action que envía un correo electrónico en formato HTML cada vez que se hace push a cualquier branch.
 
 > **Requisito:** Esta action solo funciona en repos privados, por lo cual si no tiene ya un clon del repo, necesita tener uno.
 
 **¿Qué hace?**
 
-En cada push, lee `db.json`, genera un archivo markdown con todos los insumos agrupados por categoría (en formato tabla) y lo envía como adjunto. El cuerpo del correo incluye un resumen con la fecha, branch, commit y autor.
+En cada push, lee `db.json` y envía un correo con una tabla HTML de todos los insumos agrupados por categoría. El correo incluye metadata del push (fecha, branch, commit, autor) y el total de insumos.
 
-**Contenido del archivo adjunto (`db-resumen.md`):**
+**Contenido del correo:**
 
 - Metadata del push (fecha, branch, commit, autor)
 - Total de insumos y categorías
