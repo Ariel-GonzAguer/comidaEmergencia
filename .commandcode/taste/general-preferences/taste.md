@@ -12,3 +12,4 @@
 - Values consistency: when creating new workflows, follows the same patterns and conventions as existing ones in the repo. Confidence: 0.8
 - Expects documentation (README, CHANGELOG, version bump) to be updated whenever a new feature or workflow is added — treats docs as part of the deliverable, not an afterthought. Confidence: 0.85
 - Expects the agent to read and follow existing project guides/conventions (e.g. changelog guide) before making changes, rather than inventing its own format. Confidence: 0.85
+- Values correctness reviews of scripts and automation — asks the agent to verify that scripts actually do what their comments/intent claim, especially around security-sensitive operations (e.g. preventing data leaks to public repos). Confidence: 0.8
