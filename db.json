@@ -1073,6 +1073,20 @@
       "simbolos": [],
       "creadoEn": "2026-08-27T22:53:54.243Z",
       "actualizadoEn": "2026-08-27T22:53:54.243Z"
+    },
+    {
+      "id": "67d9adb3-eb0a-4440-976c-1b2e38aa700a",
+      "nombre": "Botella pequeña Guaro",
+      "cantidad": "350",
+      "unidad": "ml",
+      "categoria": "bebidas",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-27T23:30:46.018Z",
+      "actualizadoEn": "2026-08-27T23:31:07.383Z"
     }
   ]
 }
