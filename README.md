@@ -293,7 +293,7 @@ No elimine la condición `if (process.env.NODE_ENV !== 'test')` en `server/index
 
 El proyecto incluye una GitHub Action **opcional** que envía un correo electrónico cada sábado con los insumos vencidos y próximos a vencer.
 
-> **Requisito:** Esta action solo funciona en el **repo privado** (`comida-emergencia-mini-privado`), porque necesita acceso a `db.json` que no se sube al repo público.
+> **Requisito:** Esta action solo funciona en repos privados, por lo cual si no tiene ya un clon del repo, necesita tener uno.
 
 **¿Qué hace?**
 
@@ -319,6 +319,24 @@ Para generar la contraseña de aplicación: Gmail > Seguridad > Verificación en
 **Disparar manualmente:**
 
 Ir a Actions > "Aviso de vencimientos" > Run workflow.
+
+### Resumen de inventario por correo en cada push
+
+El proyecto incluye una GitHub Action que envía un correo electrónico con un archivo adjunto `db-resumen.md` cada vez que se hace push a cualquier branch.
+
+> **Requisito:** Esta action solo funciona en repos privados, por lo cual si no tiene ya un clon del repo, necesita tener uno.
+
+**¿Qué hace?**
+
+En cada push, lee `db.json`, genera un archivo markdown con todos los insumos agrupados por categoría (en formato tabla) y lo envía como adjunto. El cuerpo del correo incluye un resumen con la fecha, branch, commit y autor.
+
+**Contenido del archivo adjunto (`db-resumen.md`):**
+
+- Metadata del push (fecha, branch, commit, autor)
+- Total de insumos y categorías
+- Tablas por categoría con: nombre, cantidad, vencimiento, calorías, proteína, símbolos y notas
+
+Usa los mismos secrets `EMAIL_USER` y `EMAIL_PASS` que la action de vencimientos.
 
 ---
 

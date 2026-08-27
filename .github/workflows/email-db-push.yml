@@ -1,0 +1,101 @@
+name: Email con db.json al hacer push
+
+on:
+  push:
+    branches: ['**']
+
+jobs:
+  send-db-email:
+    if: github.repository == 'Ariel-GonzAguer/comida-emergencia-mini-privado'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - run: pnpm add nodemailer
+
+      - uses: actions/github-script@v8
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        with:
+          script: |
+            const fs = require('fs');
+
+            const db = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+            const hoy = new Date();
+            const fecha = hoy.toLocaleDateString('es-CR', {
+              year: 'numeric', month: 'long', day: 'numeric',
+              hour: '2-digit', minute: '2-digit'
+            });
+
+            const commitMsg = context.payload.head_commit?.message || 'Sin mensaje';
+            const autor = context.payload.head_commit?.author?.name || context.actor;
+            const branch = context.ref.replace('refs/heads/', '');
+
+            const categorias = {};
+            for (const item of db.insumos) {
+              const cat = item.categoria || 'sin categoría';
+              if (!categorias[cat]) categorias[cat] = [];
+              categorias[cat].push(item);
+            }
+
+            const totalInsumos = db.insumos.length;
+            const totalCats = Object.keys(categorias).length;
+
+            let md = `# Resumen de db.json — comida-emergencia-mini\n\n`;
+            md += `- **Fecha:** ${fecha}\n`;
+            md += `- **Branch:** ${branch}\n`;
+            md += `- **Commit:** ${commitMsg}\n`;
+            md += `- **Autor:** ${autor}\n`;
+            md += `- **Total:** ${totalInsumos} insumos en ${totalCats} categorías\n`;
+
+            for (const [cat, items] of Object.entries(categorias).sort()) {
+              md += `\n## ${cat.charAt(0).toUpperCase() + cat.slice(1)} (${items.length})\n\n`;
+              md += `| Nombre | Cantidad | Vencimiento | Calorías | Proteína | Símbolos | Notas |\n`;
+              md += `|--------|----------|-------------|----------|----------|----------|-------|\n`;
+              for (const i of items.sort((a, b) => a.nombre.localeCompare(b.nombre))) {
+                const sim = (i.simbolos || []).join(', ') || '-';
+                const venc = i.vencimiento || '-';
+                const cal = i.calorias ?? '-';
+                const prot = i.proteina ?? '-';
+                const notas = i.notas || '';
+                md += `| ${i.nombre} | ${i.cantidad || '-'} ${i.unidad || ''} | ${venc} | ${cal} | ${prot} | ${sim} | ${notas} |\n`;
+              }
+            }
+
+            const mdPath = 'db-resumen.md';
+            fs.writeFileSync(mdPath, md, 'utf8');
+            console.log(md);
+
+            const nodemailer = require('nodemailer');
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+              }
+            });
+
+            const asunto = `[db.json] Push a ${branch} — ${totalInsumos} insumos — ${fecha}`;
+
+            await transporter.sendMail({
+              from: process.env.EMAIL_USER,
+              to: 'ariegonzaguer@gmail.com',
+              subject: asunto,
+              text: `Push a ${branch} por ${autor}\nCommit: ${commitMsg}\nFecha: ${fecha}\n\nTotal: ${totalInsumos} insumos en ${totalCats} categorías.\n\nAdjunto el resumen completo en db-resumen.md`,
+              attachments: [{
+                filename: 'db-resumen.md',
+                content: md,
+                contentType: 'text/markdown'
+              }]
+            });
+
+            console.log(`Correo enviado con ${totalInsumos} insumos (adjunto db-resumen.md).`);

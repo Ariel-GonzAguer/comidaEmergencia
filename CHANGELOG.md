@@ -2,6 +2,12 @@
 
 Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
+## [4.0.5] - 27/08/2026
+
+### Agregado
+
+- **Resumen de inventario por correo en cada push**: Nueva GitHub Action (`email-db-push.yml`) que envía un correo electrónico con un archivo adjunto `db-resumen.md` cada vez que se hace push a cualquier branch. El archivo contiene todos los insumos de `db.json` agrupados por categoría en formato de tabla markdown.
+
 ## [4.0.3] - 01/08/2026
 
 ### Agregado
