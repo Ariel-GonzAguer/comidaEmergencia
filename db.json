@@ -1021,7 +1021,7 @@
     {
       "id": "994c249d-a3d5-477a-931c-44b1ca960b92",
       "nombre": "Sopa lenteja",
-      "cantidad": "250",
+      "cantidad": "2x 250",
       "unidad": "ml",
       "categoria": "alimentos",
       "vencimiento": "09-2027",
@@ -1030,7 +1030,7 @@
       "notas": "",
       "simbolos": [],
       "creadoEn": "2026-08-19T22:25:46.555Z",
-      "actualizadoEn": "2026-08-19T22:25:46.555Z"
+      "actualizadoEn": "2026-08-27T22:51:59.696Z"
     },
     {
       "id": "4c6fd9a9-487f-47ab-9464-fff7b13acacb",
@@ -1059,6 +1059,20 @@
       "simbolos": [],
       "creadoEn": "2026-08-22T18:04:06.139Z",
       "actualizadoEn": "2026-08-22T18:04:06.139Z"
+    },
+    {
+      "id": "19e1865c-3956-443d-a0c8-6f65ecb8cd45",
+      "nombre": "Macarrons (postre)",
+      "cantidad": "15",
+      "unidad": "ud",
+      "categoria": "alimentos",
+      "vencimiento": "09-2027",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-27T22:53:54.243Z",
+      "actualizadoEn": "2026-08-27T22:53:54.243Z"
     }
   ]
 }
