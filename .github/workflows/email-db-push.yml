@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+
+      - name: Obtener db.json del remote privado
+        run: git show HEAD~1:db.json > db.json || git show HEAD:db.json > db.json || echo "No se pudo obtener db.json"
 
       - uses: actions/setup-node@v5
         with:
