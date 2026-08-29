@@ -1087,6 +1087,20 @@
       "simbolos": [],
       "creadoEn": "2026-08-27T23:30:46.018Z",
       "actualizadoEn": "2026-08-27T23:31:07.383Z"
+    },
+    {
+      "id": "0305ef41-7fe1-44c7-a30d-33bf8ac8e62c",
+      "nombre": "Jabón de cuerpo",
+      "cantidad": "5",
+      "unidad": "ud",
+      "categoria": "higiene",
+      "vencimiento": "01-2030",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-08-29T22:08:49.248Z",
+      "actualizadoEn": "2026-08-29T22:08:49.248Z"
     }
   ]
 }

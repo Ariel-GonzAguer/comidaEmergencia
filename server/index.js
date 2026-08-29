@@ -44,7 +44,7 @@ app.use(express.json());
 async function readDB() {
   try {
     const raw = await fs.readFile(DB_PATH, 'utf-8');
-    return JSON.parse(raw);
+    return JSON.parse(raw.replace(/^\uFEFF/, ''));
   } catch (err) {
     if (err.code === 'ENOENT') {
       throw new Error('archivo db.json no encontrado');
