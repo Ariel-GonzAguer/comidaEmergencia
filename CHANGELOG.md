@@ -2,6 +2,13 @@
 
 Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
+## [4.0.6] - 06/09/2026
+
+### Corregido
+
+- **Lectura de db.json en GitHub Action de correo**: Se corrigió la ruta de acceso al archivo `db.json` en el flujo de trabajo de envío de correo para que la acción funcione correctamente tras unificar la estructura del repo.
+- Actualización de dependencias.
+
 ## [4.0.5] - 27/08/2026
 
 ### Agregado
