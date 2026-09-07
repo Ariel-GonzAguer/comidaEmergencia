@@ -339,22 +339,6 @@
       "actualizadoEn": "2026-03-07T00:00:00.000Z"
     },
     {
-      "id": "11111111-0001-0001-0001-000000000032",
-      "nombre": "Lata SoyaPac bife",
-      "cantidad": "350",
-      "unidad": "g",
-      "categoria": "alimentos",
-      "vencimiento": "10-2026",
-      "calorias": 170,
-      "proteina": 29,
-      "notas": "",
-      "simbolos": [
-        "PS"
-      ],
-      "creadoEn": "2026-03-07T00:00:00.000Z",
-      "actualizadoEn": "2026-03-14T21:01:08.005Z"
-    },
-    {
       "id": "11111111-0001-0001-0001-000000000033",
       "nombre": "Cardamomo en polvo",
       "cantidad": "6",
