@@ -1085,6 +1085,34 @@
       "simbolos": [],
       "creadoEn": "2026-08-29T22:08:49.248Z",
       "actualizadoEn": "2026-08-29T22:08:49.248Z"
+    },
+    {
+      "id": "eb7d981f-a602-4f32-95f7-906638b9b2b2",
+      "nombre": "Ginebra Plum + Blackthorn 43.5%",
+      "cantidad": "125",
+      "unidad": "ml",
+      "categoria": "bebidas",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-09-18T00:34:24.647Z",
+      "actualizadoEn": "2026-09-18T00:35:16.100Z"
+    },
+    {
+      "id": "d628d2ec-a2d5-4495-97b5-84db65eba889",
+      "nombre": "Ginebra Lavanda 43.5%",
+      "cantidad": "125",
+      "unidad": "ml",
+      "categoria": "bebidas",
+      "vencimiento": "",
+      "calorias": null,
+      "proteina": null,
+      "notas": "",
+      "simbolos": [],
+      "creadoEn": "2026-09-18T00:34:59.132Z",
+      "actualizadoEn": "2026-09-18T00:34:59.132Z"
     }
   ]
 }
