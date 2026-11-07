@@ -22,13 +22,13 @@
 
 ## Alimentos
 
-| Producto                       | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas | Categoría |
-| ------------------------------ | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- | --------- |
-| Ramen Roland `*`               | 85 g                    | 2026/06     | 400                         | 7                        | --    | Alimento  |
-| Ramen MAMA `R`                 | --                      | --          | --                          | --                       | --    | Alimento  |
-| Salsa de soya sabor Hongos `*` | 4x 500 ml               | 2026/05     | --                          | --                       | --    | Alimento  |
-| Ajo granulado `*`              | 50 g                    | 2026/10     | --                          | --                       | --    | Especia   |
-| Paprika `PS`                   | --                      | --          | --                          | --                       | --    | Especia   |
-| Salsa de tomate Marinara `*`   | 652 g                   | 2026/11     | 60                          | 2                        | --    | Alimento  |
-| Lata SoyaPac bife `PS` `*`     | 350 g                   | 2026/10     | 170                         | 29                       | --    | Alimento  |
-| Aplicadores de madera          | 100 piezas              |             | --                          | --                       | --    | Higiene   |
+| Producto                       | Cantidad / Presentación | Vencimiento | Notas | Categoría |
+| ------------------------------ | ----------------------- | ----------- | ----- | --------- |
+| Ramen Roland `*`               | 85 g                    | 2026/06     | --    | Alimento  |
+| Ramen MAMA `R`                 | --                      | --          | --    | Alimento  |
+| Salsa de soya sabor Hongos `*` | 4x 500 ml               | 2026/05     | --    | Alimento  |
+| Ajo granulado `*`              | 50 g                    | 2026/10     | --    | Especia   |
+| Paprika `PS`                   | --                      | --          | --    | Especia   |
+| Salsa de tomate Marinara `*`   | 652 g                   | 2026/11     | --    | Alimento  |
+| Lata SoyaPac bife `PS` `*`     | 350 g                   | 2026/10     | --    | Alimento  |
+| Aplicadores de madera          | 100 piezas              |             | --    | Higiene   |

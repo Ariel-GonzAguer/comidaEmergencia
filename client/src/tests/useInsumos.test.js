@@ -11,8 +11,6 @@ describe('useInsumos', () => {
       unidad: 'kg',
       categoria: 'alimentos',
       vencimiento: '06-2027',
-      calorias: 150,
-      proteina: 3,
       notas: '',
       simbolos: [],
     },

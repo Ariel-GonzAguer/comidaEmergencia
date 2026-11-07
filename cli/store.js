@@ -26,8 +26,6 @@ const CAMPOS_INSUMO = [
   'unidad',
   'categoria',
   'vencimiento',
-  'calorias',
-  'proteina',
   'notas',
   'simbolos',
 ];
@@ -82,7 +80,6 @@ export async function escribirMD(db) {
       const [m, y] = v.split('-');
       return m && y ? `${Number(m)}/${y}` : v;
     };
-    const formatoNumero = n => (n != null ? String(n) : '--');
     const formatoCantidad = item => {
       const partes = [item.cantidad, item.unidad].filter(Boolean);
       return partes.length ? partes.join(' ') : '--';
@@ -98,7 +95,7 @@ export async function escribirMD(db) {
     const filaAlimento = i =>
       `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(
         i.vencimiento
-      )} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
+      )} | ${i.notas || '--'} |`;
 
     const filasReferencia = simbolos.map(s => `| \`${s.codigo}\` | ${s.descripcion} |`).join('\n');
 
@@ -110,8 +107,8 @@ ${filasReferencia}`;
 
     const tablaAlim = `## Alimentos
 
-| Producto | Categoría | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
-| -------- | --------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
+| Producto | Categoría | Cantidad / Presentación | Vencimiento | Notas |
+| -------- | --------- | ----------------------- | ----------- | ----- |
 ${alimentos.map(filaAlimento).join('\n')}`;
 
     const tablaHig = noAlimentos.length
@@ -192,36 +189,6 @@ export function normalizarFecha(valor) {
 }
 
 /**
- * Valida calorías (entero positivo, vacío permitido).
- *
- * @param {string} valor - Valor ingresado.
- * @returns {{ valido: boolean, error?: string }}
- */
-export function validarCalorias(valor) {
-  if (!valor || !valor.trim()) return { valido: true };
-  const num = Number(valor);
-  if (Number.isNaN(num) || num < 0)
-    return { valido: false, error: 'Calorías debe ser un número positivo' };
-  if (!Number.isInteger(num)) return { valido: false, error: 'Calorías debe ser un número entero' };
-  return { valido: true };
-}
-
-/**
- * Valida proteína (número positivo, vacío permitido).
- *
- * @param {string} valor - Valor ingresado.
- * @returns {{ valido: boolean, error?: string }}
- */
-export function validarProteina(valor) {
-  if (!valor || !valor.trim()) return { valido: true };
-  const num = Number(valor);
-  if (Number.isNaN(num) || num < 0)
-    return { valido: false, error: 'Proteína debe ser un número positivo' };
-  if (num > 200) return { valido: false, error: 'Proteína parece demasiado alta (máx: 200g)' };
-  return { valido: true };
-}
-
-/**
  * Filtra insumos por categoría y/o texto (espejo de la API REST).
  *
  * @param {Object[]} insumos - Lista completa de insumos.
@@ -265,8 +232,6 @@ export async function crearInsumo(db, datos) {
     unidad: datos.unidad ?? '',
     categoria: datos.categoria ?? 'alimentos',
     vencimiento: datos.vencimiento ?? '',
-    calorias: datos.calorias ?? null,
-    proteina: datos.proteina ?? null,
     notas: datos.notas ?? '',
     simbolos: Array.isArray(datos.simbolos) ? datos.simbolos : [],
     creadoEn: new Date().toISOString(),

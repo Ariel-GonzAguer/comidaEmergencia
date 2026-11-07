@@ -27,8 +27,6 @@ Columnas:
 - **Producto**: Nombre del insumo (puede contener símbolos entre backticks: `R`, `*`, `V`, `PS`)
 - **Cantidad / Presentación**: Formato (ej: "850g", "4x 500ml", "--" si vacío)
 - **Vencimiento**: Fecha en formato "M/AAAA" (ej: "6/2026"), "no vence", o "--" si vacío
-- **Calorías**: Número o "--"
-- **Proteína**: Número con unidad (ej: "7", "29g") o "--"
 - **Notas**: Observaciones adicionales
 - **Categoría**: "Alimento", "Especia", etc.
 
@@ -48,8 +46,6 @@ Columnas:
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "2026-06",
-      "calorias": 400,
-      "proteina": 7,
       "notas": "-----",
       "simbolos": []
     }
@@ -105,19 +101,11 @@ Separar cantidad de unidad:
 - **"1 kg"** → cantidad: "1", unidad: "kg"
 - **"--"** → cantidad: "", unidad: ""
 
-### **(D) Calorías y Proteína**
-
-- Convertir a número si es número puro
-- Si contiene "kcal" → extraer número
-- Si es "100kcal" → 100
-- Si contiene unidad (ej: "7g", "8") → extraer número
-- Si es "--" o vacío → `null`
-
-### **(E) Categoría**
+### **(D) Categoría**
 
 - Si está en tabla "Alimentos" → **"alimentos"**
 
-### **(F) ID**
+### **(E) ID**
 
 - Auto-incrementar: 1, 2, 3, ... (en orden de aparición en MD)
 
@@ -135,8 +123,6 @@ Separar cantidad de unidad:
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "2026-06",
-      "calorias": 400,
-      "proteina": 7,
       "notas": "-----",
       "simbolos": []
     },
@@ -147,8 +133,6 @@ Separar cantidad de unidad:
       "unidad": "",
       "categoria": "alimentos",
       "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
       "notas": "-----",
       "simbolos": ["R"]
     },
@@ -159,8 +143,6 @@ Separar cantidad de unidad:
       "unidad": "piezas",
       "categoria": "higiene",
       "vencimiento": "",
-      "calorias": null,
-      "proteina": null,
       "notas": "",
       "simbolos": []
     }
@@ -194,10 +176,9 @@ Separar cantidad de unidad:
 
 1. Todos los ID son únicos y secuenciales
 2. Vencimientos en formato "MM-AAAA" o "no vence" o vacío
-3. Calorías y proteína son números o `null`
-4. Símbolos solo contienen códigos válidos: "V", "\*", "R", "PS"
-5. Categoría es "alimentos", "bebidas", "higiene", etc. (según tabla)
-6. Campo "nombre" NO contiene backticks (fueron extraídos a "simbolos")
+3. Símbolos solo contienen códigos válidos: "V", "\*", "R", "PS"
+4. Categoría es "alimentos", "bebidas", "higiene", etc. (según tabla)
+5. Campo "nombre" NO contiene backticks (fueron extraídos a "simbolos")
 
 ⚠ **Notas adicionales**:
 
@@ -212,7 +193,7 @@ Separar cantidad de unidad:
 ### Fila original:
 
 ```
-| Ramen MAMA `R` | -- | -- | -- | -- | ----- |
+| Ramen MAMA `R` | -- | -- | ----- |
 ```
 
 ### Procesamiento:
@@ -227,8 +208,6 @@ Separar cantidad de unidad:
 
 4. **Vencimiento**: "--" → ""
 
-5. **Calorías/Proteína**: "--" → `null`
-
 ### JSON resultado:
 
 ```json
@@ -239,8 +218,6 @@ Separar cantidad de unidad:
   "unidad": "",
   "categoria": "alimentos",
   "vencimiento": "",
-  "calorias": null,
-  "proteina": null,
   "notas": "-----",
   "simbolos": ["R"]
 }
@@ -256,7 +233,6 @@ Separar cantidad de unidad:
   - [ ] Extraer nombre y símbolos (remover backticks)
   - [ ] Convertir vencimiento al formato "MM-AAAA"
   - [ ] Separar cantidad y unidad
-  - [ ] Convertir calorías/proteína a números o `null`
   - [ ] Asignar categoría
   - [ ] Generar ID incremental
 - [ ] Validar toda la estructura

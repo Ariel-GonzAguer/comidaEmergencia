@@ -21,9 +21,7 @@ import {
   guardar,
   leerDB,
   normalizarFecha,
-  validarCalorias,
   validarFecha,
-  validarProteina,
 } from './store.js';
 
 const insumoBase = {
@@ -33,8 +31,6 @@ const insumoBase = {
   unidad: 'kg',
   categoria: 'alimentos',
   vencimiento: '06-2027',
-  calorias: 150,
-  proteina: 3,
   notas: '',
   simbolos: [],
   creadoEn: '2026-01-01T00:00:00.000Z',
@@ -125,15 +121,6 @@ describe('validaciones', () => {
     expect(normalizarFecha('04-2027')).toBe('04-2027');
     expect(normalizarFecha('no vence')).toBe('no vence');
   });
-
-  it('validarCalorias y validarProteina', () => {
-    expect(validarCalorias('150').valido).toBe(true);
-    expect(validarCalorias('-1').valido).toBe(false);
-    expect(validarCalorias('1.5').valido).toBe(false);
-    expect(validarCalorias('').valido).toBe(true);
-    expect(validarProteina('7.5').valido).toBe(true);
-    expect(validarProteina('250').valido).toBe(false);
-  });
 });
 
 describe('crearInsumo', () => {
@@ -145,8 +132,6 @@ describe('crearInsumo', () => {
       unidad: 'kg',
       categoria: 'alimentos',
       vencimiento: '12-2027',
-      calorias: 120,
-      proteina: 4,
     });
 
     expect(nuevo.id).toBeDefined();
@@ -174,11 +159,11 @@ describe('actualizarInsumo', () => {
     const db = mockDB();
     const actualizado = await actualizarInsumo(db, 'uuid-1', {
       nombre: 'Arroz integral',
-      calorias: 180,
+      cantidad: '8',
     });
 
     expect(actualizado.nombre).toBe('Arroz integral');
-    expect(actualizado.calorias).toBe(180);
+    expect(actualizado.cantidad).toBe('8');
     expect(actualizado.unidad).toBe('kg');
     expect(actualizado.actualizadoEn).not.toBe('2026-01-01T00:00:00.000Z');
   });

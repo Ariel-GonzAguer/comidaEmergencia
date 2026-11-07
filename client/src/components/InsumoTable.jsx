@@ -201,12 +201,6 @@ export default function InsumoTable({
               </button>
             </th>
             <th scope="col" className={TH}>
-              kcal
-            </th>
-            <th scope="col" className={TH}>
-              Prot.
-            </th>
-            <th scope="col" className={TH}>
               Estado
             </th>
             <th scope="col" className={TH}>
@@ -245,16 +239,6 @@ export default function InsumoTable({
               </td>
               <td className={TD}>
                 <VencimientoCell valor={item.vencimiento} />
-              </td>
-              <td className={`${TD} font-mono text-right text-ink-mid`}>
-                {item.calorias != null ? item.calorias : <span className="text-ink-dim">—</span>}
-              </td>
-              <td className={`${TD} font-mono text-right text-ink-mid`}>
-                {item.proteina != null ? (
-                  `${item.proteina}g`
-                ) : (
-                  <span className="text-ink-dim">—</span>
-                )}
               </td>
               <td className={`${TD} whitespace-nowrap`}>
                 {item.simbolos?.length ? (

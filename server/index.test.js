@@ -19,8 +19,6 @@ const insumoBase = {
   unidad: 'kg',
   categoria: 'alimentos',
   vencimiento: '06-2027',
-  calorias: 150,
-  proteina: 3,
   notas: '',
   simbolos: [],
   creadoEn: '2026-01-01T00:00:00.000Z',
@@ -140,8 +138,6 @@ describe('POST /api/insumos', () => {
       unidad: 'kg',
       categoria: 'alimentos',
       vencimiento: '12-2027',
-      calorias: 120,
-      proteina: 4,
     };
 
     const res = await request(app).post('/api/insumos').send(payload);
@@ -191,12 +187,12 @@ describe('PUT /api/insumos/:id', () => {
   it('actualiza los campos enviados y devuelve 200', async () => {
     const res = await request(app)
       .put('/api/insumos/uuid-1')
-      .send({ nombre: 'Arroz integral', calorias: 180 });
+      .send({ nombre: 'Arroz integral', cantidad: '8' });
 
     expect(res.status).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.data.nombre).toBe('Arroz integral');
-    expect(res.body.data.calorias).toBe(180);
+    expect(res.body.data.cantidad).toBe('8');
   });
 
   it('conserva los campos no enviados', async () => {

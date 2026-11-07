@@ -2,6 +2,16 @@
 
 Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
+## [4.0.7] - 07/11/2026
+
+### Cambiado
+
+- **Tests unificados**: `pnpm test` y `pnpm test:run` ahora ejecutan todos los tests del repo (server, CLI y cliente) en un solo comando, mediante Vitest projects. Ya no es necesario correr la suite del cliente aparte con su propio comando.
+
+### Eliminado
+
+- **Calorías y proteína**: Se eliminaron por completo los campos de nutrición. Las tablas (web, CLI y `insumos-emergencia.md`) ya no muestran esas columnas, el formulario y la CLI ya no las piden, y la API ya no las acepta ni las devuelve. Es un cambio rompiente: cualquier cliente que envíe `calorias` o `proteina` a la API tendrá esos campos ignorados, y los tests y la documentación se ajustaron al nuevo esquema.
+
 ## [4.0.6] - 06/09/2026
 
 ### Corregido

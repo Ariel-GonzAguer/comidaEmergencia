@@ -44,8 +44,6 @@ describe('InsumoModal', () => {
           unidad: 'kg',
           categoria: 'alimentos',
           vencimiento: '12-2026',
-          calorias: 100,
-          proteina: 2,
           notas: '',
           simbolos: [],
         }}

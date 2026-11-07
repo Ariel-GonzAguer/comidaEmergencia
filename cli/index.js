@@ -18,9 +18,7 @@ import {
   filtrarInsumos,
   leerDB,
   normalizarFecha,
-  validarCalorias,
   validarFecha,
-  validarProteina,
 } from './store.js';
 import {
   colorEstado,
@@ -124,8 +122,6 @@ function verDetalle(insumo, simbolosDef) {
   console.log(`  Categoría:     ${insumo.categoria}`);
   console.log(`  Cantidad:      ${`${insumo.cantidad || '—'} ${insumo.unidad || ''}`.trim()}`);
   console.log(`  Vencimiento:   ${colorEstado(clave)(etiqueta)}`);
-  console.log(`  Calorías:      ${insumo.calorias ?? '—'} kcal`);
-  console.log(`  Proteína:      ${insumo.proteina ?? '—'} g`);
   console.log(
     `  Símbolos:      ${insumo.simbolos?.length ? insumo.simbolos.map(s => `${s} (${mapaSimbolos[s] ?? '?'})`).join(', ') : '—'}`
   );
@@ -171,22 +167,6 @@ async function formularioInsumo(db, existente = null) {
     },
   });
 
-  const calorias = await prompt('Calorías (kcal/porción, vacío = no aplica)', {
-    inicial: inicial('calorias', ''),
-    validar: v => {
-      const r = validarCalorias(v);
-      return r.valido ? null : r.error;
-    },
-  });
-
-  const proteina = await prompt('Proteína (g/porción, vacío = no aplica)', {
-    inicial: inicial('proteina', ''),
-    validar: v => {
-      const r = validarProteina(v);
-      return r.valido ? null : r.error;
-    },
-  });
-
   const notas = await prompt('Notas', { inicial: inicial('notas') });
 
   const opcionesSimbolos = db.simbolos.map(s => ({
@@ -205,8 +185,6 @@ async function formularioInsumo(db, existente = null) {
     unidad,
     categoria,
     vencimiento: normalizarFecha(vencimiento),
-    calorias: calorias === '' ? null : Number(calorias),
-    proteina: proteina === '' ? null : Number(proteina),
     notas,
     simbolos,
   };

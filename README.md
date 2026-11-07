@@ -132,8 +132,6 @@ Es un archivo JSON plano con tres colecciones, todas extensibles:
 | `unidad`        | string          | Ej: `"g"`, `"ml"`, `"kg"`                    |
 | `categoria`     | string          | Una de las categorías definidas en `db.json` |
 | `vencimiento`   | string          | Formato `"MM-AAAA"` o `"no vence"`           |
-| `calorias`      | number \| null  | kcal por porción                             |
-| `proteina`      | number \| null  | Gramos de proteína por porción               |
 | `notas`         | string          | Observaciones libres                         |
 | `simbolos`      | string[]        | Array de códigos: `["V", "*"]`               |
 | `creadoEn`      | ISO 8601 string | Fecha de creación (auto)                     |

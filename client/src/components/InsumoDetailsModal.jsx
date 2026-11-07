@@ -204,15 +204,6 @@ export default function InsumoDetailsModal({
             </span>
             <div className="text-lg font-mono text-ink">{insumo.vencimiento || '—'}</div>
           </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-base font-mono uppercase tracking-widest text-ink-mid">
-              Kcal / Prot
-            </span>
-            <div className="text-lg font-mono text-ink">
-              {insumo.calorias || '0'} kcal / {insumo.proteina || '0'}g
-            </div>
-          </div>
         </div>
 
         {/* Sección de Auditoría (Fechas) */}

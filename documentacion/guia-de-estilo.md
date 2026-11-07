@@ -453,17 +453,7 @@ if (!nombre || !nombre.trim()) {
 
 ```js
 // ✓ Lista blanca explícita — no usar spread directo de req.body
-const campos = [
-  'nombre',
-  'cantidad',
-  'unidad',
-  'categoria',
-  'vencimiento',
-  'calorias',
-  'proteina',
-  'notas',
-  'simbolos',
-];
+const campos = ['nombre', 'cantidad', 'unidad', 'categoria', 'vencimiento', 'notas', 'simbolos'];
 for (const campo of campos) {
   if (req.body[campo] !== undefined) actualizado[campo] = req.body[campo];
 }

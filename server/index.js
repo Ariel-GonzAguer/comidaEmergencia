@@ -95,8 +95,6 @@ async function writeMD(insumos) {
       return m && y ? `${Number(m)}/${y}` : v;
     };
 
-    const formatoNumero = n => (n != null ? String(n) : '--');
-
     const formatoCantidad = item => {
       const partes = [item.cantidad, item.unidad].filter(Boolean);
       return partes.length ? partes.join(' ') : '--';
@@ -111,7 +109,7 @@ async function writeMD(insumos) {
     const noAlimentos = insumos.filter(i => i.categoria === 'higiene');
 
     const filaAlimento = i =>
-      `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(i.vencimiento)} | ${formatoNumero(i.calorias)} | ${formatoNumero(i.proteina)} | ${i.notas || '--'} |`;
+      `| ${formatoNombre(i)} | ${i.categoria} | ${formatoCantidad(i)} | ${formatoVencimiento(i.vencimiento)} | ${i.notas || '--'} |`;
 
     const tablaRef = `## Referencias
 
@@ -125,8 +123,8 @@ async function writeMD(insumos) {
 
     const tablaAlim = `## Alimentos
 
-| Producto | Categoría | Cantidad / Presentación | Vencimiento | Calorías (kcal) por porción | Proteína (g) por porción | Notas |
-| -------- | --------- | ----------------------- | ----------- | --------------------------- | ------------------------ | ----- |
+| Producto | Categoría | Cantidad / Presentación | Vencimiento | Notas |
+| -------- | --------- | ----------------------- | ----------- | ----- |
 ${alimentos.map(filaAlimento).join('\n')}`;
 
     const tablaHig = noAlimentos.length
@@ -231,8 +229,6 @@ app.get('/api/insumos/:id', async (req, res) => {
  * @body {string}   [unidad]     - Ej: "g", "ml", "kg".
  * @body {string}   [categoria]  - Categoría del insumo (default: "alimentos").
  * @body {string}   [vencimiento]- Formato "MM-AAAA" o "no vence".
- * @body {number|null} [calorias]  - kcal por porción.
- * @body {number|null} [proteina]  - Gramos de proteína.
  * @body {string}   [notas]      - Observaciones libres.
  * @body {string[]} [simbolos]   - Códigos de símbolos (ej: ["V", "*"]).
  * @returns {{ success: boolean, data: Object }} 201 – Insumo creado en `data`.
@@ -241,17 +237,7 @@ app.get('/api/insumos/:id', async (req, res) => {
 app.post('/api/insumos', async (req, res) => {
   try {
     const db = await readDB();
-    const {
-      nombre,
-      cantidad,
-      unidad,
-      categoria,
-      vencimiento,
-      calorias,
-      proteina,
-      notas,
-      simbolos,
-    } = req.body;
+    const { nombre, cantidad, unidad, categoria, vencimiento, notas, simbolos } = req.body;
 
     if (!nombre || !nombre.trim()) {
       return res.status(400).json({ error: 'El campo "nombre" es obligatorio' });
@@ -264,8 +250,6 @@ app.post('/api/insumos', async (req, res) => {
       unidad: unidad ?? '',
       categoria: categoria ?? 'alimentos',
       vencimiento: vencimiento ?? '',
-      calorias: calorias ?? null,
-      proteina: proteina ?? null,
       notas: notas ?? '',
       simbolos: Array.isArray(simbolos) ? simbolos : [],
       creadoEn: new Date().toISOString(),
@@ -315,8 +299,6 @@ app.put('/api/insumos/:id', async (req, res) => {
       'unidad',
       'categoria',
       'vencimiento',
-      'calorias',
-      'proteina',
       'notas',
       'simbolos',
     ];

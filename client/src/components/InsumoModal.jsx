@@ -15,8 +15,6 @@ const VACIO = {
   unidad: '',
   categoria: 'alimentos',
   vencimiento: '',
-  calorias: '',
-  proteina: '',
   notas: '',
   simbolos: [],
 };
@@ -52,44 +50,6 @@ function validarFecha(fecha) {
     return { válido: false, error: 'El año debe estar entre 2000 y 2100' };
   }
 
-  return { válido: true };
-}
-
-/**
- * Valida que las calorías sean un número positivo válido.
- * Permite vacío (opcional).
- *
- * @param {string} valor - Valor a validar.
- * @returns {{ válido: boolean, error?: string }}
- */
-function validarCalorias(valor) {
-  if (!valor || !valor.trim()) return { válido: true }; // opcional
-  const num = Number(valor);
-  if (isNaN(num) || num < 0) {
-    return { válido: false, error: 'Calorías debe ser un número positivo' };
-  }
-  if (!Number.isInteger(num)) {
-    return { válido: false, error: 'Calorías debe ser un número entero' };
-  }
-  return { válido: true };
-}
-
-/**
- * Valida que la proteína sea un número positivo válido (permite decimales).
- * Permite vacío (opcional).
- *
- * @param {string} valor - Valor a validar.
- * @returns {{ válido: boolean, error?: string }}
- */
-function validarProteina(valor) {
-  if (!valor || !valor.trim()) return { válido: true }; // opcional
-  const num = Number(valor);
-  if (isNaN(num) || num < 0) {
-    return { válido: false, error: 'Proteína debe ser un número positivo' };
-  }
-  if (num > 200) {
-    return { válido: false, error: 'Proteína parece demasiado alta (máx: 200g)' };
-  }
   return { válido: true };
 }
 
@@ -179,8 +139,6 @@ export default function InsumoModal({
         unidad: insumoInicial.unidad ?? '',
         categoria: insumoInicial.categoria ?? 'alimentos',
         vencimiento: insumoInicial.vencimiento ?? '',
-        calorias: insumoInicial.calorias != null ? String(insumoInicial.calorias) : '',
-        proteina: insumoInicial.proteina != null ? String(insumoInicial.proteina) : '',
         notas: insumoInicial.notas ?? '',
         simbolos: insumoInicial.simbolos ?? [],
       });
@@ -237,27 +195,11 @@ export default function InsumoModal({
       return;
     }
 
-    // Validar calorías
-    const validCal = validarCalorias(form.calorias);
-    if (!validCal.válido) {
-      setErr(validCal.error);
-      return;
-    }
-
-    // Validar proteínas
-    const validProt = validarProteina(form.proteina);
-    if (!validProt.válido) {
-      setErr(validProt.error);
-      return;
-    }
-
     setSaving(true);
     try {
       await onGuardar({
         ...form,
         vencimiento: toStorageDate(form.vencimiento),
-        calorias: form.calorias !== '' ? Number(form.calorias) : null,
-        proteina: form.proteina !== '' ? Number(form.proteina) : null,
       });
     } catch (e) {
       setErr(e.message);
@@ -408,39 +350,6 @@ export default function InsumoModal({
                 value={form.vencimiento}
                 onChange={e => set('vencimiento', e.target.value)}
                 placeholder="4/2027, 04-2027 o 'no vence'"
-              />
-            </div>
-          </div>
-
-          {/* Calorías + Proteína */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="calorias" className={LABEL}>
-                Calorías (kcal/porción)
-              </label>
-              <input
-                id="calorias"
-                className={INPUT}
-                type="number"
-                min="0"
-                value={form.calorias}
-                onChange={e => set('calorias', e.target.value)}
-                placeholder="—"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="proteina" className={LABEL}>
-                Proteína (g/porción)
-              </label>
-              <input
-                id="proteina"
-                className={INPUT}
-                type="number"
-                min="0"
-                step="0.1"
-                value={form.proteina}
-                onChange={e => set('proteina', e.target.value)}
-                placeholder="—"
               />
             </div>
           </div>

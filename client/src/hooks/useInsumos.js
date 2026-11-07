@@ -33,8 +33,6 @@ const API = '/api';
  * @property {string}        unidad       - Unidad de medida.
  * @property {string}        categoria    - Categoría del insumo.
  * @property {string}        vencimiento  - "MM-AAAA" o "no vence".
- * @property {number|null}   calorias     - kcal por porción.
- * @property {number|null}   proteina     - Gramos de proteína.
  * @property {string}        notas        - Observaciones libres.
  * @property {string[]}      simbolos     - Códigos de símbolos aplicados.
  * @property {boolean}       esEmergencia - true = emergencia, false = no-emergencia.

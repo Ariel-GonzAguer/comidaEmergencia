@@ -45,8 +45,6 @@ La base de datos es un archivo JSON con **3 colecciones**:
       "unidad": "string (ej: g, ml, kg)",
       "categoria": "string",
       "vencimiento": "string (MM-AAAA o no vence)",
-      "calorias": "number | null",
-      "proteina": "number | null",
       "notas": "string",
       "simbolos": "string[]",
       "creadoEn": "ISO 8601 string",
@@ -77,20 +75,18 @@ La base de datos es un archivo JSON con **3 colecciones**:
 
 ### Campos de un insumo
 
-| Campo           | Tipo           | Obligatorio | Descripción                            |
-| --------------- | -------------- | ----------- | -------------------------------------- |
-| `id`            | UUID           | ✓           | Generado automáticamente               |
-| `nombre`        | string         | ✓           | Nombre del producto                    |
-| `cantidad`      | string         | ✗           | Ej: "2x 500", "1"                      |
-| `unidad`        | string         | ✗           | Ej: "g", "ml", "kg"                    |
-| `categoria`     | string         | ✓           | Debe existir en `categorias`           |
-| `vencimiento`   | string         | ✗           | Formato `MM-AAAA` o `"no vence"`       |
-| `calorias`      | number \| null | ✗           | kcal por porción                       |
-| `proteina`      | number \| null | ✗           | Gramos por porción                     |
-| `notas`         | string         | ✗           | Observaciones libres                   |
-| `simbolos`      | string[]       | ✗           | Códigos de símbolos (ej: `["V", "*"]`) |
-| `creadoEn`      | ISO 8601       | ✓           | Auto-generado                          |
-| `actualizadoEn` | ISO 8601       | ✓           | Auto-actualizado                       |
+| Campo           | Tipo     | Obligatorio | Descripción                            |
+| --------------- | -------- | ----------- | -------------------------------------- |
+| `id`            | UUID     | ✓           | Generado automáticamente               |
+| `nombre`        | string   | ✓           | Nombre del producto                    |
+| `cantidad`      | string   | ✗           | Ej: "2x 500", "1"                      |
+| `unidad`        | string   | ✗           | Ej: "g", "ml", "kg"                    |
+| `categoria`     | string   | ✓           | Debe existir en `categorias`           |
+| `vencimiento`   | string   | ✗           | Formato `MM-AAAA` o `"no vence"`       |
+| `notas`         | string   | ✗           | Observaciones libres                   |
+| `simbolos`      | string[] | ✗           | Códigos de símbolos (ej: `["V", "*"]`) |
+| `creadoEn`      | ISO 8601 | ✓           | Auto-generado                          |
+| `actualizadoEn` | ISO 8601 | ✓           | Auto-actualizado                       |
 
 ---
 
@@ -142,8 +138,6 @@ curl "http://localhost:3001/api/insumos?categoria=higiene&texto=jabón"
       "unidad": "g",
       "categoria": "alimentos",
       "vencimiento": "12-2026",
-      "calorias": 130,
-      "proteina": 2.7,
       "notas": "Almacenar en lugar frío y seco",
       "simbolos": ["*"],
       "creadoEn": "2026-03-14T10:30:00.000Z",
@@ -202,8 +196,6 @@ curl http://localhost:3001/api/insumos/abc-123...
   "unidad": "kg",
   "categoria": "alimentos",
   "vencimiento": "06-2027",
-  "calorias": 496,
-  "proteina": 26,
   "notas": "Marca: Nestle",
   "simbolos": []
 }
@@ -215,7 +207,7 @@ curl http://localhost:3001/api/insumos/abc-123...
 
 **Campos opcionales:**
 
-- `cantidad`, `unidad`, `categoria`, `vencimiento`, `calorias`, `proteina`, `notas`, `simbolos`
+- `cantidad`, `unidad`, `categoria`, `vencimiento`, `notas`, `simbolos`
 
 **El servidor genera automáticamente:**
 
@@ -583,8 +575,6 @@ const response = await fetch('/api/insumos', {
     "unidad": "botellas",
     "categoria": "bebidas",
     "vencimiento": "no vence",
-    "calorias": null,
-    "proteina": null,
     "notas": "",
     "simbolos": [],
     "creadoEn": "2026-03-14T15:30:45.123Z",

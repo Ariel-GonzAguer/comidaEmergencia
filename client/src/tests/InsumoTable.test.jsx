@@ -21,8 +21,6 @@ describe('InsumoTable', () => {
       unidad: 'kg',
       categoria: 'alimentos',
       vencimiento: '06-2027',
-      calorias: 150,
-      proteina: 3,
       notas: '',
       simbolos: [],
     },
@@ -33,8 +31,6 @@ describe('InsumoTable', () => {
       unidad: 'kg',
       categoria: 'especias',
       vencimiento: 'no vence',
-      calorias: null,
-      proteina: null,
       notas: 'Esencial',
       simbolos: ['R'],
     },
@@ -151,21 +147,6 @@ describe('InsumoTable', () => {
     );
 
     expect(screen.getByLabelText(/no vence/i)).toBeInTheDocument();
-  });
-
-  it('debe mostrar las calorías y proteínas correctamente', () => {
-    render(
-      <InsumoTable
-        loading={false}
-        insumos={insumosEjemplo}
-        simbolosDef={simbolosDef}
-        onEditar={mockEditar}
-        onEliminar={mockEliminar}
-      />
-    );
-
-    expect(screen.getByText('150')).toBeInTheDocument();
-    expect(screen.getByText('3g')).toBeInTheDocument();
   });
 
   it('debe tener una tabla con encabezados semánticos', () => {
