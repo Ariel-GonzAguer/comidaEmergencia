@@ -17,20 +17,20 @@
   },
   "dependencies": {
     "cors": "2.8.6",
-    "express": "5.2.1"
+    "express": "5.3.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@vitejs/plugin-react": "6.1.0",
-    "concurrently": "10.0.5",
-    "eslint": "10.1.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "concurrently": "10.0.7",
+    "eslint": "10.14.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-vitest": "0.5.4",
-    "globals": "17.11.0",
-    "prettier": "3.9.6",
-    "supertest": "7.2.2",
-    "vite": "8.2.2",
-    "vitest": "4.1.11"
+    "globals": "17.14.0",
+    "prettier": "3.9.10",
+    "supertest": "7.3.2",
+    "vite": "8.3.6",
+    "vitest": "5.1.0"
   }
 }

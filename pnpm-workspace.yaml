@@ -1,15 +1,9 @@
 packages:
   - 'client'
 
-minimumReleaseAgeExclude:
-  - shell-quote@1.8.4 || 1.8.5
-  - vite@8.0.5 || 8.0.16
-  - brace-expansion@1.1.16 || 2.1.2 || 5.0.7 || 5.0.8 || 5.0.9
-  - postcss@8.5.18
-  - undici@7.29.0
-  - qs@6.15.4
 overrides:
-  brace-expansion@<=5.0.7: ^5.0.8
-  nanoid@<3.3.18: ^3.3.18
-  shell-quote@>=1.1.0 <=1.8.3: ^1.8.4
-  undici@>=7.0.0 <7.29.0: ^7.29.0
+  minimatch: 11.0.5
+
+minimumReleaseAgeExclude:
+  - concurrently@10.0.7
+  - supertest@7.3.2

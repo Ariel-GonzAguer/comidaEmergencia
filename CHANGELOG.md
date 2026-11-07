@@ -4,6 +4,10 @@ Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
 ## [4.0.7] - 07/11/2026
 
+### Corregido
+
+- **Vulnerabilidades de dependencias**: Se cerraron las 8 vulnerabilidades reportadas por `pnpm audit` (1 high, 6 moderate, 1 low): `vite` actualizado a 8.3.6 en el cliente (fix de `launch-editor` y `server.fs`), `vitest` a 4.1.12 en el cliente y 5.1.0 en la raíz (parchea `@vitest/mocker`), y override de `minimatch` a 11.0.5 en `pnpm-workspace.yaml` para las rutas transitivas de eslint.
+
 ### Cambiado
 
 - **Tests unificados**: `pnpm test` y `pnpm test:run` ahora ejecutan todos los tests del repo (server, CLI y cliente) en un solo comando, mediante Vitest projects. Ya no es necesario correr la suite del cliente aparte con su propio comando.
