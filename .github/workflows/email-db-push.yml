@@ -57,19 +57,15 @@ jobs:
 
             let filas = '';
             for (const [cat, items] of Object.entries(categorias).sort()) {
-              filas += `<tr><td colspan="7" style="background:#f0f0f0;font-weight:bold;padding:8px;text-transform:capitalize;">${cat} (${items.length})</td></tr>`;
+              filas += `<tr><td colspan="5" style="background:#f0f0f0;font-weight:bold;padding:8px;text-transform:capitalize;">${cat} (${items.length})</td></tr>`;
               for (const i of items.sort((a, b) => a.nombre.localeCompare(b.nombre))) {
                 const sim = (i.simbolos || []).join(', ') || '-';
                 const venc = i.vencimiento || '-';
-                const cal = i.calorias ?? '-';
-                const prot = i.proteina ?? '-';
                 const notas = i.notas || '';
                 filas += `<tr>
                   <td style="padding:4px 8px;border:1px solid #ddd;">${i.nombre}</td>
                   <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${i.cantidad || '-'} ${i.unidad || ''}</td>
                   <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${venc}</td>
-                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${cal}</td>
-                  <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${prot}</td>
                   <td style="padding:4px 8px;border:1px solid #ddd;text-align:center;">${sim}</td>
                   <td style="padding:4px 8px;border:1px solid #ddd;">${notas}</td>
                 </tr>`;
@@ -94,8 +90,6 @@ jobs:
                     <th style="padding:6px 8px;border:1px solid #555;text-align:left;">Nombre</th>
                     <th style="padding:6px 8px;border:1px solid #555;">Cantidad</th>
                     <th style="padding:6px 8px;border:1px solid #555;">Vencimiento</th>
-                    <th style="padding:6px 8px;border:1px solid #555;">Calorias</th>
-                    <th style="padding:6px 8px;border:1px solid #555;">Proteina</th>
                     <th style="padding:6px 8px;border:1px solid #555;">Simbolos</th>
                     <th style="padding:6px 8px;border:1px solid #555;text-align:left;">Notas</th>
                   </tr>

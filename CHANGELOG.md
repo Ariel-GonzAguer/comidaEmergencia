@@ -14,7 +14,7 @@ Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
 ### Eliminado
 
-- **Calorías y proteína**: Se eliminaron por completo los campos de nutrición. Las tablas (web, CLI y `insumos-emergencia.md`) ya no muestran esas columnas, el formulario y la CLI ya no las piden, y la API ya no las acepta ni las devuelve. Es un cambio rompiente: cualquier cliente que envíe `calorias` o `proteina` a la API tendrá esos campos ignorados, y los tests y la documentación se ajustaron al nuevo esquema.
+- **Calorías y proteína**: Se eliminaron por completo los campos de nutrición. Las tablas (web, CLI, `insumos-emergencia.md` y el correo automático de pushes) ya no muestran esas columnas, el formulario y la CLI ya no las piden, y la API ya no las acepta ni las devuelve. Es un cambio rompiente: cualquier cliente que envíe `calorias` o `proteina` a la API tendrá esos campos ignorados, y los tests y la documentación se ajustaron al nuevo esquema.
 
 ## [4.0.6] - 06/09/2026
 
