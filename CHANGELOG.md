@@ -6,6 +6,7 @@ Revisar (Guía para el Changelog)[documentacion/guia-changelog.md]
 
 ### Corregido
 
+- **Script de despliegue `push-all`**: Se corrigió el flujo dual de push. `db.json` viajaba al repo público porque, aunque está en `.gitignore`, seguía trackeado por git; ahora se excluye del commit público en cada corrida. Además, el push al privado se rechazaba por non-fast-forward desde el segundo respaldo (el commit de backup se deshace localmente en cada corrida) y el error quedaba atrapado sin deshacer el commit, dejando `db.json` pegado en la rama local que luego el force push llevaba al público. Ahora el respaldo usa `--force`, se compara contra el último respaldo subido y el commit se deshace siempre, incluso si el push falla.
 - **Vulnerabilidades de dependencias**: Se cerraron las 8 vulnerabilidades reportadas por `pnpm audit` (1 high, 6 moderate, 1 low): `vite` actualizado a 8.3.6 en el cliente (fix de `launch-editor` y `server.fs`), `vitest` a 4.1.12 en el cliente y 5.1.0 en la raíz (parchea `@vitest/mocker`), y override de `minimatch` a 11.0.5 en `pnpm-workspace.yaml` para las rutas transitivas de eslint.
 
 ### Cambiado

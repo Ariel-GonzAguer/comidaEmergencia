@@ -3,10 +3,12 @@
  * @description Script de despliegue dual.
  *
  * Flujo:
- *   1. Sube el código fuente al remote "public" (rama main → mini)
- *   2. Sube SOLO db.json al remote "privado" como respaldo, y luego
- *      deshace el commit local para que el archivo NO quede en la
- *      historia de commits del repositorio público.
+ *   1. Commitea el código fuente y lo sube al remote "public"
+ *      (rama main → mini). db.json se excluye SIEMPRE del commit público.
+ *   2. Commitea SOLO db.json y lo sube al remote "privado" como respaldo
+ *      (con --force, porque el commit de backup se deshace localmente en
+ *      cada corrida), y luego deshace ese commit para que el archivo no
+ *      quede en la historia que viaja al repositorio público.
  *
  * Uso:
  *   node scripts/push-all.mjs
@@ -23,13 +25,37 @@ import { execSync } from 'child_process';
  */
 const run = cmd => execSync(cmd, { stdio: 'inherit' });
 
-try {
-  // ── 1. Preparar commit del código fuente ──
-  run('git add -A');
+/**
+ * Indica si hay diferencias entre el árbol de trabajo y un commit de
+ * referencia para una ruta dada.
+ *
+ * @example
+ *   cambioRespectoDe('privado/main', 'db.json'); // => true si db.json local difiere del último respaldo
+ *
+ * @param {string} ref  - Commit o rama remota de referencia (ej: "privado/main").
+ * @param {string} ruta - Ruta del archivo a comparar.
+ * @returns {boolean} true si el archivo difiere de la referencia.
+ */
+function cambioRespectoDe(ref, ruta) {
   try {
-    run('git commit -m "update"');
+    execSync(`git diff --quiet ${ref} -- ${ruta}`, { stdio: 'pipe' });
+    return false;
   } catch {
-    // Si no hay cambios staged, git commit falla; es comportamiento esperado.
+    return true; // exit 1 = hay diferencias; exit 128 = ref inexistente (asumimos que cambió)
+  }
+}
+
+try {
+  // ── 1. Commit del código fuente (sin db.json) ──
+  run('git add -A');
+  // db.json quedó trackeado históricamente: se saca del stage para que el
+  // commit público nunca lo incluya. --ignore-unmatch hace que el comando
+  // no falle cuando el archivo ya no está en el índice.
+  run('git rm --cached -q --ignore-unmatch db.json');
+
+  if (cambioRespectoDe('HEAD', '.')) {
+    run('git commit -m "update"');
+  } else {
     console.log('Sin cambios para commit');
   }
 
@@ -40,17 +66,26 @@ try {
   run('git push --force public main:mini');
 
   // ── 3. Respaldar db.json en el remote privado ──
-  // Se fuerza el add de db.json aunque esté en .gitignore,
-  // para poder commitearlo y subirlo como respaldo.
-  run('git add -f db.json');
-  try {
-    run('git commit -m "update db.json"');
-    run('git push privado main');
-    // Deshacer el commit local para que db.json no quede en la
-    // historia del repositorio público en el próximo push.
-    run('git reset HEAD~1');
-  } catch {
-    // Si db.json no tiene cambios, no hay nada que push.
+  // Solo si el archivo cambió respecto del último respaldo subido.
+  if (cambioRespectoDe('privado/main', 'db.json')) {
+    run('git add -f db.json');
+    let backupCommiteado = false;
+    try {
+      run('git commit -m "update db.json"');
+      backupCommiteado = true;
+      // --force es obligatorio: el backup anterior se deshizo localmente
+      // (reset), así que privado/main se reescribe en cada respaldo. Sin
+      // --force, el push es rechazado por non-fast-forward desde el
+      // segundo respaldo en adelante.
+      run('git push --force privado main');
+    } finally {
+      if (backupCommiteado) {
+        // Deshacer SIEMPRE el commit local, incluso si el push falla, para
+        // que db.json no viaje al público en el próximo deploy.
+        run('git reset HEAD~1');
+      }
+    }
+  } else {
     console.log('Sin cambios en db.json');
   }
 } catch (error) {
